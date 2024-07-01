@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tuch_trip_crms/layoutbuilder.dart';
+import 'package:tuch_trip_crms/src/layoutbuilder.dart';
+import 'package:tuch_trip_crms/src/view/desktop/desktop_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,20 +18,6 @@ class _HomePageState extends State<HomePage> {
           MobileViews: MobileView(),
           TabView: TabView()),
     );
-  }
-}
-
-class DesktopView extends StatefulWidget {
-  const DesktopView({super.key});
-
-  @override
-  State<DesktopView> createState() => _DesktopViewState();
-}
-
-class _DesktopViewState extends State<DesktopView> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
 
