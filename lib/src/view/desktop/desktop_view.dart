@@ -4,6 +4,7 @@ import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Guests/guest.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
+import 'package:tuch_trip_crms/src/view/desktop/rooms/rooms.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 import 'package:tuch_trip_crms/src/view_model/dashboard_provider.dart';
@@ -46,8 +47,10 @@ class HomePage extends StatelessWidget {
             navigationSideButtons(height, width),
             dashboardProvider.navigationButtonsSelectedIndex == 0?
             DashBoard(): 
+            dashboardProvider.navigationButtonsSelectedIndex == 1?
+            RoomScreen():
             dashboardProvider.navigationButtonsSelectedIndex == 3?
-            GuestScreen() : DashBoard()
+            GuestManagementScreen(): SizedBox()
           ],
         ),
       ),
@@ -71,12 +74,15 @@ class HomePage extends StatelessWidget {
           ),
           SizedBox(
             width: width * 0.15,
-            child: Text(
-              'Dashboard',
-              style: GoogleFonts.montserrat(
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
+            child: Consumer<DashboardProvider>(
+              builder: (context, person, child) => 
+              Text(
+                person.navigationButtonsSelectedIndex == 0? 'Dashboard' : person.navigationButtonsSelectedIndex == 1? 'Room': person.navigationButtonsSelectedIndex == 2? 'Booking': person.navigationButtonsSelectedIndex == 3? 'Guest' : person.navigationButtonsSelectedIndex == 4 ? 'Settings' : 'Concierge',
+                style: GoogleFonts.montserrat(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
@@ -204,7 +210,7 @@ class HomePage extends StatelessWidget {
       width: width * 0.18,
       color: Colors.white,
       child: Padding(
-        padding: EdgeInsets.only(top: height * 0.04),
+        padding: EdgeInsets.only(top: height * 0.02),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: List.generate(

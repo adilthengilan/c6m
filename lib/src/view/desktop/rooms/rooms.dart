@@ -7,8 +7,8 @@ import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 import 'package:tuch_trip_crms/src/view/widgets/show_dialogue.dart';
 import 'package:tuch_trip_crms/src/view_model/guest_management_provider.dart';
 
-class GuestManagementScreen extends StatelessWidget {
-  const GuestManagementScreen({super.key});
+class RoomScreen extends StatelessWidget {
+  const RoomScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class GuestManagementScreen extends StatelessWidget {
                   boxShadow: true,
                   child: Row(
                     children: List.generate(
-                      5,
+                      3,
                       (index) =>
                         Consumer<GuestManagementProvider>(
                           builder: (context, person, child) => 
@@ -44,16 +44,14 @@ class GuestManagementScreen extends StatelessWidget {
                             child: CustomContainer(
                               height: height,
                               borderRadius: BorderRadius.circular(10),
-                              margin: EdgeInsets.only(left: index == 0? width * 0.006 : 0),
-                              padding: EdgeInsets.symmetric(horizontal: width * 0.01),
+                              // gradiantColors:index == person.tabButtonSelectedIndex? [Colors.lightBlueAccent.shade200,Colors.cyanAccent.shade200] : [Colors.transparent,Colors.transparent], 
+                              padding: EdgeInsets.symmetric(horizontal: width * 0.02),
                               boxShadow: false,
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(index == 0 ? 'All Guests (282)' : index == 1? 'Pending' : index == 2? 'Booked' : index == 3? "Canceled" : 'Refund', style: index == 0 ?  smallTextStyleBold : smallTextStyle),
-                                   sizedBox(height * 0.01, 0.0),
-                                   CustomContainer(
+                                  Text(index == 0 ? 'Rooms (480)' : index == 1? 'Available Rooms (286)' : 'Booked', style: index == 0 ?  smallTextStyleBold : smallTextStyle),
+                                  CustomContainer(
                                     width: width * 0.06,
                                     height: height * 0.005,
                                     borderRadius: BorderRadius.circular(10),
@@ -143,13 +141,13 @@ class GuestManagementScreen extends StatelessWidget {
                                     checkColor: Colors.white,
                                  ),
                               ),
-                              sizedBox(0.0, width * 0.01),
+                              sizedBox(0.0, width * 0.006),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center, 
                                 children: [
                                   Text('Booking Id',style: smallTextStyle),
-                                  SizedBox(width: width * 0.1,child: Text('John Smith',style: smallTextStyleBold)),
+                                  SizedBox(width: width * 0.1,child: Text('John Smith eeetann',style: smallTextStyleBold)),
                                 ],
                               ),
                             ],
