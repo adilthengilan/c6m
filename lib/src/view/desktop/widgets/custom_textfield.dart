@@ -13,7 +13,8 @@ class CustomTextField extends StatelessWidget {
     required this.labelText,
     required this.controller,
     this.borderRadius = 8.0, // Default value for borderRadius
-    this.borderSide = const BorderSide(color: Colors.grey), // Default value for borderSide
+    this.borderSide =
+        const BorderSide(color: Colors.grey), // Default value for borderSide
     this.suffixIcon,
   }) : super(key: key);
 
@@ -34,7 +35,8 @@ class CustomTextField extends StatelessWidget {
           fontWeight: FontWeight.w400,
           color: Colors.grey,
         ),
-        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
