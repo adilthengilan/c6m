@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/view/desktop/Login/login_screen.dart';
+import 'package:tuch_trip_crms/src/view/desktop/Login/login_screen.dart';
 
 
 class LoginProvider extends ChangeNotifier {

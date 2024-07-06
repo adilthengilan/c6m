@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/view%20model/login_provider.dart';
-import 'package:flutter_application_1/src/view/Common%20widgets/common_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 
 class LoginScreen extends StatelessWidget {
   @override

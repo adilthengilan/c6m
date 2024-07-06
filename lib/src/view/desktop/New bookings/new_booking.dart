@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/view%20model/booking_provider.dart';
-import 'package:flutter_application_1/src/view/desktop/New%20bookings/booking_details.dart';
-import 'package:flutter_application_1/src/view/desktop/dashboard/dashboard.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:tuch_trip_crms/src/view%20model/booking_provider.dart';
+import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/booking_details.dart';
+import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 
 class NewBookings extends StatelessWidget {
   const NewBookings({super.key});
@@ -16,6 +16,7 @@ class NewBookings extends StatelessWidget {
 
     return SingleChildScrollView(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           sizedBox(height * 0.02, width),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/new_booking.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
@@ -119,7 +120,7 @@ class GuestManagementScreen extends StatelessWidget {
                       itemCount: 10,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => 
+                      itemBuilder: (context, builderIndex) => 
                       CustomContainer(
                         height: height * 0.1,
                         width: width,
@@ -135,7 +136,7 @@ class GuestManagementScreen extends StatelessWidget {
                               Consumer<GuestManagementProvider>(
                                 builder: (context, person, child) => 
                                  Checkbox(
-                                   value: index == person.guestSelectedIndex ? true : false,
+                                   value: builderIndex == person.guestSelectedIndex ? true : false,
                                     onChanged: (value) {
                                       person.setSelectGuestIndex(value);
                                     },
@@ -165,8 +166,8 @@ class GuestManagementScreen extends StatelessWidget {
                           ),
                           Row(
                             children: List.generate(2, (index) => Container(
-                              width: index == 1? width * 0.1 :  width * 0.085,
-                              padding: EdgeInsets.only(right: index == 0? width * 0.02 : width * 0.04),
+                              width: index == 1? width * 0.09 :  width * 0.085,
+                              padding: EdgeInsets.only(right: index == 0? width * 0.02 : width * 0.025),
                               child: Consumer<GuestManagementProvider>(
                                 builder: (context, person, child) => 
                                 TextButton(
@@ -174,8 +175,8 @@ class GuestManagementScreen extends StatelessWidget {
                                     backgroundColor: index == 1 && person.isBooked? Colors.cyanAccent.shade400 : Colors.grey.shade300,
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                                   ),
-                                  onPressed: person.isBooked? (){customShowDialog(context, 'title', 'This conten jnksaik jbchdiq', 'Book',GoogleFonts.montserrat(color: Colors.lightBlue));} : () {},
-                                 child: Text(index  == 0 ? person.isBooked? 'Booked': 'Book' : 'Check-In',style: smallTextStyle),
+                                  onPressed: index == 0 ? person.isBooked? (){showDialog(context: context, builder: (BuildContext context) {return NewBookingDialog();},);} : null: () {customShowDialog(context, 'Check-In', 'Are You Sure for Check-In', 'Check-In', smallTextStyle);}, 
+                                 child: Text(index  == 0 ? builderIndex == 0 || builderIndex == 2? 'Booked': 'Book' : 'Check-In',style: smallTextStyle),
                                  ),
                               ),
                               ),

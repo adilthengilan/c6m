@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:tuch_trip_crms/src/view%20model/rooms_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
-import 'package:tuch_trip_crms/src/view/widgets/show_dialogue.dart';
 import 'package:tuch_trip_crms/src/view_model/guest_management_provider.dart';
 
 class RoomScreen extends StatelessWidget {
@@ -44,13 +44,13 @@ class RoomScreen extends StatelessWidget {
                             child: CustomContainer(
                               height: height,
                               borderRadius: BorderRadius.circular(10),
-                              // gradiantColors:index == person.tabButtonSelectedIndex? [Colors.lightBlueAccent.shade200,Colors.cyanAccent.shade200] : [Colors.transparent,Colors.transparent], 
                               padding: EdgeInsets.symmetric(horizontal: width * 0.02),
                               boxShadow: false,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(index == 0 ? 'Rooms (480)' : index == 1? 'Available Rooms (286)' : 'Booked', style: index == 0 ?  smallTextStyleBold : smallTextStyle),
+                                  Text(index == 0 ? 'Rooms (480)' : index == 1? 'Available Rooms (286)' : 'Booked(200)', style: index == 0 ?  smallTextStyleBold : smallTextStyle),
+                                  sizedBox(height * 0.01, 0.0),
                                   CustomContainer(
                                     width: width * 0.06,
                                     height: height * 0.005,
@@ -85,6 +85,22 @@ class RoomScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              sizedBox(0.0, width * 0.02),
+              CustomContainer(
+                boxShadow: true,
+                height: height * 0.051,
+                width: width * 0.09,
+                color: Colors.purpleAccent.shade100,
+                padding: EdgeInsets.symmetric(horizontal: width * 0.01),
+                borderRadius: BorderRadius.circular(10),
+                child: Row(
+                  children: [
+                    Icon(Icons.add),
+                    sizedBox(0.0, width * 0.01),
+                    Text('Room',style: smallTextStyleBold),
+                  ],
+                ),
+                ),
              ],
             ),
             sizedBox(height * 0.03, 0.0),
@@ -103,12 +119,12 @@ class RoomScreen extends StatelessWidget {
                   height: height * 0.06,
                   border: BorderDirectional(bottom: BorderSide(color: Colors.grey.shade200)),
                   child: Row(
-                    children: List.generate(8, (index) => 
+                    children: List.generate(5, (index) => 
                     Padding(
                       padding: EdgeInsets.only(left: index == 0? width * 0.015 : 0),
                       child: SizedBox(
-                        width: index == 0?  width * 0.12 : index == 1? width * 0.1 : index == 2? width * 0.1 : index == 3 ? width * 0.14 : index  == 4? width * 0.08 : index == 6 || index == 7 ? width * 0.06 :  width * 0.1, 
-                        child: Align(alignment: Alignment.centerLeft,child: Text(index == 0? 'Guests' : index == 1? 'Date': index == 2? 'Mobile No' : index == 3? 'Email' : index == 4? 'Book' : index == 5? 'Check-In' : index == 6? 'Edit' : 'Delete',style: smallTextStyleBold))),
+                        width: index == 0?  width * 0.26 : index == 1? width * 0.1 : index == 2? width * 0.1 : index == 3?  width * 0.22 : width * 0.06 ,
+                        child: Align(alignment: Alignment.centerLeft,child: Text(index == 0? 'Room Name' : index == 1? 'Room Type': index == 2? 'Room Floor' : index == 3? 'Room Facility' : 'Status', style: smallTextStyleBold))),
                           ),
                         ),
                       ),
@@ -117,23 +133,24 @@ class RoomScreen extends StatelessWidget {
                       itemCount: 10,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => 
+                      itemBuilder: (context, builderIndex) => 
                       CustomContainer(
-                        height: height * 0.1,
                         width: width,
                         padding: EdgeInsets.only(left: width * 0.004),
                         border: BorderDirectional(bottom: BorderSide(color: Colors.grey.shade100)),
                         color: backgroundColor,
                         boxShadow: true,
                         child: Row(children: [
-                        SizedBox(
-                        width: width * 0.135,
+                        Container(
+                          width: width * 0.27,
+                          padding: EdgeInsets.symmetric(vertical: height * 0.01),
                           child: Row(
                             children: [
+                              sizedBox(0.0, width * 0.006),
                               Consumer<GuestManagementProvider>(
                                 builder: (context, person, child) => 
                                  Checkbox(
-                                   value: index == person.guestSelectedIndex ? true : false,
+                                   value: builderIndex == person.guestSelectedIndex ? true : false,
                                     onChanged: (value) {
                                       person.setSelectGuestIndex(value);
                                     },
@@ -141,62 +158,58 @@ class RoomScreen extends StatelessWidget {
                                     checkColor: Colors.white,
                                  ),
                               ),
-                              sizedBox(0.0, width * 0.006),
+                              sizedBox(0.0, width * 0.01),
+                              CustomContainer(
+                                height: height * 0.1,
+                                width: width * 0.11,
+                                color: Colors.grey.shade100,
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage('assets/images/59668rce.png')),
+                                boxShadow: false,
+                              ),
+                              sizedBox(0.0, width * 0.01), 
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center, 
                                 children: [
-                                  Text('Booking Id',style: smallTextStyle),
-                                  SizedBox(width: width * 0.1,child: Text('John Smith eeetann',style: smallTextStyleBold)),
+                                  Text('Room No',style: smallTextStyle),
+                                  sizedBox(height * 0.01, 0.0),
+                                  SizedBox(width: width * 0.1,child: Text('Deluxe 8 0004',style: smallTextStyleBold)),
                                 ],
                               ),
                             ],
                           ),
                         ),
-                          Row(
+                        Row(
                             children: List.generate(3, (index) => 
                               Container(
-                              width: index == 0 || index == 1 ? width * 0.1 : width * 0.135,
-                              padding: EdgeInsets.only(right: width * 0.01),
-                              child: Text(index == 0 ?'Sunday 12, 02, 2024 06:33 Pm' : index == 1 ? '+91 9446085810' : 'johnsmith@gmail.com',style: smallTextStyle)),
+                              width: index == 2? width * 0.22 : width * 0.1,
+                              padding: EdgeInsets.only(right: index == 2? width * 0.02 : width * 0.01),
+                              child: Text(index == 0 ? builderIndex == 0?  'Double Bed' : 'Single Bed' : index == 1 ? 'Floor G - 05' : 'Ac, Shower, Double Bed, Towel, Bathtub, Coffee set,Led Tv,Wifi',style: smallTextStyle)),
                             ),
                           ),
-                          Row(
-                            children: List.generate(2, (index) => Container(
-                              width: index == 1? width * 0.1 :  width * 0.085,
-                              padding: EdgeInsets.only(right: index == 0? width * 0.02 : width * 0.04),
-                              child: Consumer<GuestManagementProvider>(
-                                builder: (context, person, child) => 
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                    backgroundColor: index == 1 && person.isBooked? Colors.cyanAccent.shade400 : Colors.grey.shade300,
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                                  ),
-                                  onPressed: person.isBooked? (){customShowDialog(context, 'title', 'This conten jnksaik jbchdiq', 'Book',GoogleFonts.montserrat(color: Colors.lightBlue));} : () {},
-                                 child: Text(index  == 0 ? person.isBooked? 'Booked': 'Book' : 'Check-In',style: smallTextStyle),
-                                 ),
-                              ),
-                              ),
-                            ),
-                          ),
-                          Row(
-                            children: List.generate(2, (index) => SizedBox(
-                              width: index == 0 ?width * 0.065 : width * 0.04,
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: IconButton(
-                                  onPressed: (){
-                                    index == 1? customShowDialog(context, 'Delete Guest', 'Would you like to Delete this guest from History', 'Delete',GoogleFonts.montserrat(color: Colors.redAccent)): null;
-                                  },
-                                   icon: Icon(index == 0? Icons.edit_outlined
-                                    : Icons.delete_outline,
-                                    color: index == 0 ? Colors.lightBlueAccent : Colors.redAccent,
+                          SizedBox(
+                            width: width * 0.06,
+                            child: Consumer<RoomsProvider>(
+                              builder: (context, person, child) => 
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(builderIndex == 0 || builderIndex == 2 ? 'Boocked' : 'Available',
+                                  style: GoogleFonts.montserrat(
+                                    color: builderIndex == 0 || builderIndex == 2 ? Colors.red : Colors.green,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500
                                     ),
                                   ),
-                                ),
+                                  builderIndex == 0 || builderIndex == 2 ?
+                                  Text('Oct 24 - 28',style: smallTextStyle): const SizedBox()
+                                ],
                               ),
                             ),
-                           ),
+                          ),
                          ],
                        ),
                      ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/src/view%20model/booking_details.dart';
-import 'package:flutter_application_1/src/view/desktop/dashboard/dashboard.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:tuch_trip_crms/src/view%20model/booking_details.dart';
+import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 
 class BookingDetailsScreen extends StatelessWidget {
   @override
