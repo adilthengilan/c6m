@@ -5,7 +5,7 @@ import 'package:tuch_trip_crms/src/view%20model/rooms_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
-import 'package:tuch_trip_crms/src/view_model/guest_management_provider.dart';
+import 'package:tuch_trip_crms/src/view%20model/guest_management_provider.dart';
 
 class RoomScreen extends StatelessWidget {
   const RoomScreen({super.key});

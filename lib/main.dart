@@ -3,10 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/layouting.dart';
 import 'package:tuch_trip_crms/src/view%20model/booking_details.dart';
 import 'package:tuch_trip_crms/src/view%20model/booking_provider.dart';
+import 'package:tuch_trip_crms/src/view%20model/dashboard_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/rooms_provider.dart';
-import 'package:tuch_trip_crms/src/view_model/dashboard_provider.dart';
-import 'package:tuch_trip_crms/src/view_model/guest_management_provider.dart';
+import 'package:tuch_trip_crms/src/view%20model/guest_management_provider.dart';
 
 
 void main() {
