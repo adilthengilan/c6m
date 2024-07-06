@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/layouting.dart';
+import 'package:tuch_trip_crms/src/view%20model/booking_details.dart';
+import 'package:tuch_trip_crms/src/view%20model/booking_provider.dart';
+import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view_model/dashboard_provider.dart';
 import 'package:tuch_trip_crms/src/view_model/guest_management_provider.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +22,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => DashboardProvider()),
         ChangeNotifierProvider(create: (context) => GuestManagementProvider()),
+        ChangeNotifierProvider(create: (context) => LoginProvider()),
+        ChangeNotifierProvider(create: (context) => BookingProvider()),
+        ChangeNotifierProvider(create: (context) => BookingdetailsProvider()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

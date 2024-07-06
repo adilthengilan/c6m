@@ -3,11 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Guests/guest.dart';
+import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/new_booking.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/rooms/rooms.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
-import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 import 'package:tuch_trip_crms/src/view_model/dashboard_provider.dart';
+import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
+
+
 
 class DesktopView extends StatefulWidget {
   const DesktopView({super.key});
@@ -50,7 +53,12 @@ class HomePage extends StatelessWidget {
             dashboardProvider.navigationButtonsSelectedIndex == 1?
             RoomScreen():
             dashboardProvider.navigationButtonsSelectedIndex == 3?
-            GuestManagementScreen(): SizedBox()
+            GuestManagementScreen()
+                : dashboardProvider.navigationButtonsSelectedIndex == 2
+                    ? NewBookings()
+                    : dashboardProvider.navigationButtonsSelectedIndex == 3
+                        ? GuestManagementScreen()
+                        : DashBoard()
           ],
         ),
       ),
@@ -84,8 +92,16 @@ class HomePage extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
+            child: Text(
+              'Dashboard',
+              style: GoogleFonts.montserrat(
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
             ),
           ),
+        ),
           sizedBox(0.0, width * 0.06),
           //======================================================= Search Bar =============================================================
           CustomContainer(
