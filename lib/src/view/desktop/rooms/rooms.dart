@@ -86,21 +86,6 @@ class RoomScreen extends StatelessWidget {
                 ),
               ),
               sizedBox(0.0, width * 0.02),
-              CustomContainer(
-                boxShadow: true,
-                height: height * 0.051,
-                width: width * 0.09,
-                color: Colors.purpleAccent.shade100,
-                padding: EdgeInsets.symmetric(horizontal: width * 0.01),
-                borderRadius: BorderRadius.circular(10),
-                child: Row(
-                  children: [
-                    Icon(Icons.add),
-                    sizedBox(0.0, width * 0.01),
-                    Text('Room',style: smallTextStyleBold),
-                  ],
-                ),
-                ),
              ],
             ),
             sizedBox(height * 0.03, 0.0),

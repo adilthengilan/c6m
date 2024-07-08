@@ -9,9 +9,16 @@ TextEditingController guestSearchController = TextEditingController();
 bool isSelectedGuest = false;
 //Spesified select Guest from guest List
 int guestSelectedIndex = 0; 
-
+//The Occupent is Booked or Not
 bool isBooked  = true;
+//DropDown Room AVilbale 
+String roomNumberfloor = 'Available Rooms';
 
+//set floor and RoomNumber
+void setfloor(value){
+  roomNumberfloor = value;
+  notifyListeners();
+}
 
 //Updating selectguest Index in guest screen
 void setSelectGuestIndex(value){

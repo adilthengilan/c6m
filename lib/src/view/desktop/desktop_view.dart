@@ -6,11 +6,9 @@ import 'package:tuch_trip_crms/src/view%20model/dashboard_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Guests/guest.dart';
 import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/new_booking.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_menu.dart';
 import 'package:tuch_trip_crms/src/view/desktop/rooms/rooms.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
-import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
-
-
 
 class DesktopView extends StatefulWidget {
   const DesktopView({super.key});
@@ -30,6 +28,13 @@ class _DesktopViewState extends State<DesktopView> {
 ///////////==============================================================================================================
 TextEditingController searchController = TextEditingController();
 ///////////==============================================================================================================
+TextEditingController occupentCheckInFirstNameController = TextEditingController();
+TextEditingController occupentChecInkLastNameController = TextEditingController();
+TextEditingController occupentCheckInMobileNumberController = TextEditingController();
+TextEditingController occupentCheckInEmailController = TextEditingController();
+TextEditingController occupentChecInkEmailController = TextEditingController();
+TextEditingController occupentChecInCountryController = TextEditingController();
+///////////==============================================================================================================
 ///////////==============================================================================================================
 
 class HomePage extends StatelessWidget {
@@ -42,179 +47,32 @@ class HomePage extends StatelessWidget {
     final dashboardProvider = Provider.of<DashboardProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: dashboardAppBar(width, height),
+      appBar: const AppAppBar(pageName: true,),
+      drawerEnableOpenDragGesture: true,
       body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
             navigationSideButtons(height, width),
-            dashboardProvider.navigationButtonsSelectedIndex == 0?
-            DashBoard(): 
-            dashboardProvider.navigationButtonsSelectedIndex == 1?
-            RoomScreen():
-            dashboardProvider.navigationButtonsSelectedIndex == 3?
-            GuestManagementScreen()
-                : dashboardProvider.navigationButtonsSelectedIndex == 2
-                    ? NewBookings()
-                    : dashboardProvider.navigationButtonsSelectedIndex == 3
-                        ? GuestManagementScreen()
-                        : DashBoard()
+            dashboardProvider.navigationButtonsSelectedIndex == 0
+                ? const DashBoard()
+                : dashboardProvider.navigationButtonsSelectedIndex == 1
+                    ? const RoomScreen()
+                    : dashboardProvider.navigationButtonsSelectedIndex == 2
+                        ? const NewBookings()
+                        : dashboardProvider.navigationButtonsSelectedIndex == 3
+                            ? const GuestManagementScreen()
+                            : SizedBox()
           ],
         ),
       ),
     );
   }
-
+  
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////// Dashboard App Bar ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  AppBar dashboardAppBar(double width, double height) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      surfaceTintColor: Colors.white,
-      toolbarHeight: height * 0.1,
-      title: Row(
-        children: [
-          SizedBox(
-            width: width * 0.18,
-            child: Text('Tuchtrip', style: largeTextStyleBold),
-          ),
-          SizedBox(
-            width: width * 0.15,
-            child: Consumer<DashboardProvider>(
-              builder: (context, person, child) => 
-              Text(
-                person.navigationButtonsSelectedIndex == 0? 'Dashboard' : person.navigationButtonsSelectedIndex == 1? 'Room': person.navigationButtonsSelectedIndex == 2? 'Booking': person.navigationButtonsSelectedIndex == 3? 'Guest' : person.navigationButtonsSelectedIndex == 4 ? 'Settings' : 'Concierge',
-                style: GoogleFonts.montserrat(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),
-              ),
-            child: Text(
-              'Dashboard',
-              style: GoogleFonts.montserrat(
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),
-            ),
-          ),
-        ),
-          sizedBox(0.0, width * 0.06),
-          //======================================================= Search Bar =============================================================
-          CustomContainer(
-            height: height * 0.051,
-            width: width * 0.25,
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: true,
-            child: CustomTextField(
-              labelText: 'Search here',
-              controller: searchController,
-              borderRadius: 20,
-              borderSide: BorderSide.none,
-              suffixIcon: const Icon(Icons.search, color: Colors.blue),
-            ),
-          ),
-        ],
-      ),
-      actions: [
-        SizedBox(
-          width: width * 0.1,
-          child: Row(
-            //==================================================== Navigation Buttons ======================================================
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(
-              3,
-              (index) {
-                final icons = [
-                  {
-                    'icon': IconlyLight.chat,
-                    'onTap': () {},
-                  },
-                  {
-                    'icon': Icons.notifications_none_outlined,
-                    'onTap': () {},
-                  },
-                  {
-                    'icon': Icons.favorite_border_outlined,
-                    'onTap': () {},
-                  },
-                ];
-                return InkWell(
-                  borderRadius: BorderRadius.circular(10),
-                  onTap: icons[index]['onTap'] as VoidCallback,
-                  child: CustomContainer(
-                    height: height * 0.045,
-                    width: width * 0.028,
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShape: BoxShape.rectangle,
-                    boxShadow: true,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: height * 0.01,
-                            left: width * 0.003,
-                          ),
-                          child: Icon(
-                            icons[index]['icon'] as IconData?,
-                            size: height * 0.024,
-                            semanticLabel: 'text',
-                            color: Colors.deepPurple,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: height * 0.005,
-                          ),
-                          child: CircleAvatar(
-                            radius: height * 0.006,
-                            backgroundColor: Colors.orange.shade400,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ),
-        sizedBox(0.0, width * 0.06),
-        //========================================================== Profile Image ===================================================
-        CustomContainer(
-          height: height * 0.05,
-          width: width * 0.028,
-          color: Colors.grey.shade100,
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: false,
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            image: AssetImage('assets/images/profile image.png'),
-          ),
-        ),
-        sizedBox(0.0, width * 0.01),
-        SizedBox(
-          height: height * 0.06,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Receptionist', style: smallTextStyleBold),
-              Text('John Deo', style: smallTextStyle),
-            ],
-          ),
-        ),
-        sizedBox(0.0, width * 0.02),
-      ],
-    );
-  }
 
 //=================================== Navigation Menu Buttons on The side of Screen =======================================
 //=========================================================================================================================
@@ -254,8 +112,8 @@ class HomePage extends StatelessWidget {
                   'onTap': () {},
                 },
                 {
-                  'icon': IconlyLight.setting,
-                  'text': 'Settings',
+                  'icon': IconlyLight.user_1,
+                  'text': 'Concierge',
                   'onTap': () {},
                 },
               ];
@@ -324,4 +182,168 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+}
+
+class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final bool pageName;
+  const AppAppBar({super.key, required this.pageName});
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    return AppBar(
+      backgroundColor: Colors.white,
+      surfaceTintColor: Colors.white,
+      toolbarHeight: height * 0.12,
+      automaticallyImplyLeading: false,
+      title: Row(
+        children: [
+          SizedBox(
+            width: width * 0.18,
+            child: Text('Tuchtrip', style: largeTextStyleBold),
+          ),
+          pageName?
+          SizedBox(
+            width: width * 0.15,
+            child: Consumer<DashboardProvider>(
+              builder: (context, person, child) => Text(
+                person.navigationButtonsSelectedIndex == 0
+                    ? 'Dashboard'
+                    : person.navigationButtonsSelectedIndex == 1
+                        ? 'Room'
+                        : person.navigationButtonsSelectedIndex == 2
+                            ? 'Booking'
+                            : person.navigationButtonsSelectedIndex == 3
+                                ? 'Guest'
+                                : 'Concierge',
+                style: GoogleFonts.montserrat(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ): SizedBox(width: width * 0.15,),
+          SizedBox(width: width * 0.06),
+        ],
+      ),
+      actions: [
+        SizedBox(
+          width: width * 0.1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(
+              3,
+              (index) {
+                final icons = [
+                  {
+                    'icon': IconlyLight.chat,
+                    'onTap': () {},
+                  },
+                  {
+                    'icon': Icons.notifications_none_outlined,
+                    'onTap': () {},
+                  },
+                  {
+                    'icon': Icons.favorite_border_outlined,
+                    'onTap': () {},
+                  },
+                ];
+                return InkWell(
+                  borderRadius: BorderRadius.circular(10),
+                  onTap: icons[index]['onTap'] as VoidCallback,
+                  child: CustomContainer(
+                    height: height * 0.045,
+                    width: width * 0.028,
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShape: BoxShape.rectangle,
+                    boxShadow: true,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: height * 0.01,
+                            left: width * 0.003,
+                          ),
+                          child: Icon(
+                            icons[index]['icon'] as IconData?,
+                            size: height * 0.024,
+                            semanticLabel: 'text',
+                            color: Colors.deepPurple,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: height * 0.005,
+                          ),
+                          child: CircleAvatar(
+                            radius: height * 0.006,
+                            backgroundColor: Colors.orange.shade400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+        SizedBox(width: width * 0.02),
+        // =========================================================== List Your Property ==========================================================
+        // =========================================================== ================== ==========================================================
+        TextButton.icon(
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.symmetric(
+              horizontal: width * 0.01,
+              vertical: height * 0.02,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(0),
+            ),
+            backgroundColor: Colors.transparent,
+          ),
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PropertyRegistrationMenu()));
+          },
+           label: Text('Enroll Your Property',style: smallTextStyle),
+           icon: Icon(Icons.apartment_outlined,
+           color: Colors.lightBlueAccent.shade100,
+          ),
+        ),
+        sizedBox(0.0, width * 0.02),
+        CustomContainer(
+          height: height * 0.05,
+          width: width * 0.028,
+          color: Colors.grey.shade100,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: false,
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage('assets/images/profile image.png'),
+          ),
+        ),
+        SizedBox(width: width * 0.01),
+        SizedBox(
+          height: height * 0.06,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Receptionist', style: smallTextStyleBold),
+              Text('John Deo', style: smallTextStyle),
+            ],
+          ),
+        ),
+        SizedBox(width: width * 0.02),
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }

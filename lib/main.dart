@@ -4,6 +4,7 @@ import 'package:tuch_trip_crms/layouting.dart';
 import 'package:tuch_trip_crms/src/view%20model/booking_details.dart';
 import 'package:tuch_trip_crms/src/view%20model/booking_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/dashboard_provider.dart';
+import 'package:tuch_trip_crms/src/view%20model/guest_detailes_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/rooms_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/guest_management_provider.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => LoginProvider()),
         ChangeNotifierProvider(create: (context) => BookingProvider()),
         ChangeNotifierProvider(create: (context) => BookingdetailsProvider()),
-        ChangeNotifierProvider(create: (context) => RoomsProvider())
+        ChangeNotifierProvider(create: (context) => RoomsProvider()),
+        ChangeNotifierProvider(create: (context) => GuestDetailesProvider()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

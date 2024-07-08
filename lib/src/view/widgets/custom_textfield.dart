@@ -7,14 +7,16 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final BorderSide borderSide;
   final Widget? suffixIcon;
+  final BorderSide? enabledBorder;
 
   const CustomTextField({
     Key? key,
     required this.labelText,
     required this.controller,
     this.borderRadius = 8.0, // Default value for borderRadius
-    this.borderSide = const BorderSide(color: Colors.grey), // Default value for borderSide
-    this.suffixIcon,
+    this.borderSide = const BorderSide(color: Colors.transparent), // Default value for borderSide
+    this.suffixIcon, 
+    this.enabledBorder = const BorderSide(color: Colors.transparent),
   }) : super(key: key);
 
   @override
@@ -39,6 +41,19 @@ class CustomTextField extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
           borderSide: borderSide,
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+          borderSide: borderSide,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+          borderSide: borderSide,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+          borderSide: enabledBorder!,
+
         ),
       ),
     );

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tuch_trip_crms/src/view/desktop/Guests/check_in_field.dart';
+import 'package:tuch_trip_crms/src/view/desktop/Guests/guest_Detailes.dart';
 import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/new_booking.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
-import 'package:tuch_trip_crms/src/view/widgets/show_dialogue.dart';
 import 'package:tuch_trip_crms/src/view%20model/guest_management_provider.dart';
 
 class GuestManagementScreen extends StatelessWidget {
@@ -120,88 +121,95 @@ class GuestManagementScreen extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, builderIndex) => 
-                      CustomContainer(
-                        height: height * 0.1,
-                        width: width,
-                        padding: EdgeInsets.only(left: width * 0.004),
-                        border: BorderDirectional(bottom: BorderSide(color: Colors.grey.shade100)),
-                        color: backgroundColor,
-                        boxShadow: true,
-                        child: Row(children: [
-                        SizedBox(
-                        width: width * 0.135,
-                          child: Row(
-                            children: [
-                              Consumer<GuestManagementProvider>(
-                                builder: (context, person, child) => 
-                                 Checkbox(
-                                   value: builderIndex == person.guestSelectedIndex ? true : false,
-                                    onChanged: (value) {
-                                      person.setSelectGuestIndex(value);
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => GuestDetailesScreen(),));
+                        },
+                        child: CustomContainer(
+                          height: height * 0.1,
+                          width: width,
+                          padding: EdgeInsets.only(left: width * 0.004),
+                          border: BorderDirectional(bottom: BorderSide(color: Colors.grey.shade100)),
+                          color: backgroundColor,
+                          boxShadow: true,
+                          child: Row(children: [
+                          SizedBox(
+                          width: width * 0.135,
+                            child: Row(
+                              children: [
+                                Consumer<GuestManagementProvider>(
+                                  builder: (context, person, child) => 
+                                   Checkbox(
+                                     value: builderIndex == person.guestSelectedIndex ? true : false,
+                                      onChanged: (value) {
+                                        person.setSelectGuestIndex(value);
+                                      },
+                                      activeColor: Colors.cyanAccent,
+                                      checkColor: Colors.white,
+                                   ),
+                                ),
+                                sizedBox(0.0, width * 0.01),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center, 
+                                  children: [
+                                    Text('Booking Id',style: smallTextStyle),
+                                    SizedBox(width: width * 0.1,child: Text('John Smith',style: smallTextStyleBold)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                            Row(
+                              children: List.generate(3, (index) => 
+                                Container(
+                                width: index == 0 || index == 1 ? width * 0.1 : width * 0.135,
+                                padding: EdgeInsets.only(right: width * 0.01),
+                                child: Text(index == 0 ?'Sunday 12, 02, 2024 06:33 Pm' : index == 1 ? '+91 9446085810' : 'johnsmith@gmail.com',style: smallTextStyle)),
+                              ),
+                            ),
+                            Row(
+                              children: List.generate(2, (index) => Container(
+                                width: index == 1? width * 0.09 :  width * 0.085,
+                                padding: EdgeInsets.only(right: index == 0? width * 0.02 : width * 0.025),
+                                child: Consumer<GuestManagementProvider>(
+                                  builder: (context, person, child) => 
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      backgroundColor: index == 1 && person.isBooked? Colors.cyanAccent.shade400 : Colors.grey.shade300,
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                    ),
+                                    onPressed: index == 0 ? person.isBooked? (){showDialog(context: context, builder: (context) => NewBookingDialog(),);} : null: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => CheckInForm(),));
+                                    }, 
+                                   child: Text(index  == 0 ? builderIndex == 0 || builderIndex == 2? 'Booked': 'Book' : 'Check-In',style: smallTextStyle),
+                                   ),
+                                ),
+                                ),
+                              ),
+                            ),
+                            Row(
+                              children: List.generate(2, (index) => SizedBox(
+                                width: index == 0 ?width * 0.065 : width * 0.04,
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: IconButton(
+                                    onPressed: (){
+                                      index == 1? showDialog(context: context, builder: (context) => SizedBox(),): null;
                                     },
-                                    activeColor: Colors.cyanAccent,
-                                    checkColor: Colors.white,
-                                 ),
-                              ),
-                              sizedBox(0.0, width * 0.01),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center, 
-                                children: [
-                                  Text('Booking Id',style: smallTextStyle),
-                                  SizedBox(width: width * 0.1,child: Text('John Smith',style: smallTextStyleBold)),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                          Row(
-                            children: List.generate(3, (index) => 
-                              Container(
-                              width: index == 0 || index == 1 ? width * 0.1 : width * 0.135,
-                              padding: EdgeInsets.only(right: width * 0.01),
-                              child: Text(index == 0 ?'Sunday 12, 02, 2024 06:33 Pm' : index == 1 ? '+91 9446085810' : 'johnsmith@gmail.com',style: smallTextStyle)),
-                            ),
-                          ),
-                          Row(
-                            children: List.generate(2, (index) => Container(
-                              width: index == 1? width * 0.09 :  width * 0.085,
-                              padding: EdgeInsets.only(right: index == 0? width * 0.02 : width * 0.025),
-                              child: Consumer<GuestManagementProvider>(
-                                builder: (context, person, child) => 
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                    backgroundColor: index == 1 && person.isBooked? Colors.cyanAccent.shade400 : Colors.grey.shade300,
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                                  ),
-                                  onPressed: index == 0 ? person.isBooked? (){customShowDialog(context, NewBookingDialog());} : null: () {customShowDialog(context, SizedBox());}, 
-                                 child: Text(index  == 0 ? builderIndex == 0 || builderIndex == 2? 'Booked': 'Book' : 'Check-In',style: smallTextStyle),
-                                 ),
-                              ),
-                              ),
-                            ),
-                          ),
-                          Row(
-                            children: List.generate(2, (index) => SizedBox(
-                              width: index == 0 ?width * 0.065 : width * 0.04,
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: IconButton(
-                                  onPressed: (){
-                                    index == 1? customShowDialog(context, SizedBox()): null;
-                                  },
-                                   icon: Icon(index == 0? Icons.edit_outlined
-                                    : Icons.delete_outline,
-                                    color: index == 0 ? Colors.lightBlueAccent : Colors.redAccent,
+                                     icon: Icon(index == 0? Icons.edit_outlined
+                                      : Icons.delete_outline,
+                                      color: index == 0 ? Colors.lightBlueAccent : Colors.redAccent,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                           ),
-                         ],
-                       ),
-                     ),
+                             ),
+                           ],
+                         ),
+                                             ),
+                      ),
                    ),
                  ],
                ),
