@@ -6,6 +6,7 @@ import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 
+
 class ApartmentPage1 extends StatelessWidget {
   const ApartmentPage1({super.key,});
 
@@ -74,13 +75,13 @@ class ApartmentPage1 extends StatelessWidget {
                   ),
                 ),
               ),
-            SizedBox(height: height * 0.02),
+            person.numberofProperty > 1?
             SizedBox(
               child: Text(
                 'Are these properties in the same address or building?',
                 style: smallTextStyle,
               ),
-            ),
+            ): const SizedBox(),
             SizedBox(height: height * 0.02),
             Consumer<RegistrationProvider>(
               builder: (context, person, child) => Column(
@@ -181,13 +182,12 @@ class ApartmentPage1 extends StatelessWidget {
             ),
             sizedBox(height * 0.02, 0.0),
             //Text Button for [Continue]
-            Container(
+            SizedBox(
               height: height * 0.055,
               width: width * 0.25,
-              color: Colors.grey.shade100,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: person.numberofProperty < 1? Colors.grey.shade100 : Colors.blue,
+                  backgroundColor: person.numberofProperty < 1? Colors.grey.shade100 : Colors.deepPurpleAccent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8)
                   )
@@ -206,4 +206,35 @@ class ApartmentPage1 extends StatelessWidget {
       ),
     );
   }
+}
+
+
+SizedBox continueButton(height, width, isDisabledButton, onPressed) {
+  return SizedBox(
+    height: height * 0.055,
+    width: width * 0.27,
+    child: TextButton(
+      style: TextButton.styleFrom(
+          backgroundColor: isDisabledButton ? Colors.grey.shade100 : Colors.deepPurpleAccent,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+      onPressed: onPressed,
+      child: Text('Continue', style: smallTextStylewhiteBold),
+    ),
+  );
+}
+
+InkWell backButton(double height, double width,VoidCallback onPressed) {
+  return InkWell(
+    onTap: onPressed,
+    child: CustomContainer(
+      boxShadow: true,
+      border: Border.all(color: Colors.grey.shade300),
+      height: height * 0.055,
+      width: width * 0.06,
+      color: Colors.white,
+      child: const Center(
+        child: Icon(Icons.keyboard_arrow_left),
+      ),
+    ),
+  );
 }
