@@ -6,6 +6,7 @@ import 'package:tuch_trip_crms/src/view%20model/dashboard_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Guests/guest.dart';
 import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/new_booking.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_menu.dart';
 import 'package:tuch_trip_crms/src/view/desktop/rooms/rooms.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
@@ -20,7 +21,7 @@ class DesktopView extends StatefulWidget {
 class _DesktopViewState extends State<DesktopView> {
   @override
   Widget build(BuildContext context) {
-    return const HomePage();
+    return const Apartment();
   }
 }
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tuch_trip_crms/src/view/desktop/Guests/check_in_field.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Guests/guest_Detailes.dart';
 import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/new_booking.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
@@ -179,10 +178,8 @@ class GuestManagementScreen extends StatelessWidget {
                                       backgroundColor: index == 1 && person.isBooked? Colors.cyanAccent.shade400 : Colors.grey.shade300,
                                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                                     ),
-                                    onPressed: index == 0 ? person.isBooked? (){showDialog(context: context, builder: (context) => NewBookingDialog(),);} : null: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => CheckInForm(),));
-                                    }, 
-                                   child: Text(index  == 0 ? builderIndex == 0 || builderIndex == 2? 'Booked': 'Book' : 'Check-In',style: smallTextStyle),
+                                    onPressed: index == 0 ? (){showDialog(context: context, builder: (context) => NewBookingDialog(),);} : () {}, 
+                                   child: Text(index  == 0 ? 'Book' : 'Check-In',style: smallTextStyle),
                                    ),
                                 ),
                                 ),

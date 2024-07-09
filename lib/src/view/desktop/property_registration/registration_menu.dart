@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/alternative_place.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/homestay.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/hotel.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 
 class PropertyRegistrationMenu extends StatelessWidget {
@@ -22,9 +26,9 @@ class PropertyRegistrationMenu extends StatelessWidget {
                 style: GoogleFonts.montserrat(
                   color: Colors.black,
                   fontWeight: FontWeight.w700,
-                  fontSize: 26,
-                )
+                  fontSize: 26
                 ),
+              ),
             sizedBox(height * 0.02, 0.0),
             Text('To get started, choose the type of property you want to list on Booking.com',
               style: GoogleFonts.montserrat(
@@ -38,7 +42,15 @@ class PropertyRegistrationMenu extends StatelessWidget {
               children: List.generate(4, (index) => Padding(
                 padding: EdgeInsets.only(right: width * 0.03),
                 child: GestureDetector(
-                  onTap: index == 0?  () {} : index == 1? () {} : index == 2? (){} :  (){},
+                  onTap: index == 0?  () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Apartment()));
+                  } : index == 1? () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeStay()));
+                  } : index == 2? (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Hotel()));
+                  } :  (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AlternativePlaces()));
+                  },
                   child: CustomContainer(
                     boxShadow: true,
                     color: Colors.white,
@@ -48,14 +60,14 @@ class PropertyRegistrationMenu extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         sizedBox(height * 0.01, 0.0),
-                        Icon(Icons.apartment_outlined,
+                        Icon(index == 0? Icons.apartment_outlined : index == 1? Icons.home_outlined : index == 2? Icons.other_houses_outlined : Icons.houseboat_outlined,
                         size: height * 0.08,
                         color: index == 0? Colors.purpleAccent.shade100 : index == 1? Colors.greenAccent.shade100 : index == 2? Colors.orangeAccent.shade100 : Colors.pinkAccent.shade100),
                         sizedBox(height * 0.02, 0.0),
                         SizedBox(
                           width: width * 0.12,
                           child: Center(
-                            child: Text(index == 0?'Apartments' : index == 1? 'Homes' : index == 2? 'Hotel, B&Bs, and more' : 'Alternative places',style: mediumTextStyleBold)),
+                            child: Text(index == 0?'Apartments' : index == 1? 'Homes' : index == 2? 'Hotel' : 'Alternative places',style: mediumTextStyleBold)),
                         ),
                         sizedBox(height * 0.01, 0.0),
                         SizedBox(width: width * 0.12,
@@ -80,7 +92,15 @@ class PropertyRegistrationMenu extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8)
                               )
                             ),
-                            onPressed: () {},
+                            onPressed: index == 0?  () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const Apartment()));
+                            } : index == 1? () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeStay()));
+                            } : index == 2? (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const Hotel()));
+                            } :  (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const AlternativePlaces()));
+                            },
                             child: Text('Post your property',
                             style: smallTextStylewhite),
                           ),
@@ -98,6 +118,7 @@ class PropertyRegistrationMenu extends StatelessWidget {
     );
   }
 }
+
 AppBar RegistrationAppBar(double height,double width){
   return AppBar(
       backgroundColor: Colors.white,

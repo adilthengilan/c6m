@@ -8,16 +8,20 @@ class CustomTextField extends StatelessWidget {
   final BorderSide borderSide;
   final Widget? suffixIcon;
   final BorderSide? enabledBorder;
+  final TextStyle? labelTextStyle;
+  final void Function(String)? onSubmiting;
 
   const CustomTextField({
-    Key? key,
+    super.key,
     required this.labelText,
     required this.controller,
     this.borderRadius = 8.0, // Default value for borderRadius
     this.borderSide = const BorderSide(color: Colors.transparent), // Default value for borderSide
     this.suffixIcon, 
-    this.enabledBorder = const BorderSide(color: Colors.transparent),
-  }) : super(key: key);
+    this.enabledBorder = const BorderSide(color: Colors.transparent), 
+    this.labelTextStyle = const TextStyle(color: Colors.grey,fontSize: 14,fontWeight: FontWeight.w400),
+    this.onSubmiting
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +32,11 @@ class CustomTextField extends StatelessWidget {
         fontWeight: FontWeight.w400,
         color: Colors.black,
       ),
+      onSubmitted: onSubmiting,
       decoration: InputDecoration(
         labelText: labelText,
         suffixIcon: suffixIcon,
-        labelStyle: GoogleFonts.montserrat(
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          color: Colors.grey,
-        ),
+        labelStyle: labelTextStyle,
         contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         border: OutlineInputBorder(
@@ -53,7 +54,6 @@ class CustomTextField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
           borderSide: enabledBorder!,
-
         ),
       ),
     );

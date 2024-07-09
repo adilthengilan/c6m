@@ -35,6 +35,7 @@ class CheckInForm extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: height * 0.06),
                     child: Row(
                       children: [
+                        //======================================================== Text Field =============================================================
                         CustomContainer(
                           width: width * 0.25,
                           color: Colors.white,
@@ -42,22 +43,14 @@ class CheckInForm extends StatelessWidget {
                           height: height * 0.055,
                           borderRadius: BorderRadius.circular(15),
                           child: CustomTextField(
-                            labelText: index == 0
-                                ? 'First Name'
-                                : index == 1
-                                    ? 'Mobile Number'
-                                    : 'Country',
-                            controller: index == 0
-                                ? occupentCheckInFirstNameController
-                                : index == 1
-                                    ? occupentCheckInMobileNumberController
-                                    : occupentChecInCountryController,
+                            labelText: index == 0? 'First Name': index == 1? 'Mobile Number': 'Country',
+                            controller: index == 0? occupentCheckInFirstNameController : index == 1 ? occupentCheckInMobileNumberController : occupentChecInCountryController,
                             borderSide: BorderSide(color: Colors.grey.shade400),
                             borderRadius: 10,
-                            enabledBorder:
-                                BorderSide(color: Colors.grey.shade400),
+                            enabledBorder: BorderSide(color: Colors.grey.shade400),
                           ),
                         ),
+                        //=======================================================================================================================================
                         sizedBox(0.0, width * 0.04),
                         CustomContainer(
                           width: width * 0.25,
