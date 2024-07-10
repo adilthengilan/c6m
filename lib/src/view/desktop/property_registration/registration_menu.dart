@@ -93,15 +93,15 @@ class PropertyRegistrationMenu extends StatelessWidget {
                               )
                             ),
                             onPressed: index == 0?  () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const Apartment()));
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => const Apartment()));
                             } : index == 1? () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeStay()));
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeStay()));
                             } : index == 2? (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const Hotel()));
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => const Hotel()));
                             } :  (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const AlternativePlaces()));
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => const AlternativePlaces()));
                             },
-                            child: Text('Post your property',
+                            child: Text('Coming Soon..',
                             style: smallTextStylewhite),
                           ),
                          ),

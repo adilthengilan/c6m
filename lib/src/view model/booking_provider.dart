@@ -97,8 +97,15 @@ class BookingProvider extends ChangeNotifier {
     if (filter == 'All') {
       _filteredGuests = _guests;
     } else {
-      _filteredGuests = _guests.where((guest) => guest['status'] == filter).toList();
+      _filteredGuests =
+          _guests.where((guest) => guest['status'] == filter).toList();
     }
+    notifyListeners();
+  }
+
+  void addBooking(Map<String, dynamic> newBooking) {
+    _guests.add(newBooking);
+    _filteredGuests = List.from(_guests);
     notifyListeners();
   }
 }

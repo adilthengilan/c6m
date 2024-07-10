@@ -30,7 +30,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => BookingdetailsProvider()),
         ChangeNotifierProvider(create: (context) => RoomsProvider()),
         ChangeNotifierProvider(create: (context) => GuestDetailesProvider()),
-        ChangeNotifierProvider(create: (context) => RegistrationProvider())
+        ChangeNotifierProvider(create: (context) => RegistrationProvider()),
+        ChangeNotifierProvider(create: (context) => GuestManagementProvider()),
+        ChangeNotifierProvider(create: (context) => RoomsProvider()),
+        ChangeNotifierProvider(create: (context) => RegistrationProvider()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
