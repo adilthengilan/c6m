@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tuch_trip_crms/src/view/desktop/Guests/check_in_field.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Guests/guest_Detailes.dart';
 import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/new_booking.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 import 'package:tuch_trip_crms/src/view%20model/guest_management_provider.dart';
+import 'package:tuch_trip_crms/src/view/widgets/show_dialoug.dart';
+
+TextEditingController checkinController = TextEditingController();
 
 class GuestManagementScreen extends StatelessWidget {
   const GuestManagementScreen({super.key});
@@ -178,7 +182,7 @@ class GuestManagementScreen extends StatelessWidget {
                                       backgroundColor: index == 1 && person.isBooked? Colors.cyanAccent.shade400 : Colors.grey.shade300,
                                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                                     ),
-                                    onPressed: index == 0 ? (){showDialog(context: context, builder: (context) => NewBookingDialog(),);} : () {}, 
+                                    onPressed: index == 0 ? (){showDialog(context: context, builder: (context) => NewBookingDialog());} : () {customShowDialog( context, CheckInDialog());}, 
                                    child: Text(index  == 0 ? 'Book' : 'Check-In',style: smallTextStyle),
                                    ),
                                 ),
@@ -191,8 +195,10 @@ class GuestManagementScreen extends StatelessWidget {
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: IconButton(
-                                    onPressed: (){
-                                      index == 1? showDialog(context: context, builder: (context) => SizedBox(),): null;
+                                    onPressed: 
+                                      index == 0? (){ showDialog(context: context, builder: (context) => editing(height, width, checkinController));}: 
+                                      (){
+                                         showDialog(context: context, builder: (context) => DeleteFileDialog());
                                     },
                                      icon: Icon(index == 0? Icons.edit_outlined
                                       : Icons.delete_outline,
