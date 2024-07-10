@@ -26,11 +26,11 @@ class Apartment extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         controller: person.apartmentPagecontroller,
         children: [
-          const PropertyLocationPage(gotToNextPage: 5,goToBackPage: 3),
-          const ApartmentPage1(),
-          const ApartmentPage2(),
-          const ApartmentPage3(),
-          const ApartmentPage4(),
+          // const PropertyLocationPage(gotToNextPage: 5,goToBackPage: 3),
+          // const ApartmentPage1(),
+          // const ApartmentPage2(),
+          // const ApartmentPage3(),
+          // const ApartmentPage4(),
           SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(left: width * 0.1),
@@ -54,10 +54,9 @@ class Apartment extends StatelessWidget {
                         //=========================================================== Bed Rooms List ===============================================================
                         Consumer<RegistrationProvider>(
                         builder: (context, person, child) { 
-                          print(person.bedRoomList);
+                          // print(person.bedRoomList);
                           return Column(
                             children: List.generate(person.bedRoomList.length, (index) => 
-                             person.bedRoomList.isNotEmpty?
                               Padding(
                                 padding: EdgeInsets.only(bottom: height * 0.03,right: width * 0.04),
                                 child: Column(
@@ -97,7 +96,6 @@ class Apartment extends StatelessWidget {
                                       sizedBox(height * 0.01, 0.0),
                                       person.bedroomBottomSheet && index == person.bedRoomSelectedIndex?
                                       CustomContainer(
-                                      height: height * 0.1,
                                       width: width,
                                       color: Colors.white,
                                       boxShadow: true,
@@ -105,7 +103,8 @@ class Apartment extends StatelessWidget {
                                     ): const SizedBox()
                                   ],
                                 ),
-                              ) : SizedBox(),
+                              ) 
+                              // : SizedBox(),
                             ),
                           );
                          }
@@ -125,7 +124,12 @@ class Apartment extends StatelessWidget {
                                     person.addBedRoom();
                                   },
                                   label: Text('add Bedroom'),
-                                  icon: Icon(Icons.add),
+                                  icon: CustomContainer(
+                                    boxShadow: false,
+                                    border: Border.all(color: Colors.grey.shade300),
+                                    boxShape: BoxShape.circle,
+                                    padding: const EdgeInsets.all(3),
+                                    child: Icon(Icons.add,size: height * 0.024)),
                                 ):
                                 CustomContainer(
                                   height: height * 0.1,
@@ -194,6 +198,106 @@ class Apartment extends StatelessWidget {
                       ],
                     ),
                   ),
+                  sizedBox(height * 0.025, width),
+                  //========================================= Hoew Many Guests Can Stay | How many bathrooms are there? ================================================
+                  CustomContainer(
+                    boxShadow: true,
+                    width: width * 0.35,
+                    padding: EdgeInsets.symmetric(vertical: height * 0.025, horizontal: width * 0.02),
+                    color: Colors.white,
+                    child:  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(2, (index) => 
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(index == 0? 'How many guests can stay?' : 'How many bathrooms are there?'),
+                            sizedBox(height * 0.02, width),
+                            Consumer<RegistrationProvider>(
+                              builder: (context, value, child) => 
+                              CustomContainer(
+                                                  boxShadow: false,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  border: Border.all(color: Colors.grey.shade400),
+                                                  child: Row(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      IconButton(
+                                                        onPressed: () {
+                                                          person.decrementGuestCounter(index);
+                                                        },
+                                                        icon: Icon(Icons.remove,size: height * 0.025,),
+                                                      ),
+                                                      Text(index == 0?'${person.guestCapacity}' : '', style: smallTextStyle),
+                                                      IconButton(
+                                                        onPressed: () {
+                                                          person.increamentGuestCounter(index);
+                                                        },
+                                                        icon: Icon(Icons.add,size: height * 0.025,),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                            ),
+                                              sizedBox(index == 0?height * 0.02 : 0, 0.0),
+                          ],
+                        ),
+                        
+                      ),
+                    ),
+                  ),
+                  sizedBox(height * 0.025, width),
+                  // ==================================================== Allow  Children ========================================================
+                  CustomContainer(
+                    boxShadow: true,
+                    width: width * 0.35,
+                    padding: EdgeInsets.symmetric(vertical: height * 0.025, horizontal: width * 0.02),
+                    color: Colors.white,
+                    child:  Column(
+                      children: List.generate(2, (index) => 
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                 Text(
+                                  index == 0 ? 
+                                  'Do you allow children? ':
+                                  'Do you offer cots?',
+                                  style: smallTextStyle
+                                ),
+                                index == 1? SizedBox(width: width * 0.3,child: Text('Cots sleep most infants 0-3 and can be made available to guests on request.',style: GoogleFonts.montserrat(color: Colors.black,fontSize: 12,fontWeight: FontWeight.w400))) : const SizedBox(),
+                                sizedBox(height * 0.02, 0.0),
+                                //======================================================= Radiao Buttons ====================================
+                                Consumer<RegistrationProvider>(
+                                  builder: (context, consumer, child) => 
+                                  radioButtons(width, consumer.allowChildren, 
+                                  (value) {
+                                    consumer.setingAllowChildren(value);
+                                  },
+                                  (value) => consumer.setingAllowChildren(value),
+                                  ),
+                                ),
+                                sizedBox(index == 0 ?height * 0.03 : 0, 0.0),
+                              ],
+                            ),
+                      ),
+                    ),
+                  ),
+                  sizedBox(height * 0.03, width),
+                  Row(
+                    children: [
+                      backButton(height, width, (){
+                        person.goToPage(4);
+                      },
+                      ),
+                      sizedBox(0.0, width * 0.02),
+                      continueButton(height, width, true, (){
+                        person.goToPage(6);
+                      })
+                    ],
+                  ),
+                  sizedBox(height * 0.4, width)
                 ],
               ),
             ),
@@ -201,6 +305,36 @@ class Apartment extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Consumer<RegistrationProvider> radioButtons(double width,bool groupValue, void Function(bool?)?  onChanged1, void Function(bool?)? onChanged2) {
+    return Consumer<RegistrationProvider>(
+        builder: (context, consumer, child) => 
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Radio<bool>(
+              value: true,
+              groupValue: groupValue,
+              onChanged: onChanged1
+            ),
+             const Text(
+              'Yes',
+              style: TextStyle(fontSize: 12),
+            ),
+            sizedBox(0.0, width * 0.01),
+            Radio<bool>(
+              value: false,
+              groupValue: groupValue,
+              onChanged: onChanged2
+            ),
+            const Text(
+              'No',
+              style: TextStyle(fontSize: 12),
+            ),
+          ],
+        ),
+      );
   }
 
   Row livingRoomBedCount(double width, double height, RegistrationProvider person) {

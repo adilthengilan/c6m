@@ -34,20 +34,25 @@ class RegistrationProvider extends ChangeNotifier {
   int otherSpaceSofaBed = 0;
   int otherSpaceFutonMat = 0;
   //============================================================== Bedroom  ================================================================================
-  int bedroomSingleBed = 0;
+  int bedroomSingleBed = 1;
   int bedroomOfDoubleBed = 0;
   int bedroomKingSizeBedCount = 0;
   int bedroomSuperKingSizeBedCount = 0;
   int bedroomBunkBed = 0;
   int bedroomSofaBed = 0;
   int bedroomFutonMat = 0;
-  //============================================================== Number of Sofa Beds =====================================================================
+  //============================================================== Allow Children =====================================================================
+  bool allowChildren = true;
+  bool allowCoats = true;
+  //============================================================== How many Guest Can Stay ========================================================================
+  int guestCapacity = 1;
+  int bathRoomCount = 0;
 
 //This Function will controlling page view, This function can easy to change the pages in the paview
   void goToPage(int page) {
     apartmentPagecontroller.animateToPage(
       page,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
   }
@@ -132,9 +137,9 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
- void incrementBedCount(String spaceType, int bedType) {
+  void incrementBedCount(String spaceType, int bedType) {
     if (spaceType == 'living') {
-        livingRoomSofaBed++;
+      livingRoomSofaBed++;
     } else if (spaceType == 'other') {
       if (bedType == 0) {
         otherSpaceSingleBed++;
@@ -172,9 +177,9 @@ class RegistrationProvider extends ChangeNotifier {
   }
 
   void decrementBedCount(String spaceType, int bedType) {
-    if (spaceType == 'living') {
-      } if (bedType == 0 && livingRoomSofaBed > 0) {
-        livingRoomSofaBed--;
+    if (spaceType == 'living') {}
+    if (bedType == 0 && livingRoomSofaBed > 0) {
+      livingRoomSofaBed--;
     } else if (spaceType == 'other') {
       if (bedType == 0 && otherSpaceSingleBed > 0) {
         otherSpaceSingleBed--;
@@ -211,10 +216,10 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List <String> bedCount(spaceType){
-    if(spaceType == 'living'){
+  List<String> bedCount(spaceType) {
+    if (spaceType == 'living') {
       return [livingRoomSofaBed.toString()];
-    } else if(spaceType == 'other'){
+    } else if (spaceType == 'other') {
       return [
         otherSpaceSingleBed.toString(),
         otherSpaceOfDoubleBed.toString(),
@@ -224,7 +229,7 @@ class RegistrationProvider extends ChangeNotifier {
         otherSpaceSofaBed.toString(),
         otherSpaceFutonMat.toString(),
       ];
-    } else if(spaceType == 'bedroom'){
+    } else if (spaceType == 'bedroom') {
       return [
         bedroomSingleBed.toString(),
         bedroomOfDoubleBed.toString(),
@@ -238,8 +243,8 @@ class RegistrationProvider extends ChangeNotifier {
     return [];
   }
 
-  void addBedRoom(){
-    final beds =  {
+  void addBedRoom() {
+    final beds = {
       'bedRoomSingleBed': bedroomSingleBed,
       'bedRoomOfDoubleBed': bedroomOfDoubleBed,
       'bedRoomKingSizeBedCount': bedroomKingSizeBedCount,
@@ -250,5 +255,29 @@ class RegistrationProvider extends ChangeNotifier {
     };
     _bedRoomList.add(beds);
   }
+
+  void setingAllowChildren(value) {
+    allowChildren = value;
+    notifyListeners();
+  }
+
+  void increamentGuestCounter(counterIndex) {
+    if (counterIndex == 0) {
+      guestCapacity++;
+    } else if (counterIndex == 1) {
+      bathRoomCount++;
+    }
+  }
+
+  void decrementGuestCounter(int counterIndex) {
+    if (counterIndex == 0) {
+      if (guestCapacity > 0) {
+        guestCapacity--;
+      }
+    } else if (counterIndex == 1) {
+      if (bathRoomCount > 0) {
+        bathRoomCount--;
+      }
+    }
+  }
 }
-    
