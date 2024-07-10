@@ -430,7 +430,7 @@ class DashBoard extends StatelessWidget {
 //=======================================================================================================================
   CustomContainer bookedRoomsTodayStatus(double height, double width) {
     return CustomContainer(
-      height: height * 0.3,
+      height: height * 0.35,
       width: width * 0.18,
       color: Colors.white,
       borderRadius: BorderRadius.circular(15),
@@ -544,10 +544,7 @@ SizedBox sizedBox(double height, double width) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 final mediumTextStyleBold = GoogleFonts.montserrat(
-  fontSize: 18,
-  color: Colors.black,
-  fontWeight: FontWeight.w700
-);
+    fontSize: 18, color: Colors.black, fontWeight: FontWeight.w700);
 
 final smallTextStyle = GoogleFonts.montserrat(
   fontSize: 12,
@@ -583,4 +580,3 @@ final largeTextStyleBold = GoogleFonts.montserrat(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const Color backgroundColor = Colors.white;
-
