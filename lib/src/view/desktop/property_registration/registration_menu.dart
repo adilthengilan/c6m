@@ -43,13 +43,13 @@ class PropertyRegistrationMenu extends StatelessWidget {
                 padding: EdgeInsets.only(right: width * 0.03),
                 child: GestureDetector(
                   onTap: index == 0?  () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Apartment()));
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => const Apartment()));
                   } : index == 1? () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeStay()));
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeStay()));
                   } : index == 2? (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Hotel()));
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => const Hotel()));
                   } :  (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AlternativePlaces()));
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => const AlternativePlaces()));
                   },
                   child: CustomContainer(
                     boxShadow: true,

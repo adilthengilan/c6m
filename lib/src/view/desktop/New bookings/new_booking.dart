@@ -393,6 +393,8 @@ class BookingForm extends StatelessWidget {
     return CustomContainer(
       boxShadow: false,
       width: width * 0.350,
+      border: Border.all(color: Colors.grey),
+      borderRadius: BorderRadius.circular(20),
       child: CustomTextField(
         controller: controller, borderRadius: 15,
         labelText: label, labelTextStyle: smallTextStyle,

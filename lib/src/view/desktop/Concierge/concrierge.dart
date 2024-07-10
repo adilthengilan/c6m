@@ -22,6 +22,7 @@ class Concrierge extends StatelessWidget {
           children: [
             sizedBox(height * 0.04, 0.0),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // ======================================== Tab Buttons [All Guests] [Pending] [Booked] [Canceled] [Refund] =====================================
                 CustomContainer(
@@ -81,23 +82,23 @@ class Concrierge extends StatelessWidget {
                     ),
                   ),
                 ),
-                sizedBox(0.0, width * 0.18),
                 //=======================================================  The Tab Button ==================================================
-
-                sizedBox(0.0, width * 0.02),
-                CustomContainer(
-                  boxShadow: true,
-                  height: height * 0.051,
-                  width: width * 0.13,
-                  color: Color.fromARGB(231, 255, 91, 181),
-                  padding: EdgeInsets.symmetric(horizontal: width * 0.01),
-                  borderRadius: BorderRadius.circular(10),
-                  child: Row(
-                    children: [
-                      Icon(Icons.add),
-                      sizedBox(0.0, width * 0.01),
-                      Text('Generate report', style: smallTextStyleBold),
-                    ],
+                Padding(
+                  padding:  EdgeInsets.only(right: width * 0.02),
+                  child: CustomContainer(
+                    boxShadow: true,
+                    height: height * 0.051,
+                    width: width * 0.13,
+                    color: Color.fromARGB(231, 255, 91, 181),
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.01),
+                    borderRadius: BorderRadius.circular(10),
+                    child: Row(
+                      children: [
+                        Icon(Icons.add),
+                        sizedBox(0.0, width * 0.01),
+                        Text('Generate report', style: smallTextStyleBold),
+                      ],
+                    ),
                   ),
                 ),
               ],

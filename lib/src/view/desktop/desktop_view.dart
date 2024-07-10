@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/dashboard_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Concierge/concrierge.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Guests/guest.dart';
+import 'package:tuch_trip_crms/src/view/desktop/Login/login_screen.dart';
 import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/new_booking.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_menu.dart';
@@ -317,30 +318,40 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
         sizedBox(0.0, width * 0.02),
-        CustomContainer(
-          height: height * 0.05,
-          width: width * 0.028,
-          color: Colors.grey.shade100,
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: false,
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            image: AssetImage('assets/images/profile image.png'),
-          ),
-        ),
-        SizedBox(width: width * 0.01),
-        SizedBox(
-          height: height * 0.06,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
+        InkWell(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+          },
+          child: Row(
             children: [
-              Text('Receptionist', style: smallTextStyleBold),
-              Text('John Deo', style: smallTextStyle),
+              CustomContainer(
+                height: height * 0.05,
+                width: width * 0.028,
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: false,
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage('assets/images/profile image.png'),
+                ),
+              ),
+            SizedBox(width: width * 0.01),
+            SizedBox(
+            height: height * 0.06,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Receptionist', style: smallTextStyleBold),
+                Text('John Deo', style: smallTextStyle),
+              ],
+            ),
+          ),
+          SizedBox(width: width * 0.02),
             ],
           ),
         ),
-        SizedBox(width: width * 0.02),
+        
       ],
     );
   }

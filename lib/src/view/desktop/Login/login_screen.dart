@@ -17,146 +17,147 @@ class LoginScreen extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: width * 0.16, right: width * 0.07),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Login',
-                            style: GoogleFonts.montserrat(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'Please use your employee ID and password to login',
-                            style: GoogleFonts.montserrat(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black,
-                            ),
-                          ),
-                          SizedBox(height: 16),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(07)),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  hintText: ' Employee ID',
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(12))),
-                              onChanged: (value) {
-                                context
-                                    .read<LoginProvider>()
-                                    .updateEmployeeId(value);
-                              },
-                            ),
-                          ),
-                          SizedBox(height: 16),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(07)),
-                            child: DropdownButtonFormField<String>(
-                              decoration: InputDecoration(
-                                hintText: 'Department',
-                                labelStyle: TextStyle(color: Colors.black),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12)),
+                child: Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: width * 0.08),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Login',
+                              style: GoogleFonts.montserrat(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black,
                               ),
-                              value: context.watch<LoginProvider>().department,
-                              items: [
-                                DropdownMenuItem(
-                                  child: Text('Reception'),
-                                  value: 'Reception',
-                                ),
-                                // Add more departments as needed
-                              ],
-                              onChanged: (value) {
-                                context
-                                    .read<LoginProvider>()
-                                    .updateDepartment(value!);
-                              },
                             ),
-                          ),
-                          SizedBox(height: 16),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(07)),
-                            child: TextField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                hintText: 'Password',
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12)),
+                            SizedBox(height: 8),
+                            Text(
+                              'Please use your employee ID and password to login',
+                              style: GoogleFonts.montserrat(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black,
                               ),
-                              onChanged: (value) {
-                                context
-                                    .read<LoginProvider>()
-                                    .updatePassword(value);
-                              },
                             ),
-                          ),
-                          SizedBox(height: 16),
-                          Row(
-                            children: [
-                              Checkbox(
-                                checkColor: Color.fromARGB(255, 89, 26, 100),
-                                value:
-                                    context.watch<LoginProvider>().keepLoggedIn,
+                            SizedBox(height: 16),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(07)),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    hintText: ' Employee ID',
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12))),
                                 onChanged: (value) {
                                   context
                                       .read<LoginProvider>()
-                                      .toggleKeepLoggedIn(value!);
+                                      .updateEmployeeId(value);
                                 },
                               ),
-                              Text(
-                                'Keep me logged in',
-                                style: GoogleFonts.montserrat(
-                                    fontSize: 12, color: Colors.black),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 16),
-                          Container(
-                            height: height * 0.07,
-                            width: width * 0.700,
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(colors: [
-                                  Color.fromARGB(255, 105, 227, 255),
-                                  Color.fromARGB(255, 255, 167, 248),
-                                ]),
-                                borderRadius: BorderRadius.circular(07)),
-                            child: Center(
-                              child: Text(
-                                "LOGIN",
-                                style: GoogleFonts.montserrat(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(height: 16),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(07)),
+                              child: DropdownButtonFormField<String>(
+                                decoration: InputDecoration(
+                                  hintText: 'Department',
+                                  labelStyle: TextStyle(color: Colors.black),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12)),
+                                ),
+                                value: context.watch<LoginProvider>().department,
+                                items: [
+                                  DropdownMenuItem(
+                                    child: Text('Reception'),
+                                    value: 'Reception',
+                                  ),
+                                  // Add more departments as needed
+                                ],
+                                onChanged: (value) {
+                                  context
+                                      .read<LoginProvider>()
+                                      .updateDepartment(value!);
+                                },
                               ),
                             ),
-                          )
-                        ],
+                            SizedBox(height: 16),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(07)),
+                              child: TextField(
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  hintText: 'Password',
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12)),
+                                ),
+                                onChanged: (value) {
+                                  context
+                                      .read<LoginProvider>()
+                                      .updatePassword(value);
+                                },
+                              ),
+                            ),
+                            SizedBox(height: 16),
+                            Row(
+                              children: [
+                                Checkbox(
+                                  checkColor: Color.fromARGB(255, 89, 26, 100),
+                                  value:
+                                      context.watch<LoginProvider>().keepLoggedIn,
+                                  onChanged: (value) {
+                                    context
+                                        .read<LoginProvider>()
+                                        .toggleKeepLoggedIn(value!);
+                                  },
+                                ),
+                                Text(
+                                  'Keep me logged in',
+                                  style: GoogleFonts.montserrat(
+                                      fontSize: 12, color: Colors.black),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 16),
+                            Container(
+                              height: height * 0.07,
+                              width: width * 0.700,
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(colors: [
+                                    Color.fromARGB(255, 105, 227, 255),
+                                    Color.fromARGB(255, 255, 167, 248),
+                                  ]),
+                                  borderRadius: BorderRadius.circular(07)),
+                              child: Center(
+                                child: Text(
+                                  "LOGIN",
+                                  style: GoogleFonts.montserrat(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Container(
                   height: height * 0.97,
-                  width: width * 0.400,
+                  width: width * 0.6,
                   decoration: BoxDecoration(
                     color: Color.fromARGB(255, 172, 219, 246),
                     boxShadow: [
@@ -174,7 +175,7 @@ class LoginScreen extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(top: height * 0.11),
                         height: height * 0.50,
-                        width: width * 0.50,
+                        width: width * 0.68,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
