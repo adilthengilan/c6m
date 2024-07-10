@@ -57,27 +57,27 @@ class ApartmentPage3 extends StatelessWidget {
             ),
           ),
           sizedBox(height * 0.03, width),
-          // Consumer<RegistrationProvider>(
-          //   builder: (context, person, child) => 
-          //   Row(
-          //     children: [
-          //       // Back Button
-          //       backButton(height, width, (){
-          //         person.goToPage(1);
-          //         person.propertyName = '';
-          //       }),
-          //       sizedBox(0.0, width * 0.02),
-          //       //Continue Button
-          //       continueButton(
-          //         height, width, 
-          //         person.propertyName == '',
-          //         (){
-          //           person.goToPage(3);
-          //         },
-          //       ),
-          //     ],
-          //   ),
-          // )
+          Consumer<RegistrationProvider>(
+            builder: (context, person, child) => 
+            Row(
+              children: [
+                // Back Button
+                backButton(height, width, (){
+                  person.goToPage(1);
+                  person.propertyName = '';
+                }),
+                sizedBox(0.0, width * 0.02),
+                //Continue Button
+                continueButton(
+                  height, width, 
+                  person.propertyName != '',
+                  (){
+                    person.goToPage(3);
+                  },
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

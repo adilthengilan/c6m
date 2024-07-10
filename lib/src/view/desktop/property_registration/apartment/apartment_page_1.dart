@@ -215,7 +215,7 @@ SizedBox continueButton(height, width, isDisabledButton, onPressed) {
     width: width * 0.27,
     child: TextButton(
       style: TextButton.styleFrom(
-          backgroundColor: isDisabledButton ? Colors.grey.shade100 : Colors.deepPurpleAccent,
+          backgroundColor: isDisabledButton ? Colors.deepPurpleAccent : Colors.grey.shade100,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
       onPressed: onPressed,
       child: Text('Continue', style: smallTextStylewhiteBold),
