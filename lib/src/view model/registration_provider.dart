@@ -132,9 +132,9 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
- void incrementBedCount(String spaceType, int bedType) {
+  void incrementBedCount(String spaceType, int bedType) {
     if (spaceType == 'living') {
-        livingRoomSofaBed++;
+      livingRoomSofaBed++;
     } else if (spaceType == 'other') {
       if (bedType == 0) {
         otherSpaceSingleBed++;
@@ -172,9 +172,9 @@ class RegistrationProvider extends ChangeNotifier {
   }
 
   void decrementBedCount(String spaceType, int bedType) {
-    if (spaceType == 'living') {
-      } if (bedType == 0 && livingRoomSofaBed > 0) {
-        livingRoomSofaBed--;
+    if (spaceType == 'living') {}
+    if (bedType == 0 && livingRoomSofaBed > 0) {
+      livingRoomSofaBed--;
     } else if (spaceType == 'other') {
       if (bedType == 0 && otherSpaceSingleBed > 0) {
         otherSpaceSingleBed--;
@@ -211,10 +211,10 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List <String> bedCount(spaceType){
-    if(spaceType == 'living'){
+  List<String> bedCount(spaceType) {
+    if (spaceType == 'living') {
       return [livingRoomSofaBed.toString()];
-    } else if(spaceType == 'other'){
+    } else if (spaceType == 'other') {
       return [
         otherSpaceSingleBed.toString(),
         otherSpaceOfDoubleBed.toString(),
@@ -224,7 +224,7 @@ class RegistrationProvider extends ChangeNotifier {
         otherSpaceSofaBed.toString(),
         otherSpaceFutonMat.toString(),
       ];
-    } else if(spaceType == 'bedroom'){
+    } else if (spaceType == 'bedroom') {
       return [
         bedroomSingleBed.toString(),
         bedroomOfDoubleBed.toString(),
@@ -238,8 +238,8 @@ class RegistrationProvider extends ChangeNotifier {
     return [];
   }
 
-  void addBedRoom(){
-    final beds =  {
+  void addBedRoom() {
+    final beds = {
       'bedRoomSingleBed': bedroomSingleBed,
       'bedRoomOfDoubleBed': bedroomOfDoubleBed,
       'bedRoomKingSizeBedCount': bedroomKingSizeBedCount,
@@ -250,5 +250,72 @@ class RegistrationProvider extends ChangeNotifier {
     };
     _bedRoomList.add(beds);
   }
+
+  ///===================================================Alternatives places----------------------------------
+
+  // Alternative places variables
+  final PageController placesPageController = PageController();
+  int propertyTypes = 0;
+
+  void nextPage(int pageIndex) {
+    placesPageController.jumpToPage(pageIndex);
+    notifyListeners();
+  }
+
+  void setpropertyType(int propertyType) {
+    propertyTypes = propertyType;
+    notifyListeners();
+  }
+
+  ///===================================================Hotels =============================================-
+  final PageController hotelsPagecontroller = PageController();
+  bool showMoreOptions = false;
+  String? selectedOption;
+
+  void goTonextPage(int pageIndex) {
+    placesPageController.jumpToPage(pageIndex);
+    notifyListeners();
+  }
+
+  void toggleMoreOptions() {
+    showMoreOptions = !showMoreOptions;
+    notifyListeners();
+  }
+
+  void selectOption(String option) {
+    selectedOption = option;
+    notifyListeners();
+  }
+
+  bool get isOptionSelected => selectedOption != null;
+
+//================================================= Home Stay ================================================
+  final PageController homeStaycontroller = PageController();
+  int selectedProperty = 0; // Default selection
+
+  void jumpPage(int pageIndex) {
+    placesPageController.jumpToPage(pageIndex);
+    notifyListeners();
+  }
+
+  void setSelectedProperty(int index) {
+    selectedProperty = index;
+    notifyListeners();
+  }
+
+  bool isPropertySelected() {
+    return selectedProperty != -1;
+  }
+
+  List<bool> selectedCheckboxes = [false, false, false, false, false];
+
+  void toggleCheckbox(int index) {
+    selectedCheckboxes[index] = !selectedCheckboxes[index];
+    notifyListeners();
+  }
+
+  bool isAnyCheckboxSelected() {
+    return selectedCheckboxes.contains(true);
+  }
+
 }
-    

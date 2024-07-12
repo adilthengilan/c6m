@@ -105,7 +105,8 @@ class GuestManagementScreen extends StatelessWidget {
                       controller: person.guestSearchController,
                       borderRadius: 20,
                       borderSide: BorderSide.none,
-                      suffixIcon: const Icon(Icons.search, color: Colors.blue), labelTextStyle: smallTextStyle,
+                      suffixIcon: const Icon(Icons.search, color: Colors.blue),
+                      labelTextStyle: smallTextStyle,
                     ),
                   ),
                 ),
@@ -289,8 +290,8 @@ class GuestManagementScreen extends StatelessWidget {
                                         ? () {
                                             showDialog(
                                                 context: context,
-                                                builder: (context) => _editing(
-                                                    height, width, controller));
+                                                builder: (context) =>
+                                                    Editing());
                                           }
                                         : () {
                                             showDialog(
@@ -323,11 +324,18 @@ class GuestManagementScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  //-----------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------
-//-------------- Editing------------------------------------------------------------
-  Widget _editing(height, width, controller) {
+class Editing extends StatelessWidget {
+  const Editing({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.width;
+    final TextEditingController _namecontroller = TextEditingController();
+    final List<String> items = [];
+
     return AlertDialog(
       backgroundColor: Colors.white,
       title: Text(
@@ -339,20 +347,68 @@ class GuestManagementScreen extends StatelessWidget {
         ),
       ),
       content: Container(
-        height: height * 0.90,
-        width: width * 0.350,
+        width: width * 0.5,
+        height: height * 0.3,
         child: Column(
           children: [
             CustomContainer(
-              width: width * 0.250,
               boxShadow: false,
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(15),
               child: CustomTextField(
-                labelText: "",
-                controller: controller, labelTextStyle: smallTextStyle,
+                labelText: "Date",
+                controller: _namecontroller,
+                labelTextStyle: smallTextStyle,
+              ),
+            ),
+            sizedBox(height * 0.01, width * 0.01),
+            _buildDropdownFormField('Rooms', ['Room 1', 'Room 2', 'Room 3']),
+            sizedBox(height * 0.01, width * 0.01),
+            _buildDropdownFormField('Adults', [' 1', '2', ' 3']),
+            sizedBox(height * 0.01, width * 0.01),
+            _buildDropdownFormField('Children', [' 1', '2', '3']),
+            sizedBox(height * 0.03, width),
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 170, vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.cyanAccent.shade400,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextButton(
+                onPressed: () {
+                  // Handle add booking
+                },
+                child: Text(
+                  'Edit',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildDropdownFormField(String label, List<String> items) {
+    return Container(
+      child: DropdownButtonFormField<String>(
+        decoration: InputDecoration(
+          labelText: label,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+        ),
+        items: items.map((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+        onChanged: (String? newValue) {},
       ),
     );
   }
@@ -363,7 +419,6 @@ class CheckInDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.width;
-
     final TextEditingController _namecontroller = TextEditingController();
     return AlertDialog(
       backgroundColor: Colors.white,
@@ -399,15 +454,15 @@ class CheckInDialog extends StatelessWidget {
                 _buildDropdownFormField(
                     'Available Rooms', ['Room 1', 'Room 2', 'Room 3']),
               ]),
-              sizedBox(height * 0.05, width),
+              sizedBox(height * 0.03, width),
               Padding(
-                padding: EdgeInsets.only(left: width * 0.22),
+                padding: EdgeInsets.only(left: width * 0.20),
                 child: Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 170, vertical: 10),
                   decoration: BoxDecoration(
                     color: Colors.cyanAccent.shade400,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: TextButton(
                     onPressed: () {
@@ -449,9 +504,12 @@ class CheckInDialog extends StatelessWidget {
     return CustomContainer(
       width: width * 0.250,
       boxShadow: false,
+      border: Border.all(color: Colors.grey),
+      borderRadius: BorderRadius.circular(20),
       child: CustomTextField(
         labelText: label,
-        controller: controller, labelTextStyle: smallTextStyle,
+        controller: controller,
+        labelTextStyle: smallTextStyle,
       ),
     );
   }

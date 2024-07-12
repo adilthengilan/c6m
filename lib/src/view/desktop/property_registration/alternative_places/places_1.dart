@@ -6,8 +6,8 @@ import 'package:flutter_application_1/src/view/desktop/widgets/custom_textfield.
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class AlternativePlaces extends StatelessWidget {
-  const AlternativePlaces({
+class Places1 extends StatelessWidget {
+  const Places1({
     super.key,
   });
 
@@ -15,14 +15,14 @@ class AlternativePlaces extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final person = Provider.of<RegistrationProvider>(context, listen: false);
+    final places = Provider.of<RegistrationProvider>(context, listen: false);
     return Padding(
       padding: EdgeInsets.only(left: width * 0.1),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            sizedBox(height * 0.22, 0.0),
+            sizedBox(height * 0.06, 0.0),
             SizedBox(
               width: width * 0.3,
               child: Text(
@@ -39,25 +39,26 @@ class AlternativePlaces extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(bottom: i == 0 ? height * 0.04 : 0),
                 child: Consumer<RegistrationProvider>(
-                  builder: (context, person, child) => GestureDetector(
+                  builder: (context, places, child) => GestureDetector(
                     onTap: i == 0
                         ? () {
-                            person.setNumberProperties(1);
+                            places.setNumberProperties(1);
                           }
                         : () {
-                            person.setNumberProperties(2);
+                            places.setNumberProperties(1);
                           },
                     child: CustomContainer(
                       height: height * 0.13,
-                      width: width * 0.5,
+                      width: width * 0.3,
                       border: Border.all(
-                          color: i == 0 && person.numberofProperty == 1 ||
-                                  i == 1 && person.numberofProperty > 1
+                          color: i == 0 && places.numberofProperty == 1 ||
+                                  i == 1 && places.numberofProperty > 1
                               ? Colors.deepPurpleAccent
                               : Colors.transparent),
                       color: Colors.white,
                       boxShadow: true,
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(width: width * 0.02),
@@ -69,31 +70,9 @@ class AlternativePlaces extends StatelessWidget {
                             size: height * 0.06,
                           ),
                           SizedBox(width: width * 0.02),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              sizedBox(height * 0.01, width * 0.01),
-                              Text(
-                                i == 0 ? 'Entire place' : 'A private room',
-                                style: smallTextStyleBold,
-                                textAlign: TextAlign.start,
-                              ),
-                              sizedBox(height * 0.01, width * 0.01),
-                              SizedBox(
-                                width: width * 0.200,
-                                child: Text(
-                                  i == 0
-                                      ? 'Guests have access to the entire place and don\'t have to share it with the host or other guests.'
-                                      : 'Guests rent a room within the property.There are common areas that are shared with either the host or other guests.',
-                                  style: GoogleFonts.montserrat(
-                                    fontSize: 10,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  textAlign: TextAlign.start,
-                                ),
-                              )
-                            ],
+                          Text(
+                            i == 0 ? 'Entire place' : 'A private room',
+                            style: smallTextStyle,
                           ),
                         ],
                       ),
@@ -101,22 +80,22 @@ class AlternativePlaces extends StatelessWidget {
                   ),
                 ),
               ),
+
             sizedBox(height * 0.02, 0.0),
             //Text Button for [Continue]
-            Container(
+            SizedBox(
               height: height * 0.055,
               width: width * 0.25,
-              color: Colors.grey.shade100,
               child: TextButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: person.numberofProperty < 1
+                    backgroundColor: places.numberofProperty < 1
                         ? Colors.grey.shade100
-                        : Colors.blue,
+                        : Colors.deepPurpleAccent,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8))),
                 onPressed: () {
-                  if (person.numberofProperty > 0) {
-                    person.goToPage(1);
+                  if (places.numberofProperty > 0) {
+                    places.nextPage(1);
                   }
                 },
                 child: Text('Continue', style: smallTextStylewhiteBold),
@@ -128,4 +107,36 @@ class AlternativePlaces extends StatelessWidget {
       ),
     );
   }
+}
+
+SizedBox continueButton(height, width, isDisabledButton, onPressed) {
+  return SizedBox(
+    height: height * 0.055,
+    width: width * 0.27,
+    child: TextButton(
+      style: TextButton.styleFrom(
+          backgroundColor:
+              isDisabledButton ? Colors.grey.shade100 : Colors.deepPurpleAccent,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+      onPressed: onPressed,
+      child: Text('Continue', style: smallTextStylewhiteBold),
+    ),
+  );
+}
+
+InkWell backButton(double height, double width, VoidCallback onPressed) {
+  return InkWell(
+    onTap: onPressed,
+    child: CustomContainer(
+      boxShadow: true,
+      border: Border.all(color: Colors.grey.shade300),
+      height: height * 0.055,
+      width: width * 0.06,
+      color: Colors.white,
+      child: const Center(
+        child: Icon(Icons.keyboard_arrow_left),
+      ),
+    ),
+  );
 }

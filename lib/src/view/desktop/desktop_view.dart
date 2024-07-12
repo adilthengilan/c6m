@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/view%20model/dashboard_provider.dart';
+import 'package:flutter_application_1/src/view/desktop/Concierge/concrierge.dart';
 import 'package:flutter_application_1/src/view/desktop/Guest/gurest.dart';
 import 'package:flutter_application_1/src/view/desktop/New%20bookings/new_booking.dart';
 import 'package:flutter_application_1/src/view/desktop/dashboard/dashboard.dart';
-import 'package:flutter_application_1/src/view/desktop/property_registration/alternative_places/place1.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/apartment/apartmnet.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/registration_menu.dart';
 import 'package:flutter_application_1/src/view/desktop/rooms/rooms.dart';
@@ -22,7 +22,7 @@ class DesktopView extends StatefulWidget {
 class _DesktopViewState extends State<DesktopView> {
   @override
   Widget build(BuildContext context) {
-    return const PropertyRegistrationMenu();
+    return const HomePage();
   }
 }
 
@@ -69,7 +69,11 @@ class HomePage extends StatelessWidget {
                         ? const NewBookings()
                         : dashboardProvider.navigationButtonsSelectedIndex == 3
                             ? const GuestManagementScreen()
-                            : SizedBox()
+                            : dashboardProvider
+                                        .navigationButtonsSelectedIndex ==
+                                    4
+                                ? Concrierge()
+                                : SizedBox(),
           ],
         ),
       ),

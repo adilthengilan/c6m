@@ -17,7 +17,7 @@ class BookingProvider extends ChangeNotifier {
       "room": "210",
       "checkIn": "Jun 12, 2021",
       "checkOut": "Jun 20, 2021",
-      "status": "Arrived",
+      "status": "Check in",
       "Revenue": "\$780"
     },
     {
@@ -44,7 +44,7 @@ class BookingProvider extends ChangeNotifier {
       "room": "310",
       "checkIn": "Jun 02, 2021",
       "checkOut": "Jun 12, 2021",
-      "status": "Leave",
+      "status": "Check out",
       "Revenue": "\$940"
     },
     {
@@ -53,7 +53,7 @@ class BookingProvider extends ChangeNotifier {
       "room": "212",
       "checkIn": "Jun 08, 2021",
       "checkOut": "Jun 29, 2021",
-      "status": "Arrived",
+      "status": "Check in",
       "Revenue": "\$780"
     },
     {
@@ -62,7 +62,7 @@ class BookingProvider extends ChangeNotifier {
       "room": "230",
       "checkIn": "Jun 10, 2021",
       "checkOut": "Jun 30, 2021",
-      "status": "Arrived",
+      "status": "Check in",
       "Revenue": "\$780"
     },
     {
@@ -71,7 +71,7 @@ class BookingProvider extends ChangeNotifier {
       "room": "312",
       "checkIn": "Jun 10, 2021",
       "checkOut": "Jun 12, 2021",
-      "status": "Leave",
+      "status": "Check out",
       "Revenue": "\$140"
     },
     {
@@ -108,4 +108,20 @@ class BookingProvider extends ChangeNotifier {
     _filteredGuests = List.from(_guests);
     notifyListeners();
   }
+
+  //Checkbox
+  final List<Map<String, dynamic>> bookings = [];
+  String _selectedSortOption = '';
+
+  List<Map<String, dynamic>> get _bookings => bookings;
+  String get selectedSortOption => _selectedSortOption;
+
+  void filterbookings(String status) {
+    _selectedSortOption = status;
+    // Implement the filtering logic based on the status
+    // For example:
+    // _guests = _guests.where((guest) => guest['status'] == status).toList();
+    notifyListeners();
+  }
+
 }
