@@ -292,6 +292,7 @@ class RegistrationProvider extends ChangeNotifier {
 //================================================= Home Stay ================================================
   final PageController homeStaycontroller = PageController();
   int selectedProperty = 0; // Default selection
+  
 
   void jumpPage(int pageIndex) {
     placesPageController.jumpToPage(pageIndex);

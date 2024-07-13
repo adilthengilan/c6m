@@ -35,23 +35,31 @@ class HomeStayPage2 extends StatelessWidget {
             ),
           ),
           SizedBox(height: height * 0.03),
-          ListView(
-            shrinkWrap: true,
-            children: [
-              for (int i = 0; i < 5; i++)
-                Consumer<RegistrationProvider>(
-                  builder: (context, provider, child) => CheckboxListTile(
-                    title: Text(
-                      _getCheckboxLabel(i),
-                      style: smallTextStyle,
+          Container(
+            width: width * 0.300,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                for (int i = 0; i < 5; i++)
+                  Consumer<RegistrationProvider>(
+                    builder: (context, homestay, child) => Row(
+                      children: [
+                        Checkbox(
+                          value: homestay.selectedCheckboxes[i],
+                          onChanged: (_) {
+                            homestay.toggleCheckbox(i);
+                          },
+                        ),
+                        sizedBox(height * 0.01, width * 0.02),
+                        Text(
+                          _getCheckboxLabel(i),
+                          style: smallTextStyle,
+                        ),
+                      ],
                     ),
-                    value: provider.selectedCheckboxes[i],
-                    onChanged: (_) {
-                      provider.toggleCheckbox(i);
-                    },
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
           sizedBox(height * 0.05, width),
           Row(
@@ -73,7 +81,7 @@ class HomeStayPage2 extends StatelessWidget {
                     borderRadius: BorderRadius.circular(06)),
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: homestay.isOptionSelected
+                    backgroundColor: homestay.isAnyCheckboxSelected()
                         ? const Color.fromARGB(255, 133, 64, 251)
                         : Colors.grey.shade100,
                     shape: RoundedRectangleBorder(
@@ -81,7 +89,7 @@ class HomeStayPage2 extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    if (homestay.isOptionSelected) {
+                    if (homestay.isAnyCheckboxSelected()) {
                       homestay.jumpPage(2);
                     }
                   },
