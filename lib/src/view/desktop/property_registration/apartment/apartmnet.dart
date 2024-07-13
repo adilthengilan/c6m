@@ -5,6 +5,7 @@ import 'package:flutter_application_1/src/view/desktop/property_registration/apa
 import 'package:flutter_application_1/src/view/desktop/property_registration/apartment/apartment_page2.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/apartment/apartment_page3.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/apartment/apartment_page4.dart';
+import 'package:flutter_application_1/src/view/desktop/property_registration/apartment/apartment_page5.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/apartment/property_location.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/registration_menu.dart';
 import 'package:flutter_application_1/src/view/desktop/widgets/custom_container.dart';
@@ -27,6 +28,7 @@ class Apartment extends StatelessWidget {
         controller: person.apartmentPagecontroller,
         children: [
           // const PropertyLocationPage(gotToNextPage: 5,goToBackPage: 3),
+          ApartmentPage5(),
           const ApartmentPage1(),
           const ApartmentPage2(),
           const ApartmentPage3(),

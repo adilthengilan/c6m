@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/layouting.dart';
+import 'package:flutter_application_1/src/view%20model/availability_provider.dart';
 import 'package:flutter_application_1/src/view%20model/booking_details.dart';
 import 'package:flutter_application_1/src/view%20model/booking_provider.dart';
 import 'package:flutter_application_1/src/view%20model/dashboard_provider.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => GuestManagementProvider()),
         ChangeNotifierProvider(create: (context) => RoomsProvider()),
         ChangeNotifierProvider(create: (context) => RegistrationProvider()),
+        ChangeNotifierProvider(create: (context) => AvailabilityProvider()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
