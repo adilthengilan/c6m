@@ -125,7 +125,6 @@ class RegistrationProvider extends ChangeNotifier {
   TextEditingController tradeNameController = TextEditingController();
   TextEditingController GsGSTINController = TextEditingController();
 
-
 //This Function will controlling page view, This function can easy to change the pages in the paview
   void goToPage(int page, pageviewController) {
     pageviewController.animateToPage(
@@ -607,12 +606,12 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setFourthCharecterOfPanHorP(value){
+  void setFourthCharecterOfPanHorP(value) {
     isFourthCharecterOfPanHorP = value;
     notifyListeners();
   }
 
-    ///===================================================Alternatives places----------------------------------
+  ///===================================================Alternatives places----------------------------------
 
   // Alternative places variables
   final PageController placesPageController = PageController();
@@ -651,12 +650,14 @@ class RegistrationProvider extends ChangeNotifier {
   bool get isOptionSelected => selectedOption != null;
 
 //================================================= Home Stay ================================================
-  final PageController homeStaycontroller = PageController();
-  int selectedProperty = 0; // Default selection
-  
+
+  final PageController homeStayController = PageController();
+  int selectedProperty = -1; // Default selection (-1 means no selection)
+  int currentPage = 0; // Track the current page
 
   void jumpPage(int pageIndex) {
-    placesPageController.jumpToPage(pageIndex);
+    homeStayController.jumpToPage(pageIndex);
+    currentPage = pageIndex; // Update the current page
     notifyListeners();
   }
 
@@ -665,9 +666,7 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isPropertySelected() {
-    return selectedProperty != -1;
-  }
+  bool get isoptionSelected => selectedProperty != -1;
 
   List<bool> selectedCheckboxes = [false, false, false, false, false];
 

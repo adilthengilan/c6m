@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/view%20model/registration_provider.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/Home%20stay/home_stay_page1.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/Home%20stay/home_stay_page2.dart';
+import 'package:flutter_application_1/src/view/desktop/property_registration/Hotel/hotel_page1.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/alternative_places/places4.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/alternative_places/places_5.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/registration_menu.dart';
@@ -20,10 +21,11 @@ class HomeStay extends StatelessWidget {
       backgroundColor: Colors.white,
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
-        controller: homestay.homeStaycontroller,
+        controller: homestay.homeStayController,
         children: const [
-          // HomeStayPage1(), // select one or either
-          HomeStayPage2(), // list of choose
+          HomeStayPage1(), // select one or either
+          HotelPage1(),
+          // HomeStayPage2(), // list of choose
           Places5()
         ],
       ),

@@ -14,7 +14,8 @@ class HomeStayPage1 extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final homestay = Provider.of<RegistrationProvider>(context, listen: false);
+    final homestay = Provider.of<RegistrationProvider>(context);
+
     return Padding(
       padding: EdgeInsets.only(left: width * 0.1),
       child: SingleChildScrollView(
@@ -33,7 +34,6 @@ class HomeStayPage1 extends StatelessWidget {
                 ),
               ),
             ),
-            //==============================================================================================================
             SizedBox(height: height * 0.03),
             for (int i = 0; i < 2; i++)
               Padding(
@@ -76,47 +76,21 @@ class HomeStayPage1 extends StatelessWidget {
                   ),
                 ),
               ),
-            //======================================================================================================
-            sizedBox(height * 0.05, width),
+            SizedBox(height: height * 0.05),
             Row(
               children: [
-                Container(
-                  height: height * 0.10,
-                  width: width * 0.07,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blue),
-                      borderRadius: BorderRadius.circular(06)),
-                  child: Icon(Icons.arrow_back_ios_new),
-                ),
-                sizedBox(height * 0.01, width * 0.01),
-                Container(
-                  height: height * 0.10,
-                  width: width * 0.700,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(06)),
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: homestay.isOptionSelected
-                          ? const Color.fromARGB(255, 133, 64, 251)
-                          : Colors.grey.shade100,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    onPressed: () {
-                      if (homestay.isOptionSelected) {
-                        homestay.jumpPage(2);
-                      }
-                    },
-                    child: Text('Continue',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold)),
-                  ),
-                ),
+                backButton(height, width, () {
+                  // Handle back button press
+                }),
+                SizedBox(width: width * 0.01),
+                continueButton(height, width, !homestay.isoptionSelected, () {
+                  if (homestay.isoptionSelected) {
+                    homestay.jumpPage(2);
+                  }
+                }),
               ],
             ),
-            sizedBox(height * 0.1, width),
+            SizedBox(height: height * 0.1),
           ],
         ),
       ),
@@ -124,17 +98,18 @@ class HomeStayPage1 extends StatelessWidget {
   }
 }
 
-SizedBox continueButton(height, width, isDisabledButton, onPressed) {
+SizedBox continueButton(double height, double width, bool isDisabledButton,
+    VoidCallback onPressed) {
   return SizedBox(
     height: height * 0.055,
     width: width * 0.27,
     child: TextButton(
       style: TextButton.styleFrom(
-          backgroundColor:
-              isDisabledButton ? Colors.grey.shade100 : Colors.deepPurpleAccent,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-      onPressed: onPressed,
+        backgroundColor:
+            isDisabledButton ? Colors.grey.shade100 : Colors.deepPurpleAccent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+      onPressed: isDisabledButton ? null : onPressed,
       child: Text('Continue', style: smallTextStylewhiteBold),
     ),
   );
