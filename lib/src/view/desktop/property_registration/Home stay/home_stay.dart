@@ -14,16 +14,15 @@ class HomeStay extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final homeProvider =
-        Provider.of<RegistrationProvider>(context, listen: false);
+    final homestay = Provider.of<RegistrationProvider>(context, listen: false);
     return Scaffold(
       appBar: RegistrationAppBar(height, width),
       backgroundColor: Colors.white,
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
-        controller: homeProvider.homeStaycontroller,
+        controller: homestay.homeStaycontroller,
         children: const [
-          HomeStayPage2(), // select one or either
+          // HomeStayPage1(), // select one or either
           HomeStayPage2(), // list of choose
           Places5()
         ],

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/view%20model/registration_provider.dart';
 import 'package:flutter_application_1/src/view/desktop/dashboard/dashboard.dart';
+import 'package:flutter_application_1/src/view/desktop/property_registration/alternative_places/places2.dart';
 import 'package:flutter_application_1/src/view/desktop/widgets/custom_container.dart';
 import 'package:flutter_application_1/src/view/desktop/widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
 
 class ApartmentPage3 extends StatelessWidget {
-  const ApartmentPage3({super.key,});
+  final int goToPage;
+  final int backToPage;
+  final PageController pageController;
+  const ApartmentPage3({super.key, required this.goToPage, required this.backToPage, required this.pageController,});
 
 
   @override
@@ -56,27 +60,27 @@ class ApartmentPage3 extends StatelessWidget {
             ),
           ),
           sizedBox(height * 0.03, width),
-          // Consumer<RegistrationProvider>(
-          //   builder: (context, person, child) => 
-          //   Row(
-          //     children: [
-          //       // Back Button
-          //       backButton(height, width, (){
-          //         person.goToPage(1);
-          //         person.propertyName = '';
-          //       }),
-          //       sizedBox(0.0, width * 0.02),
-          //       //Continue Button
-          //       continueButton(
-          //         height, width, 
-          //         person.propertyName == '',
-          //         (){
-          //           person.goToPage(3);
-          //         },
-          //       ),
-          //     ],
-          //   ),
-          // )
+          Consumer<RegistrationProvider>(
+            builder: (context, person, child) => 
+            Row(
+              children: [
+                // Back Button
+                backButton(height, width, (){
+                  person.goToPage(backToPage, pageController);
+                  person.propertyName = '';
+                }),
+                sizedBox(0.0, width * 0.02),
+                //Continue Button
+                continueButton(
+                  height, width, 
+                  person.propertyName != '',
+                  (){
+                    person.goToPage(goToPage, pageController);
+                  },
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

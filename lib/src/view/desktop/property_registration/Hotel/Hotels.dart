@@ -22,7 +22,7 @@ class Hotels extends StatelessWidget {
         controller: hotels.placesPageController,
         children: const [
           HotelPage1(), // grid view builder 
-          // HotelPage2(), // multiple container 
+          HotelPage2(), // multiple container 
           // HotelPage3(), // next listing countinue or 
           // country/origin listing
         ],

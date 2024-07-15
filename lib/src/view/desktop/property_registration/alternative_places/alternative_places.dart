@@ -25,11 +25,12 @@ class AlternativePlaces extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         controller: placesProvider.placesPageController,
         children: const [
-          HomeStayPage1(), // What can guests book 2 options just select one
-          // Places2(), // here we can use hotel page1 grid view or seperate this 
-          // Places3(), // page for listing and countinue 
+          HomeStayPage1()
+          // Places1(), // What can guests book 2 options just select one
+          // Places2(), // here we can use hotel page1 grid view or seperate this
+          // Places3(), // page for listing and countinue
           // Places4(), // Multiple or one container
-          // Places5(), // country origin page 
+          // Places5(), // country origin page
         ],
       ),
     );
