@@ -6,7 +6,9 @@ import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 
 class ApartmentPage2 extends StatelessWidget {
-  const ApartmentPage2({super.key});
+  final int goToPage;
+  final PageController pageController;
+  const ApartmentPage2({super.key, required this.goToPage, required this.pageController});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,7 @@ class ApartmentPage2 extends StatelessWidget {
                       backgroundColor: i == 0?  Colors.deepPurpleAccent : Colors.white
                     ),
                     onPressed: i == 0? (){
-                      person.goToPage(2);
+                      person.goToPage(goToPage , pageController);
                     } : () {
                       Navigator.pop(context);
                     }, 

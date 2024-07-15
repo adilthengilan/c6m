@@ -115,7 +115,7 @@ class AlternativePlaces extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8))),
                 onPressed: () {
                   if (person.numberofProperty > 0) {
-                    person.goToPage(1);
+                    // person.goToPage(1person.al);
                   }
                 },
                 child: Text('Continue', style: smallTextStylewhiteBold),

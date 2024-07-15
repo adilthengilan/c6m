@@ -7,7 +7,10 @@ import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 
 class ApartmentPage3 extends StatelessWidget {
-  const ApartmentPage3({super.key,});
+  final int goToPage;
+  final int backToPage;
+  final PageController pageController;
+  const ApartmentPage3({super.key, required this.goToPage, required this.backToPage, required this.pageController,});
 
 
   @override
@@ -63,7 +66,7 @@ class ApartmentPage3 extends StatelessWidget {
               children: [
                 // Back Button
                 backButton(height, width, (){
-                  person.goToPage(1);
+                  person.goToPage(backToPage, pageController);
                   person.propertyName = '';
                 }),
                 sizedBox(0.0, width * 0.02),
@@ -72,7 +75,7 @@ class ApartmentPage3 extends StatelessWidget {
                   height, width, 
                   person.propertyName != '',
                   (){
-                    person.goToPage(3);
+                    person.goToPage(goToPage, pageController);
                   },
                 ),
               ],

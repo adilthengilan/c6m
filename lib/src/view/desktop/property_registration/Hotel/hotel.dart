@@ -187,7 +187,7 @@ class Hotels extends StatelessWidget {
                     ),
                     onPressed: () {
                       if (person.numberofProperty > 0) {
-                        person.goToPage(1);
+                        // person.goToPage(1);
                       }
                     },
                     child: Text('Continue', style: smallTextStylewhiteBold),

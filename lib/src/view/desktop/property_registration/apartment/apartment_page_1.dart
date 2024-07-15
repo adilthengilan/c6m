@@ -8,7 +8,11 @@ import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 
 
 class ApartmentPage1 extends StatelessWidget {
-  const ApartmentPage1({super.key,});
+  final int goToPage;
+  final PageController pageController;
+  const ApartmentPage1({super.key,
+   required this.goToPage, required this.pageController,
+   });
 
 
   @override
@@ -180,26 +184,17 @@ class ApartmentPage1 extends StatelessWidget {
                 ],
               ): const SizedBox()
             ),
-            sizedBox(height * 0.02, 0.0),
-            //Text Button for [Continue]
-            SizedBox(
-              height: height * 0.055,
-              width: width * 0.25,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: person.numberofProperty < 1? Colors.grey.shade100 : Colors.deepPurpleAccent,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)
-                  )
-                ),
-                onPressed: () {
-                  if (person.numberofProperty > 0) {
-                    person.goToPage(1);
-                  }
-                },
-                child: Text('Continue', style: smallTextStylewhiteBold),
-              ),
-            ),
+            sizedBox(height * 0.04, 0.0),
+            Consumer<RegistrationProvider>(
+             builder: (context, person, child) => 
+             continueButton(
+             height, width, 
+             true,
+             (){
+             person.goToPage(goToPage,pageController);
+            },
+           ),
+          ),
             sizedBox(height * 0.1, width),
           ],
         ),

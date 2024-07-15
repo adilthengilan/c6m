@@ -430,7 +430,6 @@ class DashBoard extends StatelessWidget {
 //=======================================================================================================================
   CustomContainer bookedRoomsTodayStatus(double height, double width) {
     return CustomContainer(
-      height: height * 0.3,
       width: width * 0.18,
       color: Colors.white,
       borderRadius: BorderRadius.circular(15),
@@ -550,7 +549,7 @@ final mediumTextStyleBold = GoogleFonts.montserrat(
 );
 
 final smallTextStyle = GoogleFonts.montserrat(
-  fontSize: 12,
+  fontSize: 13,
   color: Colors.black,
   fontWeight: FontWeight.w500,
 );
@@ -561,13 +560,13 @@ final smallTextStylewhite = GoogleFonts.montserrat(
   fontWeight: FontWeight.w500,
 );
 final smallTextStylewhiteBold = GoogleFonts.montserrat(
-  fontSize: 12,
+  fontSize: 13,
   color: Colors.white,
   fontWeight: FontWeight.w700,
 );
 
 final smallTextStyleBold = GoogleFonts.montserrat(
-  fontSize: 12,
+  fontSize: 13,
   color: Colors.black,
   fontWeight: FontWeight.w700,
 );
