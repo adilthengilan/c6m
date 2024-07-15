@@ -6,10 +6,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class HomeStayPage1 extends StatelessWidget {
-  
+  final int jumPage;
+  final PageController pageController;
 
   const HomeStayPage1({
     super.key,
+    required this.jumPage,
+    required this.pageController,
   });
 
   @override
@@ -85,11 +88,19 @@ class HomeStayPage1 extends StatelessWidget {
                   // Handle back button press
                 }),
                 SizedBox(width: width * 0.01),
-                continueButton(height, width, !homestay.isoptionSelected, () {
-                  if (homestay.isoptionSelected) {
-                    homestay.jumpPage(2);
-                  }
-                }),
+                
+                Consumer<RegistrationProvider>(
+                  builder: (context, homestay, child) => continueButton(
+                    height,
+                    width,
+                    true,
+                    () {
+                      if (homestay.isoptionSelected) {
+                        homestay.jumpPage(jumPage, pageController);
+                      }
+                    },
+                  ),
+                ),
               ],
             ),
             SizedBox(height: height * 0.1),
@@ -100,18 +111,17 @@ class HomeStayPage1 extends StatelessWidget {
   }
 }
 
-SizedBox continueButton(double height, double width, bool isDisabledButton,
-    VoidCallback onPressed) {
+SizedBox continueButton(height, width, isDisabledButton, onPressed) {
   return SizedBox(
     height: height * 0.055,
     width: width * 0.27,
     child: TextButton(
       style: TextButton.styleFrom(
-        backgroundColor:
-            isDisabledButton ? Colors.grey.shade100 : Colors.deepPurpleAccent,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      ),
-      onPressed: isDisabledButton ? null : onPressed,
+          backgroundColor:
+              isDisabledButton ? Colors.deepPurpleAccent : Colors.grey.shade100,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+      onPressed: onPressed,
       child: Text('Continue', style: smallTextStylewhiteBold),
     ),
   );

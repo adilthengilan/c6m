@@ -22,8 +22,8 @@ class Hotels extends StatelessWidget {
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: hotels.placesPageController,
-        children: const [
-          HotelPage1(), // grid view builder
+        children:  [
+          HotelPage1(jumPage: 1, pageController: hotels.placesPageController,), // grid view builder
           Places4(), // multiple container
           // ApartmentPage2(goToPage: , pageController: pageController)// sound like our property or not?
           // ApartmentPage3(goToPage: goToPage, backToPage: backToPage, pageController: pageController)//property name

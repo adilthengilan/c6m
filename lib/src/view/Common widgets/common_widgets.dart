@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/view/desktop/dashboard/dashboard.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTextField extends StatelessWidget {
@@ -17,10 +18,9 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
-      margin: EdgeInsets.symmetric(horizontal: width * 0.06),
+      height: height * 0.07,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(07),
         border: Border.all(
           color: const Color.fromARGB(255, 206, 206, 206),
         ),
@@ -30,11 +30,10 @@ class AppTextField extends StatelessWidget {
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hintText,
-          hintStyle: GoogleFonts.poppins(
-            color: Colors.grey,
-            fontWeight: FontWeight.w400,
+          hintStyle: greyTextStyle,
+          contentPadding: EdgeInsets.only(
+            left: 20,
           ),
-          contentPadding: EdgeInsets.only(left: 20, top: 10),
         ),
       ),
     );

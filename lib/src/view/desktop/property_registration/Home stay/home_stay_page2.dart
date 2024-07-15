@@ -5,7 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class HomeStayPage2 extends StatelessWidget {
-  const HomeStayPage2({super.key});
+  final int jumPage;
+  final PageController pageController;
+
+  const HomeStayPage2(
+      {super.key, required this.jumPage, required this.pageController});
 
   @override
   Widget build(BuildContext context) {
@@ -62,44 +66,7 @@ class HomeStayPage2 extends StatelessWidget {
             ),
           ),
           sizedBox(height * 0.05, width),
-          Row(
-            children: [
-              Container(
-                height: height * 0.10,
-                width: width * 0.07,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
-                    borderRadius: BorderRadius.circular(06)),
-                child: Icon(Icons.arrow_back_ios_new),
-              ),
-              sizedBox(height * 0.01, width * 0.01),
-              Container(
-                height: height * 0.10,
-                width: width * 0.700,
-                decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(06)),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: homestay.isAnyCheckboxSelected()
-                        ? const Color.fromARGB(255, 133, 64, 251)
-                        : Colors.grey.shade100,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  onPressed: () {
-                    if (homestay.isAnyCheckboxSelected()) {
-                      homestay.jumpPage(2);
-                    }
-                  },
-                  child: Text('Continue',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold)),
-                ),
-              ),
-            ],
-          ),
+          Row(children: []),
           SizedBox(height: height * 0.1),
         ],
       ),

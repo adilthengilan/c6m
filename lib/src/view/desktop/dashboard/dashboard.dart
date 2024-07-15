@@ -552,6 +552,12 @@ final smallTextStyle = GoogleFonts.montserrat(
   fontWeight: FontWeight.w500,
 );
 
+final greyTextStyle = GoogleFonts.montserrat(
+  fontSize: 12,
+  color: const Color.fromARGB(255, 172, 172, 172),
+  fontWeight: FontWeight.w500,
+);
+
 final smallTextStylewhite = GoogleFonts.montserrat(
   fontSize: 12,
   color: Colors.white,
@@ -567,6 +573,11 @@ final smallTextStyleBold = GoogleFonts.montserrat(
   fontSize: 12,
   color: Colors.black,
   fontWeight: FontWeight.w700,
+);
+final greenTextStyle = GoogleFonts.montserrat(
+  fontSize: 12,
+  color: Color.fromARGB(255, 0, 186, 136),
+  fontWeight: FontWeight.w400,
 );
 
 final largeTextStyleBold = GoogleFonts.montserrat(

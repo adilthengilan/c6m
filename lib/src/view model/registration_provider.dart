@@ -125,6 +125,8 @@ class RegistrationProvider extends ChangeNotifier {
   TextEditingController tradeNameController = TextEditingController();
   TextEditingController GsGSTINController = TextEditingController();
 
+  get selectedDate => null;
+
 //This Function will controlling page view, This function can easy to change the pages in the paview
   void goToPage(int page, pageviewController) {
     pageviewController.animateToPage(
@@ -655,7 +657,7 @@ class RegistrationProvider extends ChangeNotifier {
   int selectedProperty = -1; // Default selection (-1 means no selection)
   int currentPage = 0; // Track the current page
 
-  void jumpPage(int pageIndex) {
+  void jumpPage(int pageIndex, PageController pageController) {
     homeStayController.jumpToPage(pageIndex);
     currentPage = pageIndex; // Update the current page
     notifyListeners();
@@ -677,6 +679,149 @@ class RegistrationProvider extends ChangeNotifier {
 
   bool isAnyCheckboxSelected() {
     return selectedCheckboxes.contains(true);
+  }
+  //=================================================================================== Availability =============================================
+
+  int _selectedRadioIndex = -1; // Initialize with -1 to indicate none selected
+  bool _showAsSoonContainer = false;
+  bool _showSpecificDateContainer = false;
+  //==================================date initialize
+  DateTime? _selectedDate;
+
+  int get selectedRadioIndex => _selectedRadioIndex;
+  bool get showAsSoonContainer => _showAsSoonContainer;
+  bool get showSpecificDateContainer => _showSpecificDateContainer;
+  //get==========================
+  DateTime? get selecteDate => _selectedDate;
+
+  void setSelectedRadioIndex(int index) {
+    _selectedRadioIndex = index;
+    if (index == 0) {
+      _showAsSoonContainer = true;
+      _showSpecificDateContainer = false;
+    } else if (index == 1) {
+      _showAsSoonContainer = false;
+      _showSpecificDateContainer = true;
+    }
+    notifyListeners();
+  }
+
+//============================================================
+  void setSelectedDate(DateTime selectedDay) {
+    _selectedDate = selectedDay;
+    notifyListeners();
+  }
+
+//=================================================================== select three option sync=====================================================
+//==================================================================================================================================================
+  int _selectedRadio = 0;
+
+  int get selectedRadio => _selectedRadio;
+
+  void setSelectedRadio(int value) {
+    _selectedRadio = value;
+    notifyListeners();
+  }
+
+  //==============================================================================================================================================
+  //==============================================================================================================================================
+  //====================================================Reservation yes or no ===================================================================
+  int _selectRadioIndex = -1; // Initialize with -1 to indicate none selected
+  bool _acceptReservationsOver30Nights = false;
+  bool _notacceptReservations = false;
+
+  int get selectRadioIndex => _selectRadioIndex;
+  bool get acceptReservationsOver30Nights => _acceptReservationsOver30Nights;
+  bool get notacceptReservations => _notacceptReservations;
+
+  void setSelectRadioIndex(int index) {
+    _selectRadioIndex = index;
+    if (index == 0) {
+      _acceptReservationsOver30Nights = true;
+      _notacceptReservations = false;
+    } else if (index == 1) {
+      _acceptReservationsOver30Nights = false;
+      _notacceptReservations = true;
+    }
+    notifyListeners();
+  }
+
+  void setMaxNightsPreferred(int i) {}
+
+//==============================================================================================================================================
+  bool _nonRefundableRatePlan = false; // New toggle state
+
+  bool get nonRefundableRatePlan =>
+      _nonRefundableRatePlan; // Getter for new toggle state
+
+  void setNonRefundableRatePlan(bool value) {
+    _nonRefundableRatePlan = value;
+    notifyListeners();
+  }
+
+//====================================================================================================================
+  TextEditingController guestDiscountcontroller = TextEditingController();
+
+  int _numberOfGuests = 0;
+  double _guestDiscount = 0.0;
+
+  int get numberOfGuests => _numberOfGuests;
+  double get guestDiscount => _guestDiscount;
+
+  void increaseNumberGuests() {
+    _numberOfGuests++;
+    notifyListeners();
+  }
+
+  void decreaseNumberGuests() {
+    if (_numberOfGuests > 0) {
+      _numberOfGuests--;
+      notifyListeners();
+    }
+  }
+
+  void increaseGuestDiscount() {
+    if (_guestDiscount < 100) {
+      _guestDiscount++;
+      notifyListeners();
+    }
+  }
+
+  void decreaseGuestDiscount() {
+    if (_guestDiscount > 0) {
+      _guestDiscount--;
+      notifyListeners();
+    }
+  }
+
+  //=========================================================================================================
+  //===========================int _discountRate = 0;
+  int _discountRate = 23;
+  final double _basePrice = 56778.00;
+  TextEditingController discountController = TextEditingController();
+
+  RegistrationProvider() {
+    discountController.text = _discountRate.toString();
+  }
+
+  int get discountRate => _discountRate;
+  double get basePrice => _basePrice;
+
+  double get nonRefundablePrice =>
+      _basePrice - (_basePrice * _discountRate / 100);
+
+  void increaseDiscountRate() {
+    _discountRate++;
+    discountController.text = _discountRate.toString();
+    notifyListeners();
+  }
+
+  void decreaseDiscountRate() {
+    if (_discountRate > 0) {
+      _discountRate--;
+      discountController.text = _discountRate.toString();
+      notifyListeners();
+    }
   }
 
 }

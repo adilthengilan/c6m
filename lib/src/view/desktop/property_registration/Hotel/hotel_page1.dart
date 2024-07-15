@@ -6,7 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class HotelPage1 extends StatelessWidget {
-  const HotelPage1({super.key});
+  final int jumPage;
+  final PageController pageController;
+
+  const HotelPage1({super.key, required this.jumPage, required this.pageController});
 
   @override
   Widget build(BuildContext context) {
