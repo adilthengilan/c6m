@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class HomeStayPage1 extends StatelessWidget {
+  
+
   const HomeStayPage1({
     super.key,
   });

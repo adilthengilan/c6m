@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/view%20model/registration_provider.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/Home%20stay/home_stay_page1.dart';
+import 'package:flutter_application_1/src/view/desktop/property_registration/Hotel/hotel_page1.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/alternative_places/places2.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/alternative_places/places3.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/alternative_places/places4.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/alternative_places/places_1.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/alternative_places/places_5.dart';
+import 'package:flutter_application_1/src/view/desktop/property_registration/apartment/apartment_page2.dart';
+import 'package:flutter_application_1/src/view/desktop/property_registration/apartment/apartment_page5.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/registration_menu.dart';
 import 'package:provider/provider.dart';
 
@@ -25,12 +28,10 @@ class AlternativePlaces extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         controller: placesProvider.placesPageController,
         children: const [
-          HomeStayPage1(),
-          // Places1(), // What can guests book 2 options just select one
-          // Places2(), // here we can use hotel page1 grid view or seperate this
-          // Places3(), // page for listing and countinue
-          // Places4(), // Multiple or one container
-          // Places5(), // country origin page
+          HomeStayPage1(), // What can guests book 2 options just select one
+          HotelPage1(), // here we can use hotel page1 grid view or seperate this
+          Places4(), // Multiple or one container
+          // ApartmentPage2(goToPage: , pageController: pageController)// sound like our property or not?
         ],
       ),
     );

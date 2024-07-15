@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -7,10 +8,13 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final BorderSide borderSide;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final BorderSide? enabledBorder;
   final TextStyle? labelTextStyle;
   final void Function(String)? onSubmiting;
   final void Function(String)?  onChanged;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputType? keyboardType;
 
   const CustomTextField({
     super.key,
@@ -22,7 +26,10 @@ class CustomTextField extends StatelessWidget {
     this.enabledBorder = const BorderSide(color: Colors.transparent), 
     this.labelTextStyle = const TextStyle(color: Colors.grey,fontSize: 14,fontWeight: FontWeight.w400),
     this.onSubmiting, 
-    this.onChanged
+    this.onChanged, 
+    this.prefixIcon,
+    this.inputFormatters, 
+    this.keyboardType
   });
 
   @override
@@ -35,10 +42,13 @@ class CustomTextField extends StatelessWidget {
         color: Colors.black,
       ),
       onSubmitted: onSubmiting,
+      keyboardType: keyboardType,
+      inputFormatters: inputFormatters,
       onChanged: onChanged,
       decoration: InputDecoration(
         labelText: labelText,
         suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
         labelStyle: labelTextStyle,
         contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         floatingLabelBehavior: FloatingLabelBehavior.never,

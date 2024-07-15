@@ -5,6 +5,8 @@ import 'package:flutter_application_1/src/view/desktop/property_registration/Hom
 import 'package:flutter_application_1/src/view/desktop/property_registration/Hotel/hotel_page1.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/alternative_places/places4.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/alternative_places/places_5.dart';
+import 'package:flutter_application_1/src/view/desktop/property_registration/apartment/apartment_page2.dart';
+import 'package:flutter_application_1/src/view/desktop/property_registration/apartment/apartment_page3.dart';
 import 'package:flutter_application_1/src/view/desktop/property_registration/registration_menu.dart';
 import 'package:provider/provider.dart';
 
@@ -24,9 +26,10 @@ class HomeStay extends StatelessWidget {
         controller: homestay.homeStayController,
         children: const [
           HomeStayPage1(), // select one or either
-          HotelPage1(),
-          // HomeStayPage2(), // list of choose
-          Places5()
+          HotelPage1(), //grid view listed options
+          // ApartmentPage2(goToPage: goToPage, pageController: pageController)//multiple options or either choose
+// ApartmentPage3(goToPage: goToPage, backToPage: backToPage, pageController: pageController)//sounds like your property
+//property name
         ],
       ),
     );
