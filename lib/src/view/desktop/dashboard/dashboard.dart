@@ -543,10 +543,7 @@ SizedBox sizedBox(double height, double width) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 final mediumTextStyleBold = GoogleFonts.montserrat(
-  fontSize: 18,
-  color: Colors.black,
-  fontWeight: FontWeight.w700
-);
+    fontSize: 18, color: Colors.black, fontWeight: FontWeight.w700);
 
 final smallTextStyle = GoogleFonts.montserrat(
   fontSize: 13,
@@ -582,4 +579,3 @@ final largeTextStyleBold = GoogleFonts.montserrat(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const Color backgroundColor = Colors.white;
-
