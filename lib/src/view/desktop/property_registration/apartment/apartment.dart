@@ -14,6 +14,7 @@ import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/price_per_night.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_aminities.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_detailes.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_listing.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_location.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_rules.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_services.dart';
@@ -54,7 +55,8 @@ class Apartment extends StatelessWidget {
           RatePlans(goToPage: 15, backToPage: 13, pageController: person.apartmentPagecontroller),
           Availability(goToPage: 16, backToPage: 14, pageController: person.apartmentPagecontroller),
           GoodsandServicesTsx(goToPage: 17, backToPage: 15, pageController: person.apartmentPagecontroller),
-          Finalpage(), //page 13
+          PropertyListing(goToPage: 18, backToPage: 16, pageController: person.apartmentPagecontroller),
+          const Finalpage(), //page 13
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ],
       ),

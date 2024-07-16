@@ -14,6 +14,7 @@ import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/price_per_night.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_aminities.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_detailes.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_listing.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_location.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_rules.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_services.dart';
@@ -39,7 +40,7 @@ class AlternativePlaces extends StatelessWidget {
         controller: person.placesPageController,
         children: [
           //Privete Room or Entire places
-          Availability(goToPage: 0, backToPage: 0, pageController: person.apartmentPagecontroller),
+          PropertyListing(goToPage: 0, backToPage: 0, pageController: person.placesPageController),
           PlaceType(goToPage: 1, pageController: person.placesPageController),
           Places2(
               goToPage: 2,
@@ -108,6 +109,11 @@ class AlternativePlaces extends StatelessWidget {
               goToPage: 19,
               backToPage: 18,
               pageController: person.placesPageController),
+          PropertyListing(
+            goToPage: 20,
+            backToPage: 17,
+            pageController: person.placesPageController
+            ),
           const Finalpage(),
         ],
       ),

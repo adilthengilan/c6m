@@ -14,6 +14,7 @@ import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/price_per_night.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_aminities.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_detailes.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_listing.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_location.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_rules.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_services.dart';
@@ -57,6 +58,7 @@ class HomeStay extends StatelessWidget {
           RatePlans(goToPage: 17, backToPage: 15, pageController: person.hotelsPagecontroller),
           Availability(goToPage: 18, backToPage: 16, pageController: person.hotelsPagecontroller),
           GoodsandServicesTsx(goToPage: 19, backToPage: 17, pageController: person.hotelsPagecontroller),
+          PropertyListing(goToPage: 20, backToPage: 18, pageController: person.hotelsPagecontroller),
           Finalpage(),
         ],
       ),

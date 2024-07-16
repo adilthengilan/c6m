@@ -8,7 +8,10 @@ import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 
 class PropertyListing extends StatelessWidget {
-  const PropertyListing({super.key});
+  final int goToPage;
+  final int backToPage;
+  final PageController pageController;
+  const PropertyListing({super.key, required this.goToPage, required this.backToPage, required this.pageController});
 
   @override
   Widget build(BuildContext context) {
@@ -658,13 +661,18 @@ class PropertyListing extends StatelessWidget {
             sizedBox(height * 0.03, width),
             Row(
               children: [
-                Container(
-                  height: height * 0.08,
-                  width: width * 0.06,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blue),
-                      borderRadius: BorderRadius.circular(06)),
-                  child: Icon(Icons.arrow_back_ios_new),
+                InkWell(
+                  onTap: () {
+                    propertylisting.goToPage(backToPage, pageController);
+                  },
+                  child: Container(
+                    height: height * 0.08,
+                    width: width * 0.06,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(06)),
+                    child: Icon(Icons.arrow_back_ios_new),
+                  ),
                 ),
                 sizedBox(height * 0.01, width * 0.01),
                 Container(
@@ -682,9 +690,7 @@ class PropertyListing extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      // if (hotel.isOptionSelected) {
-                      //   hotel.goTonextPage(2);
-                      // }
+                        propertylisting.goToPage(goToPage, pageController);
                     },
                     child: Text('Open for bookings',
                         style: TextStyle(

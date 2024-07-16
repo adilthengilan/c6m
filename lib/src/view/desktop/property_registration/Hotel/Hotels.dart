@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/Home%20stay/hotel_category.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/Hotel/hotel_page1.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_1.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_2.dart';
@@ -14,6 +13,7 @@ import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/price_per_night.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_aminities.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_detailes.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_listing.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_location.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_rules.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_services.dart';
@@ -56,6 +56,7 @@ class Hotels extends StatelessWidget {
           RatePlans(goToPage: 16, backToPage: 14, pageController: person.hotelsPagecontroller),
           Availability(goToPage: 17, backToPage: 15, pageController: person.hotelsPagecontroller),
           GoodsandServicesTsx(goToPage: 18, backToPage: 16, pageController: person.hotelsPagecontroller),
+          PropertyListing(goToPage: 19, backToPage: 17, pageController: person.hotelsPagecontroller),
           const Finalpage(),
         ],
       ),
