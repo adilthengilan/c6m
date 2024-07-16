@@ -39,7 +39,7 @@ class AlternativePlaces extends StatelessWidget {
         controller: person.placesPageController,
         children: [
           //Privete Room or Entire places
-          ImageUploader(goToPage: 0, backToPage: 0, pageController: person.placesPageController),
+          Availability(goToPage: 0, backToPage: 0, pageController: person.apartmentPagecontroller),
           PlaceType(goToPage: 1, pageController: person.placesPageController),
           Places2(
               goToPage: 2,

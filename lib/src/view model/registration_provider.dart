@@ -1,9 +1,9 @@
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:image_picker_web/image_picker_web.dart';
 
 class RegistrationProvider extends ChangeNotifier {
   TextEditingController numberofPropertycontroller = TextEditingController();
@@ -107,14 +107,15 @@ class RegistrationProvider extends ChangeNotifier {
   bool isshowHost = false;
   bool isshowNeighborhood = false;
   TextEditingController aboutThePropertyController = TextEditingController();
-  TextEditingController aboutTheNeighbourhoodController = TextEditingController();
+  TextEditingController aboutTheNeighbourhoodController =
+      TextEditingController();
   TextEditingController aboutTheHostNameController = TextEditingController();
   //=================================================================== Property images ======================================================================
-  List<File> _propertyimages = [];
-  List<File> get propertyimages => _propertyimages;
+  List<Uint8List>? propertyImages = [];
   final picker = ImagePicker();
   //==================================================================== Receive bookings =====================================================================
-  bool allGuestscCanBookInstantly = true; //this variable is All Guests Can Book Instantly, when its True. When the value is false it means All Guests Will Need Request To Book
+  bool allGuestscCanBookInstantly =
+      true; //this variable is All Guests Can Book Instantly, when its True. When the value is false it means All Guests Will Need Request To Book
   //==================================================================== Property Price per Night =============================================================
   TextEditingController priceController = TextEditingController();
   double propertyPricePerNight = 0;
@@ -582,30 +583,17 @@ class RegistrationProvider extends ChangeNotifier {
   }
 
 //================================================================ Property images ====================================================================
-  Future<void> pickImage() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    if (pickedFile != null) {
-        _propertyimages.add(File(pickedFile.path));
-        print(_propertyimages);
-    } else {
-      print('No image selected.');
-    }
+  Future<void> galleryImagePicker() async {
+    List<Uint8List>? _images = await ImagePickerWeb.getMultiImagesAsBytes();
+    propertyImages = _images;
     notifyListeners();
   }
 
-  final ImagePicker imagePicker = ImagePicker();
-      List<XFile>? imageFileList = [];
-
-      void selectImages() async {
-         final List<XFile>? selectedImages = await 
-                imagePicker.pickMultiImage();
-           if (selectedImages!.isNotEmpty) {
-              imageFileList!.addAll(selectedImages);
-           }
-          print("Image List Length:" + imageFileList!.length.toString());
-          notifyListeners();
-      }
+  Future<void> removeImage(index) async {
+    propertyImages!.removeAt(index);
+    notifyListeners();
+  }
 
 //================================================================ Receive bookings =================================================================
   void setallGuestscCanBookInstantly(value) {
@@ -629,7 +617,6 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
 //================================================================== Goods & Services Tax ===============================================================
   void setGstPurpuse(value) {
     isGstPurpuse = value;
@@ -644,7 +631,8 @@ class RegistrationProvider extends ChangeNotifier {
 //=================================================================== Cancellation policies =============================================================
   void setCancellationPeriod(bool selected, int index) {
     freeCancelationButtonIndex = selected ? index : freeCancelationButtonIndex;
-    freeCancellationDays = int.parse(days[freeCancelationButtonIndex].split(' ')[0]);
+    freeCancellationDays =
+        int.parse(days[freeCancelationButtonIndex].split(' ')[0]);
     notifyListeners();
   }
 
@@ -761,7 +749,9 @@ class RegistrationProvider extends ChangeNotifier {
     return selectedCheckboxes.contains(true);
   }
 
-  //================================================================== Availability ============================================================
+   //=================================================================================== Availability =============================================
+
+  
 
   int _selectedRadioIndex = -1; // Initialize with -1 to indicate none selected
   bool _showAsSoonContainer = false;
@@ -787,37 +777,36 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-//=================================================================================================================================================
-
+//============================================================
   void setSelectedDate(DateTime selectedDay) {
     _selectedDate = selectedDay;
     notifyListeners();
   }
 
-//====================================================== select three option sync ==================================================================
+//=================================================================== select three option sync=====================================================
 //==================================================================================================================================================
-  int _selectedRadio = 0;
+  int _selectThreeAvailability = 0;
 
-  int get selectedRadio => _selectedRadio;
+  int get selectThreeAvailability => _selectThreeAvailability;
 
-  void setSelectedRadio(int value) {
-    _selectedRadio = value;
+  void setSelectThreeAvailability(int value) {
+    _selectThreeAvailability = value;
     notifyListeners();
   }
 
   //==============================================================================================================================================
   //==============================================================================================================================================
-  //==================================================== Reservation yes or no ===================================================================
-  int _selectRadioIndex = -1; // Initialize with -1 to indicate none selected
+  //====================================================Reservation yes or no ===================================================================
+  int _selectYesorNo = -1; // Initialize with -1 to indicate none selected
   bool _acceptReservationsOver30Nights = false;
   bool _notacceptReservations = false;
 
-  int get selectRadioIndex => _selectRadioIndex;
+  int get selectYesorNo => _selectYesorNo;
   bool get acceptReservationsOver30Nights => _acceptReservationsOver30Nights;
   bool get notacceptReservations => _notacceptReservations;
 
-  void setSelectRadioIndex(int index) {
-    _selectRadioIndex = index;
+  void setSelectYesorNo(int index) {
+    _selectYesorNo = index;
     if (index == 0) {
       _acceptReservationsOver30Nights = true;
       _notacceptReservations = false;
@@ -877,7 +866,7 @@ class RegistrationProvider extends ChangeNotifier {
   }
 
   //=========================================================================================================
-  //===========================
+  //===========================int _discountRate = 0;
   int _discountRate = 23;
   final double _basePrice = 56778.00;
   TextEditingController discountController = TextEditingController();
@@ -905,10 +894,16 @@ class RegistrationProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+//==================================================== Property listing======================================================
+bool isIndividual = true;
+
+  void setIndividual(bool value) {
+    isIndividual = value;
+    notifyListeners();
+  }
+
 
   void addApartmnetList() {
-
-
     final apartment = {
       'property_Name': propertyName,
       'isEntirePlace': isEntirePlace,
@@ -922,66 +917,67 @@ class RegistrationProvider extends ChangeNotifier {
       'bedRoomList': _bedRoomList,
       'livingRoomSofa': livingRoomSofaBed,
       'otherSpaceSingleBed': otherSpaceSingleBed,
-      'otherSpaceOfDoubleBed':otherSpaceOfDoubleBed,
+      'otherSpaceOfDoubleBed': otherSpaceOfDoubleBed,
       'otherSpaceKingSizeBedCount': otherSpaceKingSizeBedCount,
-      'otherSpaceSuperKingSizeBedCount':otherSpaceSuperKingSizeBedCount,
+      'otherSpaceSuperKingSizeBedCount': otherSpaceSuperKingSizeBedCount,
       'otherSpaceBunkBed': otherSpaceBunkBed,
-      'otherSpaceSofaBed':otherSpaceSofaBed,
-      'otherSpaceFutonMat':otherSpaceFutonMat,
+      'otherSpaceSofaBed': otherSpaceSofaBed,
+      'otherSpaceFutonMat': otherSpaceFutonMat,
       'bedroomSingleBed': bedroomSingleBed,
       'bedroomOfDoubleBed': bedroomOfDoubleBed,
       'bedroomKingSizeBedCount': bedroomKingSizeBedCount,
       'bedroomSuperKingSizeBedCount': bedroomSuperKingSizeBedCount,
-      'bedroomBunkBed':bedroomBunkBed,
-      'bedroomSofaBed':bedroomSofaBed,
-      'bedroomFutonMat':bedroomFutonMat,
+      'bedroomBunkBed': bedroomBunkBed,
+      'bedroomSofaBed': bedroomSofaBed,
+      'bedroomFutonMat': bedroomFutonMat,
       'isallowChildren': isallowChildren,
-      'allowCoats':allowCoats,
-      'guestCapacity':guestCapacity,
-      'bathRoomCount':bathRoomCount,
+      'allowCoats': allowCoats,
+      'guestCapacity': guestCapacity,
+      'bathRoomCount': bathRoomCount,
       'isairConditioning': airConditioning,
       'isheating': heating,
-      'isfreeWifi':freeWifi,
-      'isevChargingStation':evChargingStation,
+      'isfreeWifi': freeWifi,
+      'isevChargingStation': evChargingStation,
       'iskitchen': kitchen,
-      'iskitchenette':kitchenette,
+      'iskitchenette': kitchenette,
       'iswashingMachine': washingMachine,
-      'isflatScreenTV':flatScreenTV,
-      'isswimmingPool':swimmingPool,
-      'ishotTub':hotTub,
-      'isminibar':minibar,
-      'issauna':sauna,
-      'isbalcony':balcony,
-      'isgardenView':gardenView,
-      'isterrace':terrace,
-      'isview':view,
-      'isserveBreakfast':serveBreakfast,
+      'isflatScreenTV': flatScreenTV,
+      'isswimmingPool': swimmingPool,
+      'ishotTub': hotTub,
+      'isminibar': minibar,
+      'issauna': sauna,
+      'isbalcony': balcony,
+      'isgardenView': gardenView,
+      'isterrace': terrace,
+      'isview': view,
+      'isserveBreakfast': serveBreakfast,
       'parkingOption': parkingOption,
-      'isBrakFastIncludedCost':isBrakFastIncludedCost,
+      'isBrakFastIncludedCost': isBrakFastIncludedCost,
       'breackFastCostController': breackFastCostController.text,
-      'offeredbreakFastList':offeredbreakFastList,
+      'offeredbreakFastList': offeredbreakFastList,
       'selectedLanguage': selectedLanguage,
       'checkInFrom': checkInFrom,
       'checkInUntil': checkInUntil,
-      'checkOutFrom':checkOutFrom,
-      'checkOutUntil':checkOutUntil,
-      'issmokingAllowed':issmokingAllowed,
-      'isallowPets':isallowPets,
-      'iseventsAllowed':iseventsAllowed,
-      'propertyImageList': _propertyimages,
-      'allGuestscCanBookInstantly':allGuestscCanBookInstantly,
-      'propertyPricePerNight':propertyPricePerNight,
+      'checkOutFrom': checkOutFrom,
+      'checkOutUntil': checkOutUntil,
+      'issmokingAllowed': issmokingAllowed,
+      'isallowPets': isallowPets,
+      'iseventsAllowed': iseventsAllowed,
+      'propertyImageList': propertyImages,
+      'allGuestscCanBookInstantly': allGuestscCanBookInstantly,
+      'propertyPricePerNight': propertyPricePerNight,
       'isGstPurpuse': isGstPurpuse,
       'panController': panNoController,
       'isFourthCharecterOfPan': isFourthCharecterOfPan,
       'tradeNameController': tradeNameController,
       'GsGSTINController': GsGSTINController,
       'freeCancellationDays': freeCancellationDays,
-      'isprotectionAgainstAccidentalBookings': isprotectionAgainstAccidentalBookings,
+      'isprotectionAgainstAccidentalBookings':
+          isprotectionAgainstAccidentalBookings,
       'discountPersentage': discountPersentage,
       'totalForOneGuest': totalForOneGuest,
-      'aboutThePropertyController':aboutThePropertyController,
-      'aboutTheNeighbourhoodController':aboutTheNeighbourhoodController,
+      'aboutThePropertyController': aboutThePropertyController,
+      'aboutTheNeighbourhoodController': aboutTheNeighbourhoodController,
       'aboutTheHostNameController': aboutTheHostNameController,
     };
   }

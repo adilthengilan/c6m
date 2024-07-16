@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
@@ -69,9 +67,7 @@ class ImageUploader extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               )
                             ),
-                            onPressed: () {
-                              person.selectImages();
-                            },
+                            onPressed: person.galleryImagePicker,
                             icon: Icon(Icons.upload),
                             label: Text('Upload photos'),
                           ),
@@ -85,33 +81,50 @@ class ImageUploader extends StatelessWidget {
                     ),
                   ),
                   sizedBox(height * 0.04, 0.0),
-                  // person.propertyimages.isNotEmpty
-                      // ? 
-                      SizedBox(
-                        width: width * 0.33,
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                          padding: EdgeInsets.symmetric(horizontal: width * 0.02),
-                          gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: width * 0.03,
-                            mainAxisSpacing: height * 0.04,
-                          ),
-                          itemCount: person.imageFileList!.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              height: height * 0.3,
-                              width: width * 0.3,
-                              color: Colors.grey.shade200,
-                              child: Image.file(File(person.imageFileList![index].path), fit: BoxFit.cover),
-                            );
-                          },
+                      Consumer<RegistrationProvider>(
+                        builder: (context, person, child) => 
+                        SizedBox(
+                          width: width * 0.33,
+                          child: person.propertyImages!.isNotEmpty && person.propertyImages != null ?  GridView.builder(
+                            shrinkWrap: true,
+                            padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: width * 0.03,
+                              mainAxisSpacing: height * 0.04,
+                            ),
+                            itemCount: person.propertyImages!.length,
+                            itemBuilder: (context, index) {
+                              return CustomContainer(
+                                boxShadow: false,
+                                height: height * 0.3,
+                                width: width * 0.3,
+                                color: Colors.grey.shade200,
+                                image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: MemoryImage(person.propertyImages![index])
+                                ),
+                                child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(top: height * 0.01,right: width * 0.01),
+                                    child: IconButton.outlined(
+                                      style: IconButton.styleFrom(
+                                        side: BorderSide(color: Colors.deepPurpleAccent)
+                                      ),
+                                      onPressed: (){
+                                        person.removeImage(index);
+                                      }, icon: Icon(Icons.close,color: Colors.white)),
+                                  ),
+                                ),
+                              );
+                            },
+                          ): 
+                        Container(
+                          height: height * 0.01,
                         ),
-                      ),
-                      // : 
-                      Container(
-                        height: height * 0.01,
-                      ),
+                        ),
+                      )
                 ],
               ),
             ),
