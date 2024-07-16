@@ -30,6 +30,7 @@ class SetupWeeklyPlan extends StatelessWidget {
               ),
             ),
           ),
+          //===========================================================================================================================================
           sizedBox(height * 0.05, width),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -74,7 +75,7 @@ class SetupWeeklyPlan extends StatelessWidget {
                         Text('Set up a weekly rate plan'),
                       ],
                     ),
-                    sizedBox(height * 0.05, width),
+                    sizedBox(height * 0.06, width),
                     Consumer<RegistrationProvider>(
                       builder: (context, nonrefundableprovider, child) {
                         return nonrefundableprovider.nonRefundableRatePlan
@@ -91,7 +92,7 @@ class SetupWeeklyPlan extends StatelessWidget {
                                       "How much cheaper than the standard rate do you want to make this rate plan?",
                                       style: mediumTextStyleBold,
                                     ),
-                                    sizedBox(height * 0.03, width),
+                                    sizedBox(height * 0.05, width),
                                     Container(
                                       decoration: BoxDecoration(
                                           border: Border.all(
@@ -139,6 +140,8 @@ class SetupWeeklyPlan extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
+                                            sizedBox(
+                                                height * 0.01, width * 0.01),
                                             Text(
                                               '%',
                                               style: GoogleFonts.montserrat(

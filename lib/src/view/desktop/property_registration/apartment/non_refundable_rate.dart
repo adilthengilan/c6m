@@ -13,8 +13,7 @@ class NonRefundableRate extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final nonrefundableprovider =
-        Provider.of<RegistrationProvider>(context, listen: false);
+    
 
     return Padding(
       padding: EdgeInsets.only(left: width * 0.1),

@@ -586,7 +586,7 @@ final largeTextStyleBold = GoogleFonts.montserrat(
   fontWeight: FontWeight.w700,
 );
 final bluetextStyle = GoogleFonts.montserrat(
-  fontSize: 14,
+  fontSize: 12,
   color: Colors.blueAccent,
   fontWeight: FontWeight.w500,
 );

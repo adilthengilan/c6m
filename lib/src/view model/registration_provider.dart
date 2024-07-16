@@ -682,6 +682,8 @@ class RegistrationProvider extends ChangeNotifier {
   }
   //=================================================================================== Availability =============================================
 
+  
+
   int _selectedRadioIndex = -1; // Initialize with -1 to indicate none selected
   bool _showAsSoonContainer = false;
   bool _showSpecificDateContainer = false;
@@ -714,28 +716,28 @@ class RegistrationProvider extends ChangeNotifier {
 
 //=================================================================== select three option sync=====================================================
 //==================================================================================================================================================
-  int _selectedRadio = 0;
+  int _selectThreeAvailability = 0;
 
-  int get selectedRadio => _selectedRadio;
+  int get selectThreeAvailability => _selectThreeAvailability;
 
-  void setSelectedRadio(int value) {
-    _selectedRadio = value;
+  void setSelectThreeAvailability(int value) {
+    _selectThreeAvailability = value;
     notifyListeners();
   }
 
   //==============================================================================================================================================
   //==============================================================================================================================================
   //====================================================Reservation yes or no ===================================================================
-  int _selectRadioIndex = -1; // Initialize with -1 to indicate none selected
+  int _selectYesorNo = -1; // Initialize with -1 to indicate none selected
   bool _acceptReservationsOver30Nights = false;
   bool _notacceptReservations = false;
 
-  int get selectRadioIndex => _selectRadioIndex;
+  int get selectYesorNo => _selectYesorNo;
   bool get acceptReservationsOver30Nights => _acceptReservationsOver30Nights;
   bool get notacceptReservations => _notacceptReservations;
 
-  void setSelectRadioIndex(int index) {
-    _selectRadioIndex = index;
+  void setSelectYesorNo(int index) {
+    _selectYesorNo = index;
     if (index == 0) {
       _acceptReservationsOver30Nights = true;
       _notacceptReservations = false;
@@ -822,6 +824,13 @@ class RegistrationProvider extends ChangeNotifier {
       discountController.text = _discountRate.toString();
       notifyListeners();
     }
+  }
+//==================================================== Property listing======================================================
+bool isIndividual = true;
+
+  void setIndividual(bool value) {
+    isIndividual = value;
+    notifyListeners();
   }
 
 }
