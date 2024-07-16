@@ -611,4 +611,73 @@ class RegistrationProvider extends ChangeNotifier {
     isFourthCharecterOfPanHorP = value;
     notifyListeners();
   }
+
+  ///===================================================Alternatives places----------------------------------
+
+  // Alternative places variables
+  final PageController placesPageController = PageController();
+  int propertyTypes = 0;
+
+  void nextPage(int pageIndex) {
+    placesPageController.jumpToPage(pageIndex);
+    notifyListeners();
+  }
+
+  void setpropertyType(int propertyType) {
+    propertyTypes = propertyType;
+    notifyListeners();
+  }
+
+  ///===================================================Hotels =============================================-
+  final PageController hotelsPagecontroller = PageController();
+  bool showMoreOptions = false;
+  String? selectedOption;
+
+  void goTonextPage(int pageIndex) {
+    placesPageController.jumpToPage(pageIndex);
+    notifyListeners();
+  }
+
+  void toggleMoreOptions() {
+    showMoreOptions = !showMoreOptions;
+    notifyListeners();
+  }
+
+  void selectOption(String option) {
+    selectedOption = option;
+    notifyListeners();
+  }
+
+  bool get isOptionSelected => selectedOption != null;
+
+//================================================= Home Stay ================================================
+  final PageController homeStaycontroller = PageController();
+  int selectedProperty = 0; // Default selection
+  
+
+  void jumpPage(int pageIndex) {
+    placesPageController.jumpToPage(pageIndex);
+    notifyListeners();
+  }
+
+  void setSelectedProperty(int index) {
+    selectedProperty = index;
+    notifyListeners();
+  }
+
+  bool isPropertySelected() {
+    return selectedProperty != -1;
+  }
+
+  List<bool> selectedCheckboxes = [false, false, false, false, false];
+
+  void toggleCheckbox(int index) {
+    selectedCheckboxes[index] = !selectedCheckboxes[index];
+    notifyListeners();
+  }
+
+  bool isAnyCheckboxSelected() {
+    return selectedCheckboxes.contains(true);
+  }
+
 }

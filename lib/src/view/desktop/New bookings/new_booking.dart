@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/view%20model/booking_provider.dart';
+import 'package:flutter_application_1/src/view/desktop/widgets/custom_container.dart';
+import 'package:flutter_application_1/src/view/desktop/widgets/custom_textfield.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/booking_provider.dart';
@@ -23,7 +26,7 @@ class NewBookings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildHeader(context, bookingProvider, height, width),
-            sizedbox(height * 0.03, width),
+            SizedBox(height: height * 0.03),
             GuestsTable(),
           ],
         ),
@@ -42,7 +45,7 @@ class NewBookings extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        sizedbox(height * 0.01, width * 0.50),
+        SizedBox(width: width * 0.50),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -53,7 +56,7 @@ class NewBookings extends StatelessWidget {
               Color.fromARGB(255, 219, 255, 160),
               () => _showSortOptions(context, bookingProvider),
             ),
-            sizedbox(height * 0.01, width * 0.01),
+            SizedBox(width: width * 0.01),
             _buildActionButton(
               context,
               'Booking',
@@ -102,10 +105,9 @@ class NewBookings extends StatelessWidget {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildSortOption(context, bookingProvider, 'All'),
-              _buildSortOption(context, bookingProvider, 'Arrived'),
+              _buildSortOption(context, bookingProvider, 'Check in'),
               _buildSortOption(context, bookingProvider, 'Waiting'),
-              _buildSortOption(context, bookingProvider, 'Leave'),
+              _buildSortOption(context, bookingProvider, 'Check out'),
             ],
           ),
           actions: [
@@ -121,12 +123,31 @@ class NewBookings extends StatelessWidget {
 
   Widget _buildSortOption(
       BuildContext context, BookingProvider bookingProvider, String status) {
-    return ListTile(
-      title: Text(status),
-      onTap: () {
-        bookingProvider.filterGuests(status);
-        Navigator.pop(context);
-      },
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: CustomContainer(
+        border: Border.all(
+          color: Colors.grey,
+        ),
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: false,
+        child: ListTile(
+          leading: Checkbox(
+            value: bookingProvider.selectedSortOption == status,
+            onChanged: (bool? value) {
+              if (value != null && value) {
+                bookingProvider.filterGuests(status);
+              }
+              Navigator.pop(context);
+            },
+          ),
+          title: Text(status),
+          onTap: () {
+            bookingProvider.filterGuests(status);
+            Navigator.pop(context);
+          },
+        ),
+      ),
     );
   }
 }
@@ -207,11 +228,11 @@ class GuestsTable extends StatelessWidget {
 
   Color _getStatusColor(String status) {
     switch (status) {
-      case "Arrived":
+      case "Check in":
         return Color.fromARGB(255, 195, 255, 197);
       case "Waiting":
         return Color.fromARGB(255, 255, 209, 140);
-      case "Leave":
+      case "Check out":
         return Color.fromARGB(255, 255, 123, 114);
       default:
         return Color.fromARGB(255, 198, 194, 194);
@@ -307,135 +328,82 @@ class BookingForm extends StatelessWidget {
       key: _formKey,
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildRow([
-              _buildTextFormField(
-                  'Client email', _clientEmailController, width),
-              _buildTextFormField(
-                  'Booking reference', _bookingReferenceController, width),
-            ]),
-            _buildRow([
-              _buildDropdownFormField('Company', _company, [
-                'British Airways Holidays',
-                'Company 2',
-                'Company 3'
-              ], (value) {
-                _company = value!;
-              }),
-              _buildDropdownFormField(
-                  'Hotel', _hotel, ['The Royal National', 'Hotel 2', 'Hotel 3'],
-                  (value) {
-                _hotel = value!;
-              }),
-            ]),
-            _buildRow([
-              _buildTextFormField('Check-in', _checkInController, width),
-              _buildTextFormField('Nights', _nightsController, width),
-            ]),
-            _buildRow([
-              _buildTextFormField('Check-out', _checkOutController, width),
-              _buildDropdownFormField(
-                  'Rate', _rate, ['SUMMERSAVER', 'Rate 2', 'Rate 3'], (value) {
-                _rate = value!;
-              }),
-            ]),
-            _buildRow([
-              _buildTextFormField(
-                  'Special request', _specialRequestController, width),
-              _buildDropdownFormField('Room type', _roomType,
-                  ['Double room', 'Single room', 'Suite'], (value) {
-                _roomType = value!;
-              }),
-            ]),
-            _buildRow([
-              _buildTextFormField(
-                  'Occupant first name', _occupantFirstNameController, width),
-              _buildTextFormField(
-                  'Occupant last name', _occupantLastNameController, width),
-            ]),
-            _buildRow([
-              _buildDropdownFormField(
-                  'Extras', _extras, ['None', 'Extra 1', 'Extra 2'], (value) {
-                _extras = value!;
-              }),
-              _buildDropdownFormField('Room layout', _roomLayout,
-                  ['Default setup', 'Layout 1', 'Layout 2'], (value) {
-                _roomLayout = value!;
-              }),
-            ]),
-            _buildRow([
-              _buildTextFormField(
-                  'Adult first name', _adultFirstNameController, width),
-              _buildTextFormField(
-                  'Adult last name', _adultLastNameController, width),
-            ]),
+            CustomContainer(
+              width: width * 0.32,
+              height: height * 0.55,
+              boxShadow: true,
+              child: Column(
+                children: [
+                  _buildTextField(
+                      context, 'Client email', _clientEmailController),
+                  _buildTextField(context, 'Booking reference',
+                      _bookingReferenceController),
+                  _buildTextField(context, 'Check-in', _checkInController),
+                  _buildTextField(context, 'Nights', _nightsController),
+                  _buildTextField(context, 'Check-out', _checkOutController),
+                  _buildTextField(
+                      context, 'Special request', _specialRequestController),
+                  _buildTextField(context, 'Occupant First Name',
+                      _occupantFirstNameController),
+                  _buildTextField(context, 'Occupant Last Name',
+                      _occupantLastNameController),
+                  _buildTextField(
+                      context, 'Adult First Name', _adultFirstNameController),
+                  _buildTextField(
+                      context, 'Adult Last Name', _adultLastNameController),
+                  _buildDropdown(context, 'Company', _company,
+                      ['British Airways Holidays']),
+                  _buildDropdown(
+                      context, 'Hotel', _hotel, ['The Royal National']),
+                  _buildDropdown(context, 'Rate', _rate, ['SUMMERSAVER']),
+                  _buildDropdown(
+                      context, 'Room Type', _roomType, ['Double room']),
+                  _buildDropdown(context, 'Extras', _extras, ['None']),
+                  _buildDropdown(
+                      context, 'Room Layout', _roomLayout, ['Default setup']),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildRow(List<Widget> children) {
-    return Row(
-      children: children
-          .map((child) => Expanded(
-                  child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: child,
-              )))
-          .toList(),
-    );
-  }
-
-  Widget _buildTextFormField(
-      String label, TextEditingController controller, width) {
-    return CustomContainer(
-      boxShadow: false,
-      width: width * 0.350,
-      border: Border.all(color: Colors.grey),
-      borderRadius: BorderRadius.circular(20),
+  Widget _buildTextField(BuildContext context, String labelText,
+      TextEditingController controller) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: CustomTextField(
-        controller: controller, borderRadius: 15,
-        labelText: label, labelTextStyle: smallTextStyle,
-        // validator: (value) {
-        //   if (value == null || value.isEmpty) {
-        //     return 'Please enter some text';
-        //   }
-        //   return null;
-        // },
+        controller: controller,
+        labelText: labelText,
       ),
     );
   }
 
-  Widget _buildDropdownFormField(String label, String currentValue,
-      List<String> items, Function(String?) onChanged) {
-    return DropdownButtonFormField<String>(
-      decoration: InputDecoration(
+  Widget _buildDropdown(BuildContext context, String label, String currentValue,
+      List<String> options) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: DropdownButtonFormField<String>(
+        value: currentValue,
+        decoration: InputDecoration(
           labelText: label,
-          labelStyle: GoogleFonts.montserrat(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            color: Colors.grey,
-          ),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
-      value: currentValue,
-      items: items.map((
-        item,
-      ) {
-        return DropdownMenuItem(
-          value: item,
-          child: Text(
-            item,
-            style: GoogleFonts.montserrat(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: Colors.grey,
-            ),
-          ),
-        );
-      }).toList(),
-      onChanged: onChanged,
+          border: OutlineInputBorder(),
+        ),
+        items: options.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+        onChanged: (String? newValue) {
+          if (newValue != null) {
+            currentValue = newValue;
+          }
+        },
+      ),
     );
   }
 }
