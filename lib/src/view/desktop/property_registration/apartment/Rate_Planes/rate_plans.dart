@@ -7,6 +7,9 @@ import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/alternative_places/alternative_places.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/Rate_Planes/cancelation_policy.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/Rate_Planes/non_refundable.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/Rate_Planes/price_per_group.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/Rate_Planes/weekly_rate_plans.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_1.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 
@@ -317,7 +320,9 @@ class RatePlans extends StatelessWidget {
           ),
         ),
         CancelationPolicy(goToPage: 0, backToPage: 0, pageController: person.ratePlansPageviewController),
-        PricePerGroup(goToPage: 0, backToPage: 0, pageController: person.ratePlansPageviewController)
+        PricePerGroup(goToPage: 0, backToPage: 0, pageController: person.ratePlansPageviewController),
+        NonRefundableRate(goToPage: 0, backToPage: 0, pageController: person.ratePlansPageviewController),
+        WeeklyPlan(goToPage: 0, backToPage: 0, pageController: person.ratePlansPageviewController),
       ],
     );
   }

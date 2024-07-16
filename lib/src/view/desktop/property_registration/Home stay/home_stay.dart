@@ -6,6 +6,7 @@ import 'package:tuch_trip_crms/src/view/desktop/property_registration/Home%20sta
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_1.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_2.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_4.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/availlability.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/final_page.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/goods_services_tax.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/host_profile.dart';
@@ -39,7 +40,7 @@ class HomeStay extends StatelessWidget {
           //Privete Roo or Entire places
           PlaceType(goToPage: 1, pageController: person.hotelsPagecontroller),
           HomestayCatogories(goToPage: 2, pageController: person.hotelsPagecontroller),
-          ApartmentPage1(goToPage: 3, pageController: person.hotelsPagecontroller,stayPalceName: 'Home Stay'),
+          ApartmentPage1(goToPage: 3, pageController: person.hotelsPagecontroller,stayPalceName: person.stayCategoryOption!),
           ApartmentPage2(goToPage: 4, pageController: person.hotelsPagecontroller),
           ApartmentPage4(goToPage: 5, backToPage: 3, pageController: person.hotelsPagecontroller),
           PropertyDetailes(goToPage: 6, backToPage: 4, pageController: person.hotelsPagecontroller),
@@ -54,7 +55,8 @@ class HomeStay extends StatelessWidget {
           ReceiveBookings(goToPage: 15, backToPage: 13, pageController: person.hotelsPagecontroller),
           PricePerNight(goToPage: 16, backToPage: 14, pageController: person.hotelsPagecontroller),
           RatePlans(goToPage: 17, backToPage: 15, pageController: person.hotelsPagecontroller),
-          GoodsandServicesTsx(goToPage: 18, backToPage: 16, pageController: person.hotelsPagecontroller),
+          Availability(goToPage: 18, backToPage: 16, pageController: person.hotelsPagecontroller),
+          GoodsandServicesTsx(goToPage: 19, backToPage: 17, pageController: person.hotelsPagecontroller),
           Finalpage(),
         ],
       ),

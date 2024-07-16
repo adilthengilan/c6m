@@ -6,6 +6,7 @@ import 'package:tuch_trip_crms/src/view/desktop/property_registration/Hotel/hote
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_1.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_2.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_4.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/availlability.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/final_page.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/goods_services_tax.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/host_profile.dart';
@@ -40,20 +41,21 @@ class Hotels extends StatelessWidget {
           //Selection Stay TypeNuha's Page //From the list below, which property category is most similar to your place?
           ApartmentPage1(goToPage: 2, pageController: person.hotelsPagecontroller,stayPalceName: person.stayCategoryOption!),
           ApartmentPage2(goToPage: 3, pageController: person.hotelsPagecontroller),
-          ApartmentPage4(goToPage: 4, backToPage: 3, pageController: person.hotelsPagecontroller),
-          PropertyDetailes(goToPage: 5, backToPage: 4, pageController: person.hotelsPagecontroller),
-          PropertyLocationPage(gotToNextPage: 6, goToBackPage: 5, pageController: person.hotelsPagecontroller),
-          PropertyDetailes(goToPage: 7, backToPage: 6, pageController: person.hotelsPagecontroller),
-          PropertyAminities(goToPage: 8, backToPage: 7, pageController: person.hotelsPagecontroller),
-          PropertyServices(goToPage: 9, backToPage: 8, pageController: person.hotelsPagecontroller),
+          ApartmentPage4(goToPage: 4, backToPage: 2, pageController: person.hotelsPagecontroller),
+          PropertyDetailes(goToPage: 5, backToPage: 3, pageController: person.hotelsPagecontroller),
+          PropertyLocationPage(gotToNextPage: 6, goToBackPage: 4, pageController: person.hotelsPagecontroller),
+          PropertyDetailes(goToPage: 7, backToPage: 5, pageController: person.hotelsPagecontroller),
+          PropertyAminities(goToPage: 8, backToPage: 6, pageController: person.hotelsPagecontroller),
+          PropertyServices(goToPage: 9, backToPage: 7, pageController: person.hotelsPagecontroller),
           StaffLanguageSelectionPart(goToPage: 9, backToPage: 8, pageController: person.hotelsPagecontroller),
-          PropertyRules(goToPage: 11, backToPage: 10, pageController: person.hotelsPagecontroller),
-          HostProfilePage(goToPage: 12, backToPage: 11, pageController: person.hotelsPagecontroller),
-          ImageUploader(goToPage: 13, backToPage: 12, pageController: person.hotelsPagecontroller),
-          ReceiveBookings(goToPage: 14, backToPage: 13, pageController: person.hotelsPagecontroller),
-          PricePerNight(goToPage: 15, backToPage: 14, pageController: person.hotelsPagecontroller),
-          RatePlans(goToPage: 16, backToPage: 15, pageController: person.hotelsPagecontroller),
-          GoodsandServicesTsx(goToPage: 17, backToPage: 16, pageController: person.hotelsPagecontroller),
+          PropertyRules(goToPage: 11, backToPage: 9, pageController: person.hotelsPagecontroller),
+          HostProfilePage(goToPage: 12, backToPage: 10, pageController: person.hotelsPagecontroller),
+          ImageUploader(goToPage: 13, backToPage: 11, pageController: person.hotelsPagecontroller),
+          ReceiveBookings(goToPage: 14, backToPage: 12, pageController: person.hotelsPagecontroller),
+          PricePerNight(goToPage: 15, backToPage: 13, pageController: person.hotelsPagecontroller),
+          RatePlans(goToPage: 16, backToPage: 14, pageController: person.hotelsPagecontroller),
+          Availability(goToPage: 17, backToPage: 15, pageController: person.hotelsPagecontroller),
+          GoodsandServicesTsx(goToPage: 18, backToPage: 16, pageController: person.hotelsPagecontroller),
           const Finalpage(),
         ],
       ),

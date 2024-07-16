@@ -35,7 +35,7 @@ class PricePerNight extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   sizedBox(height * 0.04, width),
-                  Text('Rate plans', style: largeTextStyleBold),
+                  Text('Price per Night', style: largeTextStyleBold),
                   sizedBox(height * 0.04, width),
                   Text(
                     'How much do you want to charge per night?',
@@ -193,12 +193,12 @@ class PricePerNight extends StatelessWidget {
                   },
                 ),
                 sizedBox(0.0, width * 0.02),
-                continueButton(height, width, true, () {
-                   if (person.propertyPricePerNight != 0) {
-                      person.goToPage(goToPage, pageController);
-                    } else if (person.propertyPricePerNight == 0) {
-                    }
-                })
+                Consumer<RegistrationProvider>(
+                  builder: (context, value, child) => 
+                  continueButton(height, width, person.priceController.text != '', () {
+                        person.goToPage(goToPage, pageController);
+                  }),
+                )
               ],
             ),
             sizedBox(height * 0.2, width),

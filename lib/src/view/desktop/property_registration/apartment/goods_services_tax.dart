@@ -116,7 +116,7 @@ class GoodsandServicesTsx extends StatelessWidget {
                     height: height * 0.05,
                     child: CustomTextField(
                       labelText: '',
-                      controller: person.panController,
+                      controller: person.panNoController,
                       borderSide: BorderSide(
                         color: Colors.grey.shade300,
                       ),
@@ -135,7 +135,7 @@ class GoodsandServicesTsx extends StatelessWidget {
                   ),
                   Consumer<RegistrationProvider>(
                     builder: (context, consumer, child) => RadioButtons(
-                      groupValue: consumer.isFourthCharecterOfPanHorP,
+                      groupValue: consumer.isFourthCharecterOfPan,
                       onChanged1: (value) =>
                           consumer.setFourthCharecterOfPanHorP(value),
                       onChanged2: (value) =>
@@ -145,7 +145,7 @@ class GoodsandServicesTsx extends StatelessWidget {
                   Consumer<RegistrationProvider>(
                     builder: (context, value, child) => 
                     Visibility(
-                      visible: person.isFourthCharecterOfPanHorP,
+                      visible: person.isFourthCharecterOfPan,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

@@ -101,6 +101,7 @@ class HostProfilePage extends StatelessWidget {
                 children: [
                   Text('Host name'),
                   TextField(
+                    controller: person.aboutTheHostNameController,
                     maxLength: 80,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -109,9 +110,11 @@ class HostProfilePage extends StatelessWidget {
                   SizedBox(height: 10),
                   Text('About the host'),
                   TextField(
+                    controller: person.aboutThePropertyController,
                     maxLength: 1200,
                     decoration: InputDecoration(
                       hintText: 'What are your interests? What do you like about hosting?',
+                      semanticCounterText: '',
                       border: OutlineInputBorder(),
                     ),
                     maxLines: 5,
@@ -148,9 +151,11 @@ class HostProfilePage extends StatelessWidget {
                 children: [
                   Text('About the neighbourhood'),
                   TextField(
+                    controller: person.aboutTheNeighbourhoodController,
                     maxLength: 1200,
                     decoration: InputDecoration(
                       hintText: 'What’s the area like? Are there any attractions nearby?',
+                      semanticCounterText: '',
                       border: OutlineInputBorder(),
                     ),
                     maxLines: 5,

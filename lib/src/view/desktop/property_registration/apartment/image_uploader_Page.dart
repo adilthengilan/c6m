@@ -18,100 +18,118 @@ class ImageUploader extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final person = Provider.of<RegistrationProvider>(context);
-    return Padding(
-      padding: EdgeInsets.only(left: width * 0.1),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          sizedBox(height * 0.06, 0.0),
-          CustomContainer(
-            width: width * 0.35,
-            boxShadow: true,
-            padding: EdgeInsets.symmetric(vertical: height * 0.025, horizontal: width * 0.02),
-            color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                sizedBox(height * 0.06, 0.0),
-                SizedBox(
-                  width: width * 0.35,
-                  child: Text(
-                    'Upload at least 5 photos of your property. The more you upload, the more likely you are to get bookings. You can add more later.',
-                    style: TextStyle(fontSize: 16.0),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-                sizedBox(height * 0.02, 0.0),
-                Container(
-                  width: width,
-                  padding: EdgeInsets.symmetric(vertical: height * 0.025),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.image, size: 50, color: Colors.grey),
-                        sizedBox(height * 0.02, 0.0),
-                        const Text(
-                          'Drag and drop or',
-                          style: TextStyle(fontSize: 16.0, color: Colors.grey),
-                        ),
-                        sizedBox(height * 0.02, 0.0),
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            person.pickImage();
-                          },
-                          icon: Icon(Icons.upload),
-                          label: Text('Upload photos'),
-                        ),
-                        sizedBox(height * 0.02, 0.0),
-                        Text(
-                          'jpg/jpeg or png, maximum 47MB each',
-                          style: smallTextStyle
-                        ),
-                        person.proImage != null
-                    ? Expanded(
-                        child: GridView.builder(
-                          padding: EdgeInsets.symmetric(horizontal: width * 0.02),
-                          gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            crossAxisSpacing: 20,
-                            mainAxisSpacing: 4.0,
-                          ),
-                          itemCount: 2,
-                          itemBuilder: (context, index) {
-                            return Image.file(person.proImage as File);
-                          },
-                        ),
-                      )
-                    : Container(),
-                      ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.only(left: width * 0.1),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            sizedBox(height * 0.06, 0.0),
+            CustomContainer(
+              width: width * 0.35,
+              boxShadow: true,
+              padding: EdgeInsets.symmetric(vertical: height * 0.025, horizontal: width * 0.02),
+              color: Colors.white,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  sizedBox(height * 0.06, 0.0),
+                  SizedBox(
+                    width: width * 0.35,
+                    child: Text(
+                      'Upload at least 5 photos of your property. The more you upload, the more likely you are to get bookings. You can add more later.',
+                      style: TextStyle(fontSize: 16.0),
+                      textAlign: TextAlign.start,
                     ),
                   ),
-                ),
-                sizedBox(height * 0.1, 0.0),
-                
-              ],
+                  sizedBox(height * 0.02, 0.0),
+                  Container(
+                    width: width,
+                    padding: EdgeInsets.symmetric(vertical: height * 0.025),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.image, size: 50, color: Colors.grey),
+                          sizedBox(height * 0.02, 0.0),
+                          const Text(
+                            'Drag and drop or',
+                            style: TextStyle(fontSize: 16.0, color: Colors.grey),
+                          ),
+                          sizedBox(height * 0.02, 0.0),
+                          ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              side: BorderSide(color: Colors.purpleAccent),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              )
+                            ),
+                            onPressed: () {
+                              person.selectImages();
+                            },
+                            icon: Icon(Icons.upload),
+                            label: Text('Upload photos'),
+                          ),
+                          sizedBox(height * 0.02, 0.0),
+                          Text(
+                            'jpg/jpeg or png, maximum 47MB each',
+                            style: smallTextStyle
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  sizedBox(height * 0.04, 0.0),
+                  // person.propertyimages.isNotEmpty
+                      // ? 
+                      SizedBox(
+                        width: width * 0.33,
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                          padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                          gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: width * 0.03,
+                            mainAxisSpacing: height * 0.04,
+                          ),
+                          itemCount: person.imageFileList!.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              height: height * 0.3,
+                              width: width * 0.3,
+                              color: Colors.grey.shade200,
+                              child: Image.file(File(person.imageFileList![index].path), fit: BoxFit.cover),
+                            );
+                          },
+                        ),
+                      ),
+                      // : 
+                      Container(
+                        height: height * 0.01,
+                      ),
+                ],
+              ),
             ),
-          ),
-         sizedBox(height * 0.03, width),
-      Row(
-        children: [
-          backButton(height, width, (){
-            person.goToPage(backToPage, pageController);
-          },
-          ),
-          sizedBox(0.0, width * 0.02),
-          continueButton(height, width, true, (){
-            person.goToPage(goToPage, pageController);
-          })
-        ],
-      ),
-        ],
+           sizedBox(height * 0.03, width),
+        Row(
+          children: [
+            backButton(height, width, (){
+              person.goToPage(backToPage, pageController);
+            },
+            ),
+            sizedBox(0.0, width * 0.02),
+            continueButton(height, width, true, (){
+              person.goToPage(goToPage, pageController);
+            })
+          ],
+        ),
+          ],
+        ),
       ),
     );
   }

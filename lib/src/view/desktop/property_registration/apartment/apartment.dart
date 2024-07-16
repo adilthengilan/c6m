@@ -6,6 +6,7 @@ import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_2.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_4.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/aprtment_page_3.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/availlability.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/final_page.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/goods_services_tax.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/host_profile.dart';
@@ -49,9 +50,10 @@ class Apartment extends StatelessWidget {
           HostProfilePage(goToPage: 11,backToPage: 9,pageController: person.apartmentPagecontroller), //Page 11
           ImageUploader(goToPage: 12,backToPage: 10, pageController: person.apartmentPagecontroller), //Page12
           ReceiveBookings(goToPage: 13, backToPage: 11, pageController: person.apartmentPagecontroller),
-          PricePerNight(goToPage: 1, backToPage: 12, pageController: person.apartmentPagecontroller),
-          RatePlans(goToPage: 2, backToPage: 14, pageController: person.apartmentPagecontroller),
-          GoodsandServicesTsx(goToPage: 3, backToPage: 14, pageController: person.apartmentPagecontroller),
+          PricePerNight(goToPage: 14, backToPage: 12, pageController: person.apartmentPagecontroller),
+          RatePlans(goToPage: 15, backToPage: 13, pageController: person.apartmentPagecontroller),
+          Availability(goToPage: 16, backToPage: 14, pageController: person.apartmentPagecontroller),
+          GoodsandServicesTsx(goToPage: 17, backToPage: 15, pageController: person.apartmentPagecontroller),
           Finalpage(), //page 13
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ],

@@ -24,7 +24,7 @@ class DesktopView extends StatefulWidget {
 class _DesktopViewState extends State<DesktopView> {
   @override
   Widget build(BuildContext context) {
-    return AlternativePlaces();
+    return const AlternativePlaces();
   }
 }
 

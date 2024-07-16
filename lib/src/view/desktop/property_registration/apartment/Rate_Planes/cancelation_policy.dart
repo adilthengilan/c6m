@@ -122,7 +122,7 @@ class CancelationPolicy extends StatelessWidget {
                                 thumbColor: WidgetStatePropertyAll(Colors.white),
                                 activeTrackColor: Colors.blueAccent,
                                 inactiveThumbColor: Colors.white,
-                                value: person.protectionAgainstAccidentalBookings,
+                                value: person.isprotectionAgainstAccidentalBookings,
                                 onChanged: (value) {
                                   person.setBookingProtection(value);
                                 },
@@ -130,7 +130,7 @@ class CancelationPolicy extends StatelessWidget {
                             ),
                             sizedBox(0.0, width * 0.006),
                             Text(
-                              person.protectionAgainstAccidentalBookings
+                              person.isprotectionAgainstAccidentalBookings
                                   ? 'On'
                                   : 'Off',
                               style: smallTextStyleBold,
