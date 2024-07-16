@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:tuch_trip_crms/layouting.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/desktop_view.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_4.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/aprtment_page_3.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/image_uploader_Page.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_aminities.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_detailes.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_location.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_rules.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_services.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/staff_language_selection.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 
 class Finalpage extends StatelessWidget {
@@ -77,7 +82,7 @@ class Finalpage extends StatelessWidget {
                         )
                       ),
                       onPressed: () {
-                        index == 0?  person.goToPage(1,person.finalPagePageviewcontroller) : index == 1? person.goToPage(2,person.finalPagePageviewcontroller): index == 2? person.goToPage(3,person.finalPagePageviewcontroller): Navigator.push(context, MaterialPageRoute(builder: (context) => const DesktopView(),));
+                        index == 0?  person.goToPage(1,person.finalPagePageviewcontroller) : index == 1? person.goToPage(2,person.finalPagePageviewcontroller): index == 2? person.goToPage(9,person.finalPagePageviewcontroller): Navigator.push(context, MaterialPageRoute(builder: (context) => const DesktopView(),));
                       },
                        child: Text(index == 0? 'Edit' : index == 1? 'Add Room': index == 2? 'Add Photos' : 'Add final details',style: GoogleFonts.montserrat(
                         color:index == 0? Colors.deepPurpleAccent :  index == 3? Colors.grey :index == 2? Colors.white : Colors.black,
@@ -95,9 +100,16 @@ class Finalpage extends StatelessWidget {
           ],
         ),
       ),
-      ApartmentPage4(goToPage: 2, backToPage: 0, pageController: person.finalPagePageviewcontroller),
-      PropertyLocationPage(gotToNextPage: 0,goToBackPage: 1,pageController: person.finalPagePageviewcontroller),
-      ImageUploader(goToPage: 1, backToPage: 1, pageController: person.finalPagePageviewcontroller),
+      ApartmentPage3(goToPage: 2, backToPage: 0, pageController: person.finalPagePageviewcontroller),
+      ApartmentPage4(goToPage: 3, backToPage: 1, pageController: person.finalPagePageviewcontroller),
+      PropertyLocationPage(gotToNextPage: 4, goToBackPage: 2, pageController: person.finalPagePageviewcontroller),
+      PropertyDetailes(goToPage: 5, backToPage: 3, pageController: person.finalPagePageviewcontroller),
+      PropertyAminities(goToPage: 6, backToPage: 4, pageController: person.finalPagePageviewcontroller),
+      PropertyServices(goToPage: 7, backToPage: 5, pageController: person.finalPagePageviewcontroller),
+      StaffLanguageSelectionPart(goToPage: 8, backToPage: 6, pageController: person.finalPagePageviewcontroller),
+      PropertyRules(goToPage: 0, backToPage: 7, pageController: person.finalPagePageviewcontroller),
+      //
+      ImageUploader(goToPage: 0, backToPage: 0, pageController: person.finalPagePageviewcontroller),
     ],
   );    
   }

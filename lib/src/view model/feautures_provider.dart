@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/view/desktop/widgets/toast_message.dart';
 import 'package:intl/intl.dart';
 
 class FeaturesProvider extends ChangeNotifier {
@@ -29,7 +27,7 @@ class FeaturesProvider extends ChangeNotifier {
 
         if (difference > 27) {
           selectedDates.clear();
-          toastmessege("Hotels can't be Booked for a maximum of 28 Days.");
+          // toastmessege("Hotels can't be Booked for a maximum of 28 Days.");
         } else {
           // Add dates between the two selected dates to the list
           List<DateTime> betweenDates = [];

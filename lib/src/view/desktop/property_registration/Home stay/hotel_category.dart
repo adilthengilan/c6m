@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -5,10 +6,10 @@ import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 
-class HotelPage1 extends StatelessWidget {
+class HomestayCatogories extends StatelessWidget {
   final int goToPage;
   final PageController pageController;
-  const HotelPage1({super.key, required this.goToPage, required this.pageController});
+  const HomestayCatogories({super.key, required this.goToPage, required this.pageController});
 
   @override
   Widget build(BuildContext context) {
@@ -18,53 +19,36 @@ class HotelPage1 extends StatelessWidget {
 
     List<Map<String, String>> options = [
       {
-        'title': 'Homestay',
+        'title': 'Apartment',
         'description':
-            'A shared home where the guest has a private room and the host lives and is on site. Some facilities are shared between hosts and guests.'
+            'Furnished and self-catering accommodation available for short- and long-term rental'
       },
       {
         'title': 'Hostel',
         'description':
-            'Budget accommodations with mostly dorm-style beds and social atmosphere.'
-      },
-      {
-        'title': 'Condo hotel',
-        'description':
-            'Independent apartments with some hotel facilities like a front desk.'
-      },
-      {
-        'title': 'Capsule Hotel',
-        'description':
-            'Extremely small units or capsules offering cheap and basic overnight accommodations.'
-      },
-      {
-        'title': 'Country House',
-        'description':
-            'Private home in the countryside with simple accommodations.'
-      },
-      {
-        'title': 'Farm stay',
-        'description': 'Private farm with simple accommodations.'
-      },
-      {
-        'title': 'Bed and Breakfast',
-        'description':
-            'A small lodging establishment offering overnight accommodation and breakfast.'
-      },
-      {
-        'title': 'Motel',
-        'description': 'A roadside hotel designed primarily for motorists.'
+            'Free-standing home with private, external entrance and rented specifically for holidays'
       },
       {
         'title': 'Villa',
         'description':
-            'A luxurious country residence with spacious accommodations and amenities.'
+            'Private self-standing and self-catering home with luxury feel'
       },
       {
-        'title': 'Guest House',
-        'description': 'A private house offering accommodations to guests.'
+        'title': 'Aparthotel',
+        'description':
+            'A self-catering apartment with some hotel facilities like a reception desk'
+      },
+      {
+        'title': 'Chalet',
+        'description':
+            'Free-standing home characterised by sloped roof and rented specifically for holidays'
+      },
+      {
+        'title': 'Holiday park',
+        'description': 'Private self-catering residences located on a shared grounds with shared facilities or recreational activities'
       },
     ];
+
     return Padding(
       padding: EdgeInsets.only(left: width * 0.1),
       child: SingleChildScrollView(
@@ -82,7 +66,7 @@ class HotelPage1 extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(right: width * 0.11),
               child: GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   mainAxisExtent: height * 0.23,
@@ -93,67 +77,6 @@ class HotelPage1 extends StatelessWidget {
                 ),
                 itemCount: hotel.showMoreOptions ? options.length + 1 : 6,
                 itemBuilder: (context, index) {
-                  if (index == 5 && !hotel.showMoreOptions) {
-                    return GestureDetector(
-                      onTap: () {
-                        hotel.toggleMoreOptions();
-                      },
-                      child: CustomContainer(
-                        height: height * 0.03,
-                        width: width * 0.04,
-                        color: Colors.white,
-                        boxShadow: true,
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.arrow_drop_down,
-                                color: Colors.blueAccent,
-                              ),
-                              Text(
-                                'More options',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  } else if (index == options.length && hotel.showMoreOptions) {
-                    return GestureDetector(
-                      onTap: () {
-                        hotel.toggleMoreOptions();
-                      },
-                      child: CustomContainer(
-                        height: height * 0.03,
-                        width: width * 0.04,
-                        color: Colors.white,
-                        boxShadow: true,
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.arrow_drop_up_outlined,
-                                color: Colors.blueAccent,
-                              ),
-                              Text(
-                                'Less options',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  } else {
                     return Consumer<RegistrationProvider>(
                         builder: (context, hotel, child) => GestureDetector(
                             onTap: () {
@@ -190,7 +113,6 @@ class HotelPage1 extends StatelessWidget {
                               ),
                             )));
                   }
-                },
               ),
             ),
             SizedBox(height: height * 0.04),
@@ -271,7 +193,7 @@ class HotelPage1 extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   child: Container(
-                    height: height * 0.10,
+                    height: height * 0.07,
                     width: width * 0.07,
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.blue),
@@ -280,26 +202,34 @@ class HotelPage1 extends StatelessWidget {
                   ),
                 ),
                 sizedBox(height * 0.01, width * 0.01),
-                SizedBox(
-                  height: height * 0.07,
-                  width: width * 0.700,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: hotel.isStayCategoryOption
-                          ? const Color.fromARGB(255, 133, 64, 251)
-                          : Colors.grey.shade100,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                InkWell(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: height * 0.07,
+                    width: width * 0.700,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(06)),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: hotel.isStayCategoryOption
+                            ? const Color.fromARGB(255, 133, 64, 251)
+                            : Colors.grey.shade100,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
+                      onPressed: () {
+                        if (hotel.isStayCategoryOption) {
+                          hotel.goToPage(goToPage, pageController);
+                        }
+                      },
+                      child: Text('Continue',
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold)),
                     ),
-                    onPressed: () {
-                      if (hotel.isStayCategoryOption) {
-                        hotel.goToPage(goToPage,pageController);
-                      }
-                    },
-                    child: Text('Continue',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold)),
                   ),
                 ),
               ],

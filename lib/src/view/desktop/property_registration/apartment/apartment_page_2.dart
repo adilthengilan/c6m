@@ -34,7 +34,7 @@ class ApartmentPage2 extends StatelessWidget {
               color: Colors.blue),
               sizedbox(height * 0.1, 0.0),
               SizedBox(
-                width: width * 0.25,
+                width: width * 0.23,
                 child: Consumer<RegistrationProvider>(
                   builder: (context, person, child) => 
                   Text(person.numberofProperty > 1?  person.isSameAddress
@@ -71,6 +71,7 @@ class ApartmentPage2 extends StatelessWidget {
                   child: Text(i == 0? 'Continue' : 'No, I need to make a change ',style: i == 0? smallTextStylewhiteBold : smallTextStyleBold)),
                   ),
                 ),
+                sizedbox(height * 0.02, 0.0)
               ],
             ),
           )

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/view%20model/feautures_provider.dart';
-import 'package:flutter_application_1/src/view/desktop/dashboard/dashboard.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:tuch_trip_crms/src/view%20model/feautures_provider.dart';
+import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 
 bool isDarkMode = false;
 

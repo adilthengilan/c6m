@@ -8,10 +8,13 @@ import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 
 
 class ApartmentPage1 extends StatelessWidget {
+  final String stayPalceName;
   final int goToPage;
   final PageController pageController;
   const ApartmentPage1({super.key,
-   required this.goToPage, required this.pageController,
+  required this.goToPage,
+  required this.pageController,
+  required this.stayPalceName,
    });
 
 
@@ -30,7 +33,7 @@ class ApartmentPage1 extends StatelessWidget {
             SizedBox(
               width: width * 0.3,
               child: Text(
-                'How many apartments are you listing?',
+                'How many $stayPalceName are you listing?',
                 style: GoogleFonts.montserrat(
                   color: Colors.black,
                   fontWeight: FontWeight.w700,
@@ -70,7 +73,7 @@ class ApartmentPage1 extends StatelessWidget {
                           ),
                           SizedBox(width: width * 0.02),
                           Text(
-                            i == 0 ? 'One apartment' : 'Multiple apartments',
+                            i == 0 ? 'One $stayPalceName' : 'Multiple $stayPalceName',
                             style: smallTextStyle,
                           ),
                         ],
@@ -79,13 +82,22 @@ class ApartmentPage1 extends StatelessWidget {
                   ),
                 ),
               ),
-            person.numberofProperty > 1?
-            SizedBox(
-              child: Text(
-                'Are these properties in the same address or building?',
-                style: smallTextStyle,
+            Consumer<RegistrationProvider>(
+              builder: (context, value, child) => 
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  sizedBox(height * 0.02, width),
+                  person.numberofProperty > 1?
+                  SizedBox(
+                    child: Text(
+                      'Are these properties in the same address or building?',
+                      style: smallTextStyle,
+                    ),
+                  ) : const SizedBox(),
+                ],
               ),
-            ): const SizedBox(),
+            ),
             SizedBox(height: height * 0.02),
             Consumer<RegistrationProvider>(
               builder: (context, person, child) => Column(
@@ -122,8 +134,8 @@ class ApartmentPage1 extends StatelessWidget {
                             SizedBox(
                               width: width * 0.22,
                               child: Text(
-                                i == 0? 'Yes, these apartments are at the same address or building'
-                                    : 'No, these apartments are at different addresses or buildings',
+                                i == 0? 'Yes, these $stayPalceName are at the same address or building'
+                                    : 'No, these $stayPalceName are at different addresses or buildings',
                                 style: smallTextStyle,
                               ),
                             ),
@@ -184,7 +196,7 @@ class ApartmentPage1 extends StatelessWidget {
                 ],
               ): const SizedBox()
             ),
-            sizedBox(height * 0.04, 0.0),
+            sizedBox(height * 0.03, 0.0),
             Consumer<RegistrationProvider>(
              builder: (context, person, child) => 
              continueButton(
@@ -207,7 +219,7 @@ class ApartmentPage1 extends StatelessWidget {
 SizedBox continueButton(height, width, isDisabledButton, onPressed) {
   return SizedBox(
     height: height * 0.055,
-    width: width * 0.27,
+    width: width * 0.28,
     child: TextButton(
       style: TextButton.styleFrom(
           backgroundColor: isDisabledButton ? Colors.deepPurpleAccent : Colors.grey.shade100,
@@ -225,7 +237,7 @@ InkWell backButton(double height, double width,VoidCallback onPressed) {
       boxShadow: true,
       border: Border.all(color: Colors.grey.shade300),
       height: height * 0.055,
-      width: width * 0.06,
+      width: width * 0.05,
       color: Colors.white,
       child: const Center(
         child: Icon(Icons.keyboard_arrow_left),

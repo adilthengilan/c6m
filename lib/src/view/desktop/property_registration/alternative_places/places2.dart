@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/view%20model/registration_provider.dart';
-import 'package:flutter_application_1/src/view/desktop/dashboard/dashboard.dart';
-import 'package:flutter_application_1/src/view/desktop/widgets/custom_container.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
+import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
+import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 
 class Places2 extends StatelessWidget {
-  const Places2({super.key});
+  final int goToPage;
+  final int backToPage;
+  final PageController pageController;
+  const Places2({super.key, required this.goToPage, required this.backToPage,required this.pageController});
 
   @override
   Widget build(BuildContext context) {
@@ -158,38 +161,48 @@ class Places2 extends StatelessWidget {
             sizedBox(height * 0.05, width),
             Row(
               children: [
-                Container(
-                  height: height * 0.10,
-                  width: width * 0.07,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blue),
-                      borderRadius: BorderRadius.circular(06)),
-                  child: Icon(Icons.arrow_back_ios_new),
+                InkWell(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: height * 0.07,
+                    width: width * 0.07,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(06)),
+                    child: Icon(Icons.arrow_back_ios_new),
+                  ),
                 ),
                 sizedBox(height * 0.01, width * 0.01),
-                Container(
-                  height: height * 0.10,
-                  width: width * 0.700,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(06)),
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: hotel.isOptionSelected
-                          ? const Color.fromARGB(255, 133, 64, 251)
-                          : Colors.grey.shade100,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                InkWell(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: height * 0.07,
+                    width: width * 0.700,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(06)),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: hotel.isStayCategoryOption
+                            ? const Color.fromARGB(255, 133, 64, 251)
+                            : Colors.grey.shade100,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
+                      onPressed: () {
+                        if (hotel.isStayCategoryOption) {
+                          hotel.goToPage(goToPage, pageController);
+                        }
+                      },
+                      child: Text('Continue',
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold)),
                     ),
-                    onPressed: () {
-                      if (hotel.isOptionSelected) {
-                        hotel.goTonextPage(2);
-                      }
-                    },
-                    child: Text('Continue',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold)),
                   ),
                 ),
               ],
@@ -200,36 +213,4 @@ class Places2 extends StatelessWidget {
       ),
     );
   }
-}
-
-SizedBox continueButton(height, width, isDisabledButton, onPressed) {
-  return SizedBox(
-    height: height * 0.055,
-    width: width * 0.27,
-    child: TextButton(
-      style: TextButton.styleFrom(
-          backgroundColor:
-              isDisabledButton ? Colors.grey.shade100 : Colors.deepPurpleAccent,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-      onPressed: onPressed,
-      child: Text('Continue', style: smallTextStylewhiteBold),
-    ),
-  );
-}
-
-InkWell backButton(double height, double width, VoidCallback onPressed) {
-  return InkWell(
-    onTap: onPressed,
-    child: CustomContainer(
-      boxShadow: true,
-      border: Border.all(color: Colors.grey.shade300),
-      height: height * 0.055,
-      width: width * 0.06,
-      color: Colors.white,
-      child: const Center(
-        child: Icon(Icons.keyboard_arrow_left),
-      ),
-    ),
-  );
 }

@@ -32,7 +32,7 @@ class ApartmentPage4 extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                       sizedBox(height * 0.03, 0.0),
-                      Text("What's the name of your place?",style: largeTextStyleBold),
+                      Text("Where is the property you're listing?",style: largeTextStyleBold),
                       sizedBox(height * 0.02, 0.0),
                       SizedBox(
                         width: width  * 0.3,

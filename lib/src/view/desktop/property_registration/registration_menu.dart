@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/view/desktop/dashboard/dashboard.dart';
-import 'package:flutter_application_1/src/view/desktop/property_registration/Home%20stay/home_stay.dart';
-import 'package:flutter_application_1/src/view/desktop/property_registration/Hotel/Hotels.dart';
-import 'package:flutter_application_1/src/view/desktop/property_registration/alternative_places/alternative_places.dart';
-import 'package:flutter_application_1/src/view/desktop/property_registration/apartment/apartmnet.dart';
-import 'package:flutter_application_1/src/view/desktop/widgets/custom_container.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/alternative_place.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/Home%20stay/home_stay.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/Hotel/Hotels.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/alternative_places/alternative_places.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/homestay.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/hotel.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 
 class PropertyRegistrationMenu extends StatelessWidget {

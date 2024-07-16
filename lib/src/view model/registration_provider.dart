@@ -3,17 +3,22 @@ import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RegistrationProvider extends ChangeNotifier {
   TextEditingController numberofPropertycontroller = TextEditingController();
   PageController apartmentPagecontroller = PageController();
   PageController finalPagePageviewcontroller = PageController();
+  PageController ratePlansPageviewController = PageController();
   //============================================================ Property Name & Type =============================================================-
   String propertyName = '';
   String propertyType = '';
   //============================================================ Multiple Property =================================================================
   int numberofProperty = 1;
   bool isSameAddress = true;
+  //============================================================ Property Place Category ============================================================
+  String? stayCategoryOption = '';
+
   //============================================================ Property Address ===================================================================
   String propertyCountry = '';
   String propertyStreetName = '';
@@ -46,8 +51,8 @@ class RegistrationProvider extends ChangeNotifier {
   int bedroomSofaBed = 0;
   int bedroomFutonMat = 0;
   //============================================================== Allow Children =====================================================================
-  bool isallowChildren = true;
-  bool allowCoats = true;
+  bool isallowChildren = false;
+  bool allowCoats = false;
   //============================================================== How many Guest Can Stay ========================================================================
   int guestCapacity = 1;
   int bathRoomCount = 0;
@@ -124,7 +129,18 @@ class RegistrationProvider extends ChangeNotifier {
   TextEditingController panNoController = TextEditingController();
   TextEditingController tradeNameController = TextEditingController();
   TextEditingController GsGSTINController = TextEditingController();
-
+  //=================================================================== Cancellation policies =============================================================
+  int freeCancelationButtonIndex = 0;
+  final List<String> days = ['1 day', '5 days', '14 days', '30 days'];
+  int freeCancellationDays = 1; // Variable to store the selected number of days
+  bool protectionAgainstAccidentalBookings = true;
+  //=================================================================== Price per group size ===============================================================
+  bool isPricePerGroupSizeEnabled = false;
+  TextEditingController disCountRateController = TextEditingController();
+  int discountPersentage = 0;
+  double totalForTwoGuests = 56778.00;
+  double totalForOneGuest = 56778.00;
+  //===================================================================
 
 //This Function will controlling page view, This function can easy to change the pages in the paview
   void goToPage(int page, pageviewController) {
@@ -398,6 +414,17 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  //================================================  /// Property Location =========================================================================
+  void launchMaps(String latitude, String longitude) async {
+    final url =
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   //================================================  /// Cooking and Cleaning =========================================================================
   void setKitchen(bool value) {
     kitchen = value;
@@ -494,7 +521,6 @@ class RegistrationProvider extends ChangeNotifier {
     } else {
       staffLanguagesList.add(language);
     }
-    print(staffLanguagesList);
     notifyListeners();
   }
 
@@ -510,13 +536,11 @@ class RegistrationProvider extends ChangeNotifier {
   }
 
   void setCheckOutFrom(String newValue) {
-    print('sssssssssssssssssssj');
     checkOutFrom = newValue;
     notifyListeners();
   }
 
   void setCheckOutUntil(String newValue) {
-    print('aaaaaaaaaaaaaaaaaaaaaaa');
     checkOutUntil = newValue;
     notifyListeners();
   }
@@ -531,7 +555,7 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-//============================================================== Property images ====================================================================
+//============================================================== Property Host ====================================================================
 
   void toggleProperty(bool value) {
     isshowProperty = value;
@@ -555,14 +579,14 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-//============================================================== Pets and Childrens Allowed or Not ================================================
+//=============================================================== Pets and Childrens Allowed or Not ================================================
 
   void setPetsAllowed(value) {
     isallowPets = value;
     notifyListeners();
   }
 
-//============================================================== Property images ====================================================================
+//================================================================ Property images ====================================================================
   Future<void> pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
 
@@ -595,31 +619,73 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-//================================================================== Partner verification ============================================================
+//================================================================= Partner verification ============================================================
   void setPartnerVerification(value) {
     ownershipType = value;
     notifyListeners();
   }
 
-//====================================================================== Goods & Services Tax = ==============================================================
+//================================================================== Goods & Services Tax ===============================================================
   void setGstPurpuse(value) {
     isGstPurpuse = value;
     notifyListeners();
   }
 
-  void setFourthCharecterOfPanHorP(value){
+  void setFourthCharecterOfPanHorP(value) {
     isFourthCharecterOfPanHorP = value;
     notifyListeners();
   }
 
-  ///===================================================Alternatives places----------------------------------
+//=================================================================== Cancellation policies =============================================================
+  void setCancellationPeriod(bool selected, int index) {
+    freeCancelationButtonIndex = selected ? index : freeCancelationButtonIndex;
+    freeCancellationDays =
+        int.parse(days[freeCancelationButtonIndex].split(' ')[0]);
+    notifyListeners();
+  }
+
+  void setBookingProtection(value) {
+    protectionAgainstAccidentalBookings = value;
+    notifyListeners();
+  }
+
+//=================================================================== Price per group size ===============================================================
+  void setPricePerGroupSizeEnabled(value) {
+    isPricePerGroupSizeEnabled = value;
+    notifyListeners();
+  }
+
+  void setDiscountRate(value) {
+    int newValue = int.tryParse(value) ?? 0;
+     print(newValue.runtimeType);
+    if (newValue >= 0 && newValue <= 100) {
+      discountPersentage = newValue;
+      totalForOneGuest = totalForOneGuest * discountPersentage /100;
+      notifyListeners();
+    }
+    notifyListeners();
+  }
+
+
+//====================================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+  ///===================================================Alternatives places----------------------------------------
 
   // Alternative places variables
   final PageController placesPageController = PageController();
   int propertyTypes = 0;
 
-  void nextPage(int pageIndex) {
-    placesPageController.jumpToPage(pageIndex);
+  void setStayCategoryOption(String value) {
+    stayCategoryOption = value;
+    print(stayCategoryOption);
     notifyListeners();
   }
 
@@ -628,15 +694,17 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  ///===================================================Hotels =============================================-
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+//============================================ Hotels ===========================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+  ///============================================================================================================
   final PageController hotelsPagecontroller = PageController();
   bool showMoreOptions = false;
-  String? selectedOption;
-
-  void goTonextPage(int pageIndex) {
-    placesPageController.jumpToPage(pageIndex);
-    notifyListeners();
-  }
 
   void toggleMoreOptions() {
     showMoreOptions = !showMoreOptions;
@@ -644,16 +712,29 @@ class RegistrationProvider extends ChangeNotifier {
   }
 
   void selectOption(String option) {
-    selectedOption = option;
+    stayCategoryOption = option;
     notifyListeners();
   }
 
-  bool get isOptionSelected => selectedOption != null;
+  bool get isStayCategoryOption => stayCategoryOption != null;
 
-//================================================= Home Stay ================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+//===============================================================================================================
+//================================================= Home Stay ===================================================
   final PageController homeStaycontroller = PageController();
   int selectedProperty = 0; // Default selection
-  
+  bool isEntirePlace = false;
+
+  void setStayTypeEntireOrPrivatePlace(value) {
+    isEntirePlace = value;
+    notifyListeners();
+  }
 
   void jumpPage(int pageIndex) {
     placesPageController.jumpToPage(pageIndex);
@@ -679,5 +760,4 @@ class RegistrationProvider extends ChangeNotifier {
   bool isAnyCheckboxSelected() {
     return selectedCheckboxes.contains(true);
   }
-
 }

@@ -19,6 +19,7 @@ class PropertyLocationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final person = Provider.of<RegistrationProvider>(context,listen: false);
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(left: width * 0.1),
@@ -39,11 +40,19 @@ class PropertyLocationPage extends StatelessWidget {
                   Text('Pin the location of your property',style: largeTextStyleBold),
                   sizedBox(height * 0.02, width),
                   Text("This is the location we'll show to guests on our site. Move the map to find the exact location of your property then click to drop the pin.",style: smallTextStyle),
-                  sizedBox(height * 0.06, 0.0),
-                  CustomContainer(
-                    boxShadow: true,
-                    width: width,
-                    height: height * 0.5,
+                  sizedBox(height * 0.04, 0.0),
+                  InkWell(
+                    onTap: (){
+                      person.launchMaps('37.7749', '-122.4194');
+                    },
+                    child: CustomContainer(
+                      boxShadow: false,
+                      width: width,
+                      height: height * 0.5,
+                      image: DecorationImage(
+                        fit : BoxFit.cover,
+                        image: AssetImage('assets/images/google map image.png')),
+                    ),
                   ),
                 ],
               ),

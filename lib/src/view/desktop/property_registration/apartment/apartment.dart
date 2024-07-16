@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
-import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_1.dart';
@@ -19,12 +16,10 @@ import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_location.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_rules.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_services.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/rate_plans.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/Rate_Planes/rate_plans.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/receive_bookings.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/staff_language_selection.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_menu.dart';
-import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
-import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 
 class Apartment extends StatelessWidget {
   const Apartment({super.key});
@@ -41,7 +36,7 @@ class Apartment extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         controller: person.apartmentPagecontroller,
         children: [
-          ApartmentPage1(goToPage: 1,pageController: person.apartmentPagecontroller),//page 1
+          ApartmentPage1(goToPage: 1,pageController: person.apartmentPagecontroller,stayPalceName: 'apartments'),//page 1
           ApartmentPage2(goToPage: 2,pageController: person.apartmentPagecontroller),//page 2
           ApartmentPage3(goToPage: 3, backToPage: 1,pageController: person.apartmentPagecontroller),//page 3
           ApartmentPage4(goToPage: 4, backToPage: 2,pageController: person.apartmentPagecontroller),//page 4

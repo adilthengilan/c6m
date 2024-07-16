@@ -6,8 +6,8 @@ import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_1.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_detailes.dart';
-import 'package:tuch_trip_crms/src/view/desktop/widgets/custom_textfield.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
+import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 
 class GoodsandServicesTsx extends StatelessWidget {
   final int goToPage;

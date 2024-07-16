@@ -251,7 +251,7 @@ class PropertyDetailes extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: height * 0.025, horizontal: width * 0.02),
               color: Colors.white,
               child:  Column(
-                children: List.generate(2, (index) => 
+                children: List.generate(person.isallowChildren ? 2 : 1, (index) => 
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -268,7 +268,7 @@ class PropertyDetailes extends StatelessWidget {
                           Consumer<RegistrationProvider>(
                             builder: (context, consumer, child) => 
                             RadioButtons(groupValue: index== 0? consumer.isallowChildren :consumer.allowCoats, 
-                            onChanged1 :index== 0? (value) {
+                            onChanged1 : index== 0? (value) {
                               consumer.setingAllowChildren(value);
                             }:(value) {
                               consumer.setAllowCoats(value);
