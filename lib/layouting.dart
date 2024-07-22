@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:tuch_trip_crms/src/layout_builder.dart';
 import 'package:tuch_trip_crms/src/view/desktop/desktop_view.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class Layouting extends StatefulWidget {
+  const Layouting({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Layouting> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<Layouting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

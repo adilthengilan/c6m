@@ -2,12 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-void toastmessege(messege) {
+void toastmessege(messege,textcolor) {
   Fluttertoast.showToast(
     msg: messege,
-    timeInSecForIosWeb: 4,
-    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 2,
+    gravity: ToastGravity.TOP,
     backgroundColor: Colors.white,
-    // textColor: isDarkMode? backgroundColor : primarycolor
+    textColor: textcolor,
+    webBgColor: "linear-gradient(to right, #FFFFFF, #FFFFFF)",
   );
 }

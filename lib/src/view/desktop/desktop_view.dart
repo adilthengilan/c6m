@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:tuch_trip_crms/src/db_connecting.dart';
 import 'package:tuch_trip_crms/src/view%20model/dashboard_provider.dart';
+import 'package:tuch_trip_crms/src/view/desktop/Account_Registration/account_registration.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Concierge/concrierge.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Guests/guest.dart';
-import 'package:tuch_trip_crms/src/view/desktop/Login/login_screen.dart';
 import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/new_booking.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/alternative_places/alternative_places.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_menu.dart';
 import 'package:tuch_trip_crms/src/view/desktop/rooms/rooms.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
@@ -24,14 +24,14 @@ class DesktopView extends StatefulWidget {
 class _DesktopViewState extends State<DesktopView> {
   @override
   Widget build(BuildContext context) {
-    return const HomePage();
+    return const AccountRegistrationScreen();
   }
 }
 
 ///////////==============================================================================================================
 ///////////==============================================================================================================
-TextEditingController searchController = TextEditingController();
 ///////////==============================================================================================================
+TextEditingController searchController = TextEditingController();
 TextEditingController occupentCheckInFirstNameController = TextEditingController();
 TextEditingController occupentChecInkLastNameController = TextEditingController();
 TextEditingController occupentCheckInMobileNumberController = TextEditingController();
@@ -49,9 +49,13 @@ class HomePage extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final dashboardProvider = Provider.of<DashboardProvider>(context);
+    // final dbconnection = Provider.of<DBConnecting>(context);
+    // print(dbconnection.token);
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const AppAppBar(pageName: true,),
+      appBar: const AppAppBar(
+        pageName: true,
+      ),
       drawerEnableOpenDragGesture: true,
       body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -66,27 +70,22 @@ class HomePage extends StatelessWidget {
                         ? const NewBookings()
                         : dashboardProvider.navigationButtonsSelectedIndex == 3
                             ? const GuestManagementScreen()
-                            : Concrierge()
+                            : const Concrierge()
           ],
         ),
       ),
     );
   }
-  
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////// Dashboard App Bar ////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //=================================== Navigation Menu Buttons on The side of Screen =======================================
 //=========================================================================================================================
 //==================== DashBoard ======= Room ======= Booking ========= Guest ========= Settings ==========================
-//=========================================================================================================================
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   Container navigationSideButtons(double height, double width) {
     return Container(
-      height: height * 2,
-      width: width * 0.18,
-      color: Colors.white,
+      width: width * 0.17,
+      color: Colors.grey.shade50,
       child: Padding(
         padding: EdgeInsets.only(top: height * 0.02),
         child: Column(
@@ -127,57 +126,59 @@ class HomePage extends StatelessWidget {
                 ),
                 child: Consumer<DashboardProvider>(
                   builder: (context, person, child) => GestureDetector(
-                    onTap: () {
-                      person.setSelectedButtonIndex(index);
-                    },
-                    child: CustomContainer(
-                      height: height * 0.065,
-                      width: width * 0.15,
-                      padding: EdgeInsets.symmetric(horizontal: width * 0.015),
-                      borderRadius: BorderRadius.circular(15),
-                      gradiantColors:
-                          index == person.navigationButtonsSelectedIndex
-                              ? [
-                                  Colors.purple.shade500,
-                                  Colors.purple.shade300,
-                                ]
-                              : [
-                                  Colors.white,
-                                  Colors.white,
-                                ],
-                      boxShadow: index == person.navigationButtonsSelectedIndex
-                          ? true
-                          : false,
-                      child: Row(
-                        mainAxisAlignment:
-                            index == person.navigationButtonsSelectedIndex
-                                ? MainAxisAlignment.center
-                                : MainAxisAlignment.start,
-                        children: [
-                          Icon(
-                            buttons[index]['icon'] as IconData,
-                            color:
+                          onTap: () {
+                            person.setSelectedButtonIndex(index);
+                          },
+                          child: CustomContainer(
+                            height: height * 0.065,
+                            width: width * 0.15,
+                            padding: EdgeInsets.only(left: width * 0.01),
+                            borderRadius: BorderRadius.circular(15),
+                            gradiantColors:
                                 index == person.navigationButtonsSelectedIndex
-                                    ? Colors.white
-                                    : Colors.black,
-                          ),
-                          sizedBox(
-                              0.0,
-                              index == person.navigationButtonsSelectedIndex
-                                  ? width * 0.012
-                                  : width * 0.02),
-                          Text(
-                            buttons[index]['text'] as String,
-                            style:
+                                    ? [
+                                        Colors.purple.shade500,
+                                        Colors.purple.shade300,
+                                      ]
+                                    : [
+                                        Colors.grey.shade50,
+                                        Colors.grey.shade50,
+                                      ],
+                            boxShadow:
                                 index == person.navigationButtonsSelectedIndex
-                                    ? smallTextStylewhite
-                                    : smallTextStyle,
+                                    ? true
+                                    : false,
+                            child: Row(
+                              mainAxisAlignment:
+                                  index == person.navigationButtonsSelectedIndex
+                                      ? MainAxisAlignment.center
+                                      : MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  buttons[index]['icon'] as IconData,
+                                  color: index ==
+                                          person.navigationButtonsSelectedIndex
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                                sizedBox(
+                                  0.0,
+                                  index == person.navigationButtonsSelectedIndex
+                                      ? width * 0.012
+                                      : width * 0.02,
+                                ),
+                                Text(
+                                  buttons[index]['text'] as String,
+                                  style: index ==
+                                          person.navigationButtonsSelectedIndex
+                                      ? smallTextStylewhite
+                                      : smallTextStyle,
+                                ),
+                                sizedBox(0.0, width * 0.01)
+                              ],
+                            ),
                           ),
-                          sizedBox(0.0, width * 0.01)
-                        ],
-                      ),
-                    ),
-                  ),
+                        ),
                 ),
               );
             },
@@ -188,6 +189,12 @@ class HomePage extends StatelessWidget {
   }
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////// This AppBar using in DashBoard It has Owr Logo, notification buttons, listing hotels, Profile //////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool pageName;
   const AppAppBar({super.key, required this.pageName});
@@ -204,31 +211,34 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         children: [
           SizedBox(
-            width: width * 0.18,
+            width: width * 0.17,
             child: Text('Tuchtrip', style: largeTextStyleBold),
           ),
-          pageName?
-          SizedBox(
-            width: width * 0.15,
-            child: Consumer<DashboardProvider>(
-              builder: (context, person, child) => Text(
-                person.navigationButtonsSelectedIndex == 0
-                    ? 'Dashboard'
-                    : person.navigationButtonsSelectedIndex == 1
-                        ? 'Room'
-                        : person.navigationButtonsSelectedIndex == 2
-                            ? 'Booking'
-                            : person.navigationButtonsSelectedIndex == 3
-                                ? 'Guest'
-                                : 'Concierge',
-                style: GoogleFonts.montserrat(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
+          pageName
+              ? SizedBox(
+                  width: width * 0.15,
+                  child: Consumer<DashboardProvider>(
+                    builder: (context, person, child) => Text(
+                      person.navigationButtonsSelectedIndex == 0
+                          ? 'Dashboard'
+                          : person.navigationButtonsSelectedIndex == 1
+                              ? 'Room'
+                              : person.navigationButtonsSelectedIndex == 2
+                                  ? 'Booking'
+                                  : person.navigationButtonsSelectedIndex == 3
+                                      ? 'Guest'
+                                      : 'Concierge',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox(
+                  width: width * 0.15,
                 ),
-              ),
-            ),
-          ): SizedBox(width: width * 0.15,),
           SizedBox(width: width * 0.06),
         ],
       ),
@@ -311,18 +321,25 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             backgroundColor: Colors.transparent,
           ),
-          onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PropertyRegistrationMenu()));
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const PropertyRegistrationMenu()));
           },
-           label: Text('Enroll Your Property',style: smallTextStyle),
-           icon: Icon(Icons.apartment_outlined,
-           color: Colors.lightBlueAccent.shade100,
+          label: Text('Enroll Your Property', style: smallTextStyle),
+          icon: Icon(
+            Icons.apartment_outlined,
+            color: Colors.lightBlueAccent.shade100,
           ),
         ),
         sizedBox(0.0, width * 0.02),
         InkWell(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const AccountRegistrationScreen()));
           },
           child: Row(
             children: [
@@ -337,27 +354,58 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
                   image: AssetImage('assets/images/profile image.png'),
                 ),
               ),
-            SizedBox(width: width * 0.01),
-            SizedBox(
-            height: height * 0.06,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Receptionist', style: smallTextStyleBold),
-                Text('John Deo', style: smallTextStyle),
-              ],
-            ),
-          ),
-          SizedBox(width: width * 0.02),
+              SizedBox(width: width * 0.01),
+              SizedBox(
+                height: height * 0.06,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Receptionist', style: smallTextStyleBold),
+                    Text('John Deo', style: smallTextStyle),
+                  ],
+                ),
+              ),
+              SizedBox(width: width * 0.02),
             ],
           ),
         ),
-        
       ],
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////// Shimmer widget //////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class LoadingWidget extends StatelessWidget {
+  final double height;
+  final double width;
+  const LoadingWidget({
+    super.key,
+    required this.height,
+    required this.width,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade200,
+      highlightColor: Colors.grey.shade50,
+      child: CustomContainer(
+        height: height,
+        width: width,
+        borderRadius: BorderRadius.circular(15),
+        gradiantColors: [
+          Colors.grey.shade200,
+          Colors.grey.shade50,
+        ],
+        boxShadow: false,
+      ),
+    );
+  }
 }

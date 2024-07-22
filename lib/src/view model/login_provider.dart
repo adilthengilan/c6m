@@ -1,66 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:tuch_trip_crms/src/view/desktop/Login/login_screen.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginProvider extends ChangeNotifier {
-  String _employeeId = '';
-  String _department = 'Reception';
-  String _password = '';
-  bool _keepLoggedIn = false;
+  PageController accountRegistrationPage = PageController();
+  TextEditingController mobileNumberController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
-  String get employeeId => _employeeId;
-  String get department => _department;
-  String get password => _password;
-  bool get keepLoggedIn => _keepLoggedIn;
+  bool isVisiblePassword = true;
 
-  void updateEmployeeId(String id) {
-    _employeeId = id;
+  //This Function for Login and Sign up pas password Obscure or Not Boolean setti =ng
+  void showPassword() {
+    isVisiblePassword = !isVisiblePassword;
     notifyListeners();
   }
 
-  void updateDepartment(String dept) {
-    _department = dept;
-    notifyListeners();
-  }
-
-  void updatePassword(String pass) {
-    _password = pass;
-    notifyListeners();
-  }
-
-  void toggleKeepLoggedIn(bool value) {
-    _keepLoggedIn = value;
-    notifyListeners();
-  }
-
-  PageController pageController = PageController();
-  int currentPage = 0;
-  // get started Screen Images
-  final List<String> getStartedImage = [
-    "assets/images/get_started_image_1.png",
-    "assets/images/get_started_image_2.png",
-    "assets/images/get_started_image_3.png",
-  ];
-// This function for Moving to Next Image, if
-  void moveToNextImage(context) {
-    if (currentPage < getStartedImage.length - 1) {
-      currentPage++;
+  //This function Go to Next Page 
+  void goToPage(int page, PageController pageController, isTrue) {
+    if (isTrue) {
       pageController.animateToPage(
-        currentPage,
-        duration: Duration(milliseconds: 500),
-        curve: Curves.linear,
-      );
-    } else {
-      // Go to the Login Screen screen after all images
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LoginScreen(),
-        ),
-        (route) => false,
+        page,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
       );
     }
+  }
+
+  // Clearing All Controllers
+  void clearControllers(){
+    userNameController.clear();
+    mobileNumberController.clear();
+    emailController.clear();
+    passwordController.clear();
     notifyListeners();
+  }
+
+  // Navigating to Gmail Inbox
+   void navigateToGmail() async {
+    const url ='https://mail.google.com/mail/u/1/#inbox';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
 

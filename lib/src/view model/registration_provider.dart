@@ -904,6 +904,9 @@ bool isIndividual = true;
 
 
   void addApartmnetList() {
+
+
+    
     final apartment = {
       'property_Name': propertyName,
       'isEntirePlace': isEntirePlace,
@@ -972,8 +975,7 @@ bool isIndividual = true;
       'tradeNameController': tradeNameController,
       'GsGSTINController': GsGSTINController,
       'freeCancellationDays': freeCancellationDays,
-      'isprotectionAgainstAccidentalBookings':
-          isprotectionAgainstAccidentalBookings,
+      'isprotectionAgainstAccidentalBookings':isprotectionAgainstAccidentalBookings,
       'discountPersentage': discountPersentage,
       'totalForOneGuest': totalForOneGuest,
       'aboutThePropertyController': aboutThePropertyController,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DashboardProvider extends ChangeNotifier{ 
+
   int navigationButtonsSelectedIndex = 0;
   
 
@@ -9,3 +10,5 @@ class DashboardProvider extends ChangeNotifier{
     notifyListeners();
   }
 }
+
+bool isLoading = false;

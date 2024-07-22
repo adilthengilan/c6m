@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/alternative_places/alternative_places.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/Rate_Planes/cancelation_policy.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/Rate_Planes/non_refundable.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/Rate_Planes/price_per_group.dart';
