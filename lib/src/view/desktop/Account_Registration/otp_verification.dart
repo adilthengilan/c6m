@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/db_connecting.dart';
 import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
+import 'package:tuch_trip_crms/src/view/desktop/desktop_view.dart';
 
 class OTPVerification extends StatelessWidget {
   const OTPVerification({super.key});
@@ -69,7 +70,7 @@ class OTPVerification extends StatelessWidget {
               await Future.delayed(const Duration(milliseconds: 300));
               if (dBase.isVerifyOTP) {
               // Call the function to navigate to the next Screen
-              login.goToPage(2,login.accountRegistrationPage,dBase.isVerifyOTP);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage()));
               // Clear the controllers
               login.clearControllers();
               // Exit the loop

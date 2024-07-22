@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:tuch_trip_crms/src/db_connecting.dart';
 import 'package:tuch_trip_crms/src/view%20model/dashboard_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Account_Registration/account_registration.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Concierge/concrierge.dart';
@@ -24,7 +23,7 @@ class DesktopView extends StatefulWidget {
 class _DesktopViewState extends State<DesktopView> {
   @override
   Widget build(BuildContext context) {
-    return const AccountRegistrationScreen();
+    return const ();
   }
 }
 
