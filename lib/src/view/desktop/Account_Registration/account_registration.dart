@@ -36,7 +36,7 @@ class AccountRegistrationScreen extends StatelessWidget {
                             children: const [
                               SignUpScreen(),
                               OTPVerification(),
-                              // LoginScreen(),
+                              LoginScreen(),
                             ],
                           ),
                         ),

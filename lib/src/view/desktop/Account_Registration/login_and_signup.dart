@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/db_connecting.dart';
 import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
+import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/desktop_view.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -164,6 +165,20 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                sizedbox(height * 0.04, width),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Already have an account?",style: smallTextStyle),
+                    sizedbox(0.0, width * 0.003),
+                    InkWell(
+                      onTap: (){
+                        login.goToPage(2, login.accountRegistrationPage, true);
+                      },
+                      child: Text('Login',style: GoogleFonts.montserrat(color: Colors.blue,fontSize: 14),),
+                    )
+                  ],
+                ),
               ],
             ),
           ),
@@ -298,6 +313,20 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
           ),
+          sizedbox(height * 0.04, width),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don't have an account?",style: smallTextStyle),
+                    sizedbox(0.0, width * 0.003),
+                    InkWell(
+                      onTap: (){
+                        login.goToPage(0, login.accountRegistrationPage, true);
+                      },
+                      child: Text('Sign Up',style: GoogleFonts.montserrat(color: Colors.blue,fontSize: 14),),
+                    )
+                  ],
+                ),
         ],
       ),
     );
