@@ -12,9 +12,9 @@ import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/rooms_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/guest_management_provider.dart';
 
-
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
+  
 }
 
 class MyApp extends StatelessWidget {

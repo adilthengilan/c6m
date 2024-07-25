@@ -18,6 +18,7 @@ class NewBookings extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildHeader(context, bookingProvider, height, width),
@@ -31,6 +32,7 @@ class NewBookings extends StatelessWidget {
 
   Widget _buildHeader(context, bookingProvider, height, width) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
@@ -68,8 +70,7 @@ class NewBookings extends StatelessWidget {
     );
   }
 
-  Widget _buildActionButton(BuildContext context, String label, IconData icon,
-      Color color, VoidCallback onPressed) {
+  Widget _buildActionButton(BuildContext context, String label, IconData icon, Color color, VoidCallback onPressed) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(

@@ -18,11 +18,8 @@ class AccountRegistrationScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Consumer<DBConnecting>(
         builder: (context, dbconnection, child) { 
-          return dbconnection.isLoading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : Column(
+          return !dbconnection.isLoading
+            ? Column(
                 children: [
                   Row(
                     children: [
@@ -34,9 +31,9 @@ class AccountRegistrationScreen extends StatelessWidget {
                             physics: const NeverScrollableScrollPhysics(),
                             controller: login.accountRegistrationPage,
                             children: const [
+                              LoginScreen(),
                               SignUpScreen(),
                               OTPVerification(),
-                              LoginScreen(),
                             ],
                           ),
                         ),
@@ -104,6 +101,8 @@ class AccountRegistrationScreen extends StatelessWidget {
                     ],
                   ),
                 ],
+              ): const Center(
+                child: CircularProgressIndicator(),
               );
             },
       ),

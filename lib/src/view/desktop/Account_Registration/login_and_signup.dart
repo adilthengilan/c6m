@@ -173,7 +173,7 @@ class SignUpScreen extends StatelessWidget {
                     sizedbox(0.0, width * 0.003),
                     InkWell(
                       onTap: (){
-                        login.goToPage(2, login.accountRegistrationPage, true);
+                        login.goToPage(0, login.accountRegistrationPage, true);
                       },
                       child: Text('Login',style: GoogleFonts.montserrat(color: Colors.blue,fontSize: 14),),
                     )
@@ -283,7 +283,9 @@ class LoginScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const HomePage()));
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
                   // Clear the controllers
                   login.clearControllers();
                   // Exit the loop
@@ -321,10 +323,14 @@ class LoginScreen extends StatelessWidget {
                     sizedbox(0.0, width * 0.003),
                     InkWell(
                       onTap: (){
-                        login.goToPage(0, login.accountRegistrationPage, true);
+                        login.goToPage(1, login.accountRegistrationPage, true);
                       },
-                      child: Text('Sign Up',style: GoogleFonts.montserrat(color: Colors.blue,fontSize: 14),),
-                    )
+                      child: Text('Sign Up',
+                      style: GoogleFonts.montserrat(
+                        color: Colors.blue,fontSize: 14,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
         ],

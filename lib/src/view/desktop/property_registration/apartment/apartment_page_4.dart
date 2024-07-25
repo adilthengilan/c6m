@@ -52,31 +52,79 @@ class ApartmentPage4 extends StatelessWidget {
                           Text(index == 0? 'Country/region' : index == 1? 'Street name and house number' : index == 2? 'Post Code' : 'City',style: smallTextStyle),
                           sizedBox(height * 0.01, 0.0),
                           SizedBox(
-                            height: height * 0.055,
-                            width: index == 2 ? width * 0.1 : width,
-                            child: Consumer<RegistrationProvider>(
-                                builder: (context, person, child) => 
-                                CustomTextField(
-                                  labelText: '', 
-                                  onChanged: 
-                                  index == 0 ? (country) {
-                                    person.setPropertyCountry(country);
-                                  }: 
-                                  index == 1? (street) {
-                                    person.setPropertyStreet(street);
-                                  }: 
-                                  index == 2? (postCode) {
-                                    person.setPropertyPostCode(postCode);
-                                  }:
-                                   (city) {
-                                    person.setPropertyCity(city);
-                                   }, 
-                                  borderRadius: 10,
-                                  borderSide: const BorderSide(color: Colors.lightBlueAccent),
-                                  enabledBorder:  BorderSide(color: Colors.grey.shade300),
-                              ),
-                            ),
-                          ),
+      height: height * 0.08,
+      width: index == 2 ? width * 0.1 : width,
+      child: Consumer<RegistrationProvider>(
+        builder: (context, person, child) {
+          if (index == 0) {
+            return DropdownButtonFormField<String>(
+              dropdownColor: Colors.white,
+              value: person.propertyCountry.isNotEmpty
+                ? person.propertyCountry
+                : null,
+                borderRadius: BorderRadius.circular(10),
+              decoration:  InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade300
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10)
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade300
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10)
+                  ),
+                ),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                labelText: 'Select a country',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade300
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+              ),
+              items: countries.map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (newValue) {
+                person.setPropertyCountry(newValue!);
+              },
+            );
+          } else {
+            return CustomTextField(
+              labelText: index == 1 ? 'Enter Street Name or House NO' : index == 2? 'Enter Post code' : 'Enter City Name',
+              onChanged: (value) {
+                switch (index) {
+                  case 1:
+                    person.setPropertyStreet(value);
+                    break;
+                  case 2:
+                    person.setPropertyPostCode(value);
+                    break;
+                  default:
+                    person.setPropertyCity(value);
+                    break;
+                }
+              },
+              borderRadius: 10,
+              borderSide: const BorderSide(color: Colors.lightBlueAccent),
+              enabledBorder: BorderSide(color: Colors.grey.shade300),
+            );
+          }
+        },
+      ),
+    ),
                           sizedBox(height * 0.035, 0.0),
                         ]
                       ),
@@ -122,3 +170,201 @@ class ApartmentPage4 extends StatelessWidget {
     );
   }
 }
+
+List<String> countries = [
+    "Afghanistan",
+    "Albania",
+    "Algeria",
+    "Andorra",
+    "Angola",
+    "Antigua and Barbuda",
+    "Argentina",
+    "Armenia",
+    "Australia",
+    "Austria",
+    "Azerbaijan",
+    "Bahamas",
+    "Bahrain",
+    "Bangladesh",
+    "Barbados",
+    "Belarus",
+    "Belgium",
+    "Belize",
+    "Benin",
+    "Bhutan",
+    "Bolivia",
+    "Bosnia and Herzegovina",
+    "Botswana",
+    "Brazil",
+    "Brunei",
+    "Bulgaria",
+    "Burkina Faso",
+    "Burundi",
+    "Côte d'Ivoire",
+    "Cabo Verde",
+    "Cambodia",
+    "Cameroon",
+    "Canada",
+    "Central African Republic",
+    "Chad",
+    "Chile",
+    "China",
+    "Colombia",
+    "Comoros",
+    "Congo (Congo-Brazzaville)",
+    "Costa Rica",
+    "Croatia",
+    "Cuba",
+    "Cyprus",
+    "Czechia (Czech Republic)",
+    "Democratic Republic of the Congo",
+    "Denmark",
+    "Djibouti",
+    "Dominica",
+    "Dominican Republic",
+    "Ecuador",
+    "Egypt",
+    "El Salvador",
+    "Equatorial Guinea",
+    "Eritrea",
+    "Estonia",
+    "Eswatini (fmr. 'Swaziland')",
+    "Ethiopia",
+    "Fiji",
+    "Finland",
+    "France",
+    "Gabon",
+    "Gambia",
+    "Georgia",
+    "Germany",
+    "Ghana",
+    "Greece",
+    "Grenada",
+    "Guatemala",
+    "Guinea",
+    "Guinea-Bissau",
+    "Guyana",
+    "Haiti",
+    "Holy See",
+    "Honduras",
+    "Hungary",
+    "Iceland",
+    "India",
+    "Indonesia",
+    "Iran",
+    "Iraq",
+    "Ireland",
+    "Israel",
+    "Italy",
+    "Jamaica",
+    "Japan",
+    "Jordan",
+    "Kazakhstan",
+    "Kenya",
+    "Kiribati",
+    "Kuwait",
+    "Kyrgyzstan",
+    "Laos",
+    "Latvia",
+    "Lebanon",
+    "Lesotho",
+    "Liberia",
+    "Libya",
+    "Liechtenstein",
+    "Lithuania",
+    "Luxembourg",
+    "Madagascar",
+    "Malawi",
+    "Malaysia",
+    "Maldives",
+    "Mali",
+    "Malta",
+    "Marshall Islands",
+    "Mauritania",
+    "Mauritius",
+    "Mexico",
+    "Micronesia",
+    "Moldova",
+    "Monaco",
+    "Mongolia",
+    "Montenegro",
+    "Morocco",
+    "Mozambique",
+    "Myanmar (formerly Burma)",
+    "Namibia",
+    "Nauru",
+    "Nepal",
+    "Netherlands",
+    "New Zealand",
+    "Nicaragua",
+    "Niger",
+    "Nigeria",
+    "North Korea",
+    "North Macedonia",
+    "Norway",
+    "Oman",
+    "Pakistan",
+    "Palau",
+    "Palestine State",
+    "Panama",
+    "Papua New Guinea",
+    "Paraguay",
+    "Peru",
+    "Philippines",
+    "Poland",
+    "Portugal",
+    "Qatar",
+    "Romania",
+    "Russia",
+    "Rwanda",
+    "Saint Kitts and Nevis",
+    "Saint Lucia",
+    "Saint Vincent and the Grenadines",
+    "Samoa",
+    "San Marino",
+    "Sao Tome and Principe",
+    "Saudi Arabia",
+    "Senegal",
+    "Serbia",
+    "Seychelles",
+    "Sierra Leone",
+    "Singapore",
+    "Slovakia",
+    "Slovenia",
+    "Solomon Islands",
+    "Somalia",
+    "South Africa",
+    "South Korea",
+    "South Sudan",
+    "Spain",
+    "Sri Lanka",
+    "Sudan",
+    "Suriname",
+    "Sweden",
+    "Switzerland",
+    "Syria",
+    "Tajikistan",
+    "Tanzania",
+    "Thailand",
+    "Timor-Leste",
+    "Togo",
+    "Tonga",
+    "Trinidad and Tobago",
+    "Tunisia",
+    "Turkey",
+    "Turkmenistan",
+    "Tuvalu",
+    "Uganda",
+    "Ukraine",
+    "United Arab Emirates",
+    "United Kingdom",
+    "United States of America",
+    "Uruguay",
+    "Uzbekistan",
+    "Vanuatu",
+    "Venezuela",
+    "Vietnam",
+    "Yemen",
+    "Zambia",
+    "Zimbabwe",
+  ];
