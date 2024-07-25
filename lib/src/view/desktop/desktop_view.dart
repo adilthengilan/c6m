@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
@@ -37,7 +36,7 @@ class _DesktopViewState extends State<DesktopView> {
           context,
           MaterialPageRoute(
             builder: (context) => 
-            JobVacancy()
+            const JobPostingScreen(),
             // db.token != null?
                 //  const HomePage()
                 // : const AccountRegistrationScreen(),
@@ -416,7 +415,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
                   onChanged: (value) {
                     switch (value) {
                       case 'Post job vacancy':
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const JobVacancy()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const JobPostingScreen()));
                         break;
                       case 'settings':
                         print('Settings selected');

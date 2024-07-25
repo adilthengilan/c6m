@@ -8,8 +8,8 @@ import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 import 'package:tuch_trip_crms/src/view/widgets/show_dialoug.dart';
 
-class JobVacancy extends StatelessWidget {
-  const JobVacancy({super.key});
+class JobPostingScreen extends StatelessWidget {
+  const JobPostingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
