@@ -5,6 +5,7 @@ import 'package:tuch_trip_crms/src/db_connecting.dart';
 import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Account_Registration/login_and_signup.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Account_Registration/otp_verification.dart';
+import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 
 class AccountRegistrationScreen extends StatelessWidget {
   const AccountRegistrationScreen({super.key});
@@ -71,7 +72,7 @@ class AccountRegistrationScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              sizedbox(height * 0.05, width),
+                              sizedBox(height * 0.05, width),
                               Text(
                                 'Manage Your Hotel Efficiently',
                                 style: GoogleFonts.montserrat(
@@ -81,7 +82,7 @@ class AccountRegistrationScreen extends StatelessWidget {
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                              sizedbox(height * 0.01, width),
+                              sizedBox(height * 0.01, width),
                               SizedBox(
                                 width: width * 0.25,
                                 child: Text(
@@ -93,7 +94,7 @@ class AccountRegistrationScreen extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 ),
                               ),
-                              sizedbox(height * 0.05, width),
+                              sizedBox(height * 0.05, width),
                             ],
                           ),
                         ),

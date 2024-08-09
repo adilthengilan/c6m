@@ -165,12 +165,12 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                sizedbox(height * 0.04, width),
+                sizedBox(height * 0.04, width),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Already have an account?",style: smallTextStyle),
-                    sizedbox(0.0, width * 0.003),
+                    sizedBox(0.0, width * 0.003),
                     InkWell(
                       onTap: (){
                         login.goToPage(0, login.accountRegistrationPage, true);
@@ -315,12 +315,12 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
           ),
-          sizedbox(height * 0.04, width),
+          sizedBox(height * 0.04, width),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Don't have an account?",style: smallTextStyle),
-                    sizedbox(0.0, width * 0.003),
+                    sizedBox(0.0, width * 0.003),
                     InkWell(
                       onTap: (){
                         login.goToPage(1, login.accountRegistrationPage, true);

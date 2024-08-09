@@ -531,7 +531,7 @@ final mediumTextStyleBold = GoogleFonts.montserrat(
     fontSize: 20, color: Colors.black, fontWeight: FontWeight.w600);
 
 final smallTextStyle = GoogleFonts.montserrat(
-  fontSize: 13,
+  fontSize: 14,
   color: Colors.black,
   fontWeight: FontWeight.w500,
 );

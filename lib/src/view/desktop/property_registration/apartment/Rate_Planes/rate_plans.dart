@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
-import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/Rate_Planes/cancelation_policy.dart';
@@ -173,7 +172,7 @@ class RatePlans extends StatelessWidget {
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                sizedbox(height * 0.02, 0.0),
+                                sizedBox(height * 0.02, 0.0),
                                 for (int i = 0; i < 2; i++)
                                   Padding(
                                     padding: EdgeInsets.only(bottom: height * 0.02),
@@ -193,7 +192,7 @@ class RatePlans extends StatelessWidget {
                                   ),
                               ],
                             ),
-                            sizedbox(0.0, width * 0.04),
+                            sizedBox(0.0, width * 0.04),
                             Column(
                               children: [
                                 Text(
@@ -203,7 +202,7 @@ class RatePlans extends StatelessWidget {
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                sizedbox(height * 0.022, 0.0),
+                                sizedBox(height * 0.022, 0.0),
                                 for (int i = 0; i < 2; i++)
                                   Padding(
                                     padding: EdgeInsets.only(bottom: height * 0.03),
@@ -220,7 +219,7 @@ class RatePlans extends StatelessWidget {
                           ],
                         ),
                       ),
-                      sizedbox(height * 0.03, 0.0),
+                      sizedBox(height * 0.03, 0.0),
                     ],
                   ),
                 ),

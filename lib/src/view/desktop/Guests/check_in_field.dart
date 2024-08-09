@@ -126,45 +126,19 @@ class CheckInDialog extends StatelessWidget {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//-----------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------
-//-------------- Editing------------------------------------------------------------
-  Widget editing(height, width, controller) {
-    return AlertDialog(
-      backgroundColor: Colors.white,
-      title: Text(
-        'Edit',
-        style: GoogleFonts.poppins(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          color: Colors.black,
-        ),
-      ),
-      content: Container(
-        height: height * 0.90,
-        width: width * 0.350,
-        child: Column(
-          children: [
-            CustomContainer(
-              width: width * 0.250,
-              boxShadow: false,
-              child: CustomTextField(
-                labelText: "",
-                controller: controller, labelTextStyle: smallTextStyle,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Delete Dialogue /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DeleteFileDialog extends StatelessWidget {
-  const DeleteFileDialog({super.key});
+  final String heading;
+  final String messege;
+  final VoidCallback deleteTap;
+  
+  const DeleteFileDialog({
+    super.key, 
+    required this.heading, 
+    required this.messege, 
+    required this.deleteTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -177,17 +151,17 @@ class DeleteFileDialog extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       title: Text(
-        'Delete file permanently?',
+        heading,
         style: largeTextStyleBold
       ),
       content: SizedBox(
         height: height * 0.07,
-        width: width * 0.350,
+        width: width * 0.28,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'If you delete this file, you won\'t be able to recover it. Do you want to delete it?',
+              messege,
               style: smallTextStyle
             ),
             const Spacer(),
@@ -200,17 +174,19 @@ class DeleteFileDialog extends StatelessWidget {
                   child: InkWell(
                     onTap: index == 0? () {
                       Navigator.pop(context);
-                    }:
-                    (){
-                      Navigator.pop(context);
-                    },
+                    }: deleteTap,
                     child: CustomContainer(
-                      boxShadow: true,
-                      height: height * 0.028,
-                      width: width * 0.17,
-                      color: index == 0? Colors.white : Colors.redAccent,
+                      boxShadow: false,
+                      height: height * 0.026,
+                      width: width * 0.135,
+                      color: Colors.white,
+                      border: Border.all(color: index == 0? Colors.grey.shade400 :Colors.redAccent),
                       borderRadius: BorderRadius.circular(10),
-                      child: Center(child: Text(index == 0? 'Cancel':  'Delete',style: index== 0 ? smallTextStyle : smallTextStylewhite)),
+                      child: Center(
+                        child: Text(
+                          index == 0? 'Cancel':  'Delete',style: smallTextStyle,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -218,6 +194,98 @@ class DeleteFileDialog extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// Editing Show dialogue /////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class Editing extends StatelessWidget {
+  const Editing({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.width;
+    final TextEditingController _namecontroller = TextEditingController();
+    final List<String> items = [];
+
+    return AlertDialog(
+      backgroundColor: Colors.white,
+      title: Text(
+        'Edit',
+        style: GoogleFonts.poppins(
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: Colors.black,
+        ),
+      ),
+      content: Container(
+        width: width * 0.5,
+        height: height * 0.3,
+        child: Column(
+          children: [
+            CustomContainer(
+              boxShadow: false,
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(15),
+              child: CustomTextField(
+                labelText: "Date",
+                controller: _namecontroller,
+                labelTextStyle: smallTextStyle,
+              ),
+            ),
+            sizedBox(height * 0.01, width * 0.01),
+            _buildDropdownFormField('Rooms', ['Room 1', 'Room 2', 'Room 3']),
+            sizedBox(height * 0.01, width * 0.01),
+            _buildDropdownFormField('Adults', [' 1', '2', ' 3']),
+            sizedBox(height * 0.01, width * 0.01),
+            _buildDropdownFormField('Children', [' 1', '2', '3']),
+            sizedBox(height * 0.03, width),
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 170, vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.cyanAccent.shade400,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextButton(
+                onPressed: () {
+                  // Handle add booking
+                },
+                child: Text(
+                  'Edit',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDropdownFormField(String label, List<String> items) {
+    return Container(
+      child: DropdownButtonFormField<String>(
+        decoration: InputDecoration(
+          labelText: label,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+        ),
+        items: items.map((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+        onChanged: (String? newValue) {},
       ),
     );
   }

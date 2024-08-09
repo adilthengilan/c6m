@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_1.dart';
@@ -44,7 +43,7 @@ class GoodsandServicesTsx extends StatelessWidget {
                       width: width * 0.3,
                       child: const Text(
                           'Due to regulations established by the Indian government, we need the following details. By submitting this information, you are confirming that your PAN and state registration are accurate.')),
-                  sizedbox(height * 0.03, 0.0),
+                  sizedBox(height * 0.03, 0.0),
                   Text(
                     'Are you registered for GST purposes??',
                     style: GoogleFonts.montserrat(
@@ -53,7 +52,7 @@ class GoodsandServicesTsx extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                   ),
-                  sizedbox(height * 0.01, 0.0),
+                  sizedBox(height * 0.01, 0.0),
                   Consumer<RegistrationProvider>(
                     builder: (context, consumer, child) => RadioButtons(
                       groupValue: consumer.isGstPurpuse,
@@ -65,7 +64,7 @@ class GoodsandServicesTsx extends StatelessWidget {
                       },
                     ),
                   ),
-                  sizedbox(height * 0.03, 0.0),
+                  sizedBox(height * 0.03, 0.0),
                   Consumer<RegistrationProvider>(
                     builder: (context, consumer, child) => 
                     Visibility(
@@ -83,7 +82,7 @@ class GoodsandServicesTsx extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                 ),
                                ),
-                              sizedbox(height * 0.01, 0.0),
+                              sizedBox(height * 0.01, 0.0),
                             SizedBox(
                               height: height * 0.05,
                               child: CustomTextField(
@@ -97,7 +96,7 @@ class GoodsandServicesTsx extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            sizedbox(height * 0.02, 0.0),
+                            sizedBox(height * 0.02, 0.0),
                               ],
                             ),
                           ),
@@ -125,7 +124,7 @@ class GoodsandServicesTsx extends StatelessWidget {
                       ),
                     ),
                   ),
-                  sizedbox(height * 0.06, 0.0),
+                  sizedBox(height * 0.06, 0.0),
                   Text(
                     "Is the fourth character of your PAN a 'P' or an 'H'?",
                     style: GoogleFonts.montserrat(
@@ -149,7 +148,7 @@ class GoodsandServicesTsx extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          sizedbox(height * 0.03, 0.0),
+                          sizedBox(height * 0.03, 0.0),
                           Text(
                             'Enter your 12–digit Aadhaar number',
                             style: GoogleFonts.montserrat(
@@ -172,11 +171,11 @@ class GoodsandServicesTsx extends StatelessWidget {
                       ),
                     ),
                   ),
-                  sizedbox(height * 0.03, 0.0),
+                  sizedBox(height * 0.03, 0.0),
                 ],
               ),
             ),
-            sizedbox(height * 0.03, 0.0),
+            sizedBox(height * 0.03, 0.0),
             Row(
               children: [
                 backButton(

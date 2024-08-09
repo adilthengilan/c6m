@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:tuch_trip_crms/src/view%20model/availability_provider.dart';
-import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/Common%20widgets/common_widgets.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
@@ -56,7 +55,7 @@ class Availability extends StatelessWidget {
                           fontSize: 26,
                         ),
                       ),
-                      sizedbox(height * 0.03, width),
+                      sizedBox(height * 0.03, width),
                       Text("When is the first date that guests can check in?",
                           style: smallTextStyleBold),
                       SizedBox(height: height * 0.02),
@@ -141,7 +140,7 @@ class Availability extends StatelessWidget {
                 ),
               ),
             ),
-            sizedbox(height * 0.06, width),
+            sizedBox(height * 0.06, width),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Consumer<RegistrationProvider>(
@@ -163,17 +162,17 @@ class Availability extends StatelessWidget {
                           "To help you start earning, we automatically make your property available for bookings for up to 18 months – excluding the days you import marked as unavailable. You can manage your availability and make dates unavailable for bookings after registration.",
                           style: smallTextStyle,
                         ),
-                        sizedbox(height * 0.03, width),
+                        sizedBox(height * 0.03, width),
                         Text(
                           "Want to sync your availability with Airbnb?",
                           style: mediumTextStyleBold,
                         ),
-                        sizedbox(height * 0.02, width),
+                        sizedBox(height * 0.02, width),
                         Text(
                           "You'll avoid double bookings by syncing calendars. It will also help you get your property listed on TuchTrip.com and open for bookings 80% faster.",
                           style: GoogleFonts.montserrat(color: Colors.green),
                         ),
-                        sizedbox(height * 0.04, width),
+                        sizedBox(height * 0.04, width),
                         Column(
                           children: [
                             RadioListTile(
@@ -211,12 +210,12 @@ class Availability extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          sizedbox(height * 0.02, width),
+                                          sizedBox(height * 0.02, width),
                                           Text(
                                             "Paste your iCal link here",
                                             style: smallTextStyleBold,
                                           ),
-                                          sizedbox(height * 0.01, width),
+                                          sizedBox(height * 0.01, width),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -230,7 +229,7 @@ class Availability extends StatelessWidget {
                                                   height: height,
                                                 ),
                                               ),
-                                              sizedbox(
+                                              sizedBox(
                                                   height * 0.01, width * 0.01),
                                               CustomContainer(
                                                 height: height * 0.06,
@@ -294,7 +293,7 @@ class Availability extends StatelessWidget {
                                           color: Colors.greenAccent,
                                           size: 13,
                                         ),
-                                        sizedbox(height * 0.01, width * 0.01),
+                                        sizedBox(height * 0.01, width * 0.01),
                                         Text(
                                           "You can connect with a Channel Manager after your registration is complete\n – continue to the next step.",
                                           style: GoogleFonts.montserrat(
@@ -323,7 +322,7 @@ class Availability extends StatelessWidget {
                 );
               }),
             ),
-            sizedbox(height * 0.06, width),
+            sizedBox(height * 0.06, width),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomContainer(
@@ -345,17 +344,17 @@ class Availability extends StatelessWidget {
                           "Do you want to allow 30+ night stays?",
                           style: mediumTextStyleBold,
                         ),
-                        sizedbox(height * 0.02, width),
+                        sizedBox(height * 0.02, width),
                         Text(
                           "Allowing guests to stay for up to 90 nights can help you fill your calendar and tap into the trend of guests working remotely.",
                           style: smallTextStyle,
                         ),
-                        sizedbox(height * 0.04, width),
+                        sizedBox(height * 0.04, width),
                         Text(
                           "Will you accept reservations for stays over 30 nights?",
                           style: smallTextStyleBold,
                         ),
-                        sizedbox(height * 0.02, width),
+                        sizedBox(height * 0.02, width),
 
                         //======================================================= Radiao Buttons ====================================
                         RadioButtons(

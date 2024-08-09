@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
@@ -79,4 +78,6 @@ class ApartmentPage2 extends StatelessWidget {
       ),
     );
   }
+  
+  sizedbox(double d, double e) {}
 }

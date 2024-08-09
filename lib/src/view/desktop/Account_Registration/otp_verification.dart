@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/db_connecting.dart';
 import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
+import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/desktop_view.dart';
 
 class OTPVerification extends StatelessWidget {
@@ -30,7 +31,7 @@ class OTPVerification extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          sizedbox(height * 0.01, 0.0),
+          sizedBox(height * 0.01, 0.0),
           SizedBox(
             width: width * 0.21,
             child: RichText(
@@ -56,7 +57,7 @@ class OTPVerification extends StatelessWidget {
       ),
     ),
           ),
-          sizedbox(height * 0.06, 0.0),
+          sizedBox(height * 0.06, 0.0),
           OTPTextField(
             length: 4,
             onCompleted: (value) async {
@@ -81,7 +82,7 @@ class OTPVerification extends StatelessWidget {
             }
             },
           ),
-          sizedbox(height * 0.12, 0.0),
+          sizedBox(height * 0.12, 0.0),
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: width * 0.01,
@@ -111,7 +112,7 @@ class OTPVerification extends StatelessWidget {
               ),
             ),
           ),
-          sizedbox(height * 0.04, 0.0),
+          sizedBox(height * 0.04, 0.0),
           InkWell(
             onTap: () {},
             child: Text(

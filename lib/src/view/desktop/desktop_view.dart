@@ -11,7 +11,8 @@ import 'package:tuch_trip_crms/src/view/desktop/Concierge/concrierge.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Guests/guest.dart';
 import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/new_booking.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
-import 'package:tuch_trip_crms/src/view/desktop/job_vacancy/job_vacancy.dart';
+import 'package:tuch_trip_crms/src/view/desktop/job_vacancy/job_listing.dart';
+import 'package:tuch_trip_crms/src/view/desktop/job_vacancy/job_posting_screen.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_menu.dart';
 import 'package:tuch_trip_crms/src/view/desktop/rooms/rooms.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
@@ -36,11 +37,12 @@ class _DesktopViewState extends State<DesktopView> {
           context,
           MaterialPageRoute(
             builder: (context) => 
-            const JobPostingScreen(),
+            // const JobListingScreen(),
+            // const JobPostingScreen()
             // db.token != null?
-                //  const HomePage()
+                 const HomePage()
                 // : const AccountRegistrationScreen(),
-          ),
+          ), 
         );
       },
     );
@@ -400,8 +402,8 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
                       child: Text('Profile'),
                     ),
                     DropdownMenuItem(
-                      value: 'Post job vacancy',
-                      child: Text('Post job vacancy'),
+                      value: 'Jobs',
+                      child: Text('Jobs'),
                     ),
                     DropdownMenuItem(
                       value: 'settings',
@@ -414,8 +416,8 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ],
                   onChanged: (value) {
                     switch (value) {
-                      case 'Post job vacancy':
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const JobPostingScreen()));
+                      case 'Jobs':
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const JobListingScreen()));
                         break;
                       case 'settings':
                         print('Settings selected');
@@ -467,7 +469,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             ),
-            SizedBox(width: width * 0.02),
+            SizedBox(width: width * 0.005),
           ],
         ),
       ],
