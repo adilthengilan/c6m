@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_1.dart';
@@ -119,7 +118,7 @@ class CancelationPolicy extends StatelessWidget {
                               scale: 0.6,
                               child: Switch(
                                 trackOutlineColor: WidgetStatePropertyAll(Colors.grey.shade600),
-                                thumbColor: WidgetStatePropertyAll(Colors.white),
+                                thumbColor: const WidgetStatePropertyAll(Colors.white),
                                 activeTrackColor: Colors.blueAccent,
                                 inactiveThumbColor: Colors.white,
                                 value: person.isprotectionAgainstAccidentalBookings,
@@ -148,7 +147,7 @@ class CancelationPolicy extends StatelessWidget {
                 ],
               ),
             ),
-            sizedbox(height * 0.03, 0.0),
+            sizedBox(height * 0.03, 0.0),
             Row(
               children: [
                 InkWell(
@@ -165,9 +164,9 @@ class CancelationPolicy extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.keyboard_arrow_left),
+                          const Icon(Icons.keyboard_arrow_left),
                           SizedBox(width: width * 0.002),
-                          Text('Cancel'),
+                          const Text('Cancel'),
                           SizedBox(width: width * 0.003),
                         ],
                       ),

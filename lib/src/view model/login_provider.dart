@@ -47,9 +47,3 @@ class LoginProvider extends ChangeNotifier {
   }
 }
 
-Widget sizedbox(height, width) {
-  return SizedBox(
-    height: height,
-    width: width,
-  );
-}

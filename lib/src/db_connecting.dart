@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:tuch_trip_crms/src/view/widgets/toast_message.dart';
-
 
 class DBConnecting extends ChangeNotifier {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,7 +22,8 @@ class DBConnecting extends ChangeNotifier {
 
   bool isLogedIn = false;
   //This Variable can indicates the tocken of the user. we can get it by Login
-  dynamic token;
+  dynamic _token;
+  dynamic get token => _token;
   // This Loading Variable, when it true the loading is starts 
   bool isLoading = false;
   
@@ -47,17 +48,18 @@ class DBConnecting extends ChangeNotifier {
     if (response.statusCode == 200) {
 
       final responseData = json.decode(response.body);
-      toastmessege(responseData['msg'] != null ?'${responseData['msg']}' : '${responseData['error']}', responseData['msg'] != null ?Colors.green : Colors.red);
+      toastmessege(messege:responseData['msg'] != null ?'${responseData['msg']}' : '${responseData['error']}', textcolor: responseData['msg'] != null  ?Colors.green : Colors.red);
       if (responseData["msg"] == 'Admin registered successfully') {
           isLoading = false;
           isRegistered = true;
         }
+
     } else {
 
       if (response.headers['content-type']?.contains('application/json') ?? false) {
 
         final responseData = json.decode(response.body);
-        toastmessege(responseData['msg'] != null ? '${responseData['msg']}':'${responseData['error']}', responseData['msg'] != null ? Colors.green : Colors.red);
+        toastmessege(messege:responseData['msg'] != null ? '${responseData['msg']}':'${responseData['error']}', textcolor: responseData['msg'] != null ? Colors.green : Colors.red);
         isLoading = false;
         if (responseData["msg"] == 'Admin registered successfully') {
           isLoading = false;
@@ -65,14 +67,14 @@ class DBConnecting extends ChangeNotifier {
         }
       } else {
         isLoading = false;
-        toastmessege('Failed to register admin. Status code: ${response.statusCode}. Response: ${response.body}', Colors.red);
+        toastmessege(messege:'Failed to register admin. Status code: ${response.statusCode}. Response: ${response.body}', textcolor: Colors.red);
       }
     }
     
   } catch (e) {
     isLoading = false;
     print('Error occurred: $e');
-    toastmessege('An error occurred. Please try again.', Colors.red);
+    toastmessege(messege:'An error occurred. Please try again.', textcolor: Colors.red);
   }
   notifyListeners();
 }
@@ -101,13 +103,13 @@ class DBConnecting extends ChangeNotifier {
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
 
-        toastmessege(responseData['msg'] != null ?'${responseData['msg']}' : '${responseData['error']}', responseData['msg'] != null ?Colors.green : Colors.red);
+        toastmessege(messege:responseData['msg'] != null ?'${responseData['msg']}' : '${responseData['error']}', textcolor: responseData['msg'] != null ?Colors.green :Colors.red);
         print('Success: $responseData');
         isLoading = false;
 
         if (responseData['msg'] != null) {
 
-          token = responseData['token'];
+          _token = responseData['token'];
           isLoading = false;
           isVerifyOTP = true;
         }
@@ -116,25 +118,26 @@ class DBConnecting extends ChangeNotifier {
         if (response.headers['content-type']?.contains('application/json') ?? false) {
 
         final responseData = json.decode(response.body);
-        toastmessege(responseData['msg'] != null ?'${responseData['msg']}' : '${responseData['error']}', responseData['msg'] != null ?Colors.green : Colors.red);
+        toastmessege(messege:responseData['msg'] != null ?'${responseData['msg']}' : '${responseData['error']}', textcolor: responseData['msg'] != null? Colors.green : Colors.red);
         print('Response Data: $responseData');
         isLoading = false;
         if (responseData['msg'] != null) {
 
-          token = responseData['token'];
+          _token = responseData['token'];
           isVerifyOTP = true;
           isLoading = false;
           
         }
         } else {
         isLoading = false;
-        toastmessege('Failed to login. Status code: ${response.statusCode}. Response: ${response.body}', Colors.red);
+        toastmessege(messege:'Failed to login. Status code: ${response.statusCode}. Response: ${response.body}', textcolor: Colors.red);
         }
       }
+      saveToken(_token);
     } catch (e) {
       isLoading = false;
       print('Error occurred: $e');
-      toastmessege('An error occurred. Please try again.', Colors.red);
+      toastmessege(messege:'An error occurred. Please try again.', textcolor: Colors.red);
     }
     notifyListeners();
   }
@@ -164,50 +167,92 @@ class DBConnecting extends ChangeNotifier {
 
         if (responseData['msg'] == null) {
 
-        token = responseData['token'];
+        _token = responseData['token'];
         isLoading = false;
         isLogedIn = true;
 
         } else {
           isLoading = false;
-          toastmessege('${responseData['msg']}', Colors.red);
+          toastmessege(messege:'${responseData['msg']}', textcolor: Colors.red);
         } 
       } else {
 
         if (response.headers['content-type']?.contains('application/json') ?? false) {
 
         final responseData = json.decode(response.body);
-        token = responseData['token'];
-        toastmessege(responseData['msg'], Colors.red);
+        _token = responseData['token'];
+        toastmessege(messege:responseData['msg'], textcolor: Colors.red);
         isLoading = false;
-        
+
         if (responseData['msg'] == null) {
 
-        token = responseData['token'];
+        _token = responseData['token'];
         isLoading = false;
         isLogedIn = true;
 
         } else {
           isLoading = false;
-          toastmessege('${responseData['msg']}', Colors.red);
+          toastmessege(messege:'${responseData['msg']}', textcolor: Colors.red);
         } 
 
         } else {
         isLoading = false;
-        toastmessege('Failed to login. Status code: ${response.statusCode}. Response: ${response.body}', Colors.red);
+        toastmessege(messege:'Failed to login. Status code: ${response.statusCode}. Response: ${response.body}', textcolor: Colors.red);
         }
       }
-    }
-     catch (e) {
+      saveToken(_token);
+    } catch (e) {
       isLoading = false;
       print('Error occurred: $e');
-      toastmessege('An error occurred. Please try again.', Colors.red);
+      toastmessege(messege:'An error occurred. Please try again.', textcolor: Colors.red);
     }
     
     } else {
       isLoading = false;
-    toastmessege('Please enter your phone number and password correctly.', Colors.red);
+    toastmessege(messege:'Please enter your phone number and password correctly.', textcolor: Colors.red);
     }
     notifyListeners();
   }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////// Saving Token ///////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Future<void> saveToken(apiToken) async {
+  try {
+    localStorage.clear();
+    print(apiToken);
+      localStorage.setItem('token', apiToken);
+      print('Token saved successfully: $apiToken');
+  } catch (e) {
+    print('Error saving token: $e');
+  }
+}
+
+Future<void> getToken() async {
+  isLoading = true;
+  await initLocalStorage();
+    try {
+      _token = localStorage.getItem('token');
+        print('Retrieved token: $token');
+        isLoading = false;
+    } catch (e) {
+    isLoading = false;
+    print('Error retrieving token: $e');
+    print('Not logged in or OTP not verified.');
+    }
+    notifyListeners();
+  }
+
+Future<void> clearToken() async{
+  isLoading = true;
+  try {
+    localStorage.clear();
+    print('Logout successfully');
+    isLoading = false;
+  } catch (e) {
+    print('Not logouted Error occuring $e');
+    isLoading = false;
+  }
+}
 }

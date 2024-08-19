@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
@@ -48,14 +47,14 @@ class PropertyListing extends StatelessWidget {
                               "Are you listing the property as a business or an individual?",
                               style: mediumTextStyleBold),
                         ),
-                        sizedbox(height * 0.05, width),
+                        sizedBox(height * 0.05, width),
                         SizedBox(
                           width: width * 0.389,
                           child: Text(
                               "Your answer to this question will help us make sure we include all the necessary information in your contract.",
                               style: smallTextStyle),
                         ),
-                        sizedbox(height * 0.05, width),
+                        sizedBox(height * 0.05, width),
                         RadioListTile<bool>(
                           title: Text(
                             "Individual",
@@ -86,12 +85,12 @@ class PropertyListing extends StatelessWidget {
                           },
                         ),
                         Divider(),
-                        sizedbox(height * 0.04, width),
+                        sizedBox(height * 0.04, width),
                         Text(
                           "If you list more properties in the future, we'll use the information below – you only need to enter it once.",
                           style: smallTextStyle,
                         ),
-                        sizedbox(height * 0.05, width),
+                        sizedBox(height * 0.05, width),
                         //===================================================Forms of  individual & business ====================================
                         propertylisting.isIndividual
                             //=======================================================================================================================
@@ -113,7 +112,7 @@ class PropertyListing extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    sizedbox(height * 0.06, width),
+                                    sizedBox(height * 0.06, width),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -161,11 +160,11 @@ class PropertyListing extends StatelessWidget {
                                             ]),
                                       ),
                                     ),
-                                    sizedbox(height * 0.04, width),
+                                    sizedBox(height * 0.04, width),
                                     Text(
                                         "Primary residence of the contracting party",
                                         style: mediumTextStyleBold),
-                                    sizedbox(height * 0.04, width),
+                                    sizedBox(height * 0.04, width),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -247,7 +246,7 @@ class PropertyListing extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
-                                            sizedbox(
+                                            sizedBox(
                                                 height * 0.01, width * 0.01),
                                             Expanded(
                                               child: Column(
@@ -308,12 +307,12 @@ class PropertyListing extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    sizedbox(height * 0.04, width),
+                                    sizedBox(height * 0.04, width),
                                     Text(
                                       "Legal business name*",
                                       style: smallTextStyle,
                                     ),
-                                    sizedbox(height * 0.01, width),
+                                    sizedBox(height * 0.01, width),
                                     SizedBox(
                                       height: height * 0.055,
                                       child: CustomTextField(
@@ -326,7 +325,7 @@ class PropertyListing extends StatelessWidget {
                                             color: Colors.grey.shade300),
                                       ),
                                     ),
-                                    sizedbox(height * 0.04, width),
+                                    sizedBox(height * 0.04, width),
                                     Text(
                                       "Registered business address",
                                       style: GoogleFonts.montserrat(
@@ -334,12 +333,12 @@ class PropertyListing extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    sizedbox(height * 0.04, width),
+                                    sizedBox(height * 0.04, width),
                                     Text(
                                       "Country/Region*",
                                       style: smallTextStyle,
                                     ),
-                                    sizedbox(height * 0.01, width),
+                                    sizedBox(height * 0.01, width),
                                     SizedBox(
                                       height: height * 0.055,
                                       // width: index == 2
@@ -437,7 +436,7 @@ class PropertyListing extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
-                                            sizedbox(
+                                            sizedBox(
                                                 height * 0.01, width * 0.01),
                                             Expanded(
                                               child: Column(
@@ -477,7 +476,7 @@ class PropertyListing extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    sizedbox(height * 0.04, width),
+                                    sizedBox(height * 0.04, width),
                                     Text(
                                       "Legal representative’s personal information",
                                       style: GoogleFonts.montserrat(
@@ -485,7 +484,7 @@ class PropertyListing extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    sizedbox(height * 0.04, width),
+                                    sizedBox(height * 0.04, width),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -598,9 +597,9 @@ class PropertyListing extends StatelessWidget {
                                   ),
                                 )),
                       ),
-                      sizedbox(height * 0.04, width),
+                      sizedBox(height * 0.04, width),
                       Divider(),
-                      sizedbox(height * 0.02, width),
+                      sizedBox(height * 0.02, width),
                       Consumer<RegistrationProvider>(
                         builder: (context, homestay, child) => Row(
                           children: [
@@ -619,7 +618,7 @@ class PropertyListing extends StatelessWidget {
                           ],
                         ),
                       ),
-                      sizedbox(height * 0.02, width),
+                      sizedBox(height * 0.02, width),
                       Consumer<RegistrationProvider>(
                         builder: (context, homestay, child) => Row(
                           mainAxisAlignment: MainAxisAlignment.start,

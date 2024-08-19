@@ -1,17 +1,22 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tuch_trip_crms/src/db_connecting.dart';
 import 'package:tuch_trip_crms/src/view%20model/dashboard_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Account_Registration/account_registration.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Concierge/concrierge.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Guests/guest.dart';
 import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/new_booking.dart';
+import 'package:tuch_trip_crms/src/view/desktop/accounts_management/accounts_management_screen.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
+import 'package:tuch_trip_crms/src/view/desktop/job_vacancy/job_listing.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_menu.dart';
 import 'package:tuch_trip_crms/src/view/desktop/rooms/rooms.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
+import 'package:tuch_trip_crms/src/view/widgets/show_dialoug.dart';
 
 class DesktopView extends StatefulWidget {
   const DesktopView({super.key});
@@ -23,8 +28,29 @@ class DesktopView extends StatefulWidget {
 class _DesktopViewState extends State<DesktopView> {
   @override
   Widget build(BuildContext context) {
-    // return const AccountRegistrationScreen();
-    return HomePage();
+    final db = Provider.of<DBConnecting>(context, listen: false);
+    db.getToken();
+    Timer(
+      const Duration(seconds: 1),
+      () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AccountsManagementScreen(),
+            // const JobPostingScreen()
+            // db.token != null?
+            //  const HomePage()
+            // : const AccountRegistrationScreen(),
+          ),
+        );
+      },
+    );
+    return const Scaffold(
+      body: Center(
+          child: RefreshProgressIndicator(
+              backgroundColor: Colors.white, color: Colors.black)),
+    );
+    //
   }
 }
 
@@ -52,8 +78,8 @@ class HomePage extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final dashboardProvider = Provider.of<DashboardProvider>(context);
-    // final dbconnection = Provider.of<DBConnecting>(context);
-    // print(dbconnection.token);
+    final db = Provider.of<DBConnecting>(context, listen: false);
+    db.getToken();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const AppAppBar(
@@ -276,7 +302,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
                     boxShape: BoxShape.rectangle,
                     boxShadow: true,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
@@ -324,9 +350,11 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           onPressed: () {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const PropertyRegistrationMenu()));
+              context,
+              MaterialPageRoute(
+                builder: (context) => const PropertyRegistrationMenu(),
+              ),
+            );
           },
           label: Text('Enroll Your Property', style: smallTextStyle),
           icon: Icon(
@@ -335,41 +363,131 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
         sizedBox(0.0, width * 0.02),
-        InkWell(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const AccountRegistrationScreen()));
-          },
-          child: Row(
-            children: [
-              CustomContainer(
-                height: height * 0.05,
-                width: width * 0.028,
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: false,
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage('assets/images/profile image.png'),
-                ),
+        Row(
+          children: [
+            CustomContainer(
+              height: height * 0.055,
+              width: width * 0.028,
+              border: Border.all(color: Colors.grey.shade100),
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: false,
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage('assets/images/person.icon.png'),
               ),
-              SizedBox(width: width * 0.01),
-              SizedBox(
-                height: height * 0.06,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Receptionist', style: smallTextStyleBold),
-                    Text('John Deo', style: smallTextStyle),
+            ),
+            SizedBox(width: width * 0.01),
+            SizedBox(
+              child: Consumer2<DashboardProvider, DBConnecting>(
+                builder: (context, profile, db, child) =>
+                    DropdownButton<String>(
+                  dropdownColor: Colors.white,
+                  focusColor: Colors.white,
+                  underline: const SizedBox(),
+                  icon: Padding(
+                    padding: EdgeInsets.only(left: width * 0.01),
+                    child: const Icon(Icons.keyboard_arrow_down),
+                  ),
+                  elevation: 0,
+                  value: profile.selectedProfileDropDown,
+                  hint: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Receptionist',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      Text('John Deo', style: TextStyle(fontSize: 12)),
+                    ],
+                  ),
+                  items: [
+                    DropdownMenuItem(
+                      value: 'Profile',
+                      child: Text('Profile'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Jobs',
+                      child: Text('Jobs'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'settings',
+                      child: Text('Settings'),
+                    ),
+                    DropdownMenuItem(
+                      value: db.token == null ? 'login' : "logout",
+                      child: Text(db.token == null ? 'login' : "logout"),
+                    ),
                   ],
+                  onChanged: (value) {
+                    switch (value) {
+                      case 'Jobs':
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const JobListingScreen()));
+                        break;
+                      case 'settings':
+                        print('Settings selected');
+                        // Navigate to settings
+                        break;
+                      case 'Profile':
+                        print('Logout selected');
+                        // Perform logout
+                        break;
+                      case 'login':
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    AccountRegistrationScreen()));
+                        break;
+                      case 'logout':
+                        customShowDialog(
+                          context,
+                          AlertDialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            title: const Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Logout"),
+                              ],
+                            ),
+                            content: const Text(
+                                "Do you want to logout this account?"),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text("Cancel"),
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pop(); // Close the dialog
+                                },
+                              ),
+                              TextButton(
+                                child: const Text("Logout"),
+                                onPressed: () {
+                                  db.clearToken();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const AccountRegistrationScreen(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                        break;
+                    }
+                  },
                 ),
               ),
-              SizedBox(width: width * 0.02),
-            ],
-          ),
+            ),
+            SizedBox(width: width * 0.005),
+          ],
         ),
       ],
     );

@@ -5,6 +5,7 @@ import 'package:tuch_trip_crms/src/db_connecting.dart';
 import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Account_Registration/login_and_signup.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Account_Registration/otp_verification.dart';
+import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 
 class AccountRegistrationScreen extends StatelessWidget {
   const AccountRegistrationScreen({super.key});
@@ -18,11 +19,8 @@ class AccountRegistrationScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Consumer<DBConnecting>(
         builder: (context, dbconnection, child) { 
-          return dbconnection.isLoading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : Column(
+          return !dbconnection.isLoading
+            ? Column(
                 children: [
                   Row(
                     children: [
@@ -34,9 +32,9 @@ class AccountRegistrationScreen extends StatelessWidget {
                             physics: const NeverScrollableScrollPhysics(),
                             controller: login.accountRegistrationPage,
                             children: const [
+                              LoginScreen(),
                               SignUpScreen(),
                               OTPVerification(),
-                              // LoginScreen(),
                             ],
                           ),
                         ),
@@ -74,7 +72,7 @@ class AccountRegistrationScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              sizedbox(height * 0.05, width),
+                              sizedBox(height * 0.05, width),
                               Text(
                                 'Manage Your Hotel Efficiently',
                                 style: GoogleFonts.montserrat(
@@ -84,7 +82,7 @@ class AccountRegistrationScreen extends StatelessWidget {
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                              sizedbox(height * 0.01, width),
+                              sizedBox(height * 0.01, width),
                               SizedBox(
                                 width: width * 0.25,
                                 child: Text(
@@ -96,7 +94,7 @@ class AccountRegistrationScreen extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 ),
                               ),
-                              sizedbox(height * 0.05, width),
+                              sizedBox(height * 0.05, width),
                             ],
                           ),
                         ),
@@ -104,6 +102,8 @@ class AccountRegistrationScreen extends StatelessWidget {
                     ],
                   ),
                 ],
+              ): const Center(
+                child: CircularProgressIndicator(),
               );
             },
       ),

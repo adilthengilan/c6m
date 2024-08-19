@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -107,15 +106,12 @@ class RegistrationProvider extends ChangeNotifier {
   bool isshowHost = false;
   bool isshowNeighborhood = false;
   TextEditingController aboutThePropertyController = TextEditingController();
-  TextEditingController aboutTheNeighbourhoodController =
-      TextEditingController();
+  TextEditingController aboutTheNeighbourhoodController = TextEditingController();
   TextEditingController aboutTheHostNameController = TextEditingController();
   //=================================================================== Property images ======================================================================
   List<Uint8List>? propertyImages = [];
-  final picker = ImagePicker();
   //==================================================================== Receive bookings =====================================================================
-  bool allGuestscCanBookInstantly =
-      true; //this variable is All Guests Can Book Instantly, when its True. When the value is false it means All Guests Will Need Request To Book
+  bool allGuestscCanBookInstantly = true; //this variable is All Guests Can Book Instantly, when its True. When the value is false it means All Guests Will Need Request To Book
   //==================================================================== Property Price per Night =============================================================
   TextEditingController priceController = TextEditingController();
   double propertyPricePerNight = 0;

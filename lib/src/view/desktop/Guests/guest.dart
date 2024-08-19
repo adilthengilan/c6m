@@ -140,17 +140,6 @@ class GuestManagementScreen extends StatelessWidget {
                           width: width * 0.135,
                             child: Row(
                               children: [
-                                Consumer<GuestManagementProvider>(
-                                  builder: (context, person, child) => 
-                                   Checkbox(
-                                     value: builderIndex == person.guestSelectedIndex ? true : false,
-                                      onChanged: (value) {
-                                        person.setSelectGuestIndex(value);
-                                      },
-                                      activeColor: Colors.cyanAccent,
-                                      checkColor: Colors.white,
-                                   ),
-                                ),
                                 sizedBox(0.0, width * 0.01),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -192,34 +181,40 @@ class GuestManagementScreen extends StatelessWidget {
                             Row(
                               children: List.generate(2, (index) => SizedBox(
                                 width: index == 0 ?width * 0.065 : width * 0.04,
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: index == 0 ? EdgeInsets.only(right: width * 0.03): const EdgeInsets.all(0),
                                   child: IconButton(
                                     onPressed: 
-                                      index == 0? (){ showDialog(context: context, builder: (context) => editing(height, width, checkinController));}: 
+                                      index == 0? (){ showDialog(context: context, builder: (context) => const Editing());}: 
                                       (){
-                                         showDialog(context: context, builder: (context) => DeleteFileDialog());
-                                    },
+                                         showDialog(context: context, builder: (context) => 
+                                         DeleteFileDialog(
+                                          heading: 'Delete file permanently?',
+                                          messege: 'If you delete this file, you won\'t be able to recover it. Do you want to delete it?', 
+                                          deleteTap: (){},
+                                         ),
+                                       );
+                                     },
                                      icon: Icon(index == 0? Icons.edit_outlined
                                       : Icons.delete_outline,
                                       color: index == 0 ? Colors.lightBlueAccent : Colors.redAccent,
                                       ),
                                     ),
-                                  ),
+                                ),
                                 ),
                               ),
                              ),
                            ],
                          ),
-                                             ),
+                        ),
                       ),
-                   ),
-                 ],
-               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+                    ),
+                  ],
+                ),
+             ),
+           ],
+         ),
+       ),
+     );
+   }
 }
