@@ -7,6 +7,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:tuch_trip_crms/src/db_connecting.dart';
 import 'package:tuch_trip_crms/src/view%20model/dashboard_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Account_Registration/account_registration.dart';
+import 'package:tuch_trip_crms/src/view/desktop/Account_Registration/login_and_signup.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Concierge/concrierge.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Guests/guest.dart';
 import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/new_booking.dart';
@@ -36,7 +37,7 @@ class _DesktopViewState extends State<DesktopView> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => AccountsManagementScreen(),
+            builder: (context) => AccountRegistrationScreen(),
             // const JobPostingScreen()
             // db.token != null?
             //  const HomePage()

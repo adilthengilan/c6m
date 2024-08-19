@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/db_connecting.dart';
+import 'package:tuch_trip_crms/src/view%20model/accounts_management_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
+import 'package:tuch_trip_crms/src/view/desktop/accounts_management/accounts_management_screen.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/desktop_view.dart';
 
@@ -171,13 +173,17 @@ class SignUpScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Already have an account?",style: smallTextStyle),
+                    Text("Already have an account?", style: smallTextStyle),
                     sizedBox(0.0, width * 0.003),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         login.goToPage(0, login.accountRegistrationPage, true);
                       },
-                      child: Text('Login',style: GoogleFonts.montserrat(color: Colors.blue,fontSize: 14),),
+                      child: Text(
+                        'Login',
+                        style: GoogleFonts.montserrat(
+                            color: Colors.blue, fontSize: 14),
+                      ),
                     )
                   ],
                 ),
@@ -272,70 +278,136 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 30),
-          InkWell(
-            onTap: () async {
-              dbase.loginAdmin(
-                login.mobileNumberController.text,
-                login.passwordController.text,
-              );
-              while (true) {
-                await Future.delayed(const Duration(milliseconds: 300));
-                if (dbase.isLogedIn) {
-                  // Call the function to navigate to the next Screen
+          Container(
+            height: 50,
+            width: width / 1.2,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.grey)),
+            child: Padding(
+              padding: EdgeInsets.only(left: 15),
+              child: DropdownExample(),
+            ),
+          ),
+          const SizedBox(height: 30),
+          Consumer<AccountsManagementProvider>(
+            builder: (context, value, child) => InkWell(
+              onTap: () async {
+                // dbase.loginAdmin(
+                //   login.mobileNumberController.text,
+                //   login.passwordController.text,
+                // );
+
+                // while (true) {
+                //   await Future.delayed(const Duration(milliseconds: 300));
+                //   if (dbase.isLogedIn) {
+                //     // Call the function to navigate to the next Screen
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => const HomePage(),
+                //       ),
+                //     );
+                //     // Clear the controllers
+                //     login.clearControllers();
+                //     // Exit the loop
+                //     break;
+                //   }
+                //   // Debug print to check the condition
+                //   // print('dbase.is Logined is false');
+                // }
+
+                if (value.dropdownValue == 'Reception') {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const HomePage(),
-                        ),
-                      );
-                  // Clear the controllers
-                  login.clearControllers();
-                  // Exit the loop
-                  break;
+                        builder: (context) => HomePage(),
+                      ));
+                } else if (value.dropdownValue == 'Accounts') {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AccountsManagementScreen()));
                 }
-                // Debug print to check the condition
-                // print('dbase.is Logined is false');
-              }
-            },
-            child: Container(
-              height: height * 0.07,
-              width: width * 0.700,
-              decoration: BoxDecoration(
-                  gradient: const LinearGradient(colors: [
-                    Color.fromARGB(255, 105, 227, 255),
-                    Color.fromARGB(255, 255, 167, 248),
-                  ]),
-                  borderRadius: BorderRadius.circular(07)),
-              child: Center(
-                child: Text(
-                  "LOGIN",
-                  style: GoogleFonts.montserrat(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
+              },
+              child: Container(
+                height: height * 0.07,
+                width: width * 0.700,
+                decoration: BoxDecoration(
+                    gradient: const LinearGradient(colors: [
+                      Color.fromARGB(255, 105, 227, 255),
+                      Color.fromARGB(255, 255, 167, 248),
+                    ]),
+                    borderRadius: BorderRadius.circular(07)),
+                child: Center(
+                  child: Text(
+                    "LOGIN",
+                    style: GoogleFonts.montserrat(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
           sizedBox(height * 0.04, width),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Don't have an account?",style: smallTextStyle),
-                    sizedBox(0.0, width * 0.003),
-                    InkWell(
-                      onTap: (){
-                        login.goToPage(1, login.accountRegistrationPage, true);
-                      },
-                      child: Text('Sign Up',
-                      style: GoogleFonts.montserrat(
-                        color: Colors.blue,fontSize: 14,
-                        ),
-                      ),
-                    ),
-                  ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Don't have an account?", style: smallTextStyle),
+              sizedBox(0.0, width * 0.003),
+              InkWell(
+                onTap: () {
+                  login.goToPage(1, login.accountRegistrationPage, true);
+                },
+                child: Text(
+                  'Sign Up',
+                  style: GoogleFonts.montserrat(
+                    color: Colors.blue,
+                    fontSize: 14,
+                  ),
                 ),
+              ),
+            ],
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class DropdownExample extends StatefulWidget {
+  @override
+  _DropdownExampleState createState() => _DropdownExampleState();
+}
+
+class _DropdownExampleState extends State<DropdownExample> {
+  // String? dropdownValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<AccountsManagementProvider>(
+      builder: (context, value, child) => DropdownButton<String>(
+        value: value.dropdownValue,
+        hint: Text('Select Department  '),
+        icon: Icon(Icons.arrow_downward),
+        elevation: 16,
+        style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
+        underline: Container(),
+        onChanged: (String? newValue) {
+          // setState(() {
+          //   dropdownValue = newValue!;
+          // });
+          value.setDropDownValue(newValue);
+        },
+        items: <String>['Reception', 'Accounts', 'HR', 'PR']
+            .map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
       ),
     );
   }
