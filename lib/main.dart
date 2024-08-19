@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/layouting.dart';
 import 'package:tuch_trip_crms/src/db_connecting.dart';
+import 'package:tuch_trip_crms/src/view%20model/accounts_management_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/availability_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/booking_details.dart';
 import 'package:tuch_trip_crms/src/view%20model/booking_provider.dart';
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => RoomsProvider()),
         ChangeNotifierProvider(create: (context) => RegistrationProvider()),
         ChangeNotifierProvider(create: (context) => AvailabilityProvider()),
-        ChangeNotifierProvider(create: (context) => DBConnecting())
+        ChangeNotifierProvider(create: (context) => DBConnecting()),
+        ChangeNotifierProvider(create: (context) => AccountsManagementProvider())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

@@ -10,9 +10,9 @@ import 'package:tuch_trip_crms/src/view/desktop/Account_Registration/account_reg
 import 'package:tuch_trip_crms/src/view/desktop/Concierge/concrierge.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Guests/guest.dart';
 import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/new_booking.dart';
+import 'package:tuch_trip_crms/src/view/desktop/accounts_management/accounts_management_screen.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/job_vacancy/job_listing.dart';
-import 'package:tuch_trip_crms/src/view/desktop/job_vacancy/job_posting_screen.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_menu.dart';
 import 'package:tuch_trip_crms/src/view/desktop/rooms/rooms.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
@@ -37,10 +37,10 @@ class _DesktopViewState extends State<DesktopView> {
           context,
           MaterialPageRoute(
             builder: (context) => 
-            // const JobListingScreen(),
+            AccountsManagementScreen(),
             // const JobPostingScreen()
             // db.token != null?
-                 const HomePage()
+                //  const HomePage()
                 // : const AccountRegistrationScreen(),
           ), 
         );
