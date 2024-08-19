@@ -124,25 +124,27 @@ class SignUpScreen extends StatelessWidget {
                 const SizedBox(height: 30),
                 InkWell(
                   onTap: () async {
-                    dbase.registerAdmin(
-                      login.userNameController.text,
-                      login.emailController.text,
-                      login.passwordController.text,
-                      login.mobileNumberController.text,
-                    );
-                    while (true) {
-                      await Future.delayed(const Duration(milliseconds: 300));
-                      if (dbase.isRegistered) {
-                        // Call the function to navigate to the next page
-                        login.goToPage(1, login.accountRegistrationPage,
-                            dbase.isRegistered);
-                        login.clearControllers();
-                        // Exit the loop
-                        break;
-                      }
-                      // Debug print to check the condition
-                      // print('dbase.isRegistered is false');
-                    }
+                    // dbase.registerAdmin(
+                    //   login.userNameController.text,
+                    //   login.emailController.text,
+                    //   login.passwordController.text,
+                    //   login.mobileNumberController.text,
+                    // );
+                    // while (true) {
+                    //   await Future.delayed(const Duration(milliseconds: 300));
+                    //   if (dbase.isRegistered) {
+                    //     // Call the function to navigate to the next page
+                    //     login.goToPage(1, login.accountRegistrationPage,
+                    //         dbase.isRegistered);
+                    //     login.clearControllers();
+                    //     // Exit the loop
+                    //     break;
+                    //   }
+                    //   // Debug print to check the condition
+                    //   // print('dbase.isRegistered is false');
+                    // }
+                    login.goToPage(
+                        1, login.accountRegistrationPage, dbase.isRegistered);
                   },
                   child: Container(
                     height: height * 0.07,

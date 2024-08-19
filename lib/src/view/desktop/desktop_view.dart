@@ -23,7 +23,8 @@ class DesktopView extends StatefulWidget {
 class _DesktopViewState extends State<DesktopView> {
   @override
   Widget build(BuildContext context) {
-    return const AccountRegistrationScreen();
+    // return const AccountRegistrationScreen();
+    return HomePage();
   }
 }
 
@@ -31,9 +32,12 @@ class _DesktopViewState extends State<DesktopView> {
 ///////////==============================================================================================================
 ///////////==============================================================================================================
 TextEditingController searchController = TextEditingController();
-TextEditingController occupentCheckInFirstNameController = TextEditingController();
-TextEditingController occupentChecInkLastNameController = TextEditingController();
-TextEditingController occupentCheckInMobileNumberController = TextEditingController();
+TextEditingController occupentCheckInFirstNameController =
+    TextEditingController();
+TextEditingController occupentChecInkLastNameController =
+    TextEditingController();
+TextEditingController occupentCheckInMobileNumberController =
+    TextEditingController();
 TextEditingController occupentCheckInEmailController = TextEditingController();
 TextEditingController occupentChecInkEmailController = TextEditingController();
 TextEditingController occupentChecInCountryController = TextEditingController();
@@ -125,59 +129,58 @@ class HomePage extends StatelessWidget {
                 ),
                 child: Consumer<DashboardProvider>(
                   builder: (context, person, child) => GestureDetector(
-                          onTap: () {
-                            person.setSelectedButtonIndex(index);
-                          },
-                          child: CustomContainer(
-                            height: height * 0.065,
-                            width: width * 0.15,
-                            padding: EdgeInsets.only(left: width * 0.01),
-                            borderRadius: BorderRadius.circular(15),
-                            gradiantColors:
+                    onTap: () {
+                      person.setSelectedButtonIndex(index);
+                    },
+                    child: CustomContainer(
+                      height: height * 0.065,
+                      width: width * 0.15,
+                      padding: EdgeInsets.only(left: width * 0.01),
+                      borderRadius: BorderRadius.circular(15),
+                      gradiantColors:
+                          index == person.navigationButtonsSelectedIndex
+                              ? [
+                                  Colors.purple.shade500,
+                                  Colors.purple.shade300,
+                                ]
+                              : [
+                                  Colors.grey.shade50,
+                                  Colors.grey.shade50,
+                                ],
+                      boxShadow: index == person.navigationButtonsSelectedIndex
+                          ? true
+                          : false,
+                      child: Row(
+                        mainAxisAlignment:
+                            index == person.navigationButtonsSelectedIndex
+                                ? MainAxisAlignment.center
+                                : MainAxisAlignment.start,
+                        children: [
+                          Icon(
+                            buttons[index]['icon'] as IconData,
+                            color:
                                 index == person.navigationButtonsSelectedIndex
-                                    ? [
-                                        Colors.purple.shade500,
-                                        Colors.purple.shade300,
-                                      ]
-                                    : [
-                                        Colors.grey.shade50,
-                                        Colors.grey.shade50,
-                                      ],
-                            boxShadow:
-                                index == person.navigationButtonsSelectedIndex
-                                    ? true
-                                    : false,
-                            child: Row(
-                              mainAxisAlignment:
-                                  index == person.navigationButtonsSelectedIndex
-                                      ? MainAxisAlignment.center
-                                      : MainAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  buttons[index]['icon'] as IconData,
-                                  color: index ==
-                                          person.navigationButtonsSelectedIndex
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                                sizedBox(
-                                  0.0,
-                                  index == person.navigationButtonsSelectedIndex
-                                      ? width * 0.012
-                                      : width * 0.02,
-                                ),
-                                Text(
-                                  buttons[index]['text'] as String,
-                                  style: index ==
-                                          person.navigationButtonsSelectedIndex
-                                      ? smallTextStylewhite
-                                      : smallTextStyle,
-                                ),
-                                sizedBox(0.0, width * 0.01)
-                              ],
-                            ),
+                                    ? Colors.white
+                                    : Colors.black,
                           ),
-                        ),
+                          sizedBox(
+                            0.0,
+                            index == person.navigationButtonsSelectedIndex
+                                ? width * 0.012
+                                : width * 0.02,
+                          ),
+                          Text(
+                            buttons[index]['text'] as String,
+                            style:
+                                index == person.navigationButtonsSelectedIndex
+                                    ? smallTextStylewhite
+                                    : smallTextStyle,
+                          ),
+                          sizedBox(0.0, width * 0.01)
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               );
             },
@@ -187,7 +190,6 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
