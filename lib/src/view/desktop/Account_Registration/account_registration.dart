@@ -18,94 +18,98 @@ class AccountRegistrationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Consumer<DBConnecting>(
-        builder: (context, dbconnection, child) { 
+        builder: (context, dbconnection, child) {
           return !dbconnection.isLoading
-            ? Column(
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        height: height * 0.6,
-                        width: width * 0.389,
-                        child: Center(
-                          child: PageView(
-                            physics: const NeverScrollableScrollPhysics(),
-                            controller: login.accountRegistrationPage,
-                            children: const [
-                              LoginScreen(),
-                              SignUpScreen(),
-                              OTPVerification(),
-                            ],
+              ? Column(
+                  children: [
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            height: height * 0.7,
+                            width: width * 0.389,
+                            child: Center(
+                              child: PageView(
+                                physics: const NeverScrollableScrollPhysics(),
+                                controller: login.accountRegistrationPage,
+                                children: const [
+                                  LoginScreen(),
+                                  SignUpScreen(),
+                                  OTPVerification(),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                      //////////////////////////////////////////////////////////////// Image ////////////////////////////////////////////////////////////////////////
-                      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: height * 0.97,
-                          width: width * 0.6,
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 172, 219, 246),
-                            boxShadow: const [
-                              BoxShadow(
-                                offset: Offset(-2, -2),
-                                color: Color.fromARGB(31, 156, 156, 156),
-                                spreadRadius: 1,
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(top: height * 0.11),
-                                height: height * 0.50,
-                                width: width * 0.68,
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/erty-removebg-preview.png"),
+                          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                          //////////////////////////////////////////////////////////////// Image ////////////////////////////////////////////////////////////////////////
+                          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: height * 0.97,
+                              width: width * 0.6,
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 172, 219, 246),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    offset: Offset(-2, -2),
+                                    color: Color.fromARGB(31, 156, 156, 156),
+                                    spreadRadius: 1,
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(top: height * 0.11),
+                                    height: height * 0.50,
+                                    width: width * 0.68,
+                                    decoration: const BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/erty-removebg-preview.png"),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              sizedBox(height * 0.05, width),
-                              Text(
-                                'Manage Your Hotel Efficiently',
-                                style: GoogleFonts.montserrat(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              sizedBox(height * 0.01, width),
-                              SizedBox(
-                                width: width * 0.25,
-                                child: Text(
-                                  'Access all the tools you need to manage reservations, oversee staff, and ensure smooth operations',
-                                  style: GoogleFonts.montserrat(
-                                    color: Colors.white70,
-                                    fontSize: 12,
+                                  sizedBox(height * 0.05, width),
+                                  Text(
+                                    'Manage Your Hotel Efficiently',
+                                    style: GoogleFonts.montserrat(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  textAlign: TextAlign.center,
-                                ),
+                                  sizedBox(height * 0.01, width),
+                                  SizedBox(
+                                    width: width * 0.25,
+                                    child: Text(
+                                      'Access all the tools you need to manage reservations, oversee staff, and ensure smooth operations',
+                                      style: GoogleFonts.montserrat(
+                                        color: Colors.white70,
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  sizedBox(height * 0.05, width),
+                                ],
                               ),
-                              sizedBox(height * 0.05, width),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                ],
-              ): const Center(
-                child: CircularProgressIndicator(),
-              );
-            },
+                    ),
+                  ],
+                )
+              : const Center(
+                  child: CircularProgressIndicator(),
+                );
+        },
       ),
     );
   }

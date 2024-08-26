@@ -106,12 +106,14 @@ class RegistrationProvider extends ChangeNotifier {
   bool isshowHost = false;
   bool isshowNeighborhood = false;
   TextEditingController aboutThePropertyController = TextEditingController();
-  TextEditingController aboutTheNeighbourhoodController = TextEditingController();
+  TextEditingController aboutTheNeighbourhoodController =
+      TextEditingController();
   TextEditingController aboutTheHostNameController = TextEditingController();
   //=================================================================== Property images ======================================================================
   List<Uint8List>? propertyImages = [];
   //==================================================================== Receive bookings =====================================================================
-  bool allGuestscCanBookInstantly = true; //this variable is All Guests Can Book Instantly, when its True. When the value is false it means All Guests Will Need Request To Book
+  bool allGuestscCanBookInstantly =
+      true; //this variable is All Guests Can Book Instantly, when its True. When the value is false it means All Guests Will Need Request To Book
   //==================================================================== Property Price per Night =============================================================
   TextEditingController priceController = TextEditingController();
   double propertyPricePerNight = 0;
@@ -383,9 +385,9 @@ class RegistrationProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-//================================================== Setting  Hotel Aminitiest =====================================================================
+// ================================================== Setting  Hotel Aminitiest =====================================================================
 
-  //================================================  // General Amenities =========================================================================
+  // ================================================  // General Amenities =========================================================================
   void setAirConditioning(bool value) {
     airConditioning = value;
     notifyListeners();
@@ -745,9 +747,7 @@ class RegistrationProvider extends ChangeNotifier {
     return selectedCheckboxes.contains(true);
   }
 
-   //=================================================================================== Availability =============================================
-
-  
+  //=================================================================================== Availability =============================================
 
   int _selectedRadioIndex = -1; // Initialize with -1 to indicate none selected
   bool _showAsSoonContainer = false;
@@ -890,19 +890,16 @@ class RegistrationProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
 //==================================================== Property listing======================================================
-bool isIndividual = true;
+  bool isIndividual = true;
 
   void setIndividual(bool value) {
     isIndividual = value;
     notifyListeners();
   }
 
-
   void addApartmnetList() {
-
-
-    
     final apartment = {
       'property_Name': propertyName,
       'isEntirePlace': isEntirePlace,
@@ -971,7 +968,8 @@ bool isIndividual = true;
       'tradeNameController': tradeNameController,
       'GsGSTINController': GsGSTINController,
       'freeCancellationDays': freeCancellationDays,
-      'isprotectionAgainstAccidentalBookings':isprotectionAgainstAccidentalBookings,
+      'isprotectionAgainstAccidentalBookings':
+          isprotectionAgainstAccidentalBookings,
       'discountPersentage': discountPersentage,
       'totalForOneGuest': totalForOneGuest,
       'aboutThePropertyController': aboutThePropertyController,

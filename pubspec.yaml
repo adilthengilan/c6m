@@ -45,8 +45,8 @@ dependencies:
   http: ^1.2.2
   shimmer: ^3.0.0
   localstorage: ^5.0.0
-  image_picker_web: ^4.0.0
   shared_preferences: ^2.2.3
+  image_picker_web: ^4.0.0
 
 dev_dependencies:
   flutter_test:
