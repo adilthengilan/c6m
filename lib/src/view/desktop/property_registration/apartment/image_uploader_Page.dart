@@ -61,86 +61,81 @@ class ImageUploader extends StatelessWidget {
                           sizedBox(height * 0.02, 0.0),
                           ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              side: BorderSide(color: Colors.purpleAccent),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              )
-                            ),
+                                backgroundColor: Colors.white,
+                                side: BorderSide(color: Colors.purpleAccent),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                )),
                             onPressed: person.galleryImagePicker,
                             icon: Icon(Icons.upload),
                             label: Text('Upload photos'),
                           ),
                           sizedBox(height * 0.02, 0.0),
-                          Text(
-                            'jpg/jpeg or png, maximum 47MB each',
-                            style: smallTextStyle
-                          ),
+                          Text('jpg/jpeg or png, maximum 47MB each', style: smallTextStyle),
                         ],
                       ),
                     ),
                   ),
                   sizedBox(height * 0.04, 0.0),
-                      Consumer<RegistrationProvider>(
-                        builder: (context, person, child) => 
-                        SizedBox(
-                          width: width * 0.33,
-                          child: person.propertyImages!.isNotEmpty && person.propertyImages != null ?  GridView.builder(
-                            shrinkWrap: true,
-                            padding: EdgeInsets.symmetric(horizontal: width * 0.02),
-                            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: width * 0.03,
-                              mainAxisSpacing: height * 0.04,
-                            ),
-                            itemCount: person.propertyImages!.length,
-                            itemBuilder: (context, index) {
-                              return CustomContainer(
-                                boxShadow: false,
-                                height: height * 0.3,
-                                width: width * 0.3,
-                                color: Colors.grey.shade200,
-                                image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: MemoryImage(person.propertyImages![index])
-                                ),
-                                child: Align(
-                                  alignment: Alignment.topRight,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(top: height * 0.01,right: width * 0.01),
-                                    child: IconButton.outlined(
-                                      style: IconButton.styleFrom(
-                                        side: BorderSide(color: Colors.deepPurpleAccent)
-                                      ),
-                                      onPressed: (){
-                                        person.removeImage(index);
-                                      }, icon: Icon(Icons.close,color: Colors.white)),
+                  Consumer<RegistrationProvider>(
+                    builder: (context, person, child) => SizedBox(
+                      width: width * 0.33,
+                      child: person.propertyImages!.isNotEmpty && person.propertyImages != null
+                          ? GridView.builder(
+                              shrinkWrap: true,
+                              padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: width * 0.03,
+                                mainAxisSpacing: height * 0.04,
+                              ),
+                              itemCount: person.propertyImages!.length,
+                              itemBuilder: (context, index) {
+                                return CustomContainer(
+                                  boxShadow: false,
+                                  height: height * 0.3,
+                                  width: width * 0.3,
+                                  color: Colors.grey.shade200,
+                                  image: DecorationImage(fit: BoxFit.fill, image: MemoryImage(person.propertyImages![index])),
+                                  child: Align(
+                                    alignment: Alignment.topRight,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: height * 0.01, right: width * 0.01),
+                                      child: IconButton.outlined(
+                                          style: IconButton.styleFrom(side: BorderSide(color: Colors.deepPurpleAccent)),
+                                          onPressed: () {
+                                            person.removeImage(index);
+                                          },
+                                          icon: Icon(Icons.close, color: Colors.white)),
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                          ): 
-                        Container(
-                          height: height * 0.01,
-                        ),
-                        ),
-                      )
+                                );
+                              },
+                            )
+                          : Container(
+                              height: height * 0.01,
+                            ),
+                    ),
+                  )
                 ],
               ),
             ),
-           sizedBox(height * 0.03, width),
-        Row(
-          children: [
-            backButton(height, width, (){
-              person.goToPage(backToPage, pageController);
-            },
+            sizedBox(height * 0.03, width),
+            Row(
+              children: [
+                backButton(
+                  height,
+                  width,
+                  () {
+                    person.goToPage(backToPage, pageController);
+                  },
+                ),
+                sizedBox(0.0, width * 0.02),
+                continueButton(height, width, true, () {
+                  person.goToPage(goToPage, pageController);
+                })
+              ],
             ),
-            sizedBox(0.0, width * 0.02),
-            continueButton(height, width, true, (){
-              person.goToPage(goToPage, pageController);
-            })
-          ],
-        ),
           ],
         ),
       ),

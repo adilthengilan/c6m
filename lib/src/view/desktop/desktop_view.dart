@@ -13,6 +13,7 @@ import 'package:tuch_trip_crms/src/view/desktop/Guests/guest.dart';
 import 'package:tuch_trip_crms/src/view/desktop/New%20bookings/new_booking.dart';
 import 'package:tuch_trip_crms/src/view/desktop/accounts_management/accounts_management_screen.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
+import 'package:tuch_trip_crms/src/view/desktop/hotel_profile.dart/profile_page.dart';
 import 'package:tuch_trip_crms/src/view/desktop/job_vacancy/job_listing.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_menu.dart';
 import 'package:tuch_trip_crms/src/view/desktop/rooms/rooms.dart';
@@ -432,15 +433,18 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
                         // Navigate to settings
                         break;
                       case 'Profile':
-                        print('Logout selected');
-                        // Perform logout
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const HotelProfilePage()));
                         break;
                       case 'login':
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    AccountRegistrationScreen()));
+                                    const AccountRegistrationScreen()));
                         break;
                       case 'logout':
                         customShowDialog(
@@ -487,7 +491,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             ),
-            SizedBox(width: width * 0.005),
+            SizedBox(width: width * 0.01),
           ],
         ),
       ],
