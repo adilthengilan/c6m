@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/booking_provider.dart';
-import 'package:tuch_trip_crms/src/view/desktop/roomBooking.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 
-class NewBookings extends StatelessWidget {
-  const NewBookings({super.key});
+class Payroll extends StatelessWidget {
+  const Payroll({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final bookingProvider = Provider.of<BookingProvider>(context);
+    final bookingProvider = Provider.of<PayrollProvider>(context);
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
- 
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -31,13 +30,13 @@ class NewBookings extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader(context, bookingProvider, height, width) {
+  Widget _buildHeader(context, PayrollProvider bookingProvider, height, width) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'All bookings',
+          'PAY ROLL MANAGING',
           style: GoogleFonts.montserrat(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -47,7 +46,7 @@ class NewBookings extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildActionButton(
+            buildActionButton(
               context,
               'Sort',
               Icons.sort,
@@ -55,23 +54,23 @@ class NewBookings extends StatelessWidget {
               () => _showSortOptions(context, bookingProvider),
             ),
             SizedBox(width: width * 0.01),
-            _buildActionButton(
-              context,
-              'Booking',
-              Icons.add,
-              Color.fromARGB(255, 255, 160, 160),
-              () => showDialog(
-                context: context,
-                builder: (context) => NewBookingDialog(),
-              ),
-            ),
+            // _buildActionButton(
+            //   context,
+            //   'Booking',
+            //   Icons.add,
+            //   Color.fromARGB(255, 255, 160, 160),
+            //   () => showDialog(
+            //     context: context,
+            //     builder: (context) => NewBookingDialog(),
+            //   ),
+            // ),
           ],
         ),
       ],
     );
   }
 
-  Widget _buildActionButton(BuildContext context, String label, IconData icon,
+  Widget buildActionButton(BuildContext context, String label, IconData icon,
       Color color, VoidCallback onPressed) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -94,18 +93,17 @@ class NewBookings extends StatelessWidget {
     );
   }
 
-  void _showSortOptions(BuildContext context, BookingProvider bookingProvider) {
+  void _showSortOptions(BuildContext context, bookingProvider) {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Sort Guests'),
+          title: Text('Sort'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildSortOption(context, bookingProvider, 'Check in'),
-              _buildSortOption(context, bookingProvider, 'Waiting'),
-              _buildSortOption(context, bookingProvider, 'Check out'),
+              _buildSortOption(context, bookingProvider, 'Paid'),
+              _buildSortOption(context, bookingProvider, 'Pending'),
             ],
           ),
           actions: [
@@ -120,7 +118,7 @@ class NewBookings extends StatelessWidget {
   }
 
   Widget _buildSortOption(
-      BuildContext context, BookingProvider bookingProvider, String status) {
+      BuildContext context, bookingProvider, String status) {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: CustomContainer(
@@ -153,7 +151,7 @@ class NewBookings extends StatelessWidget {
 class GuestsTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final bookingProvider = Provider.of<BookingProvider>(context);
+    final bookingProvider = Provider.of<PayrollProvider>(context);
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
@@ -183,33 +181,42 @@ class GuestsTable extends StatelessWidget {
       DataColumn(
           label: Text('Name', style: TextStyle(fontWeight: FontWeight.bold))),
       DataColumn(
-          label: Text('Guests', style: TextStyle(fontWeight: FontWeight.bold))),
-      DataColumn(
-          label: Text('Room number',
-              style: TextStyle(fontWeight: FontWeight.bold))),
+          label: Text('ID', style: TextStyle(fontWeight: FontWeight.bold))),
+      // DataColumn(
+      //     label: Text('Room number',
+      //         style: TextStyle(fontWeight: FontWeight.bold))),
+      // DataColumn(
+      //     label:
+      //         Text('Check-in', style: TextStyle(fontWeight: FontWeight.bold))),
+      // DataColumn(
+      //     label:
+      //         Text('Check-out', style: TextStyle(fontWeight: FontWeight.bold))),
       DataColumn(
           label:
-              Text('Check-in', style: TextStyle(fontWeight: FontWeight.bold))),
-      DataColumn(
-          label:
-              Text('Check-out', style: TextStyle(fontWeight: FontWeight.bold))),
+              Text('Payment', style: TextStyle(fontWeight: FontWeight.bold))),
       DataColumn(
           label: Text('Status', style: TextStyle(fontWeight: FontWeight.bold))),
-      DataColumn(
-          label:
-              Text('Revenue', style: TextStyle(fontWeight: FontWeight.bold))),
+      // DataColumn(
+      //     label:
+      //         Text('Revenue', style: TextStyle(fontWeight: FontWeight.bold))),
     ];
   }
 
-  List<DataRow> _buildRows(BookingProvider bookingProvider) {
+  List<DataRow> _buildRows(PayrollProvider bookingProvider) {
     return bookingProvider.guests.map((guest) {
       return DataRow(
         cells: [
-          DataCell(Text(guest['name'])),
-          DataCell(Text(guest['guests'].toString())),
-          DataCell(Text(guest['room'])),
-          DataCell(Text(guest['checkIn'])),
-          DataCell(Text(guest['checkOut'])),
+          DataCell(Text(
+            guest['name'],
+            style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
+          )),
+          DataCell(Text('#${guest['ID']}',
+              style: GoogleFonts.poppins(fontWeight: FontWeight.w500))),
+          // DataCell(Text(guest['room'])),
+          // DataCell(Text(guest['checkIn'])),
+          // DataCell(Text(guest['checkOut'])),
+          DataCell(Text(guest['Payment'],
+              style: GoogleFonts.poppins(fontWeight: FontWeight.w500))),
           DataCell(Container(
             padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
             decoration: BoxDecoration(
@@ -218,7 +225,6 @@ class GuestsTable extends StatelessWidget {
             ),
             child: Text(guest['status']),
           )),
-          DataCell(Text(guest['Revenue'])),
         ],
       );
     }).toList();
@@ -226,11 +232,11 @@ class GuestsTable extends StatelessWidget {
 
   Color _getStatusColor(String status) {
     switch (status) {
-      case "Check in":
+      case "Paid":
         return Color.fromARGB(255, 195, 255, 197);
       case "Waiting":
         return Color.fromARGB(255, 255, 209, 140);
-      case "Check out":
+      case "Pending":
         return Color.fromARGB(255, 255, 123, 114);
       default:
         return Color.fromARGB(255, 198, 194, 194);
@@ -244,7 +250,7 @@ class NewBookingDialog extends StatelessWidget {
     return AlertDialog(
       backgroundColor: Colors.white,
       title: Text(
-        'New Booking',
+        'PAYMENT STATUS',
         style: GoogleFonts.poppins(
           fontSize: 20,
           fontWeight: FontWeight.w600,
@@ -330,39 +336,37 @@ class BookingForm extends StatelessWidget {
             CustomContainer(
               width: width * 0.32,
               height: height * 0.55,
-              boxShadow: false,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    _buildTextField(
-                        context, 'Client email', _clientEmailController),
-                    _buildTextField(context, 'Booking reference',
-                        _bookingReferenceController),
-                    _buildTextField(context, 'Check-in', _checkInController),
-                    _buildTextField(context, 'Nights', _nightsController),
-                    _buildTextField(context, 'Check-out', _checkOutController),
-                    _buildTextField(
-                        context, 'Special request', _specialRequestController),
-                    _buildTextField(context, 'Occupant First Name',
-                        _occupantFirstNameController),
-                    _buildTextField(context, 'Occupant Last Name',
-                        _occupantLastNameController),
-                    _buildTextField(
-                        context, 'Adult First Name', _adultFirstNameController),
-                    _buildTextField(
-                        context, 'Adult Last Name', _adultLastNameController),
-                    _buildDropdown(context, 'Company', _company,
-                        ['British Airways Holidays']),
-                    _buildDropdown(
-                        context, 'Hotel', _hotel, ['The Royal National']),
-                    _buildDropdown(context, 'Rate', _rate, ['SUMMERSAVER']),
-                    _buildDropdown(
-                        context, 'Room Type', _roomType, ['Double room']),
-                    _buildDropdown(context, 'Extras', _extras, ['None']),
-                    _buildDropdown(
-                        context, 'Room Layout', _roomLayout, ['Default setup']),
-                  ],
-                ),
+              boxShadow: true,
+              child: Column(
+                children: [
+                  _buildTextField(
+                      context, 'Client email', _clientEmailController),
+                  _buildTextField(context, 'Booking reference',
+                      _bookingReferenceController),
+                  _buildTextField(context, 'Check-in', _checkInController),
+                  _buildTextField(context, 'Nights', _nightsController),
+                  _buildTextField(context, 'Check-out', _checkOutController),
+                  _buildTextField(
+                      context, 'Special request', _specialRequestController),
+                  _buildTextField(context, 'Occupant First Name',
+                      _occupantFirstNameController),
+                  _buildTextField(context, 'Occupant Last Name',
+                      _occupantLastNameController),
+                  _buildTextField(
+                      context, 'Adult First Name', _adultFirstNameController),
+                  _buildTextField(
+                      context, 'Adult Last Name', _adultLastNameController),
+                  _buildDropdown(context, 'Company', _company,
+                      ['British Airways Holidays']),
+                  _buildDropdown(
+                      context, 'Hotel', _hotel, ['The Royal National']),
+                  _buildDropdown(context, 'Rate', _rate, ['SUMMERSAVER']),
+                  _buildDropdown(
+                      context, 'Room Type', _roomType, ['Double room']),
+                  _buildDropdown(context, 'Extras', _extras, ['None']),
+                  _buildDropdown(
+                      context, 'Room Layout', _roomLayout, ['Default setup']),
+                ],
               ),
             ),
           ],

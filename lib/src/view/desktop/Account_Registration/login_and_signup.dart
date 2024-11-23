@@ -147,8 +147,13 @@ class SignUpScreen extends StatelessWidget {
                       //   // Debug print to check the condition
                       //   // print('dbase.isRegistered is false');
                       // }
-                      login.goToPage(
-                          1, login.accountRegistrationPage, dbase.isRegistered);
+                      login.registerAccount(
+                          login.userNameController.text,
+                          login.emailController.text,
+                          login.passwordController.text,
+                          login.mobileNumberController.text);
+                      // login.goToPage(
+                      //     1, login.accountRegistrationPage, dbase.isRegistered);
                     },
                     child: Container(
                       height: height * 0.07,
@@ -214,6 +219,8 @@ class LoginScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final dbase = Provider.of<DBConnecting>(context, listen: false);
     final login = Provider.of<LoginProvider>(context, listen: false);
+    login.retriveFromPreferences('authtoken');
+    print('===========${login.token}');
     return Container(
       padding: EdgeInsets.symmetric(horizontal: width * 0.08),
       child: SingleChildScrollView(
@@ -323,19 +330,23 @@ class LoginScreen extends StatelessWidget {
                   //   // Debug print to check the condition
                   //   // print('dbase.is Logined is false');
                   // }
-
-                  if (value.dropdownValue == 'Reception') {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ));
-                  } else if (value.dropdownValue == 'Accounts') {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AccountsManagementScreen()));
-                  }
+                  login.loginAccount(
+                      login.userNameController.text,
+                      login.emailController.text,
+                      login.passwordController.text,
+                      login.mobileNumberController.text);
+                  // if (value.dropdownValue == 'Reception') {
+                  //   Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => HomePage(),
+                  //       ));
+                  // } else if (value.dropdownValue == 'Accounts') {
+                  //   Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => AccountsManagementScreen()));
+                  // }
                 },
                 child: Container(
                   height: height * 0.07,

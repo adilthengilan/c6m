@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/layouting.dart';
 import 'package:tuch_trip_crms/src/db_connecting.dart';
+import 'package:tuch_trip_crms/src/view%20model/account_registration.dart';
 import 'package:tuch_trip_crms/src/view%20model/accounts_management_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/availability_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/booking_details.dart';
@@ -15,7 +16,6 @@ import 'package:tuch_trip_crms/src/view%20model/guest_management_provider.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
-  
 }
 
 class MyApp extends StatelessWidget {
@@ -39,7 +39,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => RegistrationProvider()),
         ChangeNotifierProvider(create: (context) => AvailabilityProvider()),
         ChangeNotifierProvider(create: (context) => DBConnecting()),
-        ChangeNotifierProvider(create: (context) => AccountsManagementProvider())
+        ChangeNotifierProvider<accountRegistration>(
+            create: (context) => accountRegistration()),
+        ChangeNotifierProvider(
+            create: (context) => AccountsManagementProvider()),
+        ChangeNotifierProvider(create: (context) => PayrollProvider())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
