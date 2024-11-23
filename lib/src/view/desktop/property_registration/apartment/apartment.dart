@@ -38,18 +38,18 @@ class Apartment extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         controller: person.apartmentPagecontroller,
         children: [
-          ApartmentPage1(goToPage: 1,pageController: person.apartmentPagecontroller,stayPalceName: 'apartments'),//page 1
-          ApartmentPage2(goToPage: 2,pageController: person.apartmentPagecontroller),//page 2
-          ApartmentPage3(goToPage: 3, backToPage: 1,pageController: person.apartmentPagecontroller),//page 3
-          ApartmentPage4(goToPage: 4, backToPage: 2,pageController: person.apartmentPagecontroller),//page 4
-          PropertyLocationPage(gotToNextPage: 5,goToBackPage: 3,pageController: person.apartmentPagecontroller),//page 5
-          PropertyDetailes(goToPage: 6, backToPage: 4,pageController: person.apartmentPagecontroller),//page 6
-          PropertyAminities(goToPage: 7, backToPage: 5,pageController: person.apartmentPagecontroller),//page 7
-          PropertyServices(goToPage: 8, backToPage: 6,pageController: person.apartmentPagecontroller),//page 8
-          StaffLanguageSelectionPart(goToPage: 9, backToPage: 7,pageController: person.apartmentPagecontroller),//page 9
-          PropertyRules(goToPage: 10, backToPage: 8,pageController: person.apartmentPagecontroller),//page 10
-          HostProfilePage(goToPage: 11,backToPage: 9,pageController: person.apartmentPagecontroller), //Page 11
-          ImageUploader(goToPage: 12,backToPage: 10, pageController: person.apartmentPagecontroller), //Page12
+          ApartmentPage1(goToPage: 1, pageController: person.apartmentPagecontroller, stayPalceName: 'apartments'),
+          ApartmentPage2(goToPage: 2, pageController: person.apartmentPagecontroller),
+          ApartmentPage3(goToPage: 3, backToPage: 1, pageController: person.apartmentPagecontroller),
+          ApartmentPage4(goToPage: 4, backToPage: 2, pageController: person.apartmentPagecontroller),
+          PropertyLocationPage(gotToNextPage: 5, goToBackPage: 3, pageController: person.apartmentPagecontroller),
+          PropertyDetailes(goToPage: 6, backToPage: 4, pageController: person.apartmentPagecontroller),
+          PropertyAminities(goToPage: 7, backToPage: 5, pageController: person.apartmentPagecontroller),
+          PropertyServices(goToPage: 8, backToPage: 6, pageController: person.apartmentPagecontroller), 
+          StaffLanguageSelectionPart(goToPage: 9, backToPage: 7, pageController: person.apartmentPagecontroller),
+          PropertyRules(goToPage: 10, backToPage: 8, pageController: person.apartmentPagecontroller), 
+          HostProfilePage(goToPage: 11, backToPage: 9, pageController: person.apartmentPagecontroller), 
+          ImageUploader(goToPage: 12, backToPage: 10, pageController: person.apartmentPagecontroller), 
           ReceiveBookings(goToPage: 13, backToPage: 11, pageController: person.apartmentPagecontroller),
           PricePerNight(goToPage: 14, backToPage: 12, pageController: person.apartmentPagecontroller),
           RatePlans(goToPage: 15, backToPage: 13, pageController: person.apartmentPagecontroller),
