@@ -39,7 +39,7 @@ class _DesktopViewState extends State<DesktopView> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => AccountRegistrationScreen(),
+            builder: (context) => Landingpage(),
             // const JobPostingScreen()
             // db.token != null?
             //  const HomePage()
