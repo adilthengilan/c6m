@@ -31,7 +31,7 @@ class PropertyRegistrationMenu extends StatelessWidget {
             ),
             sizedBox(height * 0.02, 0.0),
             Text(
-              'To get started, choose the type of property you want to list on Booking.com',
+              'To get started, choose the type of property you want to list on tuchtrip.com',
               style: GoogleFonts.montserrat(
                   fontSize: 18,
                   color: Colors.black,

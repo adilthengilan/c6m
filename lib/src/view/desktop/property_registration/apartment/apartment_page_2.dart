@@ -7,10 +7,13 @@ import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 class ApartmentPage2 extends StatelessWidget {
   final int goToPage;
   final PageController pageController;
-  const ApartmentPage2({super.key, required this.goToPage, required this.pageController});
+  const ApartmentPage2(
+      {super.key, required this.goToPage, required this.pageController});
 
   @override
   Widget build(BuildContext context) {
+    print('=================0000000000000000000000');
+
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Padding(
@@ -28,42 +31,50 @@ class ApartmentPage2 extends StatelessWidget {
             child: Column(
               children: [
                 sizedBox(height * 0.05, 0.0),
-                Icon(Icons.other_houses_outlined, size: height * 0.15, color: Colors.blue),
-                sizedbox(height * 0.1, 0.0),
+                Icon(Icons.other_houses_outlined,
+                    size: height * 0.15, color: Colors.blue),
+                sizedBox(height * 0.1, 0.0),
                 SizedBox(
                   width: width * 0.23,
-          //         child: Consumer<RegistrationProvider>(
-          //           builder: (context, person, child) =>
-          //           Text(person.numberofProperty > 1?  person.isSameAddress
-          //           ? 'Multiple apartments in the same location where guests can book an entire apartment'
-          //           :' Multiple apartments in different locations where guests can book an entire place'
-          //           : 'One apartment where guests can book the entire place',
-          //           style: largeTextStyleBold,
-          //           textAlign: TextAlign.center,
-          //           ),
-                  // ),
+                  child: Consumer<RegistrationProvider>(
+                    builder: (context, person, child) => Text(
+                      person.numberofProperty > 1
+                          ? person.isSameAddress
+                              ? 'Multiple apartments in the same location where guests can book an entire apartment'
+                              : ' Multiple apartments in different locations where guests can book an entire place'
+                          : 'One apartment where guests can book the entire place',
+                      style: largeTextStyleBold,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ),
                 const Spacer(),
                 SizedBox(
-                  height: height * 0.15, // Constrain the height to fit both buttons
+                  height:
+                      height * 0.15, // Constrain the height to fit both buttons
                   child: ListView.builder(
                     itemCount: 2, // Number of items
-                    scrollDirection: Axis.vertical, // Change to horizontal if needed
+                    scrollDirection:
+                        Axis.vertical, // Change to horizontal if needed
                     itemBuilder: (context, index) {
                       return Container(
                         height: height * 0.06,
                         width: width,
                         color: Colors.grey.shade100,
-                        margin: EdgeInsets.symmetric(horizontal: width * 0.04, vertical: height * 0.01),
+                        margin: EdgeInsets.symmetric(
+                            horizontal: width * 0.04, vertical: height * 0.01),
                         child: Consumer<RegistrationProvider>(
                           builder: (context, person, child) {
                             return TextButton(
                               style: TextButton.styleFrom(
                                 shape: RoundedRectangleBorder(
-                                  side: const BorderSide(color: Colors.deepPurpleAccent),
+                                  side: const BorderSide(
+                                      color: Colors.deepPurpleAccent),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                backgroundColor: index == 0 ? Colors.deepPurpleAccent : Colors.white,
+                                backgroundColor: index == 0
+                                    ? Colors.deepPurpleAccent
+                                    : Colors.white,
                               ),
                               onPressed: index == 0
                                   ? () {
@@ -73,8 +84,12 @@ class ApartmentPage2 extends StatelessWidget {
                                       Navigator.pop(context);
                                     },
                               child: Text(
-                                index == 0 ? 'Continue' : 'No, I need to make a change ',
-                                style: index == 0 ? smallTextStylewhiteBold : smallTextStyleBold,
+                                index == 0
+                                    ? 'Continue'
+                                    : 'No, I need to make a change ',
+                                style: index == 0
+                                    ? smallTextStylewhiteBold
+                                    : smallTextStyleBold,
                               ),
                             );
                           },
@@ -83,7 +98,7 @@ class ApartmentPage2 extends StatelessWidget {
                     },
                   ),
                 ),
-                sizedbox(height * 0.02, 0.0)
+                sizedBox(height * 0.02, 0.0)
               ],
             ),
           )
@@ -91,6 +106,11 @@ class ApartmentPage2 extends StatelessWidget {
       ),
     );
   }
+}
 
-  sizedbox(double d, double e) {}
+sizedBox(double d, double e) {
+  return SizedBox(
+    height: d,
+    width: e,
+  );
 }

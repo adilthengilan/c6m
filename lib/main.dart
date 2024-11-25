@@ -8,6 +8,7 @@ import 'package:tuch_trip_crms/src/view%20model/availability_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/booking_details.dart';
 import 'package:tuch_trip_crms/src/view%20model/booking_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/dashboard_provider.dart';
+import 'package:tuch_trip_crms/src/view%20model/fetching_details.dart';
 import 'package:tuch_trip_crms/src/view%20model/guest_detailes_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
@@ -43,10 +44,12 @@ class MyApp extends StatelessWidget {
             create: (context) => accountRegistration()),
         ChangeNotifierProvider(
             create: (context) => AccountsManagementProvider()),
-        ChangeNotifierProvider(create: (context) => PayrollProvider())
+        ChangeNotifierProvider(create: (context) => PayrollProvider()),
+        ChangeNotifierProvider<fetchingHotelsDetails>(
+            create: (context) => fetchingHotelsDetails())
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'tuchtrip-customer relationship management',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,

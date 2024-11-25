@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import "package:google_fonts/google_fonts.dart";
 import 'package:iconly/iconly.dart';
+import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/dashboard_provider.dart';
+import 'package:tuch_trip_crms/src/view%20model/fetching_details.dart';
 import 'package:tuch_trip_crms/src/view/desktop/desktop_view.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 
@@ -18,44 +20,52 @@ class DashBoard extends StatelessWidget {
           horizontal: width * 0.02,
           vertical: height * 0.04,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            sizedBox(height * 0.02, 0.0),
-            menuButtons(height, width),
-            sizedBox(height * 0.03, width * 0.6),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              physics: const NeverScrollableScrollPhysics(),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          availableRoomsTodayPesentage(width, height),
-                          sizedBox(0.0, width * 0.015),
-                          checkInandCheckOutpersentageStatus(height, width),
-                          sizedBox(0.0, width * 0.015)
-                        ],
-                      ),
-                      sizedBox(height * 0.03, 0.0),
-                      reviewsList(height, width),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      bookedRoomsTodayStatus(height, width),
-                      sizedBox(height, 0.0)
-                    ],
-                  ),
-                ],
+        child: Consumer<fetchingHotelsDetails>(
+          builder: (context, value, child) => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              sizedBox(height * 0.02, 0.0),
+              menuButtons(
+                  height,
+                  width,
+                  value.totalBookingsCount.length,
+                  value.availableRoomsCount,
+                  value.checkinDetails.length,
+                  value.checkoutDetails.length),
+              sizedBox(height * 0.03, width * 0.6),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                physics: const NeverScrollableScrollPhysics(),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            availableRoomsTodayPesentage(width, height),
+                            sizedBox(0.0, width * 0.015),
+                            checkInandCheckOutpersentageStatus(height, width),
+                            sizedBox(0.0, width * 0.015)
+                          ],
+                        ),
+                        sizedBox(height * 0.03, 0.0),
+                        reviewsList(height, width),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        bookedRoomsTodayStatus(height, width),
+                        sizedBox(height, 0.0)
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -64,7 +74,8 @@ class DashBoard extends StatelessWidget {
 //=======================================================================================================================
 //======================================== Side Menu Buttons ============================================================
 //=======================================================================================================================
-  Row menuButtons(double height, double width) {
+  Row menuButtons(double height, double width, int totalbooking,
+      int availableRoom, int checkIn, int checkOut) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: List.generate(
@@ -74,60 +85,68 @@ class DashBoard extends StatelessWidget {
             {
               'icon': IconlyLight.bookmark,
               'color': Colors.purpleAccent.shade100,
-              'text': 'New Bookings',
+              'count': totalbooking,
+              'text': 'Total Bookings',
               'ontap': () {},
             },
             {
               'icon': IconlyLight.calendar,
               'color': Colors.greenAccent.shade100,
-              'text': 'Schedule Room',
+              'count': availableRoom,
+              'text': 'Available Room',
               'ontap': () {},
             },
             {
               'icon': Icons.logout_outlined,
               'color': Colors.orangeAccent.shade100,
+              'count': checkIn,
               'text': 'Check-In',
               'ontap': () {},
             },
             {
               'icon': Icons.login_outlined,
               'color': Colors.pinkAccent.shade100,
+              'count': checkOut,
               'text': 'Check-Out',
               'ontap': () {},
             },
           ];
+          final countList = [];
           return Padding(
             padding: EdgeInsets.only(right: width * 0.0335),
             child: !isLoading
-                ? CustomContainer(
-                    height: height * 0.18,
-                    width: width * 0.17,
-                    color: boxButtons[index]['color'] as Color,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: width * 0.02,
-                      vertical: height * 0.035,
-                    ),
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: true,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('872', style: largeTextStyleBold),
-                            sizedBox(height * 0.01, 0.0),
-                            Text(boxButtons[index]['text'] as String,
-                                style: smallTextStyleBold)
-                          ],
-                        ),
-                        Icon(
-                          boxButtons[index]['icon'] as IconData,
-                          color: Colors.black,
-                          size: height * 0.06,
-                        ),
-                      ],
+                ? Consumer<fetchingHotelsDetails>(
+                    builder: (context, value, child) => CustomContainer(
+                      height: height * 0.18,
+                      width: width * 0.17,
+                      color: boxButtons[index]['color'] as Color,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: width * 0.02,
+                        vertical: height * 0.035,
+                      ),
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: true,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('${boxButtons[index]['count']}',
+                                  style: largeTextStyleBold),
+                              sizedBox(height * 0.01, 0.0),
+                              Text(boxButtons[index]['text'] as String,
+                                  style: smallTextStyleBold)
+                            ],
+                          ),
+                          Icon(
+                            boxButtons[index]['icon'] as IconData,
+                            color: Colors.black,
+                            size: height * 0.06,
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 : LoadingWidget(
@@ -146,28 +165,31 @@ class DashBoard extends StatelessWidget {
 //====================================================================================================================
   Widget availableRoomsTodayPesentage(double width, double height) {
     return !isLoading
-        ? CustomContainer(
-            width: width * 0.18,
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(vertical: height * 0.03),
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: true,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: height * 0.1,
-                  width: width * 0.07,
-                  child: Image(
-                    fit: BoxFit.fitHeight,
-                    image: AssetImage(
-                        'assets/images/Screenshot 2024-07-02 164934.png'),
+        ? Consumer<fetchingHotelsDetails>(
+            builder: (context, value, child) => CustomContainer(
+              width: width * 0.18,
+              color: Colors.white,
+              padding: EdgeInsets.symmetric(vertical: height * 0.03),
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: true,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: height * 0.1,
+                    width: width * 0.07,
+                    child: Image(
+                      fit: BoxFit.fitHeight,
+                      image: AssetImage(
+                          'assets/images/Screenshot 2024-07-02 164934.png'),
+                    ),
                   ),
-                ),
-                sizedBox(height * 0.01, 0.0),
-                Text('785', style: largeTextStyleBold),
-                sizedBox(height * 0.006, 0.0),
-                Text('Available Rooms Today', style: smallTextStyle),
-              ],
+                  sizedBox(height * 0.01, 0.0),
+                  Text('${value.availableRoomsCount}',
+                      style: largeTextStyleBold),
+                  sizedBox(height * 0.006, 0.0),
+                  Text('Available Rooms Today', style: smallTextStyle),
+                ],
+              ),
             ),
           )
         : LoadingWidget(

@@ -15,6 +15,7 @@ import 'package:tuch_trip_crms/src/view/desktop/accounts_management/accounts_man
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/hotel_profile.dart/profile_page.dart';
 import 'package:tuch_trip_crms/src/view/desktop/job_vacancy/job_listing.dart';
+import 'package:tuch_trip_crms/src/view/desktop/landingPage.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_menu.dart';
 import 'package:tuch_trip_crms/src/view/desktop/rooms/rooms.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';

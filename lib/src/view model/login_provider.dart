@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:html';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:flutter/material.dart';
@@ -137,9 +136,10 @@ class LoginProvider extends ChangeNotifier {
       );
 
       if (response.statusCode == 200) {
-        tokenList = jsonDecode(response.body);
+        Map<String, dynamic> tokenListS = jsonDecode(response.body);
         // token = response.body;
-        token = tokenList[0]['token'];
+        tokenList = tokenListS[0]['token'];
+        print(tokenList);
         notifyListeners();
 
         saveToPreferences('authtoken', tokenList);

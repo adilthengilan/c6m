@@ -330,23 +330,23 @@ class LoginScreen extends StatelessWidget {
                   //   // Debug print to check the condition
                   //   // print('dbase.is Logined is false');
                   // }
-                  login.loginAccount(
-                      login.userNameController.text,
-                      login.emailController.text,
-                      login.passwordController.text,
-                      login.mobileNumberController.text);
-                  // if (value.dropdownValue == 'Reception') {
-                  //   Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //         builder: (context) => HomePage(),
-                  //       ));
-                  // } else if (value.dropdownValue == 'Accounts') {
-                  //   Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //           builder: (context) => AccountsManagementScreen()));
-                  // }
+                  // login.loginAccount(
+                  //     login.userNameController.text,
+                  //     login.emailController.text,
+                  //     login.passwordController.text,
+                  //     login.mobileNumberController.text);
+                  if (value.dropdownValue == 'Reception') {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ));
+                  } else if (value.dropdownValue == 'Accounts') {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AccountsManagementScreen()));
+                  }
                 },
                 child: Container(
                   height: height * 0.07,
