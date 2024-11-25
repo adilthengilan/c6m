@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginProvider extends ChangeNotifier {
+  bool regorlogin = false;
   PageController accountRegistrationPage = PageController();
   TextEditingController mobileNumberController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
@@ -17,6 +18,11 @@ class LoginProvider extends ChangeNotifier {
   var status;
   String? token;
   List<dynamic> tokenList = [];
+
+  void pagebool() {
+    regorlogin = !regorlogin;
+    notifyListeners();
+  }
 
 // Save data
   Future<void> saveToPreferences(String key, value) async {

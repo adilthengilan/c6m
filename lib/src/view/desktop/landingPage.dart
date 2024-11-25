@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Account_Registration/account_registration.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 
@@ -16,6 +18,8 @@ class _LandingpageState extends State<Landingpage> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final login = Provider.of<LoginProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
           leading: SizedBox(),
@@ -47,6 +51,7 @@ class _LandingpageState extends State<Landingpage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => AccountRegistrationScreen()));
+                login.pagebool();
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -133,6 +138,7 @@ class _LandingpageState extends State<Landingpage> {
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           AccountRegistrationScreen()));
+                              login.pagebool();
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -335,6 +341,7 @@ class _LandingpageState extends State<Landingpage> {
                             MaterialPageRoute(
                                 builder: (context) =>
                                     AccountRegistrationScreen()));
+                        login.pagebool();
                       },
                       child: Container(
                         decoration: BoxDecoration(

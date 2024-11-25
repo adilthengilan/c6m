@@ -15,6 +15,7 @@ class AccountRegistrationScreen extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final login = Provider.of<LoginProvider>(context, listen: false);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Consumer<DBConnecting>(
@@ -113,4 +114,12 @@ class AccountRegistrationScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+void pagetaking(BuildContext context) {
+  final login = Provider.of<LoginProvider>(context, listen: false);
+
+  if (login.regorlogin == true) {
+    login.goToPage(1, login.accountRegistrationPage, true);
+  } else {}
 }

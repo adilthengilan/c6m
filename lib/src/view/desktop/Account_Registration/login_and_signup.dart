@@ -7,9 +7,11 @@ import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/db_connecting.dart';
 import 'package:tuch_trip_crms/src/view%20model/accounts_management_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
+import 'package:tuch_trip_crms/src/view/desktop/Account_Registration/account_registration.dart';
 import 'package:tuch_trip_crms/src/view/desktop/accounts_management/accounts_management_screen.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/desktop_view.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_menu.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -58,6 +60,7 @@ class SignUpScreen extends StatelessWidget {
                       controller: login.userNameController,
                       decoration: InputDecoration(
                           hintText: 'User Name',
+                          hintStyle: GoogleFonts.poppins(),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12))),
                     ),
@@ -76,6 +79,7 @@ class SignUpScreen extends StatelessWidget {
                       ignorePointers: false,
                       decoration: InputDecoration(
                         hintText: 'Mobile Number',
+                        hintStyle: GoogleFonts.poppins(),
                         labelStyle: const TextStyle(color: Colors.black),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12)),
@@ -91,6 +95,7 @@ class SignUpScreen extends StatelessWidget {
                       controller: login.emailController,
                       decoration: InputDecoration(
                         hintText: 'Email',
+                        hintStyle: GoogleFonts.poppins(),
                         labelStyle: const TextStyle(color: Colors.black),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12)),
@@ -108,6 +113,7 @@ class SignUpScreen extends StatelessWidget {
                         obscureText: person.isVisiblePassword,
                         decoration: InputDecoration(
                           hintText: 'Password',
+                          hintStyle: GoogleFonts.poppins(),
                           suffixIcon: IconButton(
                             onPressed: () {
                               person.showPassword();
@@ -147,11 +153,25 @@ class SignUpScreen extends StatelessWidget {
                       //   // Debug print to check the condition
                       //   // print('dbase.isRegistered is false');
                       // }
-                      login.registerAccount(
-                          login.userNameController.text,
-                          login.emailController.text,
-                          login.passwordController.text,
-                          login.mobileNumberController.text);
+                      if (login.userNameController.text.isEmpty ||
+                          login.emailController.text.isEmpty ||
+                          login.passwordController.text.isEmpty ||
+                          login.mobileNumberController.text.isEmpty) {
+                      } else {
+                        login.registerAccount(
+                            login.userNameController.text,
+                            login.emailController.text,
+                            login.passwordController.text,
+                            login.mobileNumberController.text);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const PropertyRegistrationMenu(),
+                          ),
+                        );
+                      }
+
                       // login.goToPage(
                       //     1, login.accountRegistrationPage, dbase.isRegistered);
                     },
@@ -215,6 +235,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    pagetaking(context);
+
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final dbase = Provider.of<DBConnecting>(context, listen: false);
@@ -258,6 +280,7 @@ class LoginScreen extends StatelessWidget {
                 ignorePointers: false,
                 decoration: InputDecoration(
                   hintText: 'Mobile Number',
+                  hintStyle: GoogleFonts.poppins(),
                   labelStyle: const TextStyle(color: Colors.black),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12)),
@@ -274,6 +297,7 @@ class LoginScreen extends StatelessWidget {
                   obscureText: person.isVisiblePassword,
                   decoration: InputDecoration(
                     hintText: 'Password',
+                    hintStyle: GoogleFonts.poppins(),
                     suffixIcon: IconButton(
                       onPressed: () {
                         person.showPassword();
@@ -412,7 +436,10 @@ class _DropdownExampleState extends State<DropdownExample> {
     return Consumer<AccountsManagementProvider>(
       builder: (context, value, child) => DropdownButton<String>(
         value: value.dropdownValue,
-        hint: Text('Select Department  '),
+        hint: Text(
+          'Select Department  ',
+          style: GoogleFonts.poppins(),
+        ),
         icon: Icon(Icons.arrow_downward),
         elevation: 16,
         style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
@@ -423,8 +450,10 @@ class _DropdownExampleState extends State<DropdownExample> {
           // });
           value.setDropDownValue(newValue);
         },
-        items: <String>['Reception', 'Accounts', 'HR', 'PR']
-            .map<DropdownMenuItem<String>>((String value) {
+        items: <String>[
+          'Reception',
+          'Accounts',
+        ].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(value),
