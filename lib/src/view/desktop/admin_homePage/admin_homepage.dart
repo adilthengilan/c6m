@@ -23,42 +23,6 @@ import 'package:tuch_trip_crms/src/view/desktop/rooms/rooms.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 import 'package:tuch_trip_crms/src/view/widgets/show_dialoug.dart';
 
-class DesktopView extends StatefulWidget {
-  const DesktopView({super.key});
-
-  @override
-  State<DesktopView> createState() => _DesktopViewState();
-}
-
-class _DesktopViewState extends State<DesktopView> {
-  @override
-  Widget build(BuildContext context) {
-    final db = Provider.of<DBConnecting>(context, listen: false);
-    db.getToken();
-    Timer(
-      const Duration(seconds: 1),
-      () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Landingpage(),
-            // const JobPostingScreen()
-            // db.token != null?
-            //  const HomePage()
-            // : const AccountRegistrationScreen(),
-          ),
-        );
-      },
-    );
-    return const Scaffold(
-      body: Center(
-          child: RefreshProgressIndicator(
-              backgroundColor: Colors.white, color: Colors.black)),
-    );
-    //
-  }
-}
-
 ///////////==============================================================================================================
 ///////////==============================================================================================================
 ///////////==============================================================================================================
@@ -75,8 +39,8 @@ TextEditingController occupentChecInCountryController = TextEditingController();
 ///////////==============================================================================================================
 ///////////==============================================================================================================
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class Admin_HomePage extends StatelessWidget {
+  const Admin_HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +61,7 @@ class HomePage extends StatelessWidget {
           children: [
             navigationSideButtons(height, width),
             dashboardProvider.navigationButtonsSelectedIndex == 0
-                ? const DashBoard()
+                ? const Concrierge()
                 : dashboardProvider.navigationButtonsSelectedIndex == 1
                     ? const RoomScreen()
                     : dashboardProvider.navigationButtonsSelectedIndex == 2
@@ -252,14 +216,14 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: Consumer<DashboardProvider>(
                     builder: (context, person, child) => Text(
                       person.navigationButtonsSelectedIndex == 0
-                          ? 'Dashboard'
+                          ? 'Concierge'
                           : person.navigationButtonsSelectedIndex == 1
                               ? 'Room'
                               : person.navigationButtonsSelectedIndex == 2
                                   ? 'Booking'
                                   : person.navigationButtonsSelectedIndex == 3
                                       ? 'Guest'
-                                      : 'Concierge',
+                                      : '',
                       style: GoogleFonts.montserrat(
                         fontSize: 22,
                         fontWeight: FontWeight.w600,

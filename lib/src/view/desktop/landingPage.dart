@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:tuch_trip_crms/app_router.dart';
 import 'package:tuch_trip_crms/src/view%20model/login_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/Account_Registration/account_registration.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
@@ -47,10 +51,17 @@ class _LandingpageState extends State<Landingpage> {
           actions: [
             InkWell(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AccountRegistrationScreen()));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => AccountRegistrationScreen()));
+                GoRouter.of(context).pushNamed('register');
+                Timer(
+                  const Duration(seconds: 3),
+                  () {
+                    need_refreshPage();
+                  },
+                );
                 login.pagebool();
               },
               child: Container(
@@ -69,10 +80,19 @@ class _LandingpageState extends State<Landingpage> {
             sizedBox(0.0, 10.0),
             InkWell(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AccountRegistrationScreen()));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => AccountRegistrationScreen()));
+
+                GoRouter.of(context).pushNamed('login');
+                Timer(
+                  const Duration(seconds: 3),
+                  () {
+                    need_refreshPage();
+                  },
+                );
+                print(GoRouter.of(context).location);
               },
               child: Container(
                 decoration: BoxDecoration(

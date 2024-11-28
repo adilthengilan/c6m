@@ -12,6 +12,11 @@ class Layouting extends StatefulWidget {
 class _HomePageState extends State<Layouting> {
   @override
   Widget build(BuildContext context) {
+    void initState() {
+      super.initState();
+      setState(() {});
+    }
+
     return Scaffold(
       body: ResponsiveLayout(
           DesktopView: DesktopView(),

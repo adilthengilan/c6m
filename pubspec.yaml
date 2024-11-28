@@ -49,8 +49,9 @@ dependencies:
   image_picker_web: ^4.0.0
   http_requests: ^3.2.0
   flutter_secure_storage: ^9.2.2
-
-dev_dependencies:
+  go_router: ^5.2.0
+  universal_html: ^2.2.4
+dev_dependencis:
   flutter_test:
     sdk: flutter
 

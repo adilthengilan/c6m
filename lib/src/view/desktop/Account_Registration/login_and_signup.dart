@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/db_connecting.dart';
@@ -360,16 +361,11 @@ class LoginScreen extends StatelessWidget {
                   //     login.passwordController.text,
                   //     login.mobileNumberController.text);
                   if (value.dropdownValue == 'Reception') {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ));
+                    navigateToLogin(context, 'reception');
                   } else if (value.dropdownValue == 'Accounts') {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AccountsManagementScreen()));
+                    navigateToLogin(context, 'accounts');
+                  } else if (value.dropdownValue == 'Admin') {
+                    navigateToLogin(context, 'admin');
                   }
                 },
                 child: Container(
@@ -451,6 +447,7 @@ class _DropdownExampleState extends State<DropdownExample> {
           value.setDropDownValue(newValue);
         },
         items: <String>[
+          'Admin',
           'Reception',
           'Accounts',
         ].map<DropdownMenuItem<String>>((String value) {
@@ -462,4 +459,9 @@ class _DropdownExampleState extends State<DropdownExample> {
       ),
     );
   }
+}
+
+void navigateToLogin(BuildContext context, navigation) {
+  // Replace the current route with '/login'
+  context.replace('/${navigation}');
 }
