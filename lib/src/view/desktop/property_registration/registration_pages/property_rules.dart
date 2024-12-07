@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_1.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_detailes.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_pages/property_cout.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_pages/property_detailes.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 
 class PropertyRules extends StatelessWidget {
@@ -27,8 +27,7 @@ class PropertyRules extends StatelessWidget {
             CustomContainer(
               boxShadow: true,
               width: width * 0.35,
-              padding: EdgeInsets.symmetric(
-                  vertical: height * 0.025, horizontal: width * 0.02),
+              padding: EdgeInsets.symmetric(vertical: height * 0.025, horizontal: width * 0.02),
               color: Colors.white,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,13 +35,9 @@ class PropertyRules extends StatelessWidget {
                   sizedBox(height * 0.04, width),
                   Text('House rules', style: largeTextStyleBold),
                   sizedBox(height * 0.04, width),
-                  Text('What are your check-in and check-out times?',
-                      style: mediumTextStyleBold),
+                  Text('What are your check-in and check-out times?', style: mediumTextStyleBold),
                   sizedBox(height * 0.02, 0.0),
-                  Text(
-                    'Check in',
-                    style: smallTextStyleBold
-                  ),
+                  Text('Check in', style: smallTextStyleBold),
                   Row(
                     children: <Widget>[
                       Expanded(
@@ -51,28 +46,26 @@ class PropertyRules extends StatelessWidget {
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: List.generate(2, (index) => 
-                                Column(
+                              children: List.generate(
+                                2,
+                                (index) => Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(index == 0? 'From' : 'Until'),
+                                    Text(index == 0 ? 'From' : 'Until'),
                                     sizedBox(height * 0.006, 0.0),
                                     SizedBox(
                                       width: width * 0.13,
                                       child: Consumer<RegistrationProvider>(
-                                        builder: (context, consumer, child) =>
-                                        DropdownButtonFormField<String>(
+                                        builder: (context, consumer, child) => DropdownButtonFormField<String>(
                                           dropdownColor: Colors.white,
-                                        decoration: InputDecoration(
-                                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                                      ),
-                                        value: index ==0 ? consumer.checkInFrom: consumer.checkInUntil,
-                                        onChanged: (String? newValue) {
-                                          index == 0?
-                                        consumer.setCheckInFrom(newValue!) : 
-                                        consumer.setCheckInUntil(newValue!);
-                                        },
-                                        items: [
+                                          decoration: InputDecoration(
+                                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                                          ),
+                                          value: index == 0 ? consumer.checkInFrom : consumer.checkInUntil,
+                                          onChanged: (String? newValue) {
+                                            index == 0 ? consumer.setCheckInFrom(newValue!) : consumer.setCheckInUntil(newValue!);
+                                          },
+                                          items: [
                                             '00:00',
                                             '01:00',
                                             '02:00',
@@ -99,9 +92,9 @@ class PropertyRules extends StatelessWidget {
                                             '23:00'
                                           ].map<DropdownMenuItem<String>>((String value) {
                                             return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(value),
-                                           );
+                                              value: value,
+                                              child: Text(value),
+                                            );
                                           }).toList(),
                                         ),
                                       ),
@@ -111,31 +104,29 @@ class PropertyRules extends StatelessWidget {
                               ),
                             ),
                             sizedBox(height * 0.03, 0.0),
-                            Text('Check out',style: smallTextStyleBold),
+                            Text('Check out', style: smallTextStyleBold),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: List.generate(2, (index) => 
-                                Column(
+                              children: List.generate(
+                                2,
+                                (index) => Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(index == 0? 'From' : 'Until'),
+                                    Text(index == 0 ? 'From' : 'Until'),
                                     sizedBox(height * 0.006, 0.0),
                                     SizedBox(
                                       width: width * 0.13,
                                       child: Consumer<RegistrationProvider>(
-                                        builder: (context, consumer, child) =>
-                                        DropdownButtonFormField<String>(
+                                        builder: (context, consumer, child) => DropdownButtonFormField<String>(
                                           dropdownColor: Colors.white,
-                                        decoration: InputDecoration(
-                                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                                      ),
-                                        value: index == 0? consumer.checkOutFrom : consumer.checkOutUntil,
-                                        onChanged: (String? newValue) {
-                                          index == 0?
-                                           consumer.setCheckOutFrom(newValue!) : 
-                                           consumer.setCheckOutUntil(newValue!);
-                                        },
-                                        items: [
+                                          decoration: InputDecoration(
+                                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                                          ),
+                                          value: index == 0 ? consumer.checkOutFrom : consumer.checkOutUntil,
+                                          onChanged: (String? newValue) {
+                                            index == 0 ? consumer.setCheckOutFrom(newValue!) : consumer.setCheckOutUntil(newValue!);
+                                          },
+                                          items: [
                                             '00:00',
                                             '01:00',
                                             '02:00',
@@ -162,9 +153,9 @@ class PropertyRules extends StatelessWidget {
                                             '23:00'
                                           ].map<DropdownMenuItem<String>>((String value) {
                                             return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(value),
-                                           );
+                                              value: value,
+                                              child: Text(value),
+                                            );
                                           }).toList(),
                                         ),
                                       ),
@@ -176,66 +167,73 @@ class PropertyRules extends StatelessWidget {
                             sizedBox(height * 0.04, 0.0),
                             const Divider(),
                             sizedBox(height * 0.03, 0.0),
-                            Text('Smoking allowed',style: smallTextStyleBold),
+                            Text('Smoking allowed', style: smallTextStyleBold),
                             sizedBox(height * 0.02, 0.0),
-                  Consumer<RegistrationProvider>(
-                    builder: (context, consumer, child) => 
-                    RadioButtons(
-                      groupValue: consumer.issmokingAllowed,
-                       onChanged1:(value) {consumer.setSmokingAllowed(value);},
-                        onChanged2: (value) {consumer.setSmokingAllowed(value);
-                              },
-                             ),
+                            Consumer<RegistrationProvider>(
+                              builder: (context, consumer, child) => RadioButtons(
+                                groupValue: consumer.issmokingAllowedHouseRules,
+                                onChanged1: (value) {
+                                  consumer.setSmokingAllowed(value);
+                                },
+                                onChanged2: (value) {
+                                  consumer.setSmokingAllowed(value);
+                                },
+                              ),
                             ),
                             sizedBox(height * 0.04, 0.0),
-                            Text('Do you allow Pets?',style: smallTextStyleBold),
+                            Text('Do you allow Pets?', style: smallTextStyleBold),
                             sizedBox(height * 0.02, 0.0),
-                  Consumer<RegistrationProvider>(
-                    builder: (context, consumer, child) => 
-                    RadioButtons(
-                      groupValue: consumer.isallowPets,
-                       onChanged1:(value) {consumer.setPetsAllowed(value);
-                       },
-                        onChanged2: (value) {consumer.setPetsAllowed(value);
-                              },
-                             ),
+                            Consumer<RegistrationProvider>(
+                              builder: (context, consumer, child) => RadioButtons(
+                                groupValue: consumer.isallowPetshouseRules,
+                                onChanged1: (value) {
+                                  consumer.setPetsAllowed(value);
+                                },
+                                onChanged2: (value) {
+                                  consumer.setPetsAllowed(value);
+                                },
+                              ),
                             ),
                             sizedBox(height * 0.04, 0.0),
-                            Text('Parties/events allowed',style: smallTextStyleBold),
+                            Text('Parties/events allowed', style: smallTextStyleBold),
                             sizedBox(height * 0.02, 0.0),
-                  Consumer<RegistrationProvider>(
-                    builder: (context, consumer, child) => 
-                    RadioButtons(
-                      groupValue: consumer.iseventsAllowed,
-                       onChanged1:(value) {consumer.setEventAllowed(value);
-                       },
-                        onChanged2: (value) {consumer.setEventAllowed(value);
-                              },
-                             ),
+                            Consumer<RegistrationProvider>(
+                              builder: (context, consumer, child) => RadioButtons(
+                                groupValue: consumer.iseventsAllowedHouseRules,
+                                onChanged1: (value) {
+                                  consumer.setEventAllowed(value);
+                                },
+                                onChanged2: (value) {
+                                  consumer.setEventAllowed(value);
+                                },
+                              ),
                             ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  sizedBox(height* 0.03, width),
+                  sizedBox(height * 0.03, width),
                 ],
               ),
             ),
             sizedBox(height * 0.03, width),
-      Row(
-        children: [
-          backButton(height, width, (){
-            person.goToPage(backToPage, pageController);
-          },
-          ),
-          sizedBox(0.0, width * 0.02),
-          continueButton(height, width, true, (){
-            person.goToPage(goToPage, pageController);
-          })
-        ],
-      ),
-      sizedBox(height *0.2, width),
+            Row(
+              children: [
+                backButton(
+                  height,
+                  width,
+                  () {
+                    person.goToPage(backToPage, pageController);
+                  },
+                ),
+                sizedBox(0.0, width * 0.005),
+                continueButton(height, width, true, () {
+                  person.goToPage(goToPage, pageController);
+                })
+              ],
+            ),
+            sizedBox(height * 0.2, width),
           ],
         ),
       ),

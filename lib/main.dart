@@ -6,7 +6,6 @@ import 'package:tuch_trip_crms/layouting.dart';
 import 'package:tuch_trip_crms/src/db_connecting.dart';
 import 'package:tuch_trip_crms/src/view%20model/account_registration.dart';
 import 'package:tuch_trip_crms/src/view%20model/accounts_management_provider.dart';
-import 'package:tuch_trip_crms/src/view%20model/availability_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/booking_details.dart';
 import 'package:tuch_trip_crms/src/view%20model/booking_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/dashboard_provider.dart';
@@ -44,15 +43,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => GuestManagementProvider()),
         ChangeNotifierProvider(create: (context) => RoomsProvider()),
         ChangeNotifierProvider(create: (context) => RegistrationProvider()),
-        ChangeNotifierProvider(create: (context) => AvailabilityProvider()),
         ChangeNotifierProvider(create: (context) => DBConnecting()),
-        ChangeNotifierProvider<accountRegistration>(
-            create: (context) => accountRegistration()),
-        ChangeNotifierProvider(
-            create: (context) => AccountsManagementProvider()),
+        ChangeNotifierProvider<accountRegistration>(create: (context) => accountRegistration()),
+        ChangeNotifierProvider(create: (context) => AccountsManagementProvider()),
         ChangeNotifierProvider(create: (context) => PayrollProvider()),
-        ChangeNotifierProvider<fetchingHotelsDetails>(
-            create: (context) => fetchingHotelsDetails())
+        ChangeNotifierProvider<fetchingHotelsDetails>(create: (context) => fetchingHotelsDetails())
       ],
       child: MaterialApp.router(
         title: 'tuchtrip-customer relationship management',

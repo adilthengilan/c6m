@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_1.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_pages/property_cout.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 
 class ImageUploader extends StatelessWidget {
@@ -34,7 +34,7 @@ class ImageUploader extends StatelessWidget {
                   sizedBox(height * 0.06, 0.0),
                   SizedBox(
                     width: width * 0.35,
-                    child: Text(
+                    child: const Text(
                       'Upload at least 5 photos of your property. The more you upload, the more likely you are to get bookings. You can add more later.',
                       style: TextStyle(fontSize: 16.0),
                       textAlign: TextAlign.start,
@@ -62,13 +62,13 @@ class ImageUploader extends StatelessWidget {
                           ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
-                                side: BorderSide(color: Colors.purpleAccent),
+                                side: const BorderSide(color: Colors.purpleAccent),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 )),
                             onPressed: person.galleryImagePicker,
-                            icon: Icon(Icons.upload),
-                            label: Text('Upload photos'),
+                            icon: const Icon(Icons.upload),
+                            label: const Text('Upload photos'),
                           ),
                           sizedBox(height * 0.02, 0.0),
                           Text('jpg/jpeg or png, maximum 47MB each', style: smallTextStyle),
@@ -80,7 +80,7 @@ class ImageUploader extends StatelessWidget {
                   Consumer<RegistrationProvider>(
                     builder: (context, person, child) => SizedBox(
                       width: width * 0.33,
-                      child: person.propertyImages!.isNotEmpty && person.propertyImages != null
+                      child: person.propertyImagesList!.isNotEmpty && person.propertyImagesList != null
                           ? GridView.builder(
                               shrinkWrap: true,
                               padding: EdgeInsets.symmetric(horizontal: width * 0.02),
@@ -89,32 +89,30 @@ class ImageUploader extends StatelessWidget {
                                 crossAxisSpacing: width * 0.03,
                                 mainAxisSpacing: height * 0.04,
                               ),
-                              itemCount: person.propertyImages!.length,
+                              itemCount: person.propertyImagesList!.length,
                               itemBuilder: (context, index) {
                                 return CustomContainer(
                                   boxShadow: false,
                                   height: height * 0.3,
                                   width: width * 0.3,
                                   color: Colors.grey.shade200,
-                                  image: DecorationImage(fit: BoxFit.fill, image: MemoryImage(person.propertyImages![index])),
+                                  image: DecorationImage(fit: BoxFit.fill, image: MemoryImage(person.propertyImagesList![index])),
                                   child: Align(
                                     alignment: Alignment.topRight,
                                     child: Padding(
                                       padding: EdgeInsets.only(top: height * 0.01, right: width * 0.01),
                                       child: IconButton.outlined(
-                                          style: IconButton.styleFrom(side: BorderSide(color: Colors.deepPurpleAccent)),
+                                          style: IconButton.styleFrom(side: const BorderSide(color: Colors.deepPurpleAccent)),
                                           onPressed: () {
                                             person.removeImage(index);
                                           },
-                                          icon: Icon(Icons.close, color: Colors.white)),
+                                          icon: const Icon(Icons.close, color: Colors.white)),
                                     ),
                                   ),
                                 );
                               },
                             )
-                          : Container(
-                              height: height * 0.01,
-                            ),
+                          : Container(height: height * 0.01),
                     ),
                   )
                 ],
@@ -130,12 +128,20 @@ class ImageUploader extends StatelessWidget {
                     person.goToPage(backToPage, pageController);
                   },
                 ),
-                sizedBox(0.0, width * 0.02),
-                continueButton(height, width, true, () {
-                  person.goToPage(goToPage, pageController);
-                })
+                sizedBox(0.0, width * 0.005),
+                Consumer<RegistrationProvider>(
+                  builder: (context, person, child) => continueButton(
+                    height,
+                    width,
+                    person.propertyImagesList != null && person.propertyImagesList!.isNotEmpty,
+                    () {
+                      person.goToPage(goToPage, pageController);
+                    },
+                  ),
+                )
               ],
             ),
+            sizedBox(height * 0.06, 0.0)
           ],
         ),
       ),

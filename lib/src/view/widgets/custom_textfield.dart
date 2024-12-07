@@ -12,7 +12,8 @@ class CustomTextField extends StatelessWidget {
   final BorderSide? enabledBorder;
   final TextStyle? labelTextStyle;
   final void Function(String)? onSubmiting;
-  final void Function(String)?  onChanged;
+  final void Function(String)? onChanged;
+  final void Function(PointerDownEvent)? onTapOutside;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
 
@@ -22,14 +23,15 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.borderRadius = 8.0, // Default value for borderRadius
     this.borderSide = const BorderSide(color: Colors.transparent), // Default value for borderSide
-    this.suffixIcon, 
-    this.enabledBorder = const BorderSide(color: Colors.transparent), 
-    this.labelTextStyle = const TextStyle(color: Colors.grey,fontSize: 14,fontWeight: FontWeight.w400),
-    this.onSubmiting, 
-    this.onChanged, 
+    this.suffixIcon,
+    this.enabledBorder = const BorderSide(color: Colors.transparent),
+    this.labelTextStyle = const TextStyle(color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w400),
+    this.onSubmiting,
+    this.onChanged,
     this.prefixIcon,
-    this.inputFormatters, 
-    this.keyboardType
+    this.inputFormatters,
+    this.keyboardType,
+    this.onTapOutside,
   });
 
   @override
@@ -42,6 +44,7 @@ class CustomTextField extends StatelessWidget {
         color: Colors.black,
       ),
       onSubmitted: onSubmiting,
+      onTapOutside: onTapOutside,
       keyboardType: keyboardType,
       inputFormatters: inputFormatters,
       onChanged: onChanged,

@@ -1,30 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:tuch_trip_crms/src/view%20model/availability_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
-import 'package:tuch_trip_crms/src/view/Common%20widgets/common_widgets.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
+import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 
 class Availability extends StatelessWidget {
   final int goToPage;
   final int backToPage;
   final PageController pageController;
-  const Availability(
-      {super.key,
-      required this.goToPage,
-      required this.backToPage,
-      required this.pageController});
+  const Availability({super.key, required this.goToPage, required this.backToPage, required this.pageController});
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    TextEditingController webcontroller = TextEditingController();
-    final availability =
-        Provider.of<RegistrationProvider>(context, listen: false);
+    final provider = Provider.of<RegistrationProvider>(context, listen: false);
 
     return Padding(
       padding: EdgeInsets.only(left: width * 0.1, bottom: height * 0.06),
@@ -41,8 +35,7 @@ class Availability extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: height * 0.02),
                 color: Colors.white,
                 child: Padding(
-                  padding:
-                      EdgeInsets.only(top: height * 0.01, left: width * 0.01),
+                  padding: EdgeInsets.only(top: height * 0.01, left: width * 0.02),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -55,66 +48,52 @@ class Availability extends StatelessWidget {
                           fontSize: 26,
                         ),
                       ),
-                      sizedBox(height * 0.03, width),
-                      Text("When is the first date that guests can check in?",
-                          style: smallTextStyleBold),
-                      SizedBox(height: height * 0.02),
-                      Consumer<AvailabilityProvider>(
-                        builder: (context, availabilityProvider, child) =>
-                            Column(
+                      sizedBox(height * 0.04, width),
+                      Text("When is the first date that guests can check in?", style: smallTextStyleBold),
+                      SizedBox(height: height * 0.01),
+                      Consumer<RegistrationProvider>(
+                        builder: (context, person, child) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               children: [
                                 Expanded(
                                   child: RadioListTile<bool>(
-                                    title: Text("As soon as possible",
-                                        style: smallTextStyle),
+                                    title: Text("As soon as possible", style: smallTextStyle),
                                     value: true,
-                                    groupValue:
-                                        availabilityProvider.asSoonAsPossible,
+                                    groupValue: person.asSoonAsPossible,
                                     onChanged: (value) {
-                                      availabilityProvider
-                                          .setAsSoonAsPossible(value!);
+                                      person.setAsSoonAsPossible(value!);
                                     },
                                   ),
                                 ),
                                 Expanded(
                                   child: RadioListTile<bool>(
-                                    title: Text("On a specific date",
-                                        style: smallTextStyle),
+                                    title: Text("On a specific date", style: smallTextStyle),
                                     value: false,
-                                    groupValue:
-                                        availabilityProvider.asSoonAsPossible,
+                                    groupValue: person.asSoonAsPossible,
                                     onChanged: (value) {
-                                      availabilityProvider
-                                          .setAsSoonAsPossible(value!);
+                                      person.setAsSoonAsPossible(value!);
                                     },
                                   ),
                                 ),
                               ],
                             ),
-                            if (!availabilityProvider.asSoonAsPossible)
+                            if (!person.asSoonAsPossible)
                               TableCalendar(
-                                firstDay: DateTime.utc(2023, 7, 1),
-                                lastDay: DateTime.utc(2024, 12, 31),
-                                focusedDay: availabilityProvider.selectedDate,
-                                selectedDayPredicate: (day) => isSameDay(
-                                    day, availabilityProvider.selectedDate),
+                                firstDay: DateTime.now(),
+                                lastDay: DateTime.utc(2100, 12, 31),
+                                focusedDay: person.firstDayGuestCanCheckInSelectedDate,
+                                selectedDayPredicate: (day) => isSameDay(day, person.firstDayGuestCanCheckInSelectedDate),
                                 onDaySelected: (selectedDay, focusedDay) {
-                                  availabilityProvider
-                                      .setSelectedDate(selectedDay);
+                                  person.setSelectedDate(selectedDay);
                                 },
                                 calendarFormat: CalendarFormat.month,
                                 calendarStyle: CalendarStyle(
-                                  todayTextStyle: smallTextStylewhiteBold,
-                                  todayDecoration: BoxDecoration(
-                                      color: Color.fromARGB(232, 86, 64, 255),
-                                      borderRadius: BorderRadius.circular(10)),
+                                  todayTextStyle: smallTextStyle,
+                                  todayDecoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
                                   selectedTextStyle: smallTextStylewhiteBold,
-                                  selectedDecoration: BoxDecoration(
-                                      color: Color.fromARGB(237, 50, 255, 241),
-                                      borderRadius: BorderRadius.circular(10)),
+                                  selectedDecoration: BoxDecoration(color: const Color.fromARGB(237, 50, 255, 241), borderRadius: BorderRadius.circular(10)),
                                 ),
                                 headerStyle: HeaderStyle(
                                   titleTextStyle: smallTextStyleBold,
@@ -124,14 +103,14 @@ class Availability extends StatelessWidget {
                                   rightChevronVisible: true,
                                 ),
                               ),
-                            // Divider(),
-                            if (!availabilityProvider.asSoonAsPossible)
+                            if (!person.asSoonAsPossible)
                               Padding(
                                 padding: EdgeInsets.only(top: height * 0.02),
                                 child: Text(
-                                    "Guests can start booking right away, but the first available check-in date will be ${availabilityProvider.selectedDate.toLocal().toShortDateString()}.",
+                                    "Guests can start booking right away, but the first available check-in date will be ${person.firstDayGuestCanCheckInSelectedDate.toLocal().toShortDateString()}.",
                                     style: smallTextStyle),
                               ),
+                            sizedBox(height * 0.005, width),
                           ],
                         ),
                       ),
@@ -140,31 +119,26 @@ class Availability extends StatelessWidget {
                 ),
               ),
             ),
-            sizedBox(height * 0.06, width),
+            sizedBox(height * 0.01, width),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Consumer<RegistrationProvider>(
-                  builder: (context, availability, child) {
+              child: Consumer<RegistrationProvider>(builder: (context, provider, child) {
                 return CustomContainer(
                   boxShadow: true,
                   color: backgroundColor,
                   width: width * 0.500,
                   child: Padding(
-                    padding: EdgeInsets.only(
-                        top: height * 0.06,
-                        left: width * 0.02,
-                        bottom: height * 0.02,
-                        right: width * 0.02),
+                    padding: EdgeInsets.only(top: height * 0.06, left: width * 0.02, bottom: height * 0.02, right: width * 0.02),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "To help you start earning, we automatically make your property available for bookings for up to 18 months – excluding the days you import marked as unavailable. You can manage your availability and make dates unavailable for bookings after registration.",
+                          "To help you start earning, we automatically make your property available for bookings for up to 18 months – excluding the days you import marked as unavailable. You can manage your provider and make dates unavailable for bookings after registration.",
                           style: smallTextStyle,
                         ),
                         sizedBox(height * 0.03, width),
                         Text(
-                          "Want to sync your availability with Airbnb?",
+                          "Want to sync your provider with Airbnb?",
                           style: mediumTextStyleBold,
                         ),
                         sizedBox(height * 0.02, width),
@@ -181,34 +155,27 @@ class Availability extends StatelessWidget {
                                 style: smallTextStyle,
                               ),
                               value: 1,
-                              groupValue: availability.selectThreeAvailability,
+                              groupValue: provider.selectThreeAvailability,
                               onChanged: (int? value) {
-                                availability.setSelectThreeAvailability(value!);
+                                provider.setSelectThreeAvailability(value!);
                               },
                             ),
                             //=================================================== web link adding============================================================
-                            if (availability.selectThreeAvailability == 1)
+                            if (provider.selectThreeAvailability == 1)
                               CustomContainer(
                                 boxShadow: false,
                                 color: backgroundColor,
-                                height: height * 0.23,
+                                height: height * 0.18,
                                 width: width * 0.8,
                                 child: Center(
                                   child: CustomContainer(
-                                    border: Border.all(
-                                        color:
-                                            Color.fromARGB(255, 228, 228, 228)),
+                                    border: Border.all(color: const Color.fromARGB(255, 228, 228, 228)),
                                     borderRadius: BorderRadius.circular(7),
                                     boxShadow: false,
                                     child: Padding(
-                                      padding: EdgeInsets.fromLTRB(
-                                          width * 0.02,
-                                          height * 0.02,
-                                          width * 0.02,
-                                          height * 0.02),
+                                      padding: EdgeInsets.fromLTRB(width * 0.02, height * 0.02, width * 0.02, height * 0.02),
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           sizedBox(height * 0.02, width),
                                           Text(
@@ -217,27 +184,24 @@ class Availability extends StatelessWidget {
                                           ),
                                           sizedBox(height * 0.01, width),
                                           Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
-                                              Expanded(
-                                                child: AppTextField(
-                                                  controller: webcontroller,
-                                                  hintText:
-                                                      'Enter dates from another website',
-                                                  width: width,
-                                                  height: height,
+                                              SizedBox(
+                                                height: height * 0.06,
+                                                width: width * 0.36,
+                                                child: CustomTextField(
+                                                  labelText: 'Enter dates from another website',
+                                                  controller: provider.webcontroller,
+                                                  borderSide: BorderSide(color: Colors.grey.shade300),
+                                                  enabledBorder: BorderSide(color: Colors.grey.shade300),
                                                 ),
                                               ),
-                                              sizedBox(
-                                                  height * 0.01, width * 0.01),
+                                              sizedBox(0.0, width * 0.005),
                                               CustomContainer(
                                                 height: height * 0.06,
                                                 width: width * 0.05,
-                                                borderRadius:
-                                                    BorderRadius.circular(07),
-                                                color: Color.fromARGB(
-                                                    255, 88, 19, 168),
+                                                borderRadius: BorderRadius.circular(07),
+                                                color: const Color.fromARGB(255, 88, 19, 168),
                                                 boxShadow: false,
                                                 child: Center(
                                                   child: Text(
@@ -247,12 +211,6 @@ class Availability extends StatelessWidget {
                                                 ),
                                               ),
                                             ],
-                                          ),
-                                          SizedBox(height: height * 0.01),
-                                          Text(
-                                            "Where do I find my iCal link?",
-                                            style:
-                                                TextStyle(color: Colors.blue),
                                           ),
                                         ],
                                       ),
@@ -266,63 +224,54 @@ class Availability extends StatelessWidget {
                                 style: smallTextStyle,
                               ),
                               value: 2,
-                              groupValue: availability.selectThreeAvailability,
+                              groupValue: provider.selectThreeAvailability,
                               onChanged: (int? value) {
-                                availability.setSelectThreeAvailability(value!);
+                                provider.setSelectThreeAvailability(value!);
                               },
                             ),
-                            if (availability.selectThreeAvailability == 2)
+                            if (provider.selectThreeAvailability == 2)
                               CustomContainer(
-                                border: Border.all(
-                                    color: Color.fromARGB(255, 228, 228, 228)),
+                                border: Border.all(color: const Color.fromARGB(255, 228, 228, 228)),
                                 color: backgroundColor,
                                 borderRadius: BorderRadius.circular(7),
                                 boxShadow: false,
                                 child: Padding(
-                                  padding: EdgeInsets.fromLTRB(
-                                      width * 0.02,
-                                      height * 0.02,
-                                      width * 0.02,
-                                      height * 0.02),
-                                  child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.check_circle_outline,
-                                          color: Colors.greenAccent,
-                                          size: 13,
-                                        ),
-                                        sizedBox(height * 0.01, width * 0.01),
-                                        Text(
-                                          "You can connect with a Channel Manager after your registration is complete\n – continue to the next step.",
-                                          style: GoogleFonts.montserrat(
-                                              color: Colors.green),
-                                        )
-                                      ]),
+                                  padding: EdgeInsets.symmetric(horizontal: width * 0.02, vertical: height * 0.02),
+                                  child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                    const Icon(
+                                      Icons.check_circle_outline,
+                                      color: Colors.greenAccent,
+                                      size: 13,
+                                    ),
+                                    sizedBox(height * 0.01, width * 0.01),
+                                    Text(
+                                      "You can connect with a Channel Manager after your registration is complete\n – continue to the next step.",
+                                      style: GoogleFonts.montserrat(color: Colors.green),
+                                    )
+                                  ]),
                                 ),
                               ),
                             RadioListTile(
                               title: Text(
-                                "No, I won’t sync my availability",
+                                "No, I won’t sync my provider",
                                 style: smallTextStyle,
                               ),
                               value: 3,
-                              groupValue: availability.selectThreeAvailability,
+                              groupValue: provider.selectThreeAvailability,
                               onChanged: (int? value) {
-                                availability.setSelectThreeAvailability(value!);
+                                provider.setSelectThreeAvailability(value!);
                               },
                             ),
                           ],
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                       ],
                     ),
                   ),
                 );
               }),
             ),
-            sizedBox(height * 0.06, width),
+            sizedBox(height * 0.01, width),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomContainer(
@@ -330,13 +279,8 @@ class Availability extends StatelessWidget {
                 boxShadow: true,
                 color: backgroundColor,
                 child: Padding(
-                  padding: EdgeInsets.only(
-                      top: height * 0.03,
-                      left: width * 0.02,
-                      bottom: height * 0.03,
-                      right: width * 0.02),
-                  child: Consumer<RegistrationProvider>(
-                      builder: (context, registrationProvider, child) {
+                  padding: EdgeInsets.only(top: height * 0.03, left: width * 0.02, bottom: height * 0.03, right: width * 0.02),
+                  child: Consumer<RegistrationProvider>(builder: (context, person, child) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -358,43 +302,40 @@ class Availability extends StatelessWidget {
 
                         //======================================================= Radiao Buttons ====================================
                         RadioButtons(
-                          groupValue: registrationProvider.selectYesorNo == 1,
+                          groupValue: person.isAllowedOver30nightstays,
                           onChanged1: (value) {
-                            registrationProvider.setSelectYesorNo(1);
+                            person.setAllowedOver30nightstays(value!);
                           },
                           onChanged2: (value) {
-                            registrationProvider.setSelectYesorNo(0);
+                            person.setAllowedOver30nightstays(value!);
                           },
                           text1: 'Yes',
                           text2: 'No',
                         ),
-                        SizedBox(height: height * 0.05),
-                        if (availability.acceptReservationsOver30Nights)
-                          Container(
-                            width: width * 0.6,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                    'What\'s the maximum number of nights you want guests to be able to book?',
-                                    style: smallTextStyleBold),
-                                SizedBox(height: height * 0.02),
-                                TextField(
-                                  keyboardType: TextInputType.number,
-                                  onChanged: (value) {
-                                    registrationProvider.setMaxNightsPreferred(
-                                        int.tryParse(value) ?? 0);
-                                  },
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    hintText: 'Enter number of nights',
-                                    hintStyle: GoogleFonts.montserrat(
-                                        color: Colors.green),
+                        if (!person.isAllowedOver30nightstays)
+                          Padding(
+                            padding: EdgeInsets.only(top: height * 0.04),
+                            child: SizedBox(
+                              width: width * 0.6,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('What\'s the maximum number of nights you want guests to be able to book?', style: smallTextStyleBold),
+                                  SizedBox(height: height * 0.01),
+                                  CustomTextField(
+                                    labelText: "Enter number of nights",
+                                    borderSide: BorderSide(color: Colors.grey.shade300),
+                                    enabledBorder: BorderSide(color: Colors.grey.shade300),
+                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                    onChanged: (value) {
+                                      person.setMaxReservationNumberOfNights(int.tryParse(value) ?? 0);
+                                    },
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
+                        SizedBox(height: height * 0.02),
                       ],
                     );
                   }),
@@ -411,38 +352,31 @@ class Availability extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    availability.goToPage(backToPage, pageController);
+                    provider.goToPage(backToPage, pageController);
                   },
                   child: Container(
-                    height: height * 0.08,
-                    width: width * 0.06,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue),
-                        borderRadius: BorderRadius.circular(06)),
-                    child: Icon(Icons.arrow_back_ios_new),
+                    height: height * 0.06,
+                    width: width * 0.04,
+                    decoration: BoxDecoration(border: Border.all(color: Colors.blue), borderRadius: BorderRadius.circular(06)),
+                    child: const Icon(Icons.arrow_back_ios_new),
                   ),
                 ),
                 sizedBox(height * 0.01, width * 0.01),
                 Container(
-                  height: height * 0.08,
-                  width: width * 0.360,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(06)),
+                  height: height * 0.06,
+                  width: width * 0.44,
+                  decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(06)),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 34, 158, 207),
-                      // : Colors.grey.shade100,
+                      backgroundColor: const Color.fromARGB(255, 34, 158, 207),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
                     onPressed: () {
-                      availability.goToPage(goToPage, pageController);
+                      provider.goToPage(goToPage, pageController);
                     },
-                    child: Text('Countinue',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold)),
+                    child: const Text('Countinue', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                   ),
                 ),
                 sizedBox(height * 0.07, width * 0.01),
@@ -479,21 +413,13 @@ class RadioButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Radio<bool>(
-            activeColor: Colors.lightBlueAccent,
-            value: true,
-            groupValue: groupValue,
-            onChanged: onChanged1),
+        Radio<bool>(activeColor: Colors.lightBlueAccent, value: true, groupValue: groupValue, onChanged: onChanged1),
         Text(
           text1,
           style: smallTextStyle,
         ),
         sizedBox(0.0, 20),
-        Radio<bool>(
-            activeColor: Colors.lightBlueAccent,
-            value: false,
-            groupValue: groupValue,
-            onChanged: onChanged2),
+        Radio<bool>(activeColor: Colors.lightBlueAccent, value: false, groupValue: groupValue, onChanged: onChanged2),
         Text(
           text2,
           style: smallTextStyle,

@@ -12,6 +12,7 @@ import 'package:tuch_trip_crms/src/view/desktop/Account_Registration/account_reg
 import 'package:tuch_trip_crms/src/view/desktop/accounts_management/accounts_management_screen.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/desktop_view.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/Hotel/Hotels.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_menu.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -168,7 +169,7 @@ class SignUpScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                const PropertyRegistrationMenu(),
+                                const Hotels(),
                           ),
                         );
                       }
@@ -200,11 +201,9 @@ class SignUpScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                          width: width / 10,
-                          child: Text("Already have an account?",
-                              style: smallTextStyle)),
-                      // sizedBox(0.0, width * 0.001),
+                      Text("Already have an account?",
+                          style: smallTextStyle),
+                      sizedBox(0.0, width * 0.005),
                       InkWell(
                         onTap: () {
                           login.goToPage(
@@ -393,11 +392,8 @@ class LoginScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                    width: width / 7,
-                    child:
-                        Text("Don't have an account?", style: smallTextStyle)),
-                sizedBox(0.0, width * 0.003),
+                Text("Don't have an account?", style: smallTextStyle),
+                sizedBox(0.0, width * 0.005),
                 InkWell(
                   onTap: () {
                     login.goToPage(1, login.accountRegistrationPage, true);

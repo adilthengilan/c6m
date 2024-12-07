@@ -4,22 +4,17 @@ import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/Rate_Planes/cancelation_policy.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/Rate_Planes/non_refundable.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/Rate_Planes/price_per_group.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/Rate_Planes/weekly_rate_plans.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_1.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_pages/Rate_Planes/cancelation_policy.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_pages/Rate_Planes/price_per_group.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_pages/Rate_Planes/weekly_rate_plans.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_pages/property_cout.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 
 class RatePlans extends StatelessWidget {
   final int goToPage;
   final int backToPage;
   final PageController pageController;
-  const RatePlans(
-      {super.key,
-      required this.goToPage,
-      required this.backToPage,
-      required this.pageController});
+  const RatePlans({super.key, required this.goToPage, required this.backToPage, required this.pageController});
 
   @override
   Widget build(BuildContext context) {
@@ -74,10 +69,7 @@ class RatePlans extends StatelessWidget {
                         children: [
                           Text(
                             'Cancellation policy',
-                            style: GoogleFonts.montserrat(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500),
+                            style: GoogleFonts.montserrat(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
                           ),
                           sizedBox(0.0, width * 0.005),
                           const Icon(Icons.info_outline, size: 20),
@@ -112,9 +104,7 @@ class RatePlans extends StatelessWidget {
                               SizedBox(
                                 width: width * 0.25,
                                 child: Text(
-                                    i == 0
-                                        ? 'Guests can cancel their bookings for free up to 1 day before their arrival'
-                                        : 'Guests who cancel within 24 hours will have their cancellation fee waived',
+                                    i == 0 ? 'Guests can cancel their bookings for free up to 1 day before their arrival' : 'Guests who cancel within 24 hours will have their cancellation fee waived',
                                     style: smallTextStyle),
                               )
                             ],
@@ -129,10 +119,7 @@ class RatePlans extends StatelessWidget {
                         children: [
                           Text(
                             'Price per group size',
-                            style: GoogleFonts.montserrat(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500),
+                            style: GoogleFonts.montserrat(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
                           ),
                           sizedBox(0.0, width * 0.005),
                           const Icon(Icons.info_outline, size: 20),
@@ -181,7 +168,7 @@ class RatePlans extends StatelessWidget {
                                         const Icon(IconlyLight.user),
                                         sizedBox(0.0, width * 0.01),
                                         Text(
-                                          'X  1',
+                                          i == 0? 'X  1': 'x  2',
                                           style: GoogleFonts.montserrat(
                                             color: Colors.black,
                                             fontSize: 14,
@@ -207,7 +194,7 @@ class RatePlans extends StatelessWidget {
                                   Padding(
                                     padding: EdgeInsets.only(bottom: height * 0.03),
                                     child: Text(
-                                      i == 0 ? '\$ 100.00' : '\$ 90.00',
+                                      i == 0 ? ' ${person.propertyPricePerNight - (person.propertyPricePerNight * person.groupDiscountPersentage) / 100}' : ' ${ 2 *(person.propertyPricePerNight - (person.propertyPricePerNight * person.groupDiscountPersentage) / 100)}',
                                       style: GoogleFonts.montserrat(
                                         color: Colors.black,
                                         fontSize: 14,
@@ -301,7 +288,7 @@ class RatePlans extends StatelessWidget {
                         person.goToPage(backToPage, pageController);
                       },
                     ),
-                    sizedBox(0.0, width * 0.02),
+                    sizedBox(0.0, width * 0.005),
                     continueButton(
                       height,
                       width,
@@ -319,7 +306,6 @@ class RatePlans extends StatelessWidget {
         ),
         CancelationPolicy(goToPage: 0, backToPage: 0, pageController: person.ratePlansPageviewController),
         PricePerGroup(goToPage: 0, backToPage: 0, pageController: person.ratePlansPageviewController),
-        NonRefundableRate(goToPage: 0, backToPage: 0, pageController: person.ratePlansPageviewController),
         WeeklyPlan(goToPage: 0, backToPage: 0, pageController: person.ratePlansPageviewController),
       ],
     );

@@ -18,6 +18,7 @@ import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/hotel_profile.dart/profile_page.dart';
 import 'package:tuch_trip_crms/src/view/desktop/job_vacancy/job_listing.dart';
 import 'package:tuch_trip_crms/src/view/desktop/landingPage.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/Hotel/Hotels.dart';
 import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_menu.dart';
 import 'package:tuch_trip_crms/src/view/desktop/rooms/rooms.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
@@ -359,7 +360,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const PropertyRegistrationMenu(),
+                builder: (context) => const Hotels(),
               ),
             );
           },

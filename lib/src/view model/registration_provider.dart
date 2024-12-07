@@ -9,30 +9,52 @@ class RegistrationProvider extends ChangeNotifier {
   PageController apartmentPagecontroller = PageController();
   PageController finalPagePageviewcontroller = PageController();
   PageController ratePlansPageviewController = PageController();
-  //============================================================ Property Name & Type =============================================================-
-  String propertyName = '';
-  bool isEntirePlace = true;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  int numberOfOwnedProperties = 1;
   //============================================================ Multiple Property =================================================================
-  int numberofProperty = 1;
-  bool isSameAddress = true;
-  //============================================================ Property Place Category ============================================================
-  String? stayCategoryOption = '';
-
+  bool isAllOwnedPropertiesAreSameAddress = true;
+  //============================================================ Property Name =============================================================-
+  String propertyName = '';
   //============================================================ Property Address ===================================================================
   String propertyCountry = '';
   String propertyStreetName = '';
   String propertyPostCode = '';
   String propertyCity = '';
-  //============================================================= Bottom Sheets Open Bool Variable =====================================================
-  bool livingRoomBottomSheet = false;
-  bool otherSpaceBottomSheet = false;
-  bool bedroomBottomSheet = false;
-  int bedRoomSelectedIndex = 0;
-  //============================================================= Property Detailes ======================================================================
-  List _bedRoomList = [];
-  List get bedRoomList => _bedRoomList;
+  String propertyLocationMapLink = '';
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //============================================================= Living Room Bed Count ==================================================================
-  int livingRoomSofaBed = 0;
+  int livingRoomSofaBedCount = 0;
+  //============================================================= Bed Room Detailes ======================================================================
+  List bedRoomList = [];
+  List otherSpaceDetailsList = [];
+  List aminitiesList = [];
+  List servicesAvailableInProperty = [];
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  String bedRoomType = "";
+  int bedRoomCount = 1;
+  List bedRoomBedDetailsList = [];
+  List otherSpaceBedDetailsList = [];
+  Map<String, Object?> breakFastDetailsMap = {};
+  String parkingOption = 'No';
+  Map<String, Object?> hostProfileDetailsMap = {};
+
+  //============================================================== Allow Children & children coats ========================================================================
+  bool isallowChildren = false;
+  bool isAllowCoats = false;
+  //============================================================== How many Guest Can Stay ===============================================================
+  int guestCapacity = 1;
+  int bathRoomCount = 0;
+  List bedDetailsList = [];
+
+  bool isEntirePlace = true;
+  //============================================================ Property Place Category ===============================================================
+  String? stayCategoryOption = '';
+  //============================================================= Bottom Sheets Open Bool Variable =====================================================
+  bool isOpenLivingRoomBottomSheet = false;
+  bool isOpenOtherSpaceBottomSheet = false;
+  bool isOpenBedroomBottomSheet = false;
+  int bedRoomSelectedIndex = 0;
+
   //============================================================== other Space Bed Count =========================================================================
   int otherSpaceSingleBed = 0;
   int otherSpaceOfDoubleBed = 0;
@@ -49,12 +71,11 @@ class RegistrationProvider extends ChangeNotifier {
   int bedroomBunkBed = 0;
   int bedroomSofaBed = 0;
   int bedroomFutonMat = 0;
-  //============================================================== Allow Children =====================================================================
-  bool isallowChildren = false;
-  bool allowCoats = false;
-  //============================================================== How many Guest Can Stay ========================================================================
-  int guestCapacity = 1;
-  int bathRoomCount = 0;
+
+  TextEditingController bedRoomCountController = TextEditingController();
+  TextEditingController guestCapacityController = TextEditingController();
+  TextEditingController bathRoomCountController = TextEditingController();
+
   //============================================================== Aminities Of Property ===========================================================================
   // General Amenities
   bool airConditioning = false;
@@ -80,15 +101,14 @@ class RegistrationProvider extends ChangeNotifier {
   bool terrace = false;
   bool view = false;
 //================================================================ Property Service  ==============================================================================
-  bool serveBreakfast = false;
-  String parkingOption = 'No';
+  bool isServeBreakfast = false;
   bool isBrakFastIncludedCost = true;
-  TextEditingController breackFastCostController = TextEditingController();
-  List offeredbreakFastList = [];
+  TextEditingController breakFastCostController = TextEditingController();
+  List offeredbreakTypeFastList = [];
   //for State Management Not A Data
   bool isBreakFastSelected = false;
   //================================================================ Staff Languages ===========================================================================
-  List<String> staffLanguagesList = [];
+  List<String> staffSpeakingLanguagesList = [];
   // for state managemnet not a data
   String selectedLanguage = '';
 
@@ -97,43 +117,74 @@ class RegistrationProvider extends ChangeNotifier {
   String? checkInUntil = '18:00';
   String? checkOutFrom = '08:00';
   String? checkOutUntil = '11:00';
-  bool issmokingAllowed = false;
-  bool isallowPets = false;
-  bool iseventsAllowed = false;
+  bool issmokingAllowedHouseRules = false;
+  bool isallowPetshouseRules = false;
+  bool iseventsAllowedHouseRules = false;
 
   ///================================================================ Host Profile ==============================================================================
-  bool isshowProperty = true;
-  bool isshowHost = false;
-  bool isshowNeighborhood = false;
+  bool isShowPropertyFieldOpen = true;
+  bool isShowHostDetailsAboutPropertyOpen = false;
+  bool isShowAboutNeighborhoodOpen = false;
   TextEditingController aboutThePropertyController = TextEditingController();
-  TextEditingController aboutTheNeighbourhoodController =
-      TextEditingController();
-  TextEditingController aboutTheHostNameController = TextEditingController();
+  TextEditingController aboutTheNeighbourhoodController = TextEditingController();
+  TextEditingController theHostNameController = TextEditingController();
+  TextEditingController aboutTheHostController = TextEditingController();
   //=================================================================== Property images ======================================================================
-  List<Uint8List>? propertyImages = [];
+  List<Uint8List>? propertyImagesList = [];
   //==================================================================== Receive bookings =====================================================================
-  bool allGuestscCanBookInstantly =
-      true; //this variable is All Guests Can Book Instantly, when its True. When the value is false it means All Guests Will Need Request To Book
+  bool isAllGuestscCanBookInstantly = true; //this variable is All Guests Can Book Instantly, when its True. When the value is false it means All Guests Will Need Request To Book
   //==================================================================== Property Price per Night =============================================================
   TextEditingController priceController = TextEditingController();
   double propertyPricePerNight = 0;
   //====================================================================== Goods & Services Tax = ==============================================================
-  bool isGstPurpuse = false;
-  bool isFourthCharecterOfPan = true;
+  bool isForGstPurpuse = false;
+  bool isFourthCharecterOfPanOpen = true;
   TextEditingController panNoController = TextEditingController();
+  TextEditingController adharCarNumerController = TextEditingController();
   TextEditingController tradeNameController = TextEditingController();
   TextEditingController GsGSTINController = TextEditingController();
   //=================================================================== Cancellation policies =============================================================
   int freeCancelationButtonIndex = 0;
   final List<String> days = ['1 day', '5 days', '14 days', '30 days'];
-  int freeCancellationDays = 1; // Variable to store the selected number of days
+  int freeCancellationDaysOfBooking = 1; // Variable to store the selected number of days
   bool isprotectionAgainstAccidentalBookings = true;
   //=================================================================== Price per group size ===============================================================
-  bool isPricePerGroupSizeEnabled = false;
+  bool isGroupDiscountUpdateAnyTimeEnabled = false;
   TextEditingController disCountRateController = TextEditingController();
-  int discountPersentage = 0;
+  int groupDiscountPersentage = 0;
   double totalForTwoGuests = 56778.00;
   double totalForOneGuest = 56778.00;
+
+  bool _asSoonAsPossible = true;
+  DateTime _selectedDate = DateTime.now();
+
+  TextEditingController webcontroller = TextEditingController();
+
+  bool get asSoonAsPossible => _asSoonAsPossible;
+  DateTime get firstDayGuestCanCheckInSelectedDate => _selectedDate;
+  DateTime get nextMonth => DateTime(firstDayGuestCanCheckInSelectedDate.year, firstDayGuestCanCheckInSelectedDate.month + 1, firstDayGuestCanCheckInSelectedDate.day);
+  int _selectThreeAvailability = 0;
+
+  int get selectThreeAvailability => _selectThreeAvailability;
+  String syncAvailabilityfromAnotherorChanelManager = "";
+  int maxReservationNumberOfNights = 0;
+
+  TextEditingController propertyFirstNameStatedOnID = TextEditingController();
+  TextEditingController propertyMiddleNameStatedOnID = TextEditingController();
+  TextEditingController propertyLastNameStatedOnID = TextEditingController();
+  TextEditingController propertyOfficialEmail = TextEditingController();
+  TextEditingController propertyPhoneNumber = TextEditingController();
+
+  TextEditingController propertyLegalName = TextEditingController();
+  TextEditingController registerdCountryOrRegion = TextEditingController();
+  TextEditingController registerdAddressLine1 = TextEditingController();
+  TextEditingController registerdAddressLine2 = TextEditingController();
+  TextEditingController registeredCity = TextEditingController();
+  TextEditingController registeredZipCode = TextEditingController();
+
+  bool isAllowNecesseryLicense = true;
+  bool isIHaveReadAndAccepted = false;
+
   //===================================================================
 
 //This Function will controlling page view, This function can easy to change the pages in the paview
@@ -145,37 +196,65 @@ class RegistrationProvider extends ChangeNotifier {
     );
   }
 
-// Setting The Admins how to many Properties have Property count variable saving the property count
-  void setNumberProperties(int propertyCount) {
-    numberofProperty = propertyCount;
+// NumberProperties [1]
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  void setStayCategoryOption(String value) {
+    stayCategoryOption = value;
     notifyListeners();
   }
 
-//setting The Admins multiple properties are in a same Location or Differnt Location it has saving in a bool variable
-  void setpropertiesLocationSatus(bool issameAddress) {
-    isSameAddress = issameAddress;
+// Setting The Admins how to many Properties have Property count variable saving the property count
+  void setNumberProperties(dynamic propertyCount) {
+    if (propertyCount == "") {
+      numberofPropertycontroller.clear();
+      return;
+    }
+    numberOfOwnedProperties = (propertyCount is String) ? int.tryParse(propertyCount) ?? 0 : propertyCount;
+
+    if (propertyCount is String) {
+      numberofPropertycontroller.clear();
+    }
     notifyListeners();
   }
 
 //This function is for Numbrer input of Admins Proerty count side, The Number of Property variable increase when the increase button click
   void increaseNumberProperty() {
-    numberofProperty++;
+    numberOfOwnedProperties++;
     notifyListeners();
   }
 
 //This function is for Numbrer input of Admins Proerty count side, The Number of Property variable Decrease when the Decrease button click
   void decreaseNumberProperty() {
-    if (numberofProperty < 2) {
-      numberofProperty--;
+    if (numberOfOwnedProperties > 2) {
+      numberOfOwnedProperties--;
       notifyListeners();
     }
   }
 
-  //This function is setting the Property Name when the user click write in Textfield That Spot time it will be Assignn to Controller.text
+//setting The Admins multiple properties are in a same Location or Differnt Location it has saving in a bool variable
+  void setAllPropertiesAreSameAddress(bool isSameAddress) {
+    isAllOwnedPropertiesAreSameAddress = isSameAddress;
+    notifyListeners();
+  }
+
+// Property Name [2]
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////
+//This function is setting the Property Name when the user click write in Textfield That Spot time it will be Assignn to Controller.text
   void setPropertyName(String value) {
     propertyName = value;
     notifyListeners();
   }
+
+// Property Address [3]
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   void setPropertyCountry(String country) {
     propertyCountry = country;
@@ -197,37 +276,29 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void openLivingRoomBottomSheet() {
-    livingRoomBottomSheet = !livingRoomBottomSheet;
-    otherSpaceBottomSheet = false;
-    bedroomBottomSheet = false;
+// Property Location Map Link [4]
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  void setpropertyLocationMapLink(String value) {
+    propertyLocationMapLink = value;
     notifyListeners();
   }
 
-  void openOtherSpaceRoomBottomSheet() {
-    otherSpaceBottomSheet = !otherSpaceBottomSheet;
-    livingRoomBottomSheet = false;
-    bedroomBottomSheet = false;
-    notifyListeners();
-  }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  void openBedRoomBottomSheet() {
-    bedroomBottomSheet = !bedroomBottomSheet;
-    livingRoomBottomSheet = false;
-    otherSpaceBottomSheet = false;
-    notifyListeners();
-  }
-
-  void disposeAllBottomSheet() {
-    bedroomBottomSheet = false;
-    livingRoomBottomSheet = false;
-    otherSpaceBottomSheet = false;
+  void openBedDetailsBottomSheet(String sheetType) {
+    isOpenLivingRoomBottomSheet = sheetType == "livingRoom" && !isOpenLivingRoomBottomSheet;
+    isOpenOtherSpaceBottomSheet = sheetType == "otherSpace" && !isOpenOtherSpaceBottomSheet;
+    isOpenBedroomBottomSheet = sheetType == "bedroom" && !isOpenBedroomBottomSheet;
     notifyListeners();
   }
 
   void incrementBedCount(String spaceType, int bedType) {
     if (spaceType == 'living') {
-      livingRoomSofaBed++;
+      livingRoomSofaBedCount++;
     } else if (spaceType == 'other') {
       if (bedType == 0) {
         otherSpaceSingleBed++;
@@ -265,25 +336,34 @@ class RegistrationProvider extends ChangeNotifier {
   }
 
   void decrementBedCount(String spaceType, int bedType) {
-    if (spaceType == 'living') {}
-    if (bedType == 0 && livingRoomSofaBed > 0) {
-      livingRoomSofaBed--;
+    if (spaceType == 'living') {
+      if (bedType == 0 && livingRoomSofaBedCount > 0) {
+        livingRoomSofaBedCount--;
+      }
+      ///////////////////////////////////////////////////
     } else if (spaceType == 'other') {
       if (bedType == 0 && otherSpaceSingleBed > 0) {
         otherSpaceSingleBed--;
+        //======================================================
       } else if (bedType == 1 && otherSpaceOfDoubleBed > 0) {
         otherSpaceOfDoubleBed--;
+        //============================================================
       } else if (bedType == 2 && otherSpaceKingSizeBedCount > 0) {
         otherSpaceKingSizeBedCount--;
+        //=============================================================
       } else if (bedType == 3 && otherSpaceSuperKingSizeBedCount > 0) {
         otherSpaceSuperKingSizeBedCount--;
+        //======================================================
       } else if (bedType == 4 && otherSpaceBunkBed > 0) {
         otherSpaceBunkBed--;
+        //======================================================
       } else if (bedType == 5 && otherSpaceSofaBed > 0) {
         otherSpaceSofaBed--;
+        //======================================================
       } else if (bedType == 6 && otherSpaceFutonMat > 0) {
         otherSpaceFutonMat--;
       }
+      ////////////////////////////////////////////////////////////////
     } else if (spaceType == 'bedroom') {
       if (bedType == 0 && bedroomSingleBed > 0) {
         bedroomSingleBed--;
@@ -304,9 +384,38 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addToOtherSpaceBedList() {
+    // Map of bed descriptions to their respective counts
+    final bedDetailsMap = {
+      "Single bed": otherSpaceSingleBed,
+      "Double bed": otherSpaceOfDoubleBed,
+      "Large bed (King size)": otherSpaceKingSizeBedCount,
+      "Extra-large double bed (Super-king size)": otherSpaceSuperKingSizeBedCount,
+      "Bunk bed": otherSpaceBunkBed,
+      "Sofa bed": otherSpaceSofaBed,
+      "Futon Mat": otherSpaceFutonMat,
+    };
+
+    otherSpaceDetailsList.clear();
+
+    bedDetailsMap.forEach((key, value) {
+      if (value > 0) {
+        otherSpaceDetailsList.add("$key $value");
+      }
+    });
+    //Reset Bed Detailes
+    otherSpaceSingleBed = 0;
+    otherSpaceOfDoubleBed = 0;
+    otherSpaceKingSizeBedCount = 0;
+    otherSpaceSuperKingSizeBedCount = 0;
+    otherSpaceBunkBed = 0;
+    otherSpaceSofaBed = 0;
+    otherSpaceFutonMat = 0;
+  }
+
   List<String> bedCount(spaceType) {
     if (spaceType == 'living') {
-      return [livingRoomSofaBed.toString()];
+      return [livingRoomSofaBedCount.toString()];
     } else if (spaceType == 'other') {
       return [
         otherSpaceSingleBed.toString(),
@@ -331,27 +440,75 @@ class RegistrationProvider extends ChangeNotifier {
     return [];
   }
 
-  void addBedRoom() {
-    final beds = {
-      'bedRoomSingleBed': bedroomSingleBed,
-      'bedRoomOfDoubleBed': bedroomOfDoubleBed,
-      'bedRoomKingSizeBedCount': bedroomKingSizeBedCount,
-      'bedRoomSuperKingSizeBedCount': bedroomSuperKingSizeBedCount,
-      'bedRoomBunkBed': bedroomBunkBed,
-      'bedRoomSofaBed': bedroomSofaBed,
-      'bedRoomFutonMat': bedroomFutonMat,
+  void addNewBedRoom() {
+    bedDetailsList = [
+      "Single bed $bedroomSingleBed",
+      "Double bed $bedroomOfDoubleBed",
+      "Large bed (King size) $bedroomKingSizeBedCount",
+      "Extra-large double bed (Super-king size) $bedroomSuperKingSizeBedCount",
+      "Bunk bed $bedroomBunkBed",
+      "Sofa bed $bedroomSofaBed",
+      "Futon Mat $bedroomFutonMat",
+    ];
+
+    final newBedRoom = {
+      "bedRoomType": bedRoomType,
+      "bedRoomCount": bedRoomCount,
+      "bedRoomBedDetailsList": bedDetailsList,
+      "guestCapacity": guestCapacity,
+      "bathRoomCount": bathRoomCount,
+      "isallowChildren": isallowChildren,
+      "isAllowCoats": isAllowCoats,
     };
-    _bedRoomList.add(beds);
+
+    bedRoomList.add(newBedRoom);
+    bedRoomType = "";
+    bedDetailsList = [];
+    bedRoomCount = 0;
+    bedroomSingleBed = 0;
+    bedroomOfDoubleBed = 0;
+    bedroomKingSizeBedCount = 0;
+    bedroomSuperKingSizeBedCount = 0;
+    bedroomBunkBed = 0;
+    bedroomSofaBed = 0;
+    bedroomFutonMat = 0;
+    isallowChildren = false;
+    isAllowCoats = false;
+    guestCapacity = 1;
+    bathRoomCount = 0;
     notifyListeners();
   }
 
   void removeBedRoom(int index) {
-    if (index >= 0 && index < _bedRoomList.length) {
-      _bedRoomList.removeAt(index);
+    if (index >= 0 && index < bedRoomList.length) {
+      bedRoomList.removeAt(index);
     } else {
       print('Index out of range');
     }
     notifyListeners();
+  }
+
+  void setBedRoomType(newValue) {
+    bedRoomType = newValue;
+    notifyListeners();
+  }
+
+  void setBedRoomCount(newValue) {
+    bedRoomCount = int.parse(newValue);
+    bedRoomCountController.clear();
+    notifyListeners();
+  }
+
+  void incrementBedroomCount() {
+    bedRoomCount++;
+    notifyListeners();
+  }
+
+  void decrementBedroomCount() {
+    if (bedRoomCount > 1) {
+      bedRoomCount--;
+      notifyListeners();
+    }
   }
 
   void setingAllowChildren(value) {
@@ -360,11 +517,11 @@ class RegistrationProvider extends ChangeNotifier {
   }
 
   void setAllowCoats(value) {
-    allowCoats = value;
+    isAllowCoats = value;
     notifyListeners();
   }
 
-  void increamentGuestCounter(counterIndex) {
+  void increamentGuestCapacityAndBathroomCount(counterIndex) {
     if (counterIndex == 0) {
       guestCapacity++;
     } else if (counterIndex == 1) {
@@ -373,7 +530,7 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void decrementGuestCounter(int counterIndex) {
+  void decrementGuestCapacityAndBathroomCount(int counterIndex) {
     if (counterIndex == 0) {
       if (guestCapacity > 0) {
         guestCapacity--;
@@ -385,33 +542,21 @@ class RegistrationProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-// ================================================== Setting  Hotel Aminitiest =====================================================================
 
-  // ================================================  // General Amenities =========================================================================
-  void setAirConditioning(bool value) {
-    airConditioning = value;
+  void setGuestCapacityAndBathroomCount(index, newValue) {
+    if (index == 0) {
+      guestCapacity = int.parse(newValue);
+      guestCapacityController.clear();
+    } else if (index == 1) {
+      bathRoomCount = int.parse(newValue);
+      bathRoomCountController.clear();
+    }
     notifyListeners();
   }
 
-  void setHeating(bool value) {
-    heating = value;
-    notifyListeners();
-  }
-
-  void setFreeWifi(bool value) {
-    freeWifi = value;
-    notifyListeners();
-  }
-
-  void setEvChargingStation(bool value) {
-    evChargingStation = value;
-    notifyListeners();
-  }
-
-  //================================================  /// Property Location =========================================================================
+//================================================  /// Property Location =========================================================================
   void launchMaps(String latitude, String longitude) async {
-    final url =
-        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    final url = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -419,78 +564,131 @@ class RegistrationProvider extends ChangeNotifier {
     }
   }
 
-  //================================================  /// Cooking and Cleaning =========================================================================
-  void setKitchen(bool value) {
-    kitchen = value;
+  // ================================================== Setting  Hotel Aminitiest =====================================================================
+  // ================================================  // General Amenities =========================================================================
+
+  void setPropertyAminities(String propertyName, dynamic value) {
+    switch (propertyName) {
+      // Additional Properties
+      case 'airConditioning':
+        airConditioning = value;
+        break;
+      case 'heating':
+        heating = value;
+        break;
+      case 'freeWifi':
+        freeWifi = value;
+        break;
+      case 'evChargingStation':
+        evChargingStation = value;
+        break;
+
+      // Cooking and Cleaning Properties
+      case 'kitchen':
+        kitchen = value;
+        break;
+      case 'kitchenette':
+        kitchenette = value;
+        break;
+      case 'washingMachine':
+        washingMachine = value;
+        break;
+
+      // Entertainment Properties
+      case 'flatScreenTV':
+        flatScreenTV = value;
+        break;
+      case 'swimmingPool':
+        swimmingPool = value;
+        break;
+      case 'hotTub':
+        hotTub = value;
+        break;
+      case 'minibar':
+        minibar = value;
+        break;
+      case 'sauna':
+        sauna = value;
+        break;
+
+      // Outside and View Properties
+      case 'balcony':
+        balcony = value;
+        break;
+      case 'gardenView':
+        gardenView = value;
+        break;
+      case 'terrace':
+        terrace = value;
+        break;
+      case 'view':
+        view = value;
+        break;
+
+      default:
+        return;
+    }
     notifyListeners();
   }
 
-  void setKitchenette(bool value) {
-    kitchenette = value;
-    notifyListeners();
-  }
+  void addAminitiesToAminitiesList() {
+    aminitiesList.clear(); // Clear the list before adding new items
 
-  void setWashingMachine(bool value) {
-    washingMachine = value;
-    notifyListeners();
-  }
+    // Add Cooking and Cleaning Properties
+    if (kitchen) aminitiesList.add('Kitchen');
+    if (kitchenette) aminitiesList.add('Kitchenette');
+    if (washingMachine) aminitiesList.add('Washing machine');
 
-  //================================================  // Entertainment =========================================================================
-  void setFlatScreenTV(bool value) {
-    flatScreenTV = value;
-    notifyListeners();
-  }
+    // Add Entertainment Properties
+    if (flatScreenTV) aminitiesList.add('Flat-screen TV');
+    if (swimmingPool) aminitiesList.add('Swimming pool');
+    if (hotTub) aminitiesList.add('Hot tub');
+    if (minibar) aminitiesList.add('Minibar');
+    if (sauna) aminitiesList.add('Sauna');
 
-  void setSwimmingPool(bool value) {
-    swimmingPool = value;
-    notifyListeners();
-  }
+    // Add Outside and View Properties
+    if (balcony) aminitiesList.add('Balcony');
+    if (gardenView) aminitiesList.add('Garden view');
+    if (terrace) aminitiesList.add('Terrace');
+    if (view) aminitiesList.add('View');
 
-  void setHotTub(bool value) {
-    hotTub = value;
-    notifyListeners();
-  }
+    // Add Additional Properties
+    if (airConditioning) aminitiesList.add('Air conditioning');
+    if (heating) aminitiesList.add('Heating');
+    if (freeWifi) aminitiesList.add('Free WiFi');
+    if (evChargingStation) aminitiesList.add('Electric vehicle charging station');
 
-  void setMinibar(bool value) {
-    minibar = value;
-    notifyListeners();
-  }
-
-  void setSauna(bool value) {
-    sauna = value;
-    notifyListeners();
-  }
-
-//=================================================  // Outside and View =========================================================================
-  void setBalcony(bool value) {
-    balcony = value;
-    notifyListeners();
-  }
-
-  void setGardenView(bool value) {
-    gardenView = value;
-    notifyListeners();
-  }
-
-  void setTerrace(bool value) {
-    terrace = value;
-    notifyListeners();
-  }
-
-  void setView(bool value) {
-    view = value;
-    notifyListeners();
-  }
-
-//=================================================  Property Service =========================================================================
-  void setServeBreakfast(bool value) {
-    serveBreakfast = value;
-    notifyListeners();
+    // Print the list for debugging (Optional)
   }
 
   //Parkin Option String
   void setParkingOption(String value) {
     parkingOption = value;
+    notifyListeners();
+  }
+
+  void addOfferedBreakfastDetailsToBreakFastDetailsList() {
+    breakFastDetailsMap.clear();
+    final serveBreakfast = isServeBreakfast ? " Yes, we offer breakfast" : "No, we do not offer breakfast";
+    final breakFastPriceIsIncludedOrNot = isServeBreakfast
+        ? isBrakFastIncludedCost
+            ? "The breakfast cost is included in the price."
+            : "No, the breakfast comes with an extra charge"
+        : "";
+    final offeredBreakFastTypeList = offeredbreakTypeFastList;
+    final breakFastCost = isServeBreakfast && !isBrakFastIncludedCost ? breakFastCostController.text : "";
+    final dataToAdd = {
+      "isServeBreakfast": serveBreakfast,
+      "breakFastPriceIsIncludedOrNot": breakFastPriceIsIncludedOrNot,
+      "breakfastCost": breakFastCost,
+      "offeredBreakFastTypeList": offeredBreakFastTypeList,
+    };
+    breakFastDetailsMap = dataToAdd;
+    print(breakFastDetailsMap);
+  }
+
+  void setServeBreakfast(bool value) {
+    isServeBreakfast = value;
     notifyListeners();
   }
 
@@ -501,9 +699,9 @@ class RegistrationProvider extends ChangeNotifier {
 
   void settingOfferdBreakFast(brakFast, isSelected) {
     if (isSelected) {
-      offeredbreakFastList.remove(brakFast);
+      offeredbreakTypeFastList.remove(brakFast);
     } else {
-      offeredbreakFastList.add(brakFast);
+      offeredbreakTypeFastList.add(brakFast);
     }
     notifyListeners();
   }
@@ -511,10 +709,11 @@ class RegistrationProvider extends ChangeNotifier {
 //=============================================================== Staff Languages ========================================================================
   void addingStaffLanguages(isSelected, language) {
     if (isSelected) {
-      staffLanguagesList.remove(language);
+      staffSpeakingLanguagesList.remove(language);
     } else {
-      staffLanguagesList.add(language);
+      staffSpeakingLanguagesList.add(language);
     }
+    // print(staffSpeakingLanguagesList);
     notifyListeners();
   }
 
@@ -540,56 +739,64 @@ class RegistrationProvider extends ChangeNotifier {
   }
 
   void setSmokingAllowed(value) {
-    issmokingAllowed = value;
+    issmokingAllowedHouseRules = value;
     notifyListeners();
   }
 
   void setEventAllowed(value) {
-    iseventsAllowed = value;
+    iseventsAllowedHouseRules = value;
     notifyListeners();
   }
 
+  void setPetsAllowed(value) {
+    isallowPetshouseRules = value;
+    notifyListeners();
+  }
 //============================================================== Property Host ====================================================================
 
   void toggleProperty(bool value) {
-    isshowProperty = value;
+    isShowPropertyFieldOpen = value;
     notifyListeners();
   }
 
   void toggleHost(bool value) {
-    isshowHost = value;
+    isShowHostDetailsAboutPropertyOpen = value;
     notifyListeners();
   }
 
   void toggleNeighborhood(bool value) {
-    isshowNeighborhood = value;
+    isShowAboutNeighborhoodOpen = value;
     notifyListeners();
   }
 
   void toggleAll(bool value) {
-    isshowProperty = !value;
-    isshowHost = !value;
-    isshowNeighborhood = !value;
+    isShowPropertyFieldOpen = !value;
+    isShowHostDetailsAboutPropertyOpen = !value;
+    isShowAboutNeighborhoodOpen = !value;
     notifyListeners();
   }
 
-//=============================================================== Pets and Childrens Allowed or Not ================================================
-
-  void setPetsAllowed(value) {
-    isallowPets = value;
-    notifyListeners();
+  void addHostProfileDetailsTohostProfileDetailsMap() {
+    hostProfileDetailsMap.clear();
+    final hostData = {
+      "aboutTheProperty": isShowPropertyFieldOpen ? aboutThePropertyController.text : "",
+      "aboutTheHostName": isShowHostDetailsAboutPropertyOpen ? theHostNameController.text : "",
+      "aboutTheHostDescription": isShowHostDetailsAboutPropertyOpen ? aboutTheHostController.text : "",
+      "aboutTheNeighbourhood": isShowAboutNeighborhoodOpen ? aboutTheNeighbourhoodController.text : "",
+    };
+    hostProfileDetailsMap = hostData;
   }
 
 //================================================================ Property images ====================================================================
 
   Future<void> galleryImagePicker() async {
     List<Uint8List>? _images = await ImagePickerWeb.getMultiImagesAsBytes();
-    propertyImages = _images;
+    propertyImagesList = _images;
     notifyListeners();
   }
 
   Future<void> removeImage(index) async {
-    propertyImages!.removeAt(index);
+    propertyImagesList!.removeAt(index);
     notifyListeners();
   }
 
@@ -597,10 +804,10 @@ class RegistrationProvider extends ChangeNotifier {
   void setallGuestscCanBookInstantly(value) {
     //this variable is All Guests Can Book Instantly, when its True.
     if (value) {
-      allGuestscCanBookInstantly = true;
+      isAllGuestscCanBookInstantly = true;
     } else {
       //When the value is false it means All Guests Will Need Request To Book
-      allGuestscCanBookInstantly = false;
+      isAllGuestscCanBookInstantly = false;
     }
     notifyListeners();
   }
@@ -608,7 +815,9 @@ class RegistrationProvider extends ChangeNotifier {
 //================================================================= Property Price per Night ========================================================
   void setPropertyPricePerNight(value) {
     if (priceController.text != '') {
-      propertyPricePerNight = double.parse(priceController.text);
+      final price = double.parse(priceController.text);
+      final commision = price - (price * 15) / 100;
+      propertyPricePerNight = commision;
     } else {
       propertyPricePerNight = 0.0;
     }
@@ -617,20 +826,19 @@ class RegistrationProvider extends ChangeNotifier {
 
 //================================================================== Goods & Services Tax ===============================================================
   void setGstPurpuse(value) {
-    isGstPurpuse = value;
+    isForGstPurpuse = value;
     notifyListeners();
   }
 
   void setFourthCharecterOfPanHorP(value) {
-    isFourthCharecterOfPan = value;
+    isFourthCharecterOfPanOpen = value;
     notifyListeners();
   }
 
 //=================================================================== Cancellation policies =============================================================
   void setCancellationPeriod(bool selected, int index) {
     freeCancelationButtonIndex = selected ? index : freeCancelationButtonIndex;
-    freeCancellationDays =
-        int.parse(days[freeCancelationButtonIndex].split(' ')[0]);
+    freeCancellationDaysOfBooking = int.parse(days[freeCancelationButtonIndex].split(' ')[0]);
     notifyListeners();
   }
 
@@ -641,18 +849,37 @@ class RegistrationProvider extends ChangeNotifier {
 
 //=================================================================== Price per group size ===============================================================
   void setPricePerGroupSizeEnabled(value) {
-    isPricePerGroupSizeEnabled = value;
+    isGroupDiscountUpdateAnyTimeEnabled = value;
     notifyListeners();
   }
 
   void setDiscountRate(value) {
     int newValue = int.tryParse(value) ?? 0;
-    print(newValue.runtimeType);
     if (newValue >= 0 && newValue <= 100) {
-      discountPersentage = newValue;
-      totalForOneGuest = totalForOneGuest * discountPersentage / 100;
+      groupDiscountPersentage = newValue;
+      totalForOneGuest = totalForOneGuest * (groupDiscountPersentage / 100);
       notifyListeners();
     }
+    notifyListeners();
+  }
+
+  void setAsSoonAsPossible(bool value) {
+    _asSoonAsPossible = value;
+    notifyListeners();
+  }
+
+  void setSelectedDate(DateTime date) {
+    _selectedDate = date;
+    notifyListeners();
+  }
+
+  void setIsAllowNecesseryLicense(value) {
+    isAllowNecesseryLicense = value;
+    notifyListeners();
+  }
+
+  void setIsIHaveReadAndAccepted(value) {
+    isIHaveReadAndAccepted = value;
     notifyListeners();
   }
 
@@ -671,11 +898,6 @@ class RegistrationProvider extends ChangeNotifier {
   final PageController placesPageController = PageController();
   int propertyTypes = 0;
 
-  void setStayCategoryOption(String value) {
-    stayCategoryOption = value;
-    notifyListeners();
-  }
-
   void setpropertyType(int propertyType) {
     propertyTypes = propertyType;
     notifyListeners();
@@ -689,12 +911,12 @@ class RegistrationProvider extends ChangeNotifier {
 //===============================================================================================================
 //===============================================================================================================
 //===============================================================================================================
-  ///============================================================================================================
+//============================================================================================================
   final PageController hotelsPagecontroller = PageController();
   bool showMoreOptions = false;
 
-  void toggleMoreOptions() {
-    showMoreOptions = !showMoreOptions;
+  void toggleMoreOptions(bool value) {
+    showMoreOptions = value;
     notifyListeners();
   }
 
@@ -753,7 +975,7 @@ class RegistrationProvider extends ChangeNotifier {
   bool _showAsSoonContainer = false;
   bool _showSpecificDateContainer = false;
   //==================================date initialize
-  DateTime? _selectedDate;
+  DateTime? availablitySelectedDate;
 
   int get selectedRadioIndex => _selectedRadioIndex;
   bool get showAsSoonContainer => _showAsSoonContainer;
@@ -774,52 +996,45 @@ class RegistrationProvider extends ChangeNotifier {
   }
 
 //============================================================
-  void setSelectedDate(DateTime selectedDay) {
+  void setAvailablitySelectedDatee(DateTime selectedDay) {
     _selectedDate = selectedDay;
     notifyListeners();
   }
 
 //=================================================================== select three option sync=====================================================
 //==================================================================================================================================================
-  int _selectThreeAvailability = 0;
-
-  int get selectThreeAvailability => _selectThreeAvailability;
 
   void setSelectThreeAvailability(int value) {
     _selectThreeAvailability = value;
+    if (_selectThreeAvailability == 2) {
+      syncAvailabilityfromAnotherorChanelManager = "connect with a Channel Manager";
+    } else if (_selectThreeAvailability == 3) {
+      syncAvailabilityfromAnotherorChanelManager = "No, won’t sync";
+    }
     notifyListeners();
   }
 
   //==============================================================================================================================================
   //==============================================================================================================================================
   //====================================================Reservation yes or no ===================================================================
-  int _selectYesorNo = -1; // Initialize with -1 to indicate none selected
-  bool _acceptReservationsOver30Nights = false;
-  bool _notacceptReservations = false;
+  bool _isAllowedOver30nightstay = true; // Initialize with -1 to indicate none selected
+  bool get isAllowedOver30nightstays => _isAllowedOver30nightstay;
 
-  int get selectYesorNo => _selectYesorNo;
-  bool get acceptReservationsOver30Nights => _acceptReservationsOver30Nights;
-  bool get notacceptReservations => _notacceptReservations;
-
-  void setSelectYesorNo(int index) {
-    _selectYesorNo = index;
-    if (index == 0) {
-      _acceptReservationsOver30Nights = true;
-      _notacceptReservations = false;
-    } else if (index == 1) {
-      _acceptReservationsOver30Nights = false;
-      _notacceptReservations = true;
-    }
+  void setAllowedOver30nightstays(bool value) {
+    _isAllowedOver30nightstay = value;
     notifyListeners();
   }
 
-  void setMaxNightsPreferred(int i) {}
+  void setMaxReservationNumberOfNights(int value) {
+    maxReservationNumberOfNights = value;
+    // print(maxReservationNumberOfNights);
+    notifyListeners();
+  }
 
 //==============================================================================================================================================
   bool _nonRefundableRatePlan = false; // New toggle state
 
-  bool get nonRefundableRatePlan =>
-      _nonRefundableRatePlan; // Getter for new toggle state
+  bool get nonRefundableRatePlan => _nonRefundableRatePlan; // Getter for new toggle state
 
   void setNonRefundableRatePlan(bool value) {
     _nonRefundableRatePlan = value;
@@ -861,120 +1076,119 @@ class RegistrationProvider extends ChangeNotifier {
     }
   }
 
-  //=========================================================================================================
-  //===========================int _discountRate = 0;
-  int _discountRate = 23;
-  final double _basePrice = 56778.00;
-  TextEditingController discountController = TextEditingController();
-
-  RegistrationProvider() {
-    discountController.text = _discountRate.toString();
-  }
-
+  int _discountRate = 0;
   int get discountRate => _discountRate;
-  double get basePrice => _basePrice;
-
-  double get nonRefundablePrice =>
-      _basePrice - (_basePrice * _discountRate / 100);
+  TextEditingController _discountRateController = TextEditingController();
+  TextEditingController get discountRateController => _discountRateController;
 
   void increaseDiscountRate() {
     _discountRate++;
-    discountController.text = _discountRate.toString();
     notifyListeners();
   }
 
   void decreaseDiscountRate() {
     if (_discountRate > 0) {
       _discountRate--;
-      discountController.text = _discountRate.toString();
       notifyListeners();
     }
   }
 
-//==================================================== Property listing======================================================
-  bool isIndividual = true;
+  void setWeeklydiscoutRate(value) {
+    _discountRate = int.parse(value);
+    _discountRateController.clear();
+    notifyListeners();
+  }
+
+//==================================================== Property listing ======================================================
+  bool isBussnessCorporation = true;
 
   void setIndividual(bool value) {
-    isIndividual = value;
+    isBussnessCorporation = value;
     notifyListeners();
   }
 
   void addApartmnetList() {
     final apartment = {
-      'property_Name': propertyName,
-      'isEntirePlace': isEntirePlace,
-      'number_of_property': numberofProperty,
-      'isDifferentAddress': isSameAddress,
-      'stayCategory': stayCategoryOption,
-      'propertyCountry': propertyCountry,
-      'propertyCity': propertyCity,
-      'propertyStreetName': propertyStreetName,
-      'propertyPostCode': propertyPostCode,
-      'bedRoomList': _bedRoomList,
-      'livingRoomSofa': livingRoomSofaBed,
-      'otherSpaceSingleBed': otherSpaceSingleBed,
-      'otherSpaceOfDoubleBed': otherSpaceOfDoubleBed,
-      'otherSpaceKingSizeBedCount': otherSpaceKingSizeBedCount,
-      'otherSpaceSuperKingSizeBedCount': otherSpaceSuperKingSizeBedCount,
-      'otherSpaceBunkBed': otherSpaceBunkBed,
-      'otherSpaceSofaBed': otherSpaceSofaBed,
-      'otherSpaceFutonMat': otherSpaceFutonMat,
-      'bedroomSingleBed': bedroomSingleBed,
-      'bedroomOfDoubleBed': bedroomOfDoubleBed,
-      'bedroomKingSizeBedCount': bedroomKingSizeBedCount,
-      'bedroomSuperKingSizeBedCount': bedroomSuperKingSizeBedCount,
-      'bedroomBunkBed': bedroomBunkBed,
-      'bedroomSofaBed': bedroomSofaBed,
-      'bedroomFutonMat': bedroomFutonMat,
-      'isallowChildren': isallowChildren,
-      'allowCoats': allowCoats,
-      'guestCapacity': guestCapacity,
-      'bathRoomCount': bathRoomCount,
-      'isairConditioning': airConditioning,
-      'isheating': heating,
-      'isfreeWifi': freeWifi,
-      'isevChargingStation': evChargingStation,
-      'iskitchen': kitchen,
-      'iskitchenette': kitchenette,
-      'iswashingMachine': washingMachine,
-      'isflatScreenTV': flatScreenTV,
-      'isswimmingPool': swimmingPool,
-      'ishotTub': hotTub,
-      'isminibar': minibar,
-      'issauna': sauna,
-      'isbalcony': balcony,
-      'isgardenView': gardenView,
-      'isterrace': terrace,
-      'isview': view,
-      'isserveBreakfast': serveBreakfast,
-      'parkingOption': parkingOption,
-      'isBrakFastIncludedCost': isBrakFastIncludedCost,
-      'breackFastCostController': breackFastCostController.text,
-      'offeredbreakFastList': offeredbreakFastList,
-      'selectedLanguage': selectedLanguage,
-      'checkInFrom': checkInFrom,
-      'checkInUntil': checkInUntil,
-      'checkOutFrom': checkOutFrom,
-      'checkOutUntil': checkOutUntil,
-      'issmokingAllowed': issmokingAllowed,
-      'isallowPets': isallowPets,
-      'iseventsAllowed': iseventsAllowed,
-      'propertyImageList': propertyImages,
-      'allGuestscCanBookInstantly': allGuestscCanBookInstantly,
-      'propertyPricePerNight': propertyPricePerNight,
-      'isGstPurpuse': isGstPurpuse,
-      'panController': panNoController,
-      'isFourthCharecterOfPan': isFourthCharecterOfPan,
-      'tradeNameController': tradeNameController,
-      'GsGSTINController': GsGSTINController,
-      'freeCancellationDays': freeCancellationDays,
-      'isprotectionAgainstAccidentalBookings':
-          isprotectionAgainstAccidentalBookings,
-      'discountPersentage': discountPersentage,
-      'totalForOneGuest': totalForOneGuest,
-      'aboutThePropertyController': aboutThePropertyController,
-      'aboutTheNeighbourhoodController': aboutTheNeighbourhoodController,
-      'aboutTheHostNameController': aboutTheHostNameController,
+      "stayCategoryOption": stayCategoryOption,
+      'number_of_property': numberOfOwnedProperties,
+      'isAllOwnedPropertiesAreSameAddress': isAllOwnedPropertiesAreSameAddress,
+      "propertyDetails": {
+        'property_Name': propertyName,
+        'propertyCountry': propertyCountry,
+        'propertyStreetName': propertyStreetName,
+        'propertyPostCode': propertyPostCode,
+        'propertyCity': propertyCity,
+        "propertyLocationMapLink": propertyLocationMapLink,
+      },
+      "roomDetails": {
+        'livingRoomSofaBedCount': livingRoomSofaBedCount,
+        "bedRoomList": bedRoomList,
+        "otherSpaceDetailsList": otherSpaceDetailsList,
+      },
+      "aminitiesList": aminitiesList,
+      "breakFastDetailsList": breakFastDetailsMap,
+      "parkingOption": parkingOption,
+      "staffLanguagesList": staffSpeakingLanguagesList,
+      "checkInAndCheckoutDetailes": {
+        "checkInFrom": checkInFrom,
+        "checkInUntil": checkInUntil,
+        "checkOutFrom": checkOutFrom,
+        "checkOutUntil": checkOutUntil,
+      },
+      "houseRules": {
+        "issmokingAllowedHouseRules": issmokingAllowedHouseRules,
+        "isallowPetshouseRules": isallowPetshouseRules,
+        "iseventsAllowedHouseRules": iseventsAllowedHouseRules,
+      },
+      "hostProfileDetailsMap": hostProfileDetailsMap,
+      "propertyImagesList": propertyImagesList,
+      "bookingDetails": {
+        "allGuestscCanBookInstantly": isAllGuestscCanBookInstantly,
+        "propertyPricePerNight": propertyPricePerNight,
+        "cancelationPolicy": {
+          "freeCancellationDaysOfBooking": freeCancellationDaysOfBooking,
+          "isProtectionAgainstAccidentalBookings": isprotectionAgainstAccidentalBookings,
+        },
+      },
+      "groupDisCount": {
+        "isGroupDiscountUpdateAnyTimeEnabled": isGroupDiscountUpdateAnyTimeEnabled,
+        "groupDiscountPersentage": groupDiscountPersentage,
+      },
+      "availability": {
+        "firstDayGuestCanCheckIn": asSoonAsPossible ? "As soon us possible" : firstDayGuestCanCheckInSelectedDate,
+        "syncAvailabilityfromAnotherorChanelManager": _selectThreeAvailability == 1 ? syncAvailabilityfromAnotherorChanelManager : webcontroller.text,
+        "maxReservationNumberOfNights": _isAllowedOver30nightstay ? "Over 30 Nights" : maxReservationNumberOfNights,
+      },
+      "GoodsAndServicesTax": {
+        "isRegisteredForGSTPurpose": isForGstPurpuse,
+        "tradeName": tradeNameController.text,
+        "GSTIN": GsGSTINController.text,
+        "PANCardNumber": panNoController.text,
+        "isFourthOfPanCardPOrH": isFourthCharecterOfPanOpen,
+        "adharNumber": adharCarNumerController.text,
+      },
+      "listingPropertyBusinessOrIndividual": {
+        "isBussnessCorporation": isBussnessCorporation,
+        "PropertyLegalName": propertyLegalName.text,
+        "registerdCountryOrRegion": registerdCountryOrRegion.text,
+        "registerdAddressLine1": registerdAddressLine1.text,
+        "registerdAddressLine2": registerdAddressLine2.text,
+        "registeredCity": registeredCity.text,
+        "registeredZipCode": registeredZipCode.text,
+        "propertyFirstNameStatedOnID": propertyFirstNameStatedOnID.text,
+        "propertyMiddleNameStatedOnID": propertyMiddleNameStatedOnID.text,
+        "propertyLastNameStatedOnID": propertyLastNameStatedOnID.text,
+        "propertyOfficialEmail": propertyOfficialEmail.text,
+        "propertyPhoneNumber": propertyPhoneNumber.text,
+      },
     };
+    print(apartment);
+  }
+}
+
+////////////// Availbaility //////////////////////////////////////////////////
+extension DateTimeExtension on DateTime {
+  String toShortDateString() {
+    return "$day/$month/$year";
   }
 }

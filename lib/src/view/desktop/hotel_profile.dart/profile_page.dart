@@ -5,7 +5,7 @@ import 'package:tuch_trip_crms/src/view%20model/dashboard_provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
 import 'package:tuch_trip_crms/src/view/desktop/desktop_view.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/property_detailes.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_pages/property_detailes.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_textfield.dart';
 
@@ -293,7 +293,7 @@ class HotelProfilePage extends StatelessWidget {
               sizedBox(height * 0.02, 0.0),
               Consumer<RegistrationProvider>(
                 builder: (context, consumer, child) => RadioButtons(
-                  groupValue: consumer.serveBreakfast,
+                  groupValue: consumer.isServeBreakfast,
                   onChanged1: (bool? value) {
                     consumer.setServeBreakfast(value!);
                   },
@@ -304,7 +304,7 @@ class HotelProfilePage extends StatelessWidget {
               ),
               Consumer<RegistrationProvider>(
                 builder: (context, consumer, child) => SizedBox(
-                  child: consumer.serveBreakfast
+                  child: consumer.isServeBreakfast
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -368,7 +368,7 @@ class HotelProfilePage extends StatelessWidget {
               ),
               Consumer<RegistrationProvider>(
                 builder: (context, consumer, child) => SizedBox(
-                    child: consumer.serveBreakfast
+                    child: consumer.isServeBreakfast
                         ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -396,7 +396,7 @@ class HotelProfilePage extends StatelessWidget {
                                   'Vegetarian',
                                 ].map((option) {
                                   return Consumer<RegistrationProvider>(builder: (context, consumer, child) {
-                                    final isSelected = consumer.offeredbreakFastList.contains(option);
+                                    final isSelected = consumer.offeredbreakTypeFastList.contains(option);
                                     return InkWell(
                                       onTap: () {
                                         consumer.settingOfferdBreakFast(option, isSelected);
@@ -486,7 +486,9 @@ class HotelProfilePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('House rules', style: GoogleFonts.montserrat(
+              Text(
+                'House rules',
+                style: GoogleFonts.montserrat(
                   fontSize: 18,
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
@@ -628,7 +630,7 @@ class HotelProfilePage extends StatelessWidget {
                         sizedBox(height * 0.02, 0.0),
                         Consumer<RegistrationProvider>(
                           builder: (context, consumer, child) => RadioButtons(
-                            groupValue: consumer.issmokingAllowed,
+                            groupValue: consumer.issmokingAllowedHouseRules,
                             onChanged1: (value) {
                               consumer.setSmokingAllowed(value);
                             },
@@ -642,7 +644,7 @@ class HotelProfilePage extends StatelessWidget {
                         sizedBox(height * 0.02, 0.0),
                         Consumer<RegistrationProvider>(
                           builder: (context, consumer, child) => RadioButtons(
-                            groupValue: consumer.isallowPets,
+                            groupValue: consumer.isallowPetshouseRules,
                             onChanged1: (value) {
                               consumer.setPetsAllowed(value);
                             },
@@ -656,7 +658,7 @@ class HotelProfilePage extends StatelessWidget {
                         sizedBox(height * 0.02, 0.0),
                         Consumer<RegistrationProvider>(
                           builder: (context, consumer, child) => RadioButtons(
-                            groupValue: consumer.iseventsAllowed,
+                            groupValue: consumer.iseventsAllowedHouseRules,
                             onChanged1: (value) {
                               consumer.setEventAllowed(value);
                             },
@@ -751,16 +753,16 @@ class HotelProfilePage extends StatelessWidget {
               Consumer<RegistrationProvider>(
                 builder: (context, consumer, child) => buildCheckboxRow([
                   buildCheckbox('Air conditioning', consumer.airConditioning, (bool? value) {
-                    consumer.setAirConditioning(value!);
+                    consumer.setPropertyAminities("airConditioning", value!);
                   }),
                   buildCheckbox('Heating', consumer.heating, (value) {
-                    consumer.setHeating(value!);
+                    consumer.setPropertyAminities("heating", value!);
                   }),
                   buildCheckbox('Free WiFi', consumer.freeWifi, (value) {
-                    consumer.setFreeWifi(value!);
+                    consumer.setPropertyAminities("freeWifi", value!);
                   }),
                   buildCheckbox('Electric vehicle charging station', consumer.evChargingStation, (value) {
-                    consumer.setEvChargingStation(value!);
+                    consumer.setPropertyAminities("evChargingStation", value!);
                   }),
                 ]),
               ),
@@ -769,13 +771,13 @@ class HotelProfilePage extends StatelessWidget {
               Consumer<RegistrationProvider>(
                 builder: (context, consumer, child) => buildCheckboxRow([
                   buildCheckbox('Kitchen', consumer.kitchen, (value) {
-                    consumer.setKitchen(value!);
+                    consumer.setPropertyAminities('kitchen', value!);
                   }),
                   buildCheckbox('Kitchenette', consumer.kitchenette, (value) {
-                    consumer.setKitchenette(value!);
+                    consumer.setPropertyAminities('kitchenette', value!);
                   }),
                   buildCheckbox('Washing machine', consumer.washingMachine, (value) {
-                    consumer.setWashingMachine(value!);
+                    consumer.setPropertyAminities('washingMachine', value!);
                   }),
                 ]),
               ),
@@ -784,19 +786,19 @@ class HotelProfilePage extends StatelessWidget {
               Consumer<RegistrationProvider>(
                 builder: (context, consumer, child) => buildCheckboxRow([
                   buildCheckbox('Flat-screen TV', consumer.flatScreenTV, (value) {
-                    consumer.setFlatScreenTV(value!);
+                    consumer.setPropertyAminities('flatScreenTV', value!);
                   }),
                   buildCheckbox('Swimming pool', consumer.swimmingPool, (value) {
-                    consumer.setSwimmingPool(value!);
+                    consumer.setPropertyAminities('swimmingPool', value!);
                   }),
                   buildCheckbox('Hot tub', consumer.hotTub, (value) {
-                    consumer.setHotTub(value!);
+                    consumer.setPropertyAminities('hotTub', value!);
                   }),
                   buildCheckbox('Minibar', consumer.minibar, (value) {
-                    consumer.setMinibar(value!);
+                    consumer.setPropertyAminities('minibar', value!);
                   }),
                   buildCheckbox('Sauna', consumer.sauna, (value) {
-                    consumer.setSauna(value!);
+                    consumer.setPropertyAminities('sauna', value!);
                   }),
                 ]),
               ),
@@ -805,16 +807,16 @@ class HotelProfilePage extends StatelessWidget {
               Consumer<RegistrationProvider>(
                 builder: (context, consumer, child) => buildCheckboxRow([
                   buildCheckbox('Balcony', consumer.balcony, (value) {
-                    consumer.setBalcony(value!);
+                    consumer.setPropertyAminities('balcony', value!);
                   }),
                   buildCheckbox('Garden view', consumer.gardenView, (value) {
-                    consumer.setGardenView(value!);
+                    consumer.setPropertyAminities('gardenView', value!);
                   }),
                   buildCheckbox('Terrace', consumer.terrace, (value) {
-                    consumer.setTerrace(value!);
+                    consumer.setPropertyAminities('terrace', value!);
                   }),
                   buildCheckbox('View', consumer.view, (value) {
-                    consumer.setView(value!);
+                    consumer.setPropertyAminities('view', value!);
                   }),
                 ]),
               ),
@@ -977,7 +979,7 @@ class HotelProfilePage extends StatelessWidget {
               Consumer<RegistrationProvider>(
                 builder: (context, person, child) => SizedBox(
                   width: width * 0.33,
-                  child: person.propertyImages!.isNotEmpty && person.propertyImages != null
+                  child: person.propertyImagesList!.isNotEmpty && person.propertyImagesList != null
                       ? GridView.builder(
                           shrinkWrap: true,
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -985,14 +987,14 @@ class HotelProfilePage extends StatelessWidget {
                             crossAxisSpacing: width * 0.03,
                             mainAxisSpacing: height * 0.04,
                           ),
-                          itemCount: person.propertyImages!.length,
+                          itemCount: person.propertyImagesList!.length,
                           itemBuilder: (context, index) {
                             return CustomContainer(
                               boxShadow: false,
                               height: height * 0.3,
                               width: width * 0.3,
                               color: Colors.grey.shade200,
-                              image: DecorationImage(fit: BoxFit.fill, image: MemoryImage(person.propertyImages![index])),
+                              image: DecorationImage(fit: BoxFit.fill, image: MemoryImage(person.propertyImagesList![index])),
                               child: Align(
                                 alignment: Alignment.topRight,
                                 child: Padding(

@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_1.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_pages/property_cout.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 
 class PlaceType extends StatelessWidget {

@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_1.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_pages/property_cout.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 
 class PropertyAminities extends StatelessWidget {
@@ -11,7 +11,10 @@ class PropertyAminities extends StatelessWidget {
   final int backToPage;
   final PageController pageController;
   const PropertyAminities({
-    super.key, required this.goToPage, required this.backToPage, required this.pageController,
+    super.key,
+    required this.goToPage,
+    required this.backToPage,
+    required this.pageController,
   });
 
   @override
@@ -29,33 +32,28 @@ class PropertyAminities extends StatelessWidget {
             CustomContainer(
               boxShadow: true,
               width: width * 0.35,
-              padding: EdgeInsets.symmetric(
-                  vertical: height * 0.025, horizontal: width * 0.02),
+              padding: EdgeInsets.symmetric(vertical: height * 0.025, horizontal: width * 0.02),
               color: Colors.white,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   sizedBox(height * 0.04, width),
-                  Text('What can guests use at your place?',
-                      style: largeTextStyleBold),
+                  Text('What can guests use at your place?', style: largeTextStyleBold),
                   sizedBox(height * 0.04, width),
                   buildSectionTitle('General'),
                   Consumer<RegistrationProvider>(
                     builder: (context, consumer, child) => buildCheckboxRow([
-                      buildCheckbox(
-                          'Air conditioning', consumer.airConditioning,
-                          (bool? value) {
-                        consumer.setAirConditioning(value!);
+                      buildCheckbox('Air conditioning', consumer.airConditioning, (bool? value) {
+                        consumer.setPropertyAminities("airConditioning", value!);
                       }),
                       buildCheckbox('Heating', consumer.heating, (value) {
-                        consumer.setHeating(value!);
+                        consumer.setPropertyAminities("heating", value!);
                       }),
                       buildCheckbox('Free WiFi', consumer.freeWifi, (value) {
-                        consumer.setFreeWifi(value!);
+                        consumer.setPropertyAminities("freeWifi", value!);
                       }),
-                      buildCheckbox('Electric vehicle charging station',
-                          consumer.evChargingStation, (value) {
-                        consumer.setEvChargingStation(value!);
+                      buildCheckbox('Electric vehicle charging station', consumer.evChargingStation, (value) {
+                        consumer.setPropertyAminities("evChargingStation", value!);
                       }),
                     ]),
                   ),
@@ -64,15 +62,13 @@ class PropertyAminities extends StatelessWidget {
                   Consumer<RegistrationProvider>(
                     builder: (context, consumer, child) => buildCheckboxRow([
                       buildCheckbox('Kitchen', consumer.kitchen, (value) {
-                        consumer.setKitchen(value!);
+                        consumer.setPropertyAminities('kitchen', value!);
                       }),
-                      buildCheckbox('Kitchenette', consumer.kitchenette,
-                          (value) {
-                        consumer.setKitchenette(value!);
+                      buildCheckbox('Kitchenette', consumer.kitchenette, (value) {
+                        consumer.setPropertyAminities('kitchenette', value!);
                       }),
-                      buildCheckbox('Washing machine', consumer.washingMachine,
-                          (value) {
-                        consumer.setWashingMachine(value!);
+                      buildCheckbox('Washing machine', consumer.washingMachine, (value) {
+                        consumer.setPropertyAminities('washingMachine', value!);
                       }),
                     ]),
                   ),
@@ -80,22 +76,20 @@ class PropertyAminities extends StatelessWidget {
                   buildSectionTitle('Entertainment'),
                   Consumer<RegistrationProvider>(
                     builder: (context, consumer, child) => buildCheckboxRow([
-                      buildCheckbox('Flat-screen TV', consumer.flatScreenTV,
-                          (value) {
-                        consumer.setFlatScreenTV(value!);
+                      buildCheckbox('Flat-screen TV', consumer.flatScreenTV, (value) {
+                        consumer.setPropertyAminities('flatScreenTV', value!);
                       }),
-                      buildCheckbox('Swimming pool', consumer.swimmingPool,
-                          (value) {
-                        consumer.setSwimmingPool(value!);
+                      buildCheckbox('Swimming pool', consumer.swimmingPool, (value) {
+                        consumer.setPropertyAminities('swimmingPool', value!);
                       }),
                       buildCheckbox('Hot tub', consumer.hotTub, (value) {
-                        consumer.setHotTub(value!);
+                        consumer.setPropertyAminities('hotTub', value!);
                       }),
                       buildCheckbox('Minibar', consumer.minibar, (value) {
-                        consumer.setMinibar(value!);
+                        consumer.setPropertyAminities('minibar', value!);
                       }),
                       buildCheckbox('Sauna', consumer.sauna, (value) {
-                        consumer.setSauna(value!);
+                        consumer.setPropertyAminities('sauna', value!);
                       }),
                     ]),
                   ),
@@ -104,17 +98,16 @@ class PropertyAminities extends StatelessWidget {
                   Consumer<RegistrationProvider>(
                     builder: (context, consumer, child) => buildCheckboxRow([
                       buildCheckbox('Balcony', consumer.balcony, (value) {
-                        consumer.setBalcony(value!);
+                        consumer.setPropertyAminities('balcony', value!);
                       }),
-                      buildCheckbox('Garden view', consumer.gardenView,
-                          (value) {
-                        consumer.setGardenView(value!);
+                      buildCheckbox('Garden view', consumer.gardenView, (value) {
+                        consumer.setPropertyAminities('gardenView', value!);
                       }),
                       buildCheckbox('Terrace', consumer.terrace, (value) {
-                        consumer.setTerrace(value!);
+                        consumer.setPropertyAminities('terrace', value!);
                       }),
                       buildCheckbox('View', consumer.view, (value) {
-                        consumer.setView(value!);
+                        consumer.setPropertyAminities('view', value!);
                       }),
                     ]),
                   ),
@@ -128,17 +121,17 @@ class PropertyAminities extends StatelessWidget {
                   height,
                   width,
                   () {
-                    person.goToPage(backToPage,pageController);
+                    person.goToPage(backToPage, pageController);
                   },
                 ),
-                sizedBox(0.0, width * 0.02),
+                sizedBox(0.0, width * 0.005),
                 continueButton(height, width, true, () {
                   person.goToPage(goToPage, pageController);
+                  person.addAminitiesToAminitiesList();
                 })
               ],
             ),
             sizedBox(height * 0.2, width),
-            
           ],
         ),
       ),

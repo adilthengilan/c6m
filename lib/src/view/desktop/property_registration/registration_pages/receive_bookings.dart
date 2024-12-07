@@ -3,18 +3,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tuch_trip_crms/src/view%20model/registration_provider.dart';
 import 'package:tuch_trip_crms/src/view/desktop/dashboard/dashboard.dart';
-import 'package:tuch_trip_crms/src/view/desktop/property_registration/apartment/apartment_page_1.dart';
+import 'package:tuch_trip_crms/src/view/desktop/property_registration/registration_pages/property_cout.dart';
 import 'package:tuch_trip_crms/src/view/widgets/custom_container.dart';
 
 class ReceiveBookings extends StatelessWidget {
   final int goToPage;
   final int backToPage;
   final PageController pageController;
-  const ReceiveBookings(
-      {super.key,
-      required this.goToPage,
-      required this.backToPage,
-      required this.pageController});
+  const ReceiveBookings({
+    super.key,
+    required this.goToPage,
+    required this.backToPage,
+    required this.pageController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class ReceiveBookings extends StatelessWidget {
                   Text('How you receive bookings', style: largeTextStyleBold),
                   sizedBox(height * 0.03, 0.0),
                   Text(
-                    'We’re here to ensure you can receive bookings safely:',
+                    "We’re here to ensure you can receive bookings safely:",
                     style: GoogleFonts.montserrat(
                       fontSize: 15,
                       color: Colors.black,
@@ -53,26 +54,27 @@ class ReceiveBookings extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(Icons.check,
-                            color: Colors.black, size: height * 0.025),
+                        Icon(Icons.check, color: Colors.black, size: height * 0.025),
                         sizedBox(0.0, width * 0.01),
                         Padding(
                           padding: EdgeInsets.only(bottom: height * 0.02),
                           child: SizedBox(
-                              width: width * 0.28,
-                              child: Text(i == 0
+                            width: width * 0.28,
+                            child: Text(
+                              i == 0
                                   ? 'Set house rules guest must agree to before they stay'
                                   : i == 1
                                       ? 'Request damage deposits for extra security'
                                       : i == 2
                                           ? 'Report guest misconduct if something goes wrong'
-                                          : 'Receive protection against liability claims from guests and neighbours up to US\$10,00,000 for every reservation')),
+                                          : 'Receive protection against liability claims from guests and neighbours up to US\$10,00,000 for every reservation',
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   sizedBox(height * 0.03, 0.0),
-                  Text('How can guests book your apartment?',
-                      style: smallTextStyleBold),
+                  Text('How can guests book your apartment?', style: smallTextStyleBold),
                   sizedBox(height * 0.02, 0.0),
                   Consumer<RegistrationProvider>(
                     builder: (context, provider, child) => Column(
@@ -83,9 +85,8 @@ class ReceiveBookings extends StatelessWidget {
                             Radio<bool>(
                               activeColor: Colors.lightBlueAccent,
                               value: true,
-                              groupValue: provider.allGuestscCanBookInstantly,
-                              onChanged: (value) =>
-                                  provider.setallGuestscCanBookInstantly(value),
+                              groupValue: provider.isAllGuestscCanBookInstantly,
+                              onChanged: (value) => provider.setallGuestscCanBookInstantly(value),
                             ),
                             sizedBox(0.0, width * 0.01),
                             const Text(
@@ -100,9 +101,8 @@ class ReceiveBookings extends StatelessWidget {
                             Radio<bool>(
                               activeColor: Colors.lightBlueAccent,
                               value: false,
-                              groupValue: provider.allGuestscCanBookInstantly,
-                              onChanged: (value) =>
-                                  provider.setallGuestscCanBookInstantly(value),
+                              groupValue: provider.isAllGuestscCanBookInstantly,
+                              onChanged: (value) => provider.setallGuestscCanBookInstantly(value),
                             ),
                             sizedBox(0.0, width * 0.01),
                             const Text(
@@ -120,7 +120,7 @@ class ReceiveBookings extends StatelessWidget {
             ),
             sizedBox(height * 0.03, 0.0),
             Visibility(
-              visible: !person.allGuestscCanBookInstantly,
+              visible: !person.isAllGuestscCanBookInstantly,
               child: CustomContainer(
                 boxShadow: true,
                 width: width * 0.35,
@@ -140,19 +140,13 @@ class ReceiveBookings extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                  width: width * 0.25,
-                                  child: const Text(
-                                      'When using request to book, the booking process will be as follows:')),
+                              SizedBox(width: width * 0.25, child: const Text('When using request to book, the booking process will be as follows:')),
                               sizedBox(height * 0.01, 0.0),
                               for (int i = 0; i < 3; i++)
                                 Padding(
-                                  padding: EdgeInsets.only(
-                                      left: width * 0.005,
-                                      bottom: height * 0.01),
+                                  padding: EdgeInsets.only(left: width * 0.005, bottom: height * 0.01),
                                   child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(i == 0
                                           ? '1. '
@@ -189,7 +183,7 @@ class ReceiveBookings extends StatelessWidget {
                     person.goToPage(backToPage, pageController);
                   },
                 ),
-                sizedBox(0.0, width * 0.02),
+                sizedBox(0.0, width * 0.005),
                 continueButton(height, width, true, () {
                   person.goToPage(goToPage, pageController);
                 })
